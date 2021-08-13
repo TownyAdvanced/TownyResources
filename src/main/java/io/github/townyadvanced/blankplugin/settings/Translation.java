@@ -6,7 +6,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
-import io.github.townyadvanced.blankplugin.BlankPlugin;
+import io.github.townyadvanced.blankplugin.TownyResources;
 import io.github.townyadvanced.blankplugin.util.FileMgmt;
 
 import java.io.File;
@@ -36,11 +36,11 @@ public final class Translation {
 		try {
 			newLanguage.loadFromString(FileMgmt.convertStreamToString("/" + res));
 		} catch (IOException e) {
-			BlankPlugin.info("Lang: Custom language file detected, not updating.");
-			BlankPlugin.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
+			TownyResources.info("Lang: Custom language file detected, not updating.");
+			TownyResources.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
 			return;
 		} catch (InvalidConfigurationException e) {
-			BlankPlugin.severe("Invalid Configuration in language file detected.");
+			TownyResources.severe("Invalid Configuration in language file detected.");
 		}
 		
 		String resVersion = newLanguage.getString("version");
@@ -48,10 +48,10 @@ public final class Translation {
 
 		if (!langVersion.equalsIgnoreCase(resVersion)) {
 			language = newLanguage;
-			BlankPlugin.info("Lang: Language file replaced with updated version.");
+			TownyResources.info("Lang: Language file replaced with updated version.");
 			FileMgmt.stringToFile(FileMgmt.convertStreamToString("/" + res), file);
 		}
-		BlankPlugin.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
+		TownyResources.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
 	}
 
 	private static String parseSingleLineString(String str) {
@@ -68,7 +68,7 @@ public final class Translation {
 		String data = language.getString(key.toLowerCase());
 
 		if (data == null) {
-			BlankPlugin.severe("Error could not read " + key.toLowerCase() + " from " + Settings.getString(ConfigNodes.LANGUAGE));
+			TownyResources.severe("Error could not read " + key.toLowerCase() + " from " + Settings.getString(ConfigNodes.LANGUAGE));
 			return "";
 		}
 		return StringMgmt.translateHexColors(parseSingleLineString(data));

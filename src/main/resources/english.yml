@@ -1,8 +1,8 @@
-name: BlankPlugin
+name: TownyResources
 version: 0.01
 language: english
-author: Author
-website: 'http://townyadvanced.github.io/'
+author: Goosius
+website: 'https://github.com/TownyAdvanced/TownyResources'
 description: >
     Language file for all game messages.  Do not alter this file.
     If you wish to change any of the entries, make a copy named something else.

@@ -3,9 +3,7 @@ package io.github.townyadvanced.blankplugin.settings;
 import java.io.File;
 import java.io.IOException;
 
-import io.github.townyadvanced.blankplugin.BlankPlugin;
-import io.github.townyadvanced.blankplugin.settings.CommentedConfiguration;
-import io.github.townyadvanced.blankplugin.settings.ConfigNodes;
+import io.github.townyadvanced.blankplugin.TownyResources;
 import io.github.townyadvanced.blankplugin.util.FileMgmt;
 
 public class Settings {
@@ -77,7 +75,7 @@ public class Settings {
 
 	private static void sendError(String msg) {
 
-		BlankPlugin.severe("Error could not read " + msg);
+		TownyResources.severe("Error could not read " + msg);
 	}
 	
 	public static boolean getBoolean(ConfigNodes node) {

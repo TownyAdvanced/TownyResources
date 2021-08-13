@@ -1,0 +1,27 @@
+name: BlankPlugin
+version: 0.01
+language: english
+author: Author
+website: 'http://townyadvanced.github.io/'
+description: >
+    Language file for all game messages.  Do not alter this file.
+    If you wish to change any of the entries, make a copy named something else.
+    Alternate language files can be enabled by altering the
+    [language] entry in config.yml
+#
+#
+#         You MUST retain spacing in the texts.
+#  If a text begins or ends with a space, it must remain that way.
+#
+#
+#       %s = data to be supplied by the plugin.
+
+# Text colouring
+# --------------
+# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
+# DarkPurple = &9, LightGreen = &a, LightBlue = &b
+# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+
+plugin_prefix: '&f[&6A Prefix&f] '
+msg_err_command_disable: '&cYou don''t have enough permissions for that command.'

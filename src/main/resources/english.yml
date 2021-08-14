@@ -25,3 +25,11 @@ description: >
 
 plugin_prefix: '&f[&6A Prefix&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
+
+discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s"
+discovery.message.trees: "&bA forest has been discovered at %s!. Daily Production: %d %s"
+discovery.message.crops: "&bFertile soil has been discovered at %s!. Daily Production: %d %s"
+discovery.message.animals: "&bA herd of animals has been discovered at %s!. Daily Production: %d %s"
+discovery.message.monsters: "&bA nest of monsters has been discovered at %s!. Daily Production: %d %s"
+
+ 

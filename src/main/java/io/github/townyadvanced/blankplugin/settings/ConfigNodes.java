@@ -46,9 +46,9 @@ public enum ConfigNodes {
 		    "#          because industrial resource harvesting by players will degrade the value",
 		    "#          of many town resources, thus nullifying the trading/strategic benefits of those resources.",
 		    "# ",
-		    "#          With this setup, mitigation could be attempt by regularly modifying this file ",
+		    "#          With this setup, mitigation of industrial harvesting could be attempt by continually modifying this file ",
 		    "#			to increase the value of affected resource offers.",
-		    "#          However this is both error-prone, extra staff work, and largely pointless.",
+		    "#          However this is extra staff work, error-prone, and largely pointless.",
 		    "# ",
 		    "#          EXAMPLE: If a town discovers a wheat resource of 100/day,",
 		    "#                   and industrial food production later floods the market with wheat, causing it to be almost free,",
@@ -60,22 +60,27 @@ public enum ConfigNodes {
 			"",
 			"# The owner nation of a town gets this percentage of the town resources.",
 			"# The town gets the rest."),
-	TOWN_RESOURCES_DISCOVERY_DAYS_REQUIREMENT_PER_RESOURCE_LEVEL(
-			"town_resources.discovery_days_requirement_per_resource_level",
-			"10, 10, 10, 10",
+	TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL(
+			"town_resources.survey_cost_per_resource_level",
+			"250, 500, 2000, 5000",
 			"",
-			"# This list of values determines how many days it takes for a town to discover its resources.",
-			"# Example: If the first value is 10, then it will take the town 10 days, at town level 1 or above,",
-			"# to discover its level 1 resource."),
+			"# This list of values determines how much it costs to do a survey for each resource level.",
+			"# Example: If the first value is 250, then it will cost 250 to survey and discover the level 1 resource."),
+	TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL(
+			"town_resources.num_townblocks_requirement_per_resource_level",
+			"10, 50, 100, 200",
+			"",
+			"# This list of values determines how much many townblocks a town must have to DISCOVER each level of resource.",
+			"# Example: If the first value is 10, then the town must have 10 townblocks to survey and discover the level 1 resource."),
 	TOWN_RESOURCES_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL(
 			"town_resources.town_level_requirement_per_resource_level",
 			"1, 3, 5, 7",
 			"",
-			"# This list of values determines the level a town needs to be, to discover its resources.",
-			"# Example: If the first value is 1, then the town has to be level 1 to discover its level 1 resource."),
+			"# This list of values determines the level a town needs to be, to USE its resources.",
+			"# Example: If the first value is 1, then the town has to be level 1 to use its level 1 resource."),
 	TOWN_RESOURCES_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL(
 			"town_resources.productivity_percentage_per_resource_level",
-			"100, 150, 300, 500",
+			"100, 150, 250, 400",
 			"",
 			"# This list of values determines the productivity of each level of resource.",
 			"# Example: If the second value is 200, then the level 2 resource of a town will be 200% productive."),
@@ -90,59 +95,59 @@ public enum ConfigNodes {
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
-	TOWN_RESOURCES_OFFERS_DEPOSITS(
-			"town_resources.offers.deposits",
-			"{GOLD_ORE, 8, 50}, {NETHERITE_ORE, 2, 10}",
+	TOWN_RESOURCES_OFFERS_ORES(
+			"town_resources.offers.ores",
+			"ANCIENT_DEBRIS-2-10, DIAMOND-10-20, EMERALD-20-20, GOLD_ORE-30-20",
 			"",
-			"# This list determines the offers of 'deposits' resources which each town can gain.",
+			"# This list determines the offers of 'ores' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
-			"# 1 - Material Name of resource",
-			"# 2 - Base resource amount",
+			"# 1 - Name of resource",
+			"# 2 - Base daily generated amount",
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_FORESTS(
-			"town_resources.offers.forests",
-			"{OAK_LOG, 200, 10}",
+	TOWN_RESOURCES_OFFERS_TREES(
+			"town_resources.offers.trees",
+			"OAK_LOG-150-5",
 			"",
-			"# This list determines the offers of 'forests' resources which each town can gain.",
+			"# This list determines the offers of 'trees' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
-			"# 1 - Material Name of resource",
-			"# 2 - Base resource amount",
+			"# 1 - Name of resource",
+			"# 2 - Base daily generated amount",
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_FERTILE_SOIL(
-			"town_resources.offers.fertile_soil",
-			"{WHEAT, 100 , 100}",
+	TOWN_RESOURCES_OFFERS_CROPS(
+			"town_resources.offers.crops",
+			"WHEAT-150-5}",
 			"",
-			"# This list determines the offers of 'fertile soil' resources which each town can gain.",
+			"# This list determines the offers of 'crops' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
-			"# 1 - Material Name of resource",
-			"# 2 - Base resource amount",
+			"# 1 - Name of resource",
+			"# 2 - Base daily generated amount",
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_HERD_OF_ANIMALS(
-			"town_resources.offers.herd_of_animals",
+	TOWN_RESOURCES_OFFERS_ANIMALS(
+			"town_resources.offers.animals",
 			"",
-			"{BEEF, 20 , 100}",
-			"# This list determines the offers of 'herd of animals' resources which each town can gain.",
+			"BEEF-30-5}",
+			"# This list determines the offers of 'animals' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
-			"# 1 - Material Name of resource",
-			"# 2 - Base resource amount",
+			"# 1 - Name of resource",
+			"# 2 - Base daily generated amount",
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_HERD_OF_MONSTERS(
-			"town_resources.offers.herd_of_monsters",
+	TOWN_RESOURCES_OFFERS_MONSTERS(
+			"town_resources.offers.monsters",
 			"",
 			"",
-			"# This list determines the offers of 'herd of monsters' resources which each town can gain.",
+			"# This list determines the offers of  monsters' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
-			"# 1 - Material Name of resource",
-			"# 2 - Base resource amount",
+			"# 1 - Name of resource",
+			"# 2 - Base daily generated amount",
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),			
-	PLAYER_EXTRACTION_RESTRICTIONS(
-			"player_extraction_restrictions",
+	PLAYER_EXTRACTION_RESTRICTION(
+			"player_extraction_restriction",
 			"",
 			"",
 			"",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
-			"# |            Player Extraction Restrictions            | #",
+			"# |             Player Extraction Restrictions           | #",
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
@@ -152,24 +157,58 @@ public enum ConfigNodes {
 			"",
 			"# If true, then player extraction restrictions are enabled.",
 			"# If false, then player extraction restrictions are disabled."),
-			
-			
-			
-Productivity Rate Per Resource Level
-100
-150   ..... i.e. the level 2 resource is +50%
-30)0
-500
-			Town Level Requirement per resource level
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS(
+			"player_extraction_restrictions.daily_limits",
+			"",
+			"",
+			"",
+			"############################################################",
+			"# +------------------------------------------------------+ #",
+			"# |                    DAILY LIMITS                        | #",
+			"# +------------------------------------------------------+ #",
+			"############################################################",
+			""),
+	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ORES(
+			"player_extraction_restrictions.daily_limits.ores",
+			"GOLD_ORE-16, ANCIENT_DEBRIS-2",
+			"",
+			"# This list determines the daily extraction limits for players for 'ores' resources.",
+			"# Each entry on the list has 2 values:",
+			"# 1 - Name of resource",
+			"# 2 - Daily Limit"),
+	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_TREES(
+			"player_extraction_restrictions.daily_limits.trees",
+			"OAK_LOG-64",
+			"",
+			"# This list determines the daily extraction limits for players for 'trees' resources.",
+			"# Each entry on the list has 2 values:",
+			"# 1 - Name of resource",
+			"# 2 - Daily Limit"),
+	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_CROPS(
+			"player_extraction_restrictions.daily_limits.crops",
+			"WHEAT-64",
+			"",
+			"# This list determines the daily extraction limits for players for 'crops' resources.",
+			"# Each entry on the list has 2 values:",
+			"# 1 - Name of resource",
+			"# 2 - Daily Limit"),		
+	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ANIMALS(
+			"player_extraction_restrictions.daily_limits.animals",
+			"BEEF-16",
+			"",
+			"# This list determines the daily extraction limits for players for 'animals' resources.",
+			"# Each entry on the list has 2 values:",
+			"# 1 - Name of resource",
+			"# 2 - Daily Limit"),
+	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_MONSTERS(
+			"player_extraction_restrictions.daily_limits.monsters",
+			"",
+			"",
+			"# This list determines the daily extraction limits for players for 'monster' resources.",
+			"# Each entry on the list has 2 values:",
+			"# 1 - Name of resource",
+			"# 2 - Daily Limit");
 
-			
-			
-			Discovery Days Requirement per resource level
-10  ......... takes 10 days AT the required level or more to get the lev 1 resource
-10   ........ takes 10 MORE days at the required level or more to get the lev 2 resource
-10
-10
-	
 	private final String Root;
 	private final String Default;
 	private String[] comments;

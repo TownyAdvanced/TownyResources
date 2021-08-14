@@ -26,10 +26,22 @@ description: >
 plugin_prefix: '&f[&6A Prefix&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
 
+town.screen.header: "Resources:"
+town.screen.daily.production: " > Daily Production: %s"
+town.screen.available.for.collection: " > Available for Collection: %s"
+
+nation.screen.header: "Resources:"
+nation.screen.daily.production: " > Daily Production: %s"
+nation.screen.available.for.collection: " > Available for Collection: %s"
+
 discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s"
 discovery.message.trees: "&bA forest has been discovered at %s!. Daily Production: %d %s"
 discovery.message.crops: "&bFertile soil has been discovered at %s!. Daily Production: %d %s"
 discovery.message.animals: "&bA herd of animals has been discovered at %s!. Daily Production: %d %s"
 discovery.message.monsters: "&bA nest of monsters has been discovered at %s!. Daily Production: %d %s"
+
+msg_err_daily_extraction_limit_reached: "&cDaily Extraction Limit Reached for %s."
+msg_err_survey_too_expensive: "&cYou cannot afford to complete this survey."
+msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblocks for this survey."
 
  

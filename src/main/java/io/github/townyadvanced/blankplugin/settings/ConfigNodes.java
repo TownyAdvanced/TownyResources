@@ -47,7 +47,7 @@ public enum ConfigNodes {
 			""),
 	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ORES(
 			"player_extraction_restrictions.daily_limits.ores",
-			"ANCIENT_DEBRIS-0.0375, GOLD_ORE-0.25",
+			"ANCIENT_DEBRIS-0.075-10, DIAMOND-0.125-20, EMERALD-0.125-20, GOLD_ORE-0.25-20",
 			"",
 			"# This list determines the daily extraction limits for players for 'ores' resources.",
 			"# Each entry on the list has 2 values:",

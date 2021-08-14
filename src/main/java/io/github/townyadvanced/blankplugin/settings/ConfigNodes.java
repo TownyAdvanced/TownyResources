@@ -47,7 +47,7 @@ public enum ConfigNodes {
 			""),
 	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ORES(
 			"player_extraction_restrictions.daily_limits.ores",
-			"ANCIENT_DEBRIS-0.075-10, DIAMOND-0.125-20, EMERALD-0.125-20, GOLD_ORE-0.25-20",
+			"ANCIENT_DEBRIS-0.03125-10, DIAMOND-0.125-20, EMERALD-0.25-20, GOLD_ORE-0.25-20",
 			"",
 			"# This list determines the daily extraction limits for players for 'ores' resources.",
 			"# Each entry on the list has 2 values:",
@@ -165,7 +165,7 @@ public enum ConfigNodes {
 			""),
 	TOWN_RESOURCES_OFFERS_ORES(
 			"town_resources.offers.ores",
-			"ANCIENT_DEBRIS-0.075-10, DIAMOND-0.25-20, EMERALD-0.25-20, GOLD_ORE-0.5-20",
+			"ANCIENT_DEBRIS-0.0625-10, DIAMOND-0.25-20, EMERALD-0.5-20, GOLD_ORE-0.5-20",
 			"",
 			"# This list determines the offers of 'ores' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",

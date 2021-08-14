@@ -38,8 +38,8 @@ This plugin is essential for a good SiegeWar experience, because without it, the
 - The mayor can collect the extracted resources at any time by running `/tr collect`.
 
 #### Step 3: Give occupiers a cut of the auto-collected resources.
-- 50% of the town resources are extracted by the town.
-- 50% of the town resources are extracted by the owner nation (*natural or occupier*). 
+- 75% of the town resources are extracted by the owner nation (*natural or occupier*). 
+- 25% of the town resources are extracted by the town.
 - The owner king can collect the nation's cut at any time by running `/tr collect`.
     
 ## Installation Instructions:

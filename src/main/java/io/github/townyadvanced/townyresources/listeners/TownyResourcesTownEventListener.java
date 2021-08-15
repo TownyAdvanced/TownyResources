@@ -1,10 +1,10 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -36,9 +36,9 @@ public class TownyResourcesTownEventListener implements Listener {
 			Town town = event.getTown();
 
 			//Resources:
-			out.add(Translation.of("town.screen.header"));
-			out.add(Translation.of("town.screen.daily.production", "dummy list"));
-			out.add(Translation.of("town.screen.available.for.collection", "dummy list"));
+			out.add(TownyResourcesTranslation.of("town.screen.header"));
+			out.add(TownyResourcesTranslation.of("town.screen.daily.production", "dummy list"));
+			out.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));
 
 	        event.addLines(out);
 		}

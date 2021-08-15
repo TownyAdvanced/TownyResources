@@ -8,11 +8,11 @@ import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.util.Colors;
 
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.settings.Translation;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 
-public class Messaging {
+public class TownyResourcesMessaging {
 
-    final static String prefix = Translation.of("plugin_prefix");
+    final static String prefix = TownyResourcesTranslation.of("plugin_prefix");
     
     public static void sendErrorMsg(CommandSender sender, String message) {
         //Ensure the sender is not null (i.e. is an online player who is not an npc)

@@ -4,7 +4,7 @@ import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.settings.Settings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -31,7 +31,7 @@ public class TownyResourcesTownEventListener implements Listener {
 	 */
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
-		if (Settings.isEnabled()) {
+		if (TownyResourcesSettings.isEnabled()) {
 			List<String> out = new ArrayList<>();
 			Town town = event.getTown();
 

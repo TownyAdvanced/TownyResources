@@ -8,3 +8,9 @@ prefix: ${project.artifactId}
 depend: [Towny]
 
 description: This is an add-on plugin for Towny, which provides towns and nations with valuable natural resources, creating a good reason for wars and trading.
+
+commands:
+    townyresources:
+        aliases: [tr]
+    townyresourcesadmin:
+        aliases: [tra]

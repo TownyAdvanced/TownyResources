@@ -17,8 +17,8 @@ public enum ConfigNodes {
 			"",
 			"# If true, the TownyResources system is enabled.",
 			"# if false, the TownyResources system is disabled."),		
-	PLAYER_EXTRACTION_RESTRICTION(
-			"player_extraction_restriction",
+	PLAYER_EXTRACTION_RESTRICTIONS(
+			"player_extraction_restrictions",
 			"",
 			"",
 			"",
@@ -183,7 +183,7 @@ public enum ConfigNodes {
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_CROPS(
 			"town_resources.offers.crops",
-			"WHEAT-2-5}",
+			"WHEAT-2-5",
 			"",
 			"# This list determines the offers of 'crops' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -192,8 +192,8 @@ public enum ConfigNodes {
 			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_ANIMALS(
 			"town_resources.offers.animals",
+			"BEEF-0.5-5",
 			"",
-			"BEEF-0.5-5}",
 			"# This list determines the offers of 'animals' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",

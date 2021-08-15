@@ -6,7 +6,7 @@ import java.io.IOException;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
 
-public class Settings {
+public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
 	
 	public static boolean isEnabled() {

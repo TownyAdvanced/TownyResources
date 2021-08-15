@@ -1,10 +1,10 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.settings.Settings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -31,14 +31,14 @@ public class TownyResourcesNationEventListener implements Listener {
 	 */
 	@EventHandler
 	public void onNationStatusScreen(NationStatusScreenEvent event) {
-		if (Settings.isEnabled()) {
+		if (TownyResourcesSettings.isEnabled()) {
 			List<String> out = new ArrayList<>();
 			Nation nation = event.getNation();
 
 			//Resources:
-			out.add(Translation.of("town.screen.header"));
-			out.add(Translation.of("town.screen.daily.production", "dummy list"));
-			out.add(Translation.of("town.screen.available.for.collection", "dummy list"));
+			out.add(TownyResourcesTranslation.of("town.screen.header"));
+			out.add(TownyResourcesTranslation.of("town.screen.daily.production", "dummy list"));
+			out.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));
 
 	        event.addLines(out);
 		}

@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * A convenience object to facilitate translation. 
  */
-public final class Translation {
+public final class TownyResourcesTranslation {
 	
 	public static CommentedConfiguration language;
 
@@ -24,7 +24,7 @@ public final class Translation {
 	// if the file is not found it will load the default from resource
 	public static void loadLanguage(String filepath, String defaultRes) throws IOException {
 
-		String res = Settings.getString(ConfigNodes.LANGUAGE.getRoot(), defaultRes);
+		String res = TownyResourcesSettings.getString(ConfigNodes.LANGUAGE.getRoot(), defaultRes);
 		String fullPath = filepath + File.separator + res;
 		File file = FileMgmt.unpackResourceFile(fullPath, res, defaultRes);
 
@@ -37,21 +37,21 @@ public final class Translation {
 			newLanguage.loadFromString(FileMgmt.convertStreamToString("/" + res));
 		} catch (IOException e) {
 			TownyResources.info("Lang: Custom language file detected, not updating.");
-			TownyResources.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
+			TownyResources.info("Lang: " + res + " v" + TownyResourcesTranslation.of("version") + " loaded.");
 			return;
 		} catch (InvalidConfigurationException e) {
 			TownyResources.severe("Invalid Configuration in language file detected.");
 		}
 		
 		String resVersion = newLanguage.getString("version");
-		String langVersion = Translation.of("version");
+		String langVersion = TownyResourcesTranslation.of("version");
 
 		if (!langVersion.equalsIgnoreCase(resVersion)) {
 			language = newLanguage;
 			TownyResources.info("Lang: Language file replaced with updated version.");
 			FileMgmt.stringToFile(FileMgmt.convertStreamToString("/" + res), file);
 		}
-		TownyResources.info("Lang: " + res + " v" + Translation.of("version") + " loaded.");
+		TownyResources.info("Lang: " + res + " v" + TownyResourcesTranslation.of("version") + " loaded.");
 	}
 
 	private static String parseSingleLineString(String str) {
@@ -68,7 +68,7 @@ public final class Translation {
 		String data = language.getString(key.toLowerCase());
 
 		if (data == null) {
-			TownyResources.severe("Error could not read " + key.toLowerCase() + " from " + Settings.getString(ConfigNodes.LANGUAGE));
+			TownyResources.severe("Error could not read " + key.toLowerCase() + " from " + TownyResourcesSettings.getString(ConfigNodes.LANGUAGE));
 			return "";
 		}
 		return StringMgmt.translateHexColors(parseSingleLineString(data));
@@ -85,5 +85,5 @@ public final class Translation {
 		return String.format(of(key), args);
 	}
 
-	private Translation() {}
+	private TownyResourcesTranslation() {}
 }

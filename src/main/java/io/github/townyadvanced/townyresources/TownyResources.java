@@ -2,8 +2,8 @@ package io.github.townyadvanced.townyresources;
 
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
-import io.github.townyadvanced.townyresources.settings.Settings;
-import io.github.townyadvanced.townyresources.settings.Translation;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,13 +34,13 @@ public class TownyResources extends JavaPlugin {
 	}
 	
 	public static String getPrefix() {
-		return Translation.language != null ? Translation.of("plugin_prefix") : "[" + plugin.getName() + "]";
+		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
 	}
 	
 	private boolean loadSettings() {
 		try {
-			Settings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
-			Translation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
+			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 		} catch (IOException e) {
             e.printStackTrace();

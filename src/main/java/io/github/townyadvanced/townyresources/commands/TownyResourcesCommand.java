@@ -93,13 +93,13 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_all_resources_already_discovered"));
 		
 		//Check if the town has enough townblocks
-		int levelToDiscover = discoveredResources.size() + 1;
-		int townblocksRequirement = townblocksRequirementPerResourceLevel.get(levelToDiscover);
+		int indexOfNextResourceLevel = discoveredResources.size();
+		int townblocksRequirement = townblocksRequirementPerResourceLevel.get(indexOfNextResourceLevel);
 		if(town.getTownBlocks().size() < townblocksRequirement)
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_not_enough_townblocks"));
 		
 		//Check that the player can afford the survey
-		double surveyCost = costPerResourceLevel.get(levelToDiscover);
+		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
 			throw new TownyException(Translation.of("msg_err_survey_too_expensive"));

@@ -18,6 +18,7 @@ public class TownyResourcesTownyEventListener implements Listener {
 
 	@SuppressWarnings("unused")
 	private final TownyResources plugin;
+	private static long nextProductionRecalculationTime = 0;
 	
 	public TownyResourcesTownyEventListener(TownyResources instance) {
 
@@ -25,33 +26,39 @@ public class TownyResourcesTownyEventListener implements Listener {
 	}
 	
 	/*
-     * Whe the Towny database gets reloaded, Townyresources reloads  also
+     * Whe the Towny database gets reloaded, Townyresources reloads  also.
      */
     @EventHandler
     public void onTownyDatabaseLoad(TownyLoadedDatabaseEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
             TownyResources.info(SiegeWar.prefix + "Towny database reload detected, reloading townyresources...");
-            //TownyResourcesController.loadAll();
+            //TownyResources.loadAll();
         }
     }
     
     /*
-     * On Towny new day, town resources are automatically extracted
+     * On Towny new day, town resources are automatically extracted.
      */
     @EventHandler
     public void onNewDay(PreNewDayEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            //TownyResourcesController.extractResources();
+            //TownProductionController.extractResources();
         }
     }
             
     /*
-     * On each ShortTime period, TownyResources saves data on player-extract resources
+     * On each ShortTime period, TownyResources saves data on player-extracted resources.
+     * 
+     * Every 10 mins, the produced town & nation resources are recalculated. 
      */
     @EventHandler
-    public void onShortTime(NewShortTimeEvent event) {
+    public void onNewShortTime(NewShortTimeEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            //TownyResourcesController.saveDataOnPlayerExtractedResource();
+            if(System.currentTimeMillis() > nextProductionRecalculationTime) {
+                nextProductionRecalculationTime = System.currentTimeMillis() + 600000; //10 mins
+                //TownProductionController.recalculateTownAndNationProduction();                
+            }
+            //PlayerExtractionLimitsController.saveDataOnPlayerExtractedResources();
         }
     }
 }

@@ -17,25 +17,28 @@ public enum ConfigNodes {
 			"",
 			"# If true, the TownyResources system is enabled.",
 			"# if false, the TownyResources system is disabled."),		
-	PLAYER_EXTRACTION_RESTRICTIONS(
-			"player_extraction_restrictions",
+	PLAYER_EXTRACTION_LIMITS(
+			"player_extraction_limits",
 			"",
 			"",
 			"",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
-			"# |             Player Extraction Restrictions           | #",
+			"# |               Player Extraction Limits               | #",
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
-	PLAYER_EXTRACTION_RESTRICTIONS_ENABLED(
-			"player_extraction_restrictions.enabled",
+	PLAYER_EXTRACTION_LIMITS_ENABLED(
+			"player_extraction_limits.enabled",
 			"true",
 			"",
-			"# If true, then player extraction restrictions are enabled.",
-			"# If false, then player extraction restrictions are disabled."),
+			"# If true, then player extraction limits are enabled.",
+			"# If false, then player extraction limits are disabled."),
+			
+			//TODO ------- Add machine-limiting stuff here e.g. for cactuses and sugar
+			
 	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS(
-			"player_extraction_restrictions.daily_limits",
+			"player_extraction_limits.daily_limits",
 			"",
 			"",
 			"",
@@ -45,40 +48,40 @@ public enum ConfigNodes {
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
-	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ORES(
-			"player_extraction_restrictions.daily_limits.ores",
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS_ORES(
+			"player_extraction_limits.daily_limits.ores",
 			"ANCIENT_DEBRIS-0.03125-10, DIAMOND-0.125-20, EMERALD-0.25-20, GOLD_ORE-0.25-20",
 			"",
 			"# This list determines the daily extraction limits for players for 'ores' resources.",
 			"# Each entry on the list has 2 values:",
 			"# 1 - Name of resource",
 			"# 2 - Daily Limit, in stacks"),
-	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_TREES(
-			"player_extraction_restrictions.daily_limits.trees",
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS_TREES(
+			"player_extraction_limits.daily_limits.trees",
 			"OAK_LOG-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'trees' resources.",
 			"# Each entry on the list has 2 values:",
 			"# 1 - Name of resource",
 			"# 2 - Daily Limit, in stacks"),
-	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_CROPS(
-			"player_extraction_restrictions.daily_limits.crops",
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS_CROPS(
+			"player_extraction_limits.daily_limits.crops",
 			"WHEAT-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'crops' resources.",
 			"# Each entry on the list has 2 values:",
 			"# 1 - Name of resource",
 			"# 2 - Daily Limit, in stacks"),
-	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_ANIMALS(
-			"player_extraction_restrictions.daily_limits.animals",
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS_ANIMALS(
+			"player_extraction_limits.daily_limits.animals",
 			"BEEF-0.25",
 			"",
 			"# This list determines the daily extraction limits for players for 'animals' resources.",
 			"# Each entry on the list has 2 values:",
 			"# 1 - Name of resource",
 			"# 2 - Daily Limit, in stacks"),
-	PLAYER_EXTRACTION_RESTRICTIONS_DAILY_LIMITS_MONSTERS(
-			"player_extraction_restrictions.daily_limits.monsters",
+	PLAYER_EXTRACTION_LIMITS_DAILY_LIMITS_MONSTERS(
+			"player_extraction_limits.daily_limits.monsters",
 			"",
 			"",
 			"# This list determines the daily extraction limits for players for 'monster' resources.",
@@ -103,14 +106,14 @@ public enum ConfigNodes {
 			"# If true, tows get resources.",
 			"# if false, towns do not get resource.",
 			"# ",
-   		    "# If town resources AND player extraction restrictions are enabled together, the following benefits are gained:",
+   		    "# If town resources AND player extraction limits are enabled together, the following benefits are gained:",
 			"# ",
 			"# 1. A natural and strategic 'reason to attack' is established for each town,",
 			"#    encouraging healthier and less-toxic warfare.",
 			"# 2. Each town naturally becomes a 'trade-center' for a handful of resources,",
 		    "#    encouraging healthier player-trading patterns.",
 		    "#,",
-		    "# WARNING: It is not recommended to enable town_resources without also enabling player_extraction_restrictions",
+		    "# WARNING: It is not recommended to enable town_resources without also enabling player_extraction_limits",
 		    "#          because industrial resource harvesting by players will degrade the value",
 		    "#          of many town resources, thus nullifying the trading/strategic benefits of those resources.",
 		    "# ",

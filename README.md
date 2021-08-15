@@ -11,7 +11,7 @@ This plugin is essential for a good SiegeWar experience, because without it, the
  - **PVP:** Good Reason. *However*, such sieges usually upset those who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
  - **Plunder Money:** Good Reason. *However*, money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
  
-This plugin solve this problem by transforming **Resources** into a good reason for war. The wisdom of this is demonstrated by the success of the **Civlization** series of games, which also provides randomly-generated terrain & sandbox geopolitical strategy, and in which: 
+This plugin solve this problem by transforming **Resources** into a good reason for war. The wisdom of this is demonstrated by the success of the **Civlization** series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
 #### 
  

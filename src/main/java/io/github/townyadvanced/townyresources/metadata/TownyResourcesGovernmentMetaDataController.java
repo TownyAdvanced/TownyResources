@@ -18,10 +18,18 @@ public class TownyResourcesGovernmentMetaDataController {
 	}
 
     private static String
+        discoveredMetadataKey = "townyresources_discovered",  //only used for towns
         dailyProductionMetadataKey = "townyresources_dailyproduction",
         availableForCollectionMetadataKey = "townyresources_availableforcollection";
-        
-        
+
+    public static String getDiscovered(Government government) {
+        return MetaDataUtil.getSdf(government, discoveredMetadataKey);
+    }
+
+    public static void setDiscovered(Government government, String discovered) {
+        MetaDataUtil.setSdf(government, discoveredMetadataKey, discovered);
+    }
+    
     public static String getDailyProduction(Government government) {
         return MetaDataUtil.getSdf(government, dailyProductionMetadataKey);
     }

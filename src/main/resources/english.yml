@@ -31,13 +31,13 @@ msg_err_survey_too_expensive: "&cYou cannot afford to complete this survey."
 msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblocks for this survey."
 
 town.screen.header: "&2Resources:"
-town.screen.daily.production: "&2 > Daily Productivity: %s"
-town.screen.available.for.collection: "&2 > Available for Collection: %s"
+town.screen.daily.production: '&2 > Daily Productivity &a[%s]&2: &f'
+town.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
 nation.screen.header: "&2Resources:"
 
 nation.screen.daily.production: '&2 > Daily Productivity &a[%s]&2: &f'
-nation.screen.available.for.collection: "&2 > Available for Collection: &f%s"
+nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
 discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s"
 discovery.message.trees: "&bA forest has been discovered at %s!. Daily Production: %d %s"

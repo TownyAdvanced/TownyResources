@@ -44,36 +44,8 @@ public class TownyResourcesTownEventListener implements Listener {
 			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
 
 			// > Daily Productivity [2]: 128 Oak Log, 128 Sugar Cane
-			String resourcesAsString = "OAK-LOG-128, SUGAR_CANE-128";  ///Comes from town metadata
-			String[] resourcesAsArray = resourcesAsString.toLowerCase().split(",");
-			//Truncate list if there is too many resources
-			if(resourcesAsArray.length > 10) 
-				resourcesAsArray = Arrays.copyOf(resourcesAsArray, 10);
-			//Create list for display
-			String[] formattedListOfResources = new String[resourcesAsArray.length];
-			String[] resourceParts;
-			StringBuilder stringBuilder;
-			for(int i = 0; i < resourcesAsArray.length; i++) {
-				resourceParts = resourcesAsArray[i].split("-");
-				stringBuilder = new StringBuilder();
-				if(resourceParts.length == 3) {
-					formattedListOfResources[i] = 
-						stringBuilder
-							.append(resourceParts[0])
-							.append(" ")
-							.append(resourceParts[2])
-							.append(" ")
-							.append(resourceParts[0])
-							.toString();
-				} else {
-					formattedListOfResources[i] = 
-						stringBuilder
-							.append(resourceParts[2])
-							.append(" ")
-							.append(resourceParts[0])
-							.toString();
-				}
-			}
+			String resourcesAsString = "128-OAK-LOG, 128-SUGAR_CANE";  ///Comes from town metadata
+			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").split(",");
 			textLines.addAll(ChatTools.listArr(formattedListOfResources, Translation.of("town.screen.daily.production", formattedListOfResources.length)));
 
 			textLines.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));	

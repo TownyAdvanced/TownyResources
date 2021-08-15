@@ -124,7 +124,7 @@ public enum ConfigNodes {
 		    "#                   will simply flood the market further, and do little to restore the town's value."),
 	TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL(
 			"town_resources.survey_cost_per_resource_level",
-			"250, 500, 2000, 5000",
+			"250, 1000, 5000, 20000",
 			"",
 			"# This list of values determines how much it costs to do a survey for each resource level.",
 			"# Example: If the first value is 250, then it will cost 250 to survey and discover the level 1 resource."),
@@ -136,13 +136,13 @@ public enum ConfigNodes {
 			"# Example: If the first value is 10, then the town must have 10 townblocks to survey and discover the level 1 resource."),
 	TOWN_RESOURCES_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL(
 			"town_resources.town_level_requirement_per_resource_level",
-			"1, 3, 5, 7",
+			"1, 4, 6, 8",
 			"",
 			"# This list of values determines the level a town needs to be, to USE its resources.",
 			"# Example: If the first value is 1, then the town has to be level 1 to use its level 1 resource."),
 	TOWN_RESOURCES_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL(
 			"town_resources.productivity_percentage_per_resource_level",
-			"100, 150, 250, 400",
+			"100, 200, 300, 400",
 			"",
 			"# This list of values determines the productivity of each level of resource.",
 			"# Example: If the second value is 200, then the level 2 resource of a town will be 200% productive."),

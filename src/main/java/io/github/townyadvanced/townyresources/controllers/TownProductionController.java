@@ -5,16 +5,23 @@ import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TownProductionController {
 
     public static List<String> getDiscoveredResources(Town town) {
-        String[] resourcesArray = TownyResourcesGovernmentMetaDataController.getDiscovered(town)
+        String resourcesString = TownyResourcesGovernmentMetaDataController.getDiscovered(town);
+        if(resourcesString.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            String[] resourcesArray = TownyResourcesGovernmentMetaDataController.getDiscovered(town)
                     .replaceAll(" ","")
                     .split(",");
-        return Arrays.asList(resourcesArray);
+            return Arrays.asList(resourcesArray);        
+        }
     }
 
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) {

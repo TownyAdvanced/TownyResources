@@ -23,7 +23,7 @@ description: >
 # DarkPurple = &9, LightGreen = &a, LightBlue = &b
 # Rose = &c, LightPurple = &d, Yellow = &e, White = &f
 
-plugin_prefix: '&f[&6A Towny Resources&f] '
+plugin_prefix: '&f[&6Towny Resources&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
 
 town.screen.header: "&2Resources:"

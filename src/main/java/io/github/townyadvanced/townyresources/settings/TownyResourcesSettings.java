@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources.settings;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -16,21 +17,29 @@ public class TownyResourcesSettings {
 	}
 
     public static List<Integer> getSurveyCostsPerResourceLevel() {
-    	String[] costsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL).split(",");
-    	List<Integer> result = new ArrayList<>();
-    	for(String levelCostAsString: costsAsString) {
-    		result.add(Integer.parseInt(levelCostAsString));
-		}
-    	return result;
+	    String costsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL).replaceAll(" ","");
+		if(costsAsString.isEmpty()) {
+			return Collections.emptyList();
+		} else {
+			List<Integer> result = new ArrayList<>();
+			for(String levelCostAsString: costsAsString.split(",")) {
+				result.add(Integer.parseInt(levelCostAsString));
+			}
+			return result;
+		}    	
 	}
 
     public static List<Integer> getSurveyNumTownblocksRequirementsPerResourceLevel() {
-    	String[] townblockRequirementsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL).split(",");
-    	List<Integer> result = new ArrayList<>();
-    	for(String levelRequirementAsString: townblockRequirementsAsString) {
-    		result.add(Integer.parseInt(levelRequirementAsString));
-		}
-    	return result;
+    	String townblocksAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL).replaceAll(" ","");
+		if(townblocksAsString.isEmpty()) {
+			return Collections.emptyList();
+		} else {
+			List<Integer> result = new ArrayList<>();
+			for(String levelRequirementAsString: townblocksAsString.split(",")) {
+				result.add(Integer.parseInt(levelRequirementAsString));
+			}
+			return result;
+		}    	
 	}
 
 	public static void loadConfig(String filepath, String version) throws IOException {

@@ -25,6 +25,13 @@ public class TownProductionController {
    
    		//Send global message
 		TownyResourcesMessagingUtil.sendGlobalMessage("Somebody discovered a new resource woohoo");
-        
+     
+        //TODO - recalculate the town production here (& nation if there is one)   
     }
+    
+    public static void recalculateTownProduction(Town town) {
+        //recalculate production for a single town
+        //Also do for its owner nation if it has one
+    }
+   
 }

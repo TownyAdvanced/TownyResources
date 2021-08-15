@@ -35,7 +35,8 @@ town.screen.daily.production: "&2 > Daily Productivity: %s"
 town.screen.available.for.collection: "&2 > Available for Collection: %s"
 
 nation.screen.header: "&2Resources:"
-nation.screen.daily.production: "&2 > Daily Productivity: &f%s"
+
+nation.screen.daily.production: '&2 > Daily Productivity &a[%s]&2: &f'
 nation.screen.available.for.collection: "&2 > Available for Collection: &f%s"
 
 discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s"

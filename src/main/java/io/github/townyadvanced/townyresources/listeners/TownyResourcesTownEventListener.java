@@ -1,7 +1,11 @@
 package io.github.townyadvanced.townyresources.listeners;
 
+import com.gmail.goosius.siegewar.TownOccupationController;
+import com.gmail.goosius.siegewar.settings.Translation;
+import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
@@ -33,44 +37,48 @@ public class TownyResourcesTownEventListener implements Listener {
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
 		if (TownyResourcesSettings.isEnabled()) {
-			List<String> out = new ArrayList<>();
+			List<String> textLines = new ArrayList<>();
 			Town town = event.getTown();
 
-			//Get list of resources
-			out.add(TownyResourcesTranslation.of("town.screen.header"));
+			//Resources:
+			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
+
+			// > Daily Productivity [2]: 128 Oak Log, 128 Sugar Cane
 			String resourcesAsString = "OAK-LOG-128, SUGAR_CANE-128";  ///Comes from town metadata
-			String[] resourcesAsListOfStrings = resourcesAsString.toLowerCase().split(",");
+			String[] resourcesAsArray = resourcesAsString.toLowerCase().split(",");
 			//Truncate list if there is too many resources
-			if(resourcesAsListOfStrings.length > 10) 
-				resourcesAsListOfStrings = Arrays.copyOf(resourcesAsListOfStrings, 10);
-			//Build resources String to display
-			StringBuilder resourcesStringToDisplay = new StringBuilder();
-			resourcesStringToDisplay
-				.append("[")
-				.append(resourcesAsListOfStrings.length)
-				.append("] ");
+			if(resourcesAsArray.length > 10) 
+				resourcesAsArray = Arrays.copyOf(resourcesAsArray, 10);
+			//Create list for display
+			String[] formattedListOfResources = new String[resourcesAsArray.length];
 			String[] resourceParts;
-			for(String resourceAsString: resourcesAsListOfStrings) {
-				resourceParts = resourceAsString.split("-");
+			StringBuilder stringBuilder;
+			for(int i = 0; i < resourcesAsArray.length; i++) {
+				resourceParts = resourcesAsArray[i].split("-");
+				stringBuilder = new StringBuilder();
 				if(resourceParts.length == 3) {
-					resourcesStringToDisplay
-						.append(resourceParts[2])
-						.append(" ")
-						.append(resourceParts[0])
-						.append(" ")
-						.append(resourceParts[1]);
+					formattedListOfResources[i] = 
+						stringBuilder
+							.append(resourceParts[0])
+							.append(" ")
+							.append(resourceParts[2])
+							.append(" ")
+							.append(resourceParts[0])
+							.toString();
 				} else {
-					resourcesStringToDisplay
-						.append(resourceParts[1])
-						.append(" ")
-						.append(resourceParts[0]);
+					formattedListOfResources[i] = 
+						stringBuilder
+							.append(resourceParts[2])
+							.append(" ")
+							.append(resourceParts[0])
+							.toString();
 				}
 			}
-			//Display list
-			out.add(TownyResourcesTranslation.of("town.screen.daily.production", resourcesStringToDisplay.toString()));
-			out.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));
+			textLines.addAll(ChatTools.listArr(formattedListOfResources, Translation.of("town.screen.daily.production", formattedListOfResources.length)));
 
-	        event.addLines(out);
+			textLines.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));	
+			
+			event.addLines(textLines);
 		}
 	}
 }

@@ -1,5 +1,9 @@
 package io.github.townyadvanced.townyresources;
 
+import com.gmail.goosius.siegewar.command.SiegeWarAdminCommand;
+import com.gmail.goosius.siegewar.command.SiegeWarCommand;
+import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
+import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -20,7 +24,7 @@ public class TownyResources extends JavaPlugin {
     	
     	plugin = this;
     	
-        if (!loadSettings())
+        if (!loadAll())
         	onDisable();
 
     }
@@ -37,12 +41,14 @@ public class TownyResources extends JavaPlugin {
 		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
 	}
 	
-	private boolean loadSettings() {
+	private boolean loadAll() {
 		try {
+			printSickASCIIArt();
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
-		} catch (IOException e) {
+			registerCommands();
+		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
             return false;
@@ -58,10 +64,33 @@ public class TownyResources extends JavaPlugin {
 	public static void severe(String message) {
 		plugin.getLogger().severe(message);
 	}
+
+	private void printSickASCIIArt() {
+		System.out.println("    _________.__                      ");
+		System.out.println("   /   _____/|__| ____   ____   ____  ");
+		System.out.println("   \\_____  \\ |  |/ __ \\ / ___\\_/ __ \\ ");
+		System.out.println("   /        \\|  \\  ___// /_/  >  ___/ ");
+		System.out.println("  /_______  /|__|\\___  >___  / \\___  >");
+		System.out.println("          \\/         \\/_____/      \\/ ");
+		System.out.println("       __      __                        ");
+		System.out.println("      /  \\    /  \\_____ _______          ");
+		System.out.println("      \\   \\/\\/   /\\__  \\\\_  __ \\         ");
+		System.out.println("       \\        /  / __ \\|  | \\/         ");
+		System.out.println("        \\__/\\  /  (____  /__|            ");
+		System.out.println("             \\/        \\/                ");
+		System.out.println("          By Goosius         ");
+		System.out.println("                                      ");
+	}
 	
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
 		pm.registerEvents(new TownyResourcesNationEventListener(this), this);		
 	}
+	
+	private void registerCommands() {
+		getCommand("townyresouces").setExecutor(new TownyResourcesCommand());
+		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());
+	}
+
 }

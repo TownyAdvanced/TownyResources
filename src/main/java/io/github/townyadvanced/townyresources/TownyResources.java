@@ -89,7 +89,7 @@ public class TownyResources extends JavaPlugin {
 	}
 	
 	private void registerCommands() {
-		getCommand("townyresouces").setExecutor(new TownyResourcesCommand());
+		getCommand("townyresources").setExecutor(new TownyResourcesCommand());
 		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());
 	}
 

@@ -141,8 +141,8 @@ public enum TownyResourcesConfigNodes {
 			"town_resources.town_level_requirement_per_resource_level",
 			"1, 4, 6, 8",
 			"",
-			"# This list of values determines the level a town needs to be, to USE its resources.",
-			"# Example: If the first value is 1, then the town has to be level 1 to use its level 1 resource."),
+			"# This list of values determines the level a town needs to be, to PRODUCE its resources.",
+			"# Example: If the first value is 1, then the town has to be level 1 to produce its level 1 resource."),
 	TOWN_RESOURCES_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL(
 			"town_resources.productivity_percentage_per_resource_level",
 			"100, 200, 300, 400",

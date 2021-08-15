@@ -65,21 +65,23 @@ public class TownyResources extends JavaPlugin {
 		plugin.getLogger().severe(message);
 	}
 
-	private void printSickASCIIArt() {
-		System.out.println("    _________.__                      ");
-		System.out.println("   /   _____/|__| ____   ____   ____  ");
-		System.out.println("   \\_____  \\ |  |/ __ \\ / ___\\_/ __ \\ ");
-		System.out.println("   /        \\|  \\  ___// /_/  >  ___/ ");
-		System.out.println("  /_______  /|__|\\___  >___  / \\___  >");
-		System.out.println("          \\/         \\/_____/      \\/ ");
-		System.out.println("       __      __                        ");
-		System.out.println("      /  \\    /  \\_____ _______          ");
-		System.out.println("      \\   \\/\\/   /\\__  \\\\_  __ \\         ");
-		System.out.println("       \\        /  / __ \\|  | \\/         ");
-		System.out.println("        \\__/\\  /  (____  /__|            ");
-		System.out.println("             \\/        \\/                ");
-		System.out.println("          By Goosius         ");
-		System.out.println("                                      ");
+	private void printSickASCIIArt() {	
+			Bukkit.getLogger().info("");	
+			Bukkit.getLogger().info("	__________                                                  ________                                                                           ");
+			Bukkit.getLogger().info("MMMMMMMMMM                                                  `MMMMMMMb.                                                                         ");
+			Bukkit.getLogger().info("/   MM   \\                                                   MM    `Mb                                                                         ");
+			Bukkit.getLogger().info("    MM   _____  ____    _    ___ ___  __  ____    ___        MM     MM   ____     ____     _____  ___   ___ ___  __   ____     ____     ____");   
+			Bukkit.getLogger().info("    MM  6MMMMMb `MM(   ,M.   )M' `MM 6MMb `MM(    )M'        MM     MM  6MMMMb   6MMMMb\\  6MMMMMb `MM    MM `MM 6MM  6MMMMb.  6MMMMb   6MMMMb\\ ");
+			Bukkit.getLogger().info("    MM 6M'   `Mb `Mb   dMb   d'   MMM9 `Mb `Mb    d'         MM    .M9 6M'  `Mb MM'    ` 6M'   `Mb MM    MM  MM69 \" 6M'   Mb 6M'  `Mb MM'    ` ");
+			Bukkit.getLogger().info("    MM MM     MM  YM. ,PYM. ,P    MM'   MM  YM.  ,P          MMMMMMM9' MM    MM YM.      MM     MM MM    MM  MM'    MM    `' MM    MM YM.      ");
+			Bukkit.getLogger().info("    MM MM     MM  `Mb d'`Mb d'    MM    MM   MM  M           MM  \\M\\   MMMMMMMM  YMMMMb  MM     MM MM    MM  MM     MM       MMMMMMMM  YMMMMb  ");
+			Bukkit.getLogger().info("    MM MM     MM   YM,P  YM,P     MM    MM   `Mbd'           MM   \\M\\  MM            `Mb MM     MM MM    MM  MM     MM       MM            `Mb ");
+			Bukkit.getLogger().info("    MM YM.   ,M9   `MM'  `MM'     MM    MM    YMP            MM    \\M\\ YM    d9 L    ,MM YM.   ,M9 YM.   MM  MM     YM.   d9 YM    d9 L    ,MM ");
+			Bukkit.getLogger().info("   _MM_ YMMMMM9     YP    YP     _MM_  _MM_    M            _MM_    \\M\\_YMMMM9  MYMMMM9   YMMMMM9   YMMM9MM__MM_     YMMMM9   YMMMM9  MYMMMM9  ");
+			Bukkit.getLogger().info("                                              d'                                                                                               ");
+			Bukkit.getLogger().info("                                          (8),P                                                                                              ");
+			Bukkit.getLogger().info("                                           YMM                                            By Goosius                                           ");
+			Bukkit.getLogger().info("");	
 	}
 	
 	private void registerListeners() {

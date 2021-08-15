@@ -26,13 +26,13 @@ description: >
 plugin_prefix: '&f[&6A Prefix&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
 
-town.screen.header: "Resources:"
-town.screen.daily.production: " > Daily Production: %s"
-town.screen.available.for.collection: " > Available for Collection: %s"
+town.screen.header: "&2Resources:"
+town.screen.daily.production: "&2 > Daily Productivity: %s"
+town.screen.available.for.collection: "&2 > Available for Collection: %s"
 
-nation.screen.header: "Resources:"
-nation.screen.daily.production: " > Daily Production: %s"
-nation.screen.available.for.collection: " > Available for Collection: %s"
+nation.screen.header: "&2Resources:"
+nation.screen.daily.production: "&2 > Daily Productivity: %s"
+nation.screen.available.for.collection: "&2 > Available for Collection: %s"
 
 discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s"
 discovery.message.trees: "&bA forest has been discovered at %s!. Daily Production: %d %s"

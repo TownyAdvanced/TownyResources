@@ -153,7 +153,7 @@ public enum ConfigNodes {
 			"# The owner nation of a town gets this percentage of the town resources.",
 			"# The town gets the rest."),
 	TOWN_RESOURCES_OFFERS(
-			"towny.resources_offers",
+			"town_resources.offers",
 			"",
 			"",
 			"",

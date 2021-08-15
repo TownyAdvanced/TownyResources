@@ -4,6 +4,7 @@ import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.event.EventHandler;
@@ -41,7 +42,7 @@ public class TownyResourcesNationEventListener implements Listener {
 			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
 
 			// > Daily Productivity [2]: 96 oak Log, 96 sugar cane, 24 gold_ore
-			String resourcesAsString = "96-OAK-LOG, 96-SUGAR_CANE, 24-GOLD_ORE";  ///Comes from nation metadata
+			String resourcesAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(nation);
 			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
 			if(formattedListOfResources.length > 20) {
 				formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
@@ -50,7 +51,7 @@ public class TownyResourcesNationEventListener implements Listener {
 			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("nation.screen.daily.production", formattedListOfResources.length)));
 
 			// > Available For Collection [2]: 192 oak log, 192 sugar cane, 48 gold ore
-			resourcesAsString = "192-OAK-LOG, 192-SUGAR_CANE, 48-GOLD_ORE";  ///Comes from nation metadata
+			resourcesAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(nation);
 			formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
 			if(formattedListOfResources.length > 20) {
 				formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);

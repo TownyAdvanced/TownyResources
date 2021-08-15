@@ -86,23 +86,26 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		Town town = playerWorldCoord.getTownBlock().getTown();
 		List<String> discoveredResources = TownProductionController.getDiscoveredResources(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
-		List<Integer> townblocksRequirementPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
+		List<Integer> requiredNumTownblocksPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
 		if(discoveredResources.size() >= costPerResourceLevel.size())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_all_resources_already_discovered"));
-		if(discoveredResources.size() >= townblocksRequirementPerResourceLevel.size())
+		if(discoveredResources.size() >= requiredNumTownblocksPerResourceLevel.size())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_all_resources_already_discovered"));
 		
 		//Check if the town has enough townblocks
 		int indexOfNextResourceLevel = discoveredResources.size();
-		int townblocksRequirement = townblocksRequirementPerResourceLevel.get(indexOfNextResourceLevel);
-		if(town.getTownBlocks().size() < townblocksRequirement)
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_not_enough_townblocks"));
+		int requiredNumTownblocks = requiredNumTownblocksPerResourceLevel.get(indexOfNextResourceLevel);
+		int currentNumTownblocks = town.getTownBlocks().size();
+		if(currentNumTownblocks < requiredNumTownblocks)
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_not_enough_townblocks", 
+				requiredNumTownblocks, currentNumTownblocks));
 		
 		//Check that the player can afford the survey
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
-			throw new TownyException(Translation.of("msg_err_survey_too_expensive"));
+			throw new TownyException(Translation.of("msg_err_survey_too_expensive", 
+				TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
 
 		//Pay for the survey
 		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");

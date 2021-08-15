@@ -104,7 +104,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
-			throw new TownyException(Translation.of("msg_err_survey_too_expensive", 
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive", 
 				TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
 
 		//Pay for the survey

@@ -1,6 +1,6 @@
 package io.github.townyadvanced.townyresources.settings;
 
-public enum ConfigNodes {
+public enum TownyResourcesConfigNodes {
 	
 	VERSION_HEADER("version", "", ""),
 	VERSION(
@@ -216,7 +216,7 @@ public enum ConfigNodes {
 	private final String Default;
 	private String[] comments;
 
-	ConfigNodes(String root, String def, String... comments) {
+	TownyResourcesConfigNodes(String root, String def, String... comments) {
 
 		this.Root = root;
 		this.Default = def;

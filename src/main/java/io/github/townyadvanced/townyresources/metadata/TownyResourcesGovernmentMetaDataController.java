@@ -18,9 +18,9 @@ public class TownyResourcesGovernmentMetaDataController {
 	}
 
     private static String
-        discoveredMetadataKey = "townyresources_discovered",  //only used for towns
-        dailyProductionMetadataKey = "townyresources_dailyproduction",
-        availableForCollectionMetadataKey = "townyresources_availableforcollection";
+        discoveredMetadataKey = "townyresources_discovered",  //e.g.   OAK_LOG, SUGAR
+        dailyProductionMetadataKey = "townyresources_dailyproduction",  //e.g.   32-OAK_LOG, 32-SUGAR
+        availableForCollectionMetadataKey = "townyresources_availableforcollection";  //e.g.  64-OAK_LOG, 64-SUGAR
 
     public static String getDiscovered(Government government) {
         return MetaDataUtil.getSdf(government, discoveredMetadataKey);

@@ -8,14 +8,14 @@ import java.util.Map;
  * This class represents a players resources extraction record
  */
 public class PlayerResourcesExtractionRecord {
-    private Map<Material, ResourceExtractionRecord> resourceExtractionRecords;
+    private Map<Material, ResourceQuantity> resourceExtractionRecords;
     private long timeSinceLastLimitWarning;   //helps us to avoid spamming the player with limit warnings
 
-    public Map<Material, ResourceExtractionRecord> getResourceExtractionRecords() {
+    public Map<Material, ResourceQuantity> getResourceExtractionRecords() {
         return resourceExtractionRecords;
     }
 
-    public void setResourceExtractionRecords(Map<Material, ResourceExtractionRecord> resourceExtractionRecords) {
+    public void setResourceExtractionRecords(Map<Material, ResourceQuantity> resourceExtractionRecords) {
         this.resourceExtractionRecords = resourceExtractionRecords;
     }
 

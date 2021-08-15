@@ -24,7 +24,7 @@ public final class TownyResourcesTranslation {
 	// if the file is not found it will load the default from resource
 	public static void loadLanguage(String filepath, String defaultRes) throws IOException {
 
-		String res = TownyResourcesSettings.getString(ConfigNodes.LANGUAGE.getRoot(), defaultRes);
+		String res = TownyResourcesSettings.getString(TownyResourcesConfigNodes.LANGUAGE.getRoot(), defaultRes);
 		String fullPath = filepath + File.separator + res;
 		File file = FileMgmt.unpackResourceFile(fullPath, res, defaultRes);
 
@@ -68,7 +68,7 @@ public final class TownyResourcesTranslation {
 		String data = language.getString(key.toLowerCase());
 
 		if (data == null) {
-			TownyResources.severe("Error could not read " + key.toLowerCase() + " from " + TownyResourcesSettings.getString(ConfigNodes.LANGUAGE));
+			TownyResources.severe("Error could not read " + key.toLowerCase() + " from " + TownyResourcesSettings.getString(TownyResourcesConfigNodes.LANGUAGE));
 			return "";
 		}
 		return StringMgmt.translateHexColors(parseSingleLineString(data));

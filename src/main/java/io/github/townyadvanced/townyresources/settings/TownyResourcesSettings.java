@@ -2,6 +2,8 @@ package io.github.townyadvanced.townyresources.settings;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
@@ -10,10 +12,27 @@ public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
 	
 	public static boolean isEnabled() {
-		return getBoolean(ConfigNodes.ENABLED);
+		return getBoolean(TownyResourcesConfigNodes.ENABLED);
 	}
-	
-	
+
+    public static List<Integer> getSurveyCostsPerResourceLevel() {
+    	String[] costsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL).split(",");
+    	List<Integer> result = new ArrayList<>();
+    	for(String levelCostAsString: costsAsString) {
+    		result.add(Integer.parseInt(levelCostAsString));
+		}
+    	return result;
+	}
+
+    public static List<Integer> getSurveyNumTownblocksRequirementsPerResourceLevel() {
+    	String[] townblockRequirementsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL).split(",");
+    	List<Integer> result = new ArrayList<>();
+    	for(String levelRequirementAsString: townblockRequirementsAsString) {
+    		result.add(Integer.parseInt(levelRequirementAsString));
+		}
+    	return result;
+	}
+
 	public static void loadConfig(String filepath, String version) throws IOException {
 		if (FileMgmt.checkOrCreateFile(filepath)) {
 			File file = new File(filepath);
@@ -55,10 +74,10 @@ public class TownyResourcesSettings {
 		newConfig = new CommentedConfiguration(file);
 		newConfig.load();
 
-		for (ConfigNodes root : ConfigNodes.values()) {
+		for (TownyResourcesConfigNodes root : TownyResourcesConfigNodes.values()) {
 			if (root.getComments().length > 0)
 				addComment(root.getRoot(), root.getComments());
-			if (root.getRoot() == ConfigNodes.VERSION.getRoot())
+			if (root.getRoot() == TownyResourcesConfigNodes.VERSION.getRoot())
 				setNewProperty(root.getRoot(), version);
 			else
 				setNewProperty(root.getRoot(), (config.get(root.getRoot().toLowerCase()) != null) ? config.get(root.getRoot().toLowerCase()) : root.getDefault());
@@ -83,12 +102,12 @@ public class TownyResourcesSettings {
 		TownyResources.severe("Error could not read " + msg);
 	}
 	
-	public static boolean getBoolean(ConfigNodes node) {
+	public static boolean getBoolean(TownyResourcesConfigNodes node) {
 
 		return Boolean.parseBoolean(config.getString(node.getRoot().toLowerCase(), node.getDefault()));
 	}
 
-	public static double getDouble(ConfigNodes node) {
+	public static double getDouble(TownyResourcesConfigNodes node) {
 
 		try {
 			return Double.parseDouble(config.getString(node.getRoot().toLowerCase(), node.getDefault()).trim());
@@ -98,7 +117,7 @@ public class TownyResourcesSettings {
 		}
 	}
 
-	public static int getInt(ConfigNodes node) {
+	public static int getInt(TownyResourcesConfigNodes node) {
 
 		try {
 			return Integer.parseInt(config.getString(node.getRoot().toLowerCase(), node.getDefault()).trim());
@@ -108,7 +127,7 @@ public class TownyResourcesSettings {
 		}
 	}
 
-	public static String getString(ConfigNodes node) {
+	public static String getString(TownyResourcesConfigNodes node) {
 
 		return config.getString(node.getRoot().toLowerCase(), node.getDefault());
 	}

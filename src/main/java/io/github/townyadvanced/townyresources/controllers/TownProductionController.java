@@ -15,7 +15,7 @@ public class TownProductionController {
     public static List<String> getDiscoveredResources(Town town) {
         String resourcesString = TownyResourcesGovernmentMetaDataController.getDiscovered(town);
         if(resourcesString.isEmpty()) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         } else {
             String[] resourcesArray = TownyResourcesGovernmentMetaDataController.getDiscovered(town)
                     .replaceAll(" ","")
@@ -26,6 +26,13 @@ public class TownProductionController {
 
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) {
         String newResource = "GOLD_ORE"; //Logic here etc.
+        
+        //Compile a list of all candidate resource
+        
+        
+        //Generate a random number to determine which candidate will win
+        
+        //Discover the resource
         alreadyDiscoveredResources.add(newResource);
         TownyResourcesGovernmentMetaDataController.setDiscovered(town, alreadyDiscoveredResources);
         town.save();

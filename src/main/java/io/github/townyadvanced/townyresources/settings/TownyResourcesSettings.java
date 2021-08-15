@@ -19,7 +19,7 @@ public class TownyResourcesSettings {
     public static List<Integer> getSurveyCostsPerResourceLevel() {
 	    String costsAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL).replaceAll(" ","");
 		if(costsAsString.isEmpty()) {
-			return Collections.emptyList();
+            return new ArrayList<>();
 		} else {
 			List<Integer> result = new ArrayList<>();
 			for(String levelCostAsString: costsAsString.split(",")) {
@@ -32,7 +32,7 @@ public class TownyResourcesSettings {
     public static List<Integer> getSurveyNumTownblocksRequirementsPerResourceLevel() {
     	String townblocksAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL).replaceAll(" ","");
 		if(townblocksAsString.isEmpty()) {
-			return Collections.emptyList();
+            return new ArrayList<>();
 		} else {
 			List<Integer> result = new ArrayList<>();
 			for(String levelRequirementAsString: townblocksAsString.split(",")) {

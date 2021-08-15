@@ -4,6 +4,7 @@ import com.gmail.goosius.siegewar.Messaging;
 import com.gmail.goosius.siegewar.settings.Translation;
 import com.gmail.goosius.siegewar.utils.SiegeWarMoneyUtil;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
+import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -70,7 +71,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 				default:
 					showTownyResourcesHelp(player);
 			}		
-		} catch (TownyException e) {
+		} catch (Exception e) {
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
 	}
@@ -78,6 +79,10 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	private void parseSurveyCommand(Player player) throws TownyException{
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
 
+		//Check if town resources are enabled
+		if(!TownyResourcesSettings.areTownResourcesEnabled())
+			throw new TownyException(Translation.of("msg_err_command_disable"));
+		
 		//Check if there is a town here
 		if(!playerWorldCoord.hasTownBlock())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_no_town"));

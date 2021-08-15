@@ -37,11 +37,11 @@ nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2:
 help_collect: 'Collect all available extracted resources at your town and/or nation.'
 help_survey: 'Survey the town at your current location, to discover new resources.'
 
-discovery.message.deposits: "&bOre deposits have been discovered at %s!. Daily Production: %d %s."
-discovery.message.trees: "&bA forest has been discovered at %s!. Daily Production: %d %s."
-discovery.message.crops: "&bFertile soil has been discovered at %s!. Daily Production: %d %s."
-discovery.message.animals: "&bA herd of animals has been discovered at %s!. Daily Production: %d %s."
-discovery.message.monsters: "&bA nest of monsters has been discovered at %s!. Daily Production: %d %s."
+discovery.message.ores: "&b%s has discovered ore deposits at %s!. Daily Production: %d %s."
+discovery.message.trees: "&b%s has discovered a forest at %s!. Daily Production: %d %s."
+discovery.message.crops: "&b%s has discovered fertile soil at %s!. Daily Production: %d %s."
+discovery.message.animals: "&b%s has discovered a herd of animals at %s!. Daily Production: %d %s."
+discovery.message.monsters: "&b%s has discovered a nest of monsters at %s!. Daily Production: %d %s."
 
 msg_err_daily_extraction_limit_reached: "&cDaily Extraction Limit Reached for %s (%d)."
 msg_err_survey_no_town: "&cThere is no town here to survey."

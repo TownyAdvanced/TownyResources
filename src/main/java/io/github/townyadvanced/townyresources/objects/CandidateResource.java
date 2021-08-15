@@ -22,5 +22,16 @@ public class CandidateResource {
         this.candidateID = candidateID;
         
     }
-      
+
+    public String getResourceMaterialName() {
+        return resourceMaterialName;
+    }
+
+    public int getCandidateID() {
+        return candidateID;
+    }
+
+    public String getResourceCategory() {
+        return resourceCategory;
+    }
 }

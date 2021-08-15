@@ -26,7 +26,7 @@ public class TownyResourcesGovernmentMetaDataController {
         availableForCollectionMetadataKey = "townyresources_availableforcollection";  //e.g.  64-OAK_LOG, 64-SUGAR
 
     public static String getDiscovered(Government government) {
-        return MetaDataUtil.getSdf(government, discoveredMetadataKey);
+        return MetaDataUtil.getSdf(government, discoveredMetadataKey).replaceAll(" ","");
     }
     
     public static void setDiscovered(Government government, List<String> discoveredResources) {
@@ -45,7 +45,7 @@ public class TownyResourcesGovernmentMetaDataController {
     }
     
     public static String getDailyProduction(Government government) {
-        return MetaDataUtil.getSdf(government, dailyProductionMetadataKey);
+        return MetaDataUtil.getSdf(government, dailyProductionMetadataKey).replaceAll(" ","");
     }
 
     public static void setDailyProduction(Government government, String dailyProduction) {
@@ -53,7 +53,7 @@ public class TownyResourcesGovernmentMetaDataController {
     }
 
     public static String getAvailableForCollection(Government government) {
-        return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey);
+        return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
     }
 
     public static void setAvailableForCollection(Government government, String availableForCollection) {

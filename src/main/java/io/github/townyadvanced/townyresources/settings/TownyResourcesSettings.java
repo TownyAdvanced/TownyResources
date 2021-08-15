@@ -159,7 +159,7 @@ public class TownyResourcesSettings {
 		}    	
 	}
 
-	public static boolean areTownResourcesEnabled() {
-		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_ENABLED);
+	public static boolean areSurveysEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_ENABLED);
 	}
 }

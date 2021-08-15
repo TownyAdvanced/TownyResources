@@ -78,11 +78,11 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 	private void parseSurveyCommand(Player player) throws TownyException{
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
-
-		//Check if town resources are enabled
-		if(!TownyResourcesSettings.areTownResourcesEnabled())
+			
+		//Check if surveys are enabled
+		if(!TownyResourcesSettings.areSurveysEnabled())
 			throw new TownyException(Translation.of("msg_err_command_disable"));
-		
+					
 		//Check if there is a town here
 		if(!playerWorldCoord.hasTownBlock())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_no_town"));

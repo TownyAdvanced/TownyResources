@@ -10,7 +10,9 @@ import com.palmergames.bukkit.util.Colors;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 
-public class TownyResourcesMessaging {
+import java.util.Arrays;
+
+public class TownyResourcesMessagingUtil {
 
     final static String prefix = TownyResourcesTranslation.of("plugin_prefix");
     
@@ -32,5 +34,16 @@ public class TownyResourcesMessaging {
             if (player != null && TownyAPI.getInstance().isTownyWorld(player.getWorld()))
                 sendMsg(player, message);
         }
+    }
+    
+    public static String[] formatResourcesStringForDisplay(String resourcesAsString) {
+        String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
+        if(formattedListOfResources.length == 1) {
+            formattedListOfResources = new String[0];
+        } else if(formattedListOfResources.length > 20) {
+            formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
+            formattedListOfResources[20] = "...";
+        }
+        return formattedListOfResources;
     }
 }

@@ -67,7 +67,7 @@ public class TownyResources extends JavaPlugin {
 
 	private void printSickASCIIArt() {	
 			Bukkit.getLogger().info("");	
-			Bukkit.getLogger().info("	__________                                                  ________                                                                           ");
+			Bukkit.getLogger().info("__________                                                  ________                                                                           ");
 			Bukkit.getLogger().info("MMMMMMMMMM                                                  `MMMMMMMb.                                                                         ");
 			Bukkit.getLogger().info("/   MM   \\                                                   MM    `Mb                                                                         ");
 			Bukkit.getLogger().info("    MM   _____  ____    _    ___ ___  __  ____    ___        MM     MM   ____     ____     _____  ___   ___ ___  __   ____     ____     ____");   

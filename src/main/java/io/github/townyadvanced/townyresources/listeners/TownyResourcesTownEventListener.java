@@ -10,6 +10,7 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -46,21 +47,13 @@ public class TownyResourcesTownEventListener implements Listener {
 
 			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
 			String resourcesAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(town);
-			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
-			if(formattedListOfResources.length > 20) {
-				formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
-				formattedListOfResources[20] = "...";
-			}
-			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("town.screen.daily.production", formattedListOfResources.length)));
+			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.daily.production", resourcesAsFormattedArray.length)));
 
 			// > Available For Collection [2]: 64 oak log, 64 sugar cane
 			resourcesAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(town);
-			formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
-			if(formattedListOfResources.length > 20) {
-				formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
-				formattedListOfResources[20] = "...";
-			}
-			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("town.screen.available.for.collection", formattedListOfResources.length)));
+			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.available.for.collection", resourcesAsFormattedArray.length)));
 			
 			event.addLines(textLines);
 		}

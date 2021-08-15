@@ -7,9 +7,10 @@ package io.github.townyadvanced.townyresources.enums;
  */
 public enum TownyResourcesPermissionNodes {
 
-	TOWNY_RESOURCES_SURVEY("townyresources.survey"),  //Do a resource survey in a town
-	TOWNY_RESOURCES_TOWN_COLLECT("townyresources.town.collect"),  //Collect your town's share of extracted resources
-	TOWNY_RESOURCES_NATION_COLLECT("townyresources.nation.collect"); //Collect your nation's share of extracted resources
+	TOWNY_RESOURCES_COMMAND("townyresources.command.*"),
+	TOWNY_RESOURCES_COMMAND_SURVEY("townyresources.command.survey"),  //Do a resource survey in a town
+	TOWNY_RESOURCES_COMMAND_TOWN_COLLECT("townyresources.command.town.collect"),  //Collect your town's share of extracted resources
+	TOWNY_RESOURCES_COMMAND_NATION_COLLECT("townyresources.command.nation.collect"); //Collect your nation's share of extracted resources
 
 	private String value;
 

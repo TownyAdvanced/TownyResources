@@ -65,7 +65,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 					parseSurveyCommand(player);
 					break;
 				case "collect":
-					//parseSiegeWarHudCommand(player, StringMgmt.remFirstArg(args));
+					parseCollectCommand(player);
 					break;
 				default:
 					showTownyResourcesHelp(player);
@@ -74,7 +74,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
 	}
-	
+
 	private void parseSurveyCommand(Player player) throws TownyException{
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
 
@@ -84,7 +84,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Check if there are resources left to discover at the town
 		Town town = playerWorldCoord.getTownBlock().getTown();
-		List<Material> discoveredResources = TownProductionController.getDiscoveredResources(town);
+		List<String> discoveredResources = TownProductionController.getDiscoveredResources(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
 		List<Integer> townblocksRequirementPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
 		if(discoveredResources.size() >= costPerResourceLevel.size())
@@ -108,6 +108,11 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
 				
 		//Discover a new resource (notification will be sent from here)
-		TownProductionController.discoverNewResource(resident, town, levelToDiscover);
+		TownProductionController.discoverNewResource(resident, town, discoveredResources);
 	}
+	
+	private static void parseCollectCommand(Player player) {
+		
+	}
+
 }

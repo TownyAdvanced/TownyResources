@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.listeners;
 
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
@@ -32,15 +33,23 @@ public class TownyResourcesNationEventListener implements Listener {
 	@EventHandler
 	public void onNationStatusScreen(NationStatusScreenEvent event) {
 		if (TownyResourcesSettings.isEnabled()) {
-			List<String> out = new ArrayList<>();
+			List<String> textLines = new ArrayList<>();
 			Nation nation = event.getNation();
 
 			//Resources:
-			out.add(TownyResourcesTranslation.of("town.screen.header"));
-			out.add(TownyResourcesTranslation.of("town.screen.daily.production", "dummy list"));
-			out.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));
+			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
 
-	        event.addLines(out);
+			// > Daily Productivity [2]: 96 oak Log, 96 sugar cane, 24 gold_ore
+			String resourcesAsString = "96-OAK-LOG, 96-SUGAR_CANE, 24-GOLD_ORE";  ///Comes from town metadata
+			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
+			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("nation.screen.daily.production", formattedListOfResources.length)));
+
+			// > Available For Collection [2]: 192 oak log, 192 sugar cane, 48 gold ore
+			resourcesAsString = "192-OAK-LOG, 192-SUGAR_CANE, 48-GOLD_ORE";  ///Comes from town metadata
+			formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
+			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("nation.screen.available.for.collection", formattedListOfResources.length)));
+
+	        event.addLines(textLines);
 		}
 	}
 }

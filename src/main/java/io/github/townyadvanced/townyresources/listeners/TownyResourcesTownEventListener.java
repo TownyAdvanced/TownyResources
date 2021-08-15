@@ -43,12 +43,15 @@ public class TownyResourcesTownEventListener implements Listener {
 			//Resources:
 			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
 
-			// > Daily Productivity [2]: 128 Oak Log, 128 Sugar Cane
-			String resourcesAsString = "128-OAK-LOG, 128-SUGAR_CANE";  ///Comes from town metadata
-			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").split(",");
-			textLines.addAll(ChatTools.listArr(formattedListOfResources, Translation.of("town.screen.daily.production", formattedListOfResources.length)));
+			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
+			String resourcesAsString = "32-OAK-LOG, 32-SUGAR_CANE";  ///Comes from town metadata
+			String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
+			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("town.screen.daily.production", formattedListOfResources.length)));
 
-			textLines.add(TownyResourcesTranslation.of("town.screen.available.for.collection", "dummy list"));	
+			// > Available For Collection [2]: 64 oak log, 64 sugar cane
+			resourcesAsString = "64-OAK-LOG, 64-SUGAR_CANE";  ///Comes from town metadata
+			formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("-", " ").replaceAll("_"," ").split(",");
+			textLines.addAll(ChatTools.listArr(formattedListOfResources, TownyResourcesTranslation.of("town.screen.available.for.collection", formattedListOfResources.length)));
 			
 			event.addLines(textLines);
 		}

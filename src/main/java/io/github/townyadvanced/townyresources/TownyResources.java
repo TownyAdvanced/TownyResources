@@ -1,12 +1,15 @@
-package io.github.townyadvanced.blankplugin;
+package io.github.townyadvanced.townyresources;
+
+import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
+import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
+import io.github.townyadvanced.townyresources.settings.Settings;
+import io.github.townyadvanced.townyresources.settings.Translation;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
-import io.github.townyadvanced.blankplugin.settings.Settings;
-import io.github.townyadvanced.blankplugin.settings.Translation;
 
 public class TownyResources extends JavaPlugin {
 	
@@ -38,12 +41,13 @@ public class TownyResources extends JavaPlugin {
 		try {
 			Settings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			Translation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			registerListeners();
 		} catch (IOException e) {
             e.printStackTrace();
-            severe("Config.yml failed to load! Disabling!");
+            severe("TownyResources failed to load! Disabling!");
             return false;
         }
-		info("Config.yml loaded successfully.");		
+		info("TownyResources loaded successfully.");		
 		return true;
 	}
 	
@@ -53,5 +57,11 @@ public class TownyResources extends JavaPlugin {
 	
 	public static void severe(String message) {
 		plugin.getLogger().severe(message);
+	}
+	
+	private void registerListeners() {
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
+		pm.registerEvents(new TownyResourcesNationEventListener(this), this);		
 	}
 }

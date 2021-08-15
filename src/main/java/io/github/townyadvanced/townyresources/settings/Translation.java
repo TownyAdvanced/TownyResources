@@ -1,4 +1,4 @@
-package io.github.townyadvanced.blankplugin.settings;
+package io.github.townyadvanced.townyresources.settings;
 
 
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -6,8 +6,8 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
-import io.github.townyadvanced.blankplugin.TownyResources;
-import io.github.townyadvanced.blankplugin.util.FileMgmt;
+import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.util.FileMgmt;
 
 import java.io.File;
 import java.io.IOException;

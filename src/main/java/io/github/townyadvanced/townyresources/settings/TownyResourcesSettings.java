@@ -2,10 +2,7 @@ package io.github.townyadvanced.townyresources.settings;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
@@ -20,11 +17,11 @@ public class TownyResourcesSettings {
 	}
 
     public static List<Integer> getSurveyCostsPerResourceLevel() {
-	    return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_COST_PER_RESOURCE_LEVEL);
+	    return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_COST_PER_RESOURCE_LEVEL);
 	}
 
     public static List<Integer> getSurveyNumTownblocksRequirementsPerResourceLevel() {
-    	return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL);
+    	return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL);
 	}
 		
 	public static List<Integer> getProductionPercentagesPerResourceLevel() {
@@ -39,20 +36,19 @@ public class TownyResourcesSettings {
 		return sumOfAllOfferDiscoveryProbabilityWeights;
 	}
 		
-	//TODO - This needs to be a hasmap baby!
-	public static List<ResourceOffer> getAllResourceOffers() {
+	public static Map<String, ResourceOffer> getAllResourceOffers() {
         sumOfAllOfferDiscoveryProbabilityWeights = 0;
-        List<ResourceOffer> allResourceOffers = new ArrayList<>();
-        allResourceOffers.addAll(getOffersInCategory("ores", getOffersOres()));
-        allResourceOffers.addAll(getOffersInCategory("trees", getOffersTrees()));
-        allResourceOffers.addAll(getOffersInCategory("crops", getOffersCrops()));
-        allResourceOffers.addAll(getOffersInCategory("animals", getOffersAnimals()));
-        allResourceOffers.addAll(getOffersInCategory("monsters", getOffersMonsters()));   
+        Map<String, ResourceOffer> allResourceOffers = new HashMap<>();
+        allResourceOffers.putAll(getOffersInCategory("ores", getOffersOres()));
+        allResourceOffers.putAll(getOffersInCategory("trees", getOffersTrees()));
+        allResourceOffers.putAll(getOffersInCategory("crops", getOffersCrops()));
+        allResourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals()));
+        allResourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters()));   
         return allResourceOffers;
 	}
 
-    private static List<ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList) {
-        List<ResourceOffer> result = new ArrayList<>();
+    private static Map<String, ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList) {
+        Map<String, ResourceOffer> result = new HashMap<>();
         String[] offerAsArray;
         String offerMaterial;
         int offerBaseAmount;
@@ -67,7 +63,7 @@ public class TownyResourcesSettings {
             offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
             offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;
             newResourceOffer = new ResourceOffer(offersCategory, offerMaterial, offerBaseAmount, offerDiscoveryProbabilityWeight, offerDiscoveryId);
-            result.add(newResourceOffer);                
+            result.put(offerMaterial, newResourceOffer);                
             sumOfAllOfferDiscoveryProbabilityWeights += offerDiscoveryProbabilityWeight; 
         }
         return result;
@@ -75,23 +71,23 @@ public class TownyResourcesSettings {
 
 
     private static List<String> getOffersOres() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ORES);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_ORES);
 	}
 
     private static List<String> getOffersTrees() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_TREES);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_TREES);
 	}
 	
     private static List<String> getOffersCrops() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CROPS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_CROPS);
 	}
 
     private static List<String> getOffersAnimals() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ANIMALS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_ANIMALS);
 	}
 
     private static List<String> getOffersMonsters() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MONSTERS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_MONSTERS);
 	}
 
 	public static void loadConfig(String filepath, String version) throws IOException {

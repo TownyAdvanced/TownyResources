@@ -15,6 +15,7 @@ import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class TownProductionController {
     
@@ -29,8 +30,8 @@ public class TownProductionController {
     }
 
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException {
- 		//Get all resouces
- 		List<ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
+ 		//Get all resource offers <material name, offer>
+ 		Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
  		
  		//Ensure the offers list is not empty	
         if(allResourceOffers.isEmpty())
@@ -66,7 +67,12 @@ public class TownProductionController {
    		String translationkey = "discovery.message." + winningCandidate.getCategory();
 		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName()));
      
+        //Recalculate Town Production
         recalculateTownProduction(town, allResourceOffers);
+      
+        //Recalculate Nation Production TODO  
+//        if(town.hasNation() || TownOccupationController.isTownOccupied(town)
+  //          recalculateNationProduction();
     }
 
 
@@ -77,7 +83,7 @@ public class TownProductionController {
      * @param town the town to recalculate production for
      */
     
-    public static void recalculateTownProduction(Town town, List<ResourceOffer> allResourceOffers) {
+    public static void recalculateTownProduction(Town town, Map<String, ResourceOffer> allResourceOffers) {
         //Get production percentages
         List<Integer> productionBonusesPerLevel = TownyResourcesSettings.getProductionPercentagesPerResourceLevel();
 
@@ -86,8 +92,8 @@ public class TownProductionController {
 
         //Determine owner nation
         Nation ownerNation = null;
-        double townCutNormalized = 0;
         double nationCutNormalized = 0;
+        double townCutNormalized = 0;
         if(TownOccupationController.isTownOccupied(town)) {
             ownerNation = TownOccupationController.getTownOccupier(town);
             nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
@@ -118,13 +124,7 @@ public class TownProductionController {
         }
         
         //Save data
-        TownyResourcesGovernmentMetaDataController.saveTownProduction(townProduction);
-        
-        //Recalculate for nation
-        if(ownerNation != null) {
-            //TODO
-        }
-      
+        TownyResourcesGovernmentMetaDataController.setDailyProduction(town, townProduction);      
     }
    
 }

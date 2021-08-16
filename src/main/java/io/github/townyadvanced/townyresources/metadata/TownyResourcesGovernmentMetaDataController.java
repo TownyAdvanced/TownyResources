@@ -48,6 +48,17 @@ public class TownyResourcesGovernmentMetaDataController {
         return MetaDataUtil.getSdf(government, dailyProductionMetadataKey).replaceAll(" ","");
     }
 
+    public static void setDailyProduction(Government government, List<String> dailyProduction) {
+        StringBuilder dailyProductionStringBuilder = new StringBuilder();
+        for(int i = 0; i < dailyProduction.size(); i++) {
+            //Add comma before all entries except 1st
+            if(i != 0) 
+                dailyProductionStringBuilder.append(", ");
+            dailyProductionStringBuilder.append(dailyProduction.get(i));
+        }
+        MetaDataUtil.setSdf(government, dailyProductionMetadataKey, dailyProductionStringBuilder.toString());
+    }
+
     public static void setDailyProduction(Government government, String dailyProduction) {
         MetaDataUtil.setSdf(government, dailyProductionMetadataKey, dailyProduction);
     }

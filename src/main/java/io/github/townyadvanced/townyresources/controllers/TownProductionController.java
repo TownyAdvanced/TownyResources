@@ -65,7 +65,7 @@ public class TownProductionController {
    
    		//Send global message
    		int levelOfNewResource = discoveredResources.size();
-   		double productivityModifierNormalized = TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1);
+   		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
         int preTaxProduction = (int)((winningCandidate.getBaseAmount() * productivityModifierNormalized) + 0.5); 
    		String translationkey = "discovery.message." + winningCandidate.getCategory();
 		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName(), preTaxProduction, winningCandidate.getMaterial().toLowerCase()));

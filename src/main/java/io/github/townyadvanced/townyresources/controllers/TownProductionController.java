@@ -64,7 +64,7 @@ public class TownProductionController {
    
    		//Send global message
    		String translationkey = "discovery.message." + winningCandidate.getCategory();
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName()));
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName(), winningCandidate.getBaseAmount(), winningCandidate.getMaterial().toLowerCase()));
      
         //Recalculate Town Production
         recalculateTownProduction(town, allResourceOffers);

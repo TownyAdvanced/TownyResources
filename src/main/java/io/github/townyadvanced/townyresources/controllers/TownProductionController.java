@@ -85,11 +85,19 @@ public class TownProductionController {
      */
     
     public static void recalculateTownProduction(Town town, Map<String, ResourceOffer> allResourceOffers) {
-        //Get production percentages
-        //List<Integer> productionBonusesPerLevel = TownyResourcesSettings.getProductionPercentagesPerResourceLevel();
-
         //Get discovered resources
         List<String> discoveredResources = getDiscoveredResources(town);
+
+        //Remove any discovered resources which are no longer on offer
+        List<String> resourcesToRemove = new ArrayList<>();
+        for(String resource: discoveredResources) {
+            if(!allResourceOffers.containsKey(resource))
+                resourcesToRemove.add(resource);
+        }
+        if(!resourcesToRemove.isEmpty()) {
+            discoveredResources.removeAll(resourcesToRemove);
+            town.save();
+        }
 
         //Determine owner nation
         Nation ownerNation = null;

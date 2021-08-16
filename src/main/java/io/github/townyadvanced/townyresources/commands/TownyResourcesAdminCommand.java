@@ -77,7 +77,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 					showHelp(sender);
 			}		 	
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();   //TODO- remove when release
 			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage());						
 		}
 	}

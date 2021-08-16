@@ -38,8 +38,8 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 	private void showTownyResourcesHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/townyresources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr collect", "", TownyResourcesTranslation.of("help_collect")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr survey", "", TownyResourcesTranslation.of("help_survey")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "collect", TownyResourcesTranslation.of("help_collect")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "survey", TownyResourcesTranslation.of("help_survey")));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -68,7 +68,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 					showTownyResourcesHelp(player);
 			}		
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();  //TODO -Remove when done
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
 	}

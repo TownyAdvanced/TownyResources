@@ -13,10 +13,7 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TownProductionController {
     
@@ -42,12 +39,13 @@ public class TownProductionController {
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
         
         //Determine which  offer has won
+        List<ResourceOffer> candidates = new ArrayList<>(allResourceOffers.values());
         ResourceOffer winningCandidate = null;
         ResourceOffer candidate;
         ResourceOffer nextCandidate = null;
-        for(int i = 0; i < allResourceOffers.size() - 1; i++) {      //Don't check the last entry 
-            candidate = allResourceOffers.get(i);   
-            nextCandidate = allResourceOffers.get(i+1);
+        for(int i = 0; i < candidates.size() - 1; i++) {      //Don't check the last entry 
+            candidate = candidates.get(i);   
+            nextCandidate = candidates.get(i+1);
             if(winningNumber >= candidate.getDiscoveryId() && winningNumber < nextCandidate.getDiscoveryId()) {
                 winningCandidate = candidate;
                 break;

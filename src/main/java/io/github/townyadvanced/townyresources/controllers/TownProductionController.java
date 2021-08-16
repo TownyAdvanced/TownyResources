@@ -135,7 +135,8 @@ public class TownProductionController {
         }
         
         //Save data
-        TownyResourcesGovernmentMetaDataController.setDailyProduction(town, townProduction);      
+        TownyResourcesGovernmentMetaDataController.setDailyProduction(town, townProduction);    
+        town.save();  
     }
    
 }

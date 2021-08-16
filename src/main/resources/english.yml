@@ -48,4 +48,5 @@ msg_err_survey_no_town: "&cThere is no town here to survey."
 msg_err_survey_all_resources_already_discovered: "&cAll the resources of this town have already been discovered."
 msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblocks for a survey. Required: %d, Actual: %d"
 msg_err_survey_too_expensive: "&cYou cannot afford to do this survey. Required: %s, Balance: %s"
+msg_err_empty_offers_list: "&cYou cannot do this survey because the configured offers list is empty."
 

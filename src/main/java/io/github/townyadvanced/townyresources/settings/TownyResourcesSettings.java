@@ -25,6 +25,14 @@ public class TownyResourcesSettings {
     	return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL);
 	}
 		
+	public static List<Integer> getProductionPercentagesPerResourceLevel() {
+		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL);
+	}
+		
+	public static double getTownResourcesProductionNationTaxNormalized() {
+		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_NATION_TAX_PERCENTAGE) / 100;
+	}	
+		
     public static List<String> getOffersOres() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ORES);
 	}

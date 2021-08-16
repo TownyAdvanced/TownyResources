@@ -39,35 +39,39 @@ public enum TownyResourcesConfigNodes {
 			
 	DAILY_PLAYER_EXTRACTION_LIMITS_ORES(
 			"daily_player_extraction_limits.ores",
-			"ANCIENT_DEBRIS-0.03125-10, DIAMOND-0.125-20, EMERALD-0.25-20, GOLD_ORE-0.25-20",
+			"ANCIENT_DEBRIS-Ancient debris-0.03125, DIAMOND_ORE-Diamonds-0.125, EMERALD-Emeralds-0.25, GOLD_ORE-Gold-0.25",
 			"",
 			"# This list determines the daily extraction limits for players for 'ores' resources.",
-			"# Each entry on the list has 2 values:",
-			"# 1 - Name of resource",
+			"# Each entry on the list has 3 values:",
+			"# 1 - Source block material",
+			"# 2 - Resource to display",
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_TREES(
 			"daily_player_extraction_limits.trees",
-			"OAK_LOG-1",
+			"OAK_LOG-Oak logs-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'trees' resources.",
-			"# Each entry on the list has 2 values:",
-			"# 1 - Name of resource",
+			"# Each entry on the list has 3 values:",
+			"# 1 - Source block material",
+			"# 2 - Resource to display",
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_CROPS(
 			"daily_player_extraction_limits.crops",
-			"WHEAT-1",
+			"WHEAT-Wheat-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'crops' resources.",
-			"# Each entry on the list has 2 values:",
-			"# 1 - Name of resource",
+			"# Each entry on the list has 3 values:",
+			"# 1 - Source block material",
+			"# 2 - Resource to display",
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_ANIMALS(
 			"daily_player_extraction_limits.animals",
-			"BEEF-0.25",
+			"BEEF-Beef-0.25",
 			"",
 			"# This list determines the daily extraction limits for players for 'animals' resources.",
 			"# Each entry on the list has 2 values:",
-			"# 1 - Name of resource",
+			"# 1 - Source material",
+			"# 2 - Resource to display",
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_MONSTERS(
 			"daily_player_extraction_limits.monsters",
@@ -75,7 +79,8 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# This list determines the daily extraction limits for players for 'monster' resources.",
 			"# Each entry on the list has 2 values:",
-			"# 1 - Name of resource",
+			"# 1 - Source material",
+			"# 2 - Resource to display",
 			"# 2 - Daily Limit, in stacks"),
 	TOWN_RESOURCES(
 			"town_resources",
@@ -171,7 +176,7 @@ public enum TownyResourcesConfigNodes {
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
+			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_SURVEYS_OFFERS_TREES(
 			"town_resources.surveys.offers.trees",
 			"OAK_LOG-2-5",
@@ -180,7 +185,7 @@ public enum TownyResourcesConfigNodes {
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
+			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_SURVEYS_OFFERS_CROPS(
 			"town_resources.surveys.offers.crops",
 			"WHEAT-2-5",
@@ -189,7 +194,7 @@ public enum TownyResourcesConfigNodes {
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
+			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_SURVEYS_OFFERS_ANIMALS(
 			"town_resources.surveys.offers.animals",
 			"BEEF-0.5-5",
@@ -198,7 +203,7 @@ public enum TownyResourcesConfigNodes {
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery weight (the higher this is, the more likely its discovery"),
+			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_SURVEYS_OFFERS_MONSTERS(
 			"town_resources.surveys.offers.monsters",
 			"",
@@ -207,7 +212,7 @@ public enum TownyResourcesConfigNodes {
 			"# Each entry on the list has 3 values:",
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery weight (the higher this is, the more likely its discovery");
+			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery");
 
 	private final String Root;
 	private final String Default;

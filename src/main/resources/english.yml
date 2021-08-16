@@ -51,5 +51,5 @@ msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblock
 msg_err_survey_too_expensive: "&cYou cannot afford to do this survey. Required: %s, Balance: %s"
 msg_err_empty_offers_list: "&cYou cannot do this survey because the configured offers list is empty."
 
-townyresources_reloaded_successfully: "&b TownyResources reloaded successfully."
-townyresources_failed_to_reload: "&b TownyResources failed to reload."
+townyresources_reloaded_successfully: "&bTownyResources reloaded successfully."
+townyresources_failed_to_reload: "&bTownyResources failed to reload."

@@ -63,7 +63,7 @@ public class TownyResourcesSettings {
         for(String offer: offersList) {
             offerAsArray = offer.split("-");
             offerMaterial = offerAsArray[0];
-            offerBaseAmount = Integer.parseInt(offerAsArray[1]);
+            offerBaseAmount = (int)((Double.parseDouble(offerAsArray[1]) * 64) + 0.5);
             offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
             offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;
             newResourceOffer = new ResourceOffer(offersCategory, offerMaterial, offerBaseAmount, offerDiscoveryProbabilityWeight, offerDiscoveryId);

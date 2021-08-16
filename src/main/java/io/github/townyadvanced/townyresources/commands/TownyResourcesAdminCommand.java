@@ -49,7 +49,10 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		parseAdminCommand(sender, args);
+		if (args.length > 0)
+			parseAdminCommand(sender, args);
+		else 
+			showHelp(sender);
 		return true;
 	}
 
@@ -77,7 +80,6 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 			e.printStackTrace();
 			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage());						
 		}
-		 
 	}
 	
 	private void showHelp(CommandSender sender) {

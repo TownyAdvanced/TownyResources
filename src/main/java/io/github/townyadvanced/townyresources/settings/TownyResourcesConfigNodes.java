@@ -39,7 +39,7 @@ public enum TownyResourcesConfigNodes {
 			
 	DAILY_PLAYER_EXTRACTION_LIMITS_ORES(
 			"daily_player_extraction_limits.ores",
-			"ANCIENT_DEBRIS-Ancient debris-0.03125, DIAMOND_ORE-Diamonds-0.125, EMERALD-Emeralds-0.25, GOLD_ORE-Gold-0.25",
+			"Ancient_Debris-Ancient debris-0.03125, Diamond_Ore-Diamonds-0.125, Emerald-Emeralds-0.25, Gold_Ore-Gold-0.25",
 			"",
 			"# This list determines the daily extraction limits for players for 'ores' resources.",
 			"# Each entry on the list has 3 values:",
@@ -48,7 +48,7 @@ public enum TownyResourcesConfigNodes {
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_TREES(
 			"daily_player_extraction_limits.trees",
-			"OAK_LOG-Oak logs-1",
+			"Oak_Log-Oak logs-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'trees' resources.",
 			"# Each entry on the list has 3 values:",
@@ -57,7 +57,7 @@ public enum TownyResourcesConfigNodes {
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_CROPS(
 			"daily_player_extraction_limits.crops",
-			"WHEAT-Wheat-1",
+			"Wheat-Wheat-1",
 			"",
 			"# This list determines the daily extraction limits for players for 'crops' resources.",
 			"# Each entry on the list has 3 values:",
@@ -66,7 +66,7 @@ public enum TownyResourcesConfigNodes {
 			"# 2 - Daily Limit, in stacks"),
 	DAILY_PLAYER_EXTRACTION_LIMITS_ANIMALS(
 			"daily_player_extraction_limits.animals",
-			"BEEF-Beef-0.25",
+			"Beef-Beef-0.25",
 			"",
 			"# This list determines the daily extraction limits for players for 'animals' resources.",
 			"# Each entry on the list has 2 values:",
@@ -152,7 +152,7 @@ public enum TownyResourcesConfigNodes {
 			""),
 	TOWN_RESOURCES_OFFERS_ORES(
 			"town_resources.offers.ores",
-			"ANCIENT_DEBRIS-0.0625-10, DIAMOND-0.25-20, EMERALD-0.5-20, GOLD_ORE-0.5-20",
+			"Ancient_Debris-0.0625-10, Diamond-0.25-20, Emerald-0.5-20, Gold_Ore-0.5-20",
 			"",
 			"# This list determines the offers of 'ores' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -161,7 +161,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_TREES(
 			"town_resources.offers.trees",
-			"OAK_LOG-2-5",
+			"Oak_Log-2-5",
 			"",
 			"# This list determines the offers of 'trees' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -170,7 +170,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_CROPS(
 			"town_resources.offers.crops",
-			"WHEAT-2-5",
+			"Wheat-2-5",
 			"",
 			"# This list determines the offers of 'crops' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -179,7 +179,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_ANIMALS(
 			"town_resources.offers.animals",
-			"BEEF-0.5-5",
+			"Beef-0.5-5",
 			"",
 			"# This list determines the offers of 'animals' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",

@@ -30,10 +30,17 @@ public class TownProductionController {
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException {
  		//Get all resource offers <material name, offer>
  		Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
- 		
- 		//Ensure the offers list is not empty	
-        if(allResourceOffers.isEmpty())
-            throw new TownyException("msg_err_empty_offers_list");
+
+ 		//Remove already discovered resources
+ 		for(String alreadyDiscoveredResource: alreadyDiscoveredResources) {
+ 		    if(allResourceOffers.containsKey(alreadyDiscoveredResource)) {
+ 		        allResourceOffers.remove(alreadyDiscoveredResource);
+            }
+        }
+
+ 		//Ensure there are enough offers left for a new discovery
+        if(allResourceOffers.size() < 1)
+            throw new TownyException("msg_err_not_enough_offers_left");
 
         //Generate a random number to determine which offer will win
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
@@ -68,7 +75,8 @@ public class TownProductionController {
    		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
         int preTaxProduction = (int)((winningCandidate.getBaseAmount() * productivityModifierNormalized) + 0.5); 
    		String translationkey = "discovery.message." + winningCandidate.getCategory();
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName(), preTaxProduction, winningCandidate.getMaterial().toLowerCase()));
+        String formattedMaterialName = winningCandidate.getMaterial().replaceAll("_", " ");
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName(), preTaxProduction, formattedMaterialName));
      
         //Recalculate Town Production
         recalculateTownProduction(town, allResourceOffers);

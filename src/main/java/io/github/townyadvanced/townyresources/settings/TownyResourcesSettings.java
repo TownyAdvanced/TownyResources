@@ -75,23 +75,23 @@ public class TownyResourcesSettings {
 
 
     private static List<String> getOffersOres() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_ORES);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ORES);
 	}
 
     private static List<String> getOffersTrees() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_TREES);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_TREES);
 	}
 	
     private static List<String> getOffersCrops() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_CROPS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CROPS);
 	}
 
     private static List<String> getOffersAnimals() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_ANIMALS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ANIMALS);
 	}
 
     private static List<String> getOffersMonsters() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_OFFERS_MONSTERS);
+    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MONSTERS);
 	}
 
 	public static void loadConfig(String filepath, String version) throws IOException {

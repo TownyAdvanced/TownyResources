@@ -93,16 +93,33 @@ public enum TownyResourcesConfigNodes {
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
+	TOWN_RESOURCES_SURVEYS(
+			"town_resources.surveys",
+			"",
+			"",
+			""),				
+	TOWN_RESOURCES_SURVEYS_ENABLED(
+			"town_resources.surveys.enabled",
+			"true",
+			"",
+			"# If true, players can do surveys.",
+			"# if false, they cannot."),
+	TOWN_RESOURCES_SURVEYS_COST_PER_RESOURCE_LEVEL(
+			"town_resources.surveys.cost_per_resource_level",
+			"250, 1000, 5000, 20000",
+			"",
+			"# This list of values determines how much it costs to do a survey for each resource level.",
+			"# Example: If the first value is 250, then it will cost 250 to survey and discover the level 1 resource."),
+	TOWN_RESOURCES_SURVEYS_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL(
+			"town_resources.surveys.num_townblocks_requirement_per_resource_level",
+			"10, 50, 100, 200",
+			"",
+			"# This list of values determines how much many townblocks a town must have to DISCOVER each level of resource.",
+			"# Example: If the first value is 10, then the town must have 10 townblocks to survey and discover the level 1 resource."),
 	TOWN_RESOURCES_PRODUCTION(
-			"town_resources_production",
+			"town_resources.production",
 			"",
 			"",
-			"",
-			"############################################################",
-			"# +------------------------------------------------------+ #",
-			"# |                    Production                        | #",
-			"# +------------------------------------------------------+ #",
-			"############################################################",
 			""),			
 	TOWN_RESOURCES_PRODUCTION_ENABLED(
 			"town_resources.production.enabled",
@@ -128,48 +145,13 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# The owner nation of a town gets this percentage of town production.",
 			"# The town gets the rest."),
-	TOWN_RESOURCES_SURVEYS(
-			"town_resources_surveys",
+	TOWN_RESOURCES_OFFERS(
+			"town_resources.offers",
 			"",
 			"",
-			"",
-			"############################################################",
-			"# +------------------------------------------------------+ #",
-			"# |                      Surveys                         | #",
-			"# +------------------------------------------------------+ #",
-			"############################################################",
-			""),				
-	TOWN_RESOURCES_SURVEYS_ENABLED(
-			"town_resources.surveys_enabled",
-			"true",
-			"",
-			"# If true, players can do surveys.",
-			"# if false, they cannot."),
-	TOWN_RESOURCES_SURVEYS_COST_PER_RESOURCE_LEVEL(
-			"town_resources.surveys.cost_per_resource_level",
-			"250, 1000, 5000, 20000",
-			"",
-			"# This list of values determines how much it costs to do a survey for each resource level.",
-			"# Example: If the first value is 250, then it will cost 250 to survey and discover the level 1 resource."),
-	TOWN_RESOURCES_SURVEYS_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL(
-			"town_resources.surveys.num_townblocks_requirement_per_resource_level",
-			"10, 50, 100, 200",
-			"",
-			"# This list of values determines how much many townblocks a town must have to DISCOVER each level of resource.",
-			"# Example: If the first value is 10, then the town must have 10 townblocks to survey and discover the level 1 resource."),
-	TOWN_RESOURCES_SURVEYS_OFFERS(
-			"town_resources.surveys.offers",
-			"",
-			"",
-			"",
-			"############################################################",
-			"# +------------------------------------------------------+ #",
-			"# |                   Survey Offers                      | #",
-			"# +------------------------------------------------------+ #",
-			"############################################################",
 			""),
-	TOWN_RESOURCES_SURVEYS_OFFERS_ORES(
-			"town_resources.surveys.offers.ores",
+	TOWN_RESOURCES_OFFERS_ORES(
+			"town_resources.offers.ores",
 			"ANCIENT_DEBRIS-0.0625-10, DIAMOND-0.25-20, EMERALD-0.5-20, GOLD_ORE-0.5-20",
 			"",
 			"# This list determines the offers of 'ores' resources which each town can gain.",
@@ -177,8 +159,8 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_SURVEYS_OFFERS_TREES(
-			"town_resources.surveys.offers.trees",
+	TOWN_RESOURCES_OFFERS_TREES(
+			"town_resources.offers.trees",
 			"OAK_LOG-2-5",
 			"",
 			"# This list determines the offers of 'trees' resources which each town can gain.",
@@ -186,8 +168,8 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_SURVEYS_OFFERS_CROPS(
-			"town_resources.surveys.offers.crops",
+	TOWN_RESOURCES_OFFERS_CROPS(
+			"town_resources.offers.crops",
 			"WHEAT-2-5",
 			"",
 			"# This list determines the offers of 'crops' resources which each town can gain.",
@@ -195,8 +177,8 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_SURVEYS_OFFERS_ANIMALS(
-			"town_resources.surveys.offers.animals",
+	TOWN_RESOURCES_OFFERS_ANIMALS(
+			"town_resources.offers.animals",
 			"BEEF-0.5-5",
 			"",
 			"# This list determines the offers of 'animals' resources which each town can gain.",
@@ -204,8 +186,8 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - Name of resource",
 			"# 2 - Base daily production, in stacks",
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_SURVEYS_OFFERS_MONSTERS(
-			"town_resources.surveys.offers.monsters",
+	TOWN_RESOURCES_OFFERS_MONSTERS(
+			"town_resources.offers.monsters",
 			"",
 			"",
 			"# This list determines the offers of  monsters' resources which each town can gain.",

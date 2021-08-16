@@ -28,6 +28,10 @@ public class TownyResourcesSettings {
 		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL);
 	}
 		
+	public static List<Integer> getProductionTownLevelRequirementPerResourceLevel() {
+		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL);
+	}
+		
 	public static double getTownResourcesProductionNationTaxNormalized() {
 		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_NATION_TAX_PERCENTAGE) / 100;
 	}	

@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -85,7 +86,7 @@ public class TownProductionController {
     
     public static void recalculateTownProduction(Town town, Map<String, ResourceOffer> allResourceOffers) {
         //Get production percentages
-        List<Integer> productionBonusesPerLevel = TownyResourcesSettings.getProductionPercentagesPerResourceLevel();
+        //List<Integer> productionBonusesPerLevel = TownyResourcesSettings.getProductionPercentagesPerResourceLevel();
 
         //Get discovered resources
         List<String> discoveredResources = getDiscoveredResources(town);
@@ -112,9 +113,12 @@ public class TownProductionController {
         double resourceLevelProductionModifierNormalized;
    
         for(int i = 0; i < discoveredResources.size(); i++) {
+            //Ensure town meets the town level requirement to produce the resource
+            if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) 
+                break;
             materialName = discoveredResources.get(i);
             baseProductionAmount = allResourceOffers.get(materialName).getBaseAmount();
-            resourceLevelProductionModifierNormalized = (double)productionBonusesPerLevel.get(i) / 100;
+            resourceLevelProductionModifierNormalized = (double) TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(i) / 100;
             if(ownerNation == null) {
                 finalProductionAmount = baseProductionAmount * resourceLevelProductionModifierNormalized;
             } else {

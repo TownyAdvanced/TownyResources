@@ -58,8 +58,9 @@ public class TownProductionController {
         }
 
         //Discover the resource
-        alreadyDiscoveredResources.add(winningCandidate.getMaterial());
-        TownyResourcesGovernmentMetaDataController.setDiscovered(town, alreadyDiscoveredResources);
+        List<String> discoveredResources = new ArrayList<>(alreadyDiscoveredResources);
+        discoveredResources.add(winningCandidate.getMaterial());
+        TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredResources);
         town.save();
    
    		//Send global message

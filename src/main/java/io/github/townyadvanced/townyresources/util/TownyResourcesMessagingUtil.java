@@ -37,13 +37,15 @@ public class TownyResourcesMessagingUtil {
     }
     
     public static String[] formatResourcesStringForDisplay(String resourcesAsString) {
-        String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("_"," ").split(",");
-        if(formattedListOfResources.length == 1) {
-            formattedListOfResources = new String[0];
-        } else if(formattedListOfResources.length > 20) {
-            formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
-            formattedListOfResources[20] = "...";
+        if(resourcesAsString.length() == 0) {
+            return new String[0];
+        } else {
+            String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("_"," ").split(",");
+            if(formattedListOfResources.length > 20) {
+                formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
+                formattedListOfResources[20] = "...";
+            }
+            return formattedListOfResources;
         }
-        return formattedListOfResources;
     }
 }

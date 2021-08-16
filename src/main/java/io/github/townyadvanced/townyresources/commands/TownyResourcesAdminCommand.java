@@ -24,6 +24,7 @@ import com.palmergames.util.TimeMgmt;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -81,15 +82,15 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/townyresourcesadmin"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/swa", "reload", Translation.of("admin_help_reload")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reload", Translation.of("admin_help_reload")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {
 		if (TownyResources.getPlugin().loadAll()) {
-			TownyResourcesMessagingUtil.sendMsg(sender, Translation.of("townyresources_reloaded_successfully"));
+			TownyResourcesMessagingUtil.sendMsg(sender, TownyResourcesTranslation.of("townyresources_reloaded_successfully"));
 			return;
 		}
-		TownyResourcesMessagingUtil.sendErrorMsg(sender, Translation.of("townyresources_failed_to_reload"));
+		TownyResourcesMessagingUtil.sendErrorMsg(sender, TownyResourcesTranslation.of("townyresources_failed_to_reload"));
 	}
 }
 

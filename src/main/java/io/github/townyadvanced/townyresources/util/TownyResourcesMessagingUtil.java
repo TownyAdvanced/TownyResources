@@ -40,7 +40,12 @@ public class TownyResourcesMessagingUtil {
         if(resourcesAsString.length() == 0) {
             return new String[0];
         } else {
-            String[] formattedListOfResources = resourcesAsString.toLowerCase().replaceAll("_"," ").split(",");
+            String[] formattedListOfResources = 
+                resourcesAsString
+                .toLowerCase()
+                .replaceAll("-"," ")
+                .replaceAll("_"," ")
+                .split(",");
             if(formattedListOfResources.length > 20) {
                 formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
                 formattedListOfResources[20] = "...";

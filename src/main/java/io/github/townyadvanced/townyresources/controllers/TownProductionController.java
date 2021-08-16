@@ -116,7 +116,7 @@ public class TownProductionController {
         List<String> townProduction = new ArrayList<>();
         String materialName;
         double baseProductionAmount;
-        double finalProductionAmount;
+        int finalProductionAmount;
         double resourceLevelProductionModifierNormalized;
    
         for(int i = 0; i < discoveredResources.size(); i++) {
@@ -127,11 +127,11 @@ public class TownProductionController {
             baseProductionAmount = allResourceOffers.get(materialName).getBaseAmount();
             resourceLevelProductionModifierNormalized = (double) TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(i) / 100;
             if(ownerNation == null) {
-                finalProductionAmount = baseProductionAmount * resourceLevelProductionModifierNormalized;
+                finalProductionAmount = (int)((baseProductionAmount * resourceLevelProductionModifierNormalized) + 0.5);
             } else {
-                finalProductionAmount = baseProductionAmount * resourceLevelProductionModifierNormalized * townCutNormalized;
+                finalProductionAmount = (int)((baseProductionAmount * resourceLevelProductionModifierNormalized * townCutNormalized) + 0.5);
             }            
-            townProduction.add(materialName + "-" + finalProductionAmount);
+            townProduction.add(finalProductionAmount + "-" + materialName);
         }
         
         //Save data

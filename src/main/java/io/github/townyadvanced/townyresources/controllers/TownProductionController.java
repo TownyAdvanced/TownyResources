@@ -17,19 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TownProductionController {
-
-    private static List<ResourceOffer> allResourceOffers = new ArrayList<>();  //All resource offers
-    private static int sumOfAllOfferDiscoveryProbabilityWeights = 0;  //Used during discovery
-    
-    private void load() {
-        //Load all resource offers into memory
-        sumOfAllOfferDiscoveryProbabilityWeights = 0;
-        loadResourceOffers("ores", TownyResourcesSettings.getOffersOres());
-        loadResourceOffers("trees", TownyResourcesSettings.getOffersTrees());
-        loadResourceOffers("crops", TownyResourcesSettings.getOffersCrops());
-        loadResourceOffers("animals", TownyResourcesSettings.getOffersAnimals());
-        loadResourceOffers("monsters", TownyResourcesSettings.getOffersMonsters());   
-    }
     
     public static List<String> getDiscoveredResources(Town town) {
         String resourcesString = TownyResourcesGovernmentMetaDataController.getDiscovered(town);
@@ -42,12 +29,15 @@ public class TownProductionController {
     }
 
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException {
+ 		//Get all resouces
+ 		List<ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
+ 		
  		//Ensure the offers list is not empty	
         if(allResourceOffers.isEmpty())
             throw new TownyException("msg_err_empty_offers_list");
 
         //Generate a random number to determine which offer will win
-        int winningNumber = (int)((Math.random() * sumOfAllOfferDiscoveryProbabilityWeights) + 0.5);
+        int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
         
         //Determine which  offer has won
         ResourceOffer winningCandidate = null;
@@ -76,34 +66,9 @@ public class TownProductionController {
    		String translationkey = "discovery.message." + winningCandidate.getCategory();
 		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName()));
      
-        recalculateTownProduction(town);
+        recalculateTownProduction(town, allResourceOffers);
     }
 
-    /**
-     * Load all resource offers belonging to the a given category
-     * 
-     * @param offersCategory the given category
-     * @param offersList the list of offers in the given category
-     */
-    private static void loadResourceOffers(String offersCategory, List<String> offersList) {
-        String[] offerAsArray;
-        String offerMaterial;
-        int offerBaseAmount;
-        int offerDiscoveryProbabilityWeight;
-        int offerDiscoveryId;
-        ResourceOffer newResourceOffer;
-        
-        for(String offer: offersList) {
-            offerAsArray = offer.split("-");
-            offerMaterial = offerAsArray[0];
-            offerBaseAmount = Integer.parseInt(offerAsArray[1]);
-            offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
-            offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;
-            newResourceOffer = new ResourceOffer(offersCategory, offerMaterial, offerBaseAmount, offerDiscoveryProbabilityWeight, offerDiscoveryId);
-            allResourceOffers.add(newResourceOffer);                
-            sumOfAllOfferDiscoveryProbabilityWeights += offerDiscoveryProbabilityWeight; 
-        }
-    }
 
     /**
      * Recalculate production for a single town
@@ -112,7 +77,7 @@ public class TownProductionController {
      * @param town the town to recalculate production for
      */
     
-    public static void recalculateTownProduction(Town town) {
+    public static void recalculateTownProduction(Town town, List<ResourceOffer> allResourceOffers) {
         //Get production percentages
         List<Integer> productionBonusesPerLevel = TownyResourcesSettings.getProductionPercentagesPerResourceLevel();
 

@@ -8,11 +8,13 @@ import java.util.Collections;
 import java.util.List;
 
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
-	
+	private static int sumOfAllOfferDiscoveryProbabilityWeights = 0;  //Used when getting the resource offers
+	    
 	public static boolean isEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.ENABLED);
 	}
@@ -32,24 +34,63 @@ public class TownyResourcesSettings {
 	public static double getTownResourcesProductionNationTaxNormalized() {
 		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_NATION_TAX_PERCENTAGE) / 100;
 	}	
+	
+	public static int getSumOfAllOfferDiscoveryProbabilityWeights() {
+		return sumOfAllOfferDiscoveryProbabilityWeights;
+	}
 		
-    public static List<String> getOffersOres() {
+	//TODO - This needs to be a hasmap baby!
+	public static List<ResourceOffer> getAllResourceOffers() {
+        sumOfAllOfferDiscoveryProbabilityWeights = 0;
+        List<ResourceOffer> allResourceOffers = new ArrayList<>();
+        allResourceOffers.addAll(getOffersInCategory("ores", getOffersOres()));
+        allResourceOffers.addAll(getOffersInCategory("trees", getOffersTrees()));
+        allResourceOffers.addAll(getOffersInCategory("crops", getOffersCrops()));
+        allResourceOffers.addAll(getOffersInCategory("animals", getOffersAnimals()));
+        allResourceOffers.addAll(getOffersInCategory("monsters", getOffersMonsters()));   
+        return allResourceOffers;
+	}
+
+    private static List<ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList) {
+        List<ResourceOffer> result = new ArrayList<>();
+        String[] offerAsArray;
+        String offerMaterial;
+        int offerBaseAmount;
+        int offerDiscoveryProbabilityWeight;
+        int offerDiscoveryId;
+        ResourceOffer newResourceOffer;
+        
+        for(String offer: offersList) {
+            offerAsArray = offer.split("-");
+            offerMaterial = offerAsArray[0];
+            offerBaseAmount = Integer.parseInt(offerAsArray[1]);
+            offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
+            offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;
+            newResourceOffer = new ResourceOffer(offersCategory, offerMaterial, offerBaseAmount, offerDiscoveryProbabilityWeight, offerDiscoveryId);
+            result.add(newResourceOffer);                
+            sumOfAllOfferDiscoveryProbabilityWeights += offerDiscoveryProbabilityWeight; 
+        }
+        return result;
+    }
+
+
+    private static List<String> getOffersOres() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ORES);
 	}
 
-    public static List<String> getOffersTrees() {
+    private static List<String> getOffersTrees() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_TREES);
 	}
 	
-    public static List<String> getOffersCrops() {
+    private static List<String> getOffersCrops() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CROPS);
 	}
 
-    public static List<String> getOffersAnimals() {
+    private static List<String> getOffersAnimals() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ANIMALS);
 	}
 
-    public static List<String> getOffersMonsters() {
+    private static List<String> getOffersMonsters() {
     	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MONSTERS);
 	}
 

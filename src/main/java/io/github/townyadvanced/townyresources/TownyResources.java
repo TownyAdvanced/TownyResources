@@ -40,8 +40,13 @@ public class TownyResources extends JavaPlugin {
 	public static String getPrefix() {
 		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
 	}
-	
-	private boolean loadAll() {
+
+	/**
+	 * Load or reload towny resources
+	 * 
+	 * @return true if load succeeded
+	 */
+	public boolean loadAll() {
 		try {
 			printSickASCIIArt();
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());

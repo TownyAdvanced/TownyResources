@@ -2,9 +2,7 @@ package io.github.townyadvanced.townyresources.commands;
 
 import com.gmail.goosius.siegewar.Messaging;
 import com.gmail.goosius.siegewar.settings.Translation;
-import com.gmail.goosius.siegewar.utils.SiegeWarMoneyUtil;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
-import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -14,11 +12,9 @@ import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.controllers.TownProductionController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
-import io.github.townyadvanced.townyresources.objects.ResourceQuantity;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -72,6 +68,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 					showTownyResourcesHelp(player);
 			}		
 		} catch (Exception e) {
+			e.printStackTrace();
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
 	}

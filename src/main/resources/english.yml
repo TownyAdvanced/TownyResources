@@ -36,6 +36,7 @@ nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2:
 
 help_collect: 'Collect all available extracted resources at your town and/or nation.'
 help_survey: 'Survey the town at your current location, to discover new resources.'
+admin_help_reload: 'Reload TownyResources.'
 
 discovery.message.ores: "&b%s has discovered ore deposits at %s!. Daily Production: %d %s."
 discovery.message.trees: "&b%s has discovered a forest at %s!. Daily Production: %d %s."
@@ -50,3 +51,5 @@ msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblock
 msg_err_survey_too_expensive: "&cYou cannot afford to do this survey. Required: %s, Balance: %s"
 msg_err_empty_offers_list: "&cYou cannot do this survey because the configured offers list is empty."
 
+townyresources_reloaded_successfully: "&b TownyResources reloaded successfully."
+townyresources_failed_to_reload: "&b TownyResources failed to reload."

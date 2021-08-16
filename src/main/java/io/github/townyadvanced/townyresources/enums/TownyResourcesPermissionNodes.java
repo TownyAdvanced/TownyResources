@@ -10,7 +10,9 @@ public enum TownyResourcesPermissionNodes {
 	TOWNY_RESOURCES_COMMAND("townyresources.command.*"),
 	TOWNY_RESOURCES_COMMAND_SURVEY("townyresources.command.survey"),  //Do a resource survey in a town
 	TOWNY_RESOURCES_COMMAND_TOWN_COLLECT("townyresources.command.town.collect"),  //Collect your town's share of extracted resources
-	TOWNY_RESOURCES_COMMAND_NATION_COLLECT("townyresources.command.nation.collect"); //Collect your nation's share of extracted resources
+	TOWNY_RESOURCES_COMMAND_NATION_COLLECT("townyresources.command.nation.collect"), //Collect your nation's share of extracted resources
+	TOWNY_RESOURCES_ADMIN_COMMAND("townyresources.admin.command.*"),
+	TOWNY_RESOURCES_ADMIN_COMMAND_RELOAD("townyresources.admin.command.reload");
 
 	private String value;
 

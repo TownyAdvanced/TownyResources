@@ -47,10 +47,11 @@ public class TownProductionController {
      */
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException {
  		/*
- 		 * Get all possible resources which can be found in a new discovery
- 		 * i.e. All resource offers, excluding any already discovered resources
+ 		 * Get the list of all possible resources which can be found in a new discovery
+ 		 * This list will be comprised of all resource offers, except already discovered resources
  		 */
- 		Map<String, ResourceOffer> resourceOfferCandidates = TownyResourcesSettings.getResourceOffers(alreadyDiscoveredResources);
+ 		List<ResourceOffer> resourceOfferCandidates = 
+ 		    new ArrayList<>(TownyResourcesSettings.getResourceOffers(alreadyDiscoveredResources).values());
 
  		//Ensure there are enough candidates left for a new discovery
         if(resourceOfferCandidates.size() < 1)

@@ -35,20 +35,23 @@ public class TownyResourcesTownEventListener implements Listener {
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
 		if (TownyResourcesSettings.isEnabled()) {
-			List<String> textLines = new ArrayList<>();
 			Town town = event.getTown();
+			String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(town);
+			String availableAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(town);
 
-			//Resources:
+			if(productionAsString.isEmpty() || availableAsString.isEmpty())
+				return;
+
+			//Resources:	
+			List<String> textLines = new ArrayList<>();
 			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
-
+				
 			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
-			String resourcesAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(town);
-			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(productionAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.daily.production", resourcesAsFormattedArray.length)));
 
 			// > Available For Collection [2]: 64 oak log, 64 sugar cane
-			resourcesAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(town);
-			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(availableAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.available.for.collection", resourcesAsFormattedArray.length)));
 			
 			event.addLines(textLines);

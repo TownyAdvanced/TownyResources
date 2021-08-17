@@ -152,8 +152,6 @@ public class TownyResourcesGovernmentMetaDataController {
     }
     
     public static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
-
-        System.out.println("Setting resource quantities string " + metadataKey + " " + resourceQuantitiesMap.size());
         /* 
          * Build String
          * Note: Do not order these according to discovery

@@ -1,7 +1,6 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
-import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -47,31 +46,26 @@ public class TownProductionController {
      * @throws TownyException 
      */
     public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException {
- 		//Get all resource offers <material name, offer>
- 		Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
+ 		/*
+ 		 * Get all possible resources which can be found in a new discovery
+ 		 * i.e. All resource offers, excluding any already discovered resources
+ 		 */
+ 		Map<String, ResourceOffer> resourceOfferCandidates = TownyResourcesSettings.getResourceOffers(alreadyDiscoveredResources);
 
- 		//Remove already discovered resources
- 		for(String alreadyDiscoveredResource: alreadyDiscoveredResources) {
- 		    if(allResourceOffers.containsKey(alreadyDiscoveredResource)) {
- 		        allResourceOffers.remove(alreadyDiscoveredResource);
-            }
-        }
-
- 		//Ensure there are enough offers left for a new discovery
-        if(allResourceOffers.size() < 1)
+ 		//Ensure there are enough candidates left for a new discovery
+        if(resourceOfferCandidates.size() < 1)
             throw new TownyException("msg_err_not_enough_offers_left");
 
         //Generate a random number to determine which offer will win
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
 
         //Determine which  offer has won
-        List<ResourceOffer> candidates = new ArrayList<>(allResourceOffers.values());
         ResourceOffer winningCandidate = null;
         ResourceOffer candidate;
         ResourceOffer nextCandidate = null;
-        for(int i = 0; i < candidates.size() - 1; i++) {      //Don't check the last entry 
-            candidate = candidates.get(i);   
-            nextCandidate = candidates.get(i+1);
+        for(int i = 0; i < resourceOfferCandidates.size() - 1; i++) {      //Don't check the last entry 
+            candidate = resourceOfferCandidates.get(i);   
+            nextCandidate = resourceOfferCandidates.get(i+1);
             if(winningNumber >= candidate.getDiscoveryId() && winningNumber < nextCandidate.getDiscoveryId()) {
                 winningCandidate = candidate;
                 break;
@@ -98,13 +92,14 @@ public class TownProductionController {
 		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of(translationkey, resident.getName(), town.getName(), preTaxProduction, formattedMaterialName));
 
         //Recalculate Town Production
+        Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
         recalculateProductionForOneTown(town, allResourceOffers);
 
         //Recalculate Nation Production
         if(TownOccupationController.isTownOccupied(town)) {
             recalculateProductionForOneNation(TownOccupationController.getTownOccupier(town), allResourceOffers);
         } else if (town.hasNation()) {
-            recalculateProductionForOneNation(town.getNation(), allResourceOffers);
+            recalculateProductionForOneNation(town.getNation(),allResourceOffers);
         }
     }
 
@@ -113,9 +108,7 @@ public class TownProductionController {
      * 
      * Note: This method does not recalculate production for any nations
      */
-    public static void recalculateProductionForAllTowns() {
-        Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
-
+    private static void recalculateProductionForAllTowns(Map<String, ResourceOffer> allResourceOffers) {
         for(Town town: TownyUniverse.getInstance().getTowns()) {
             recalculateProductionForOneTown(town, allResourceOffers);
         }
@@ -129,9 +122,17 @@ public class TownProductionController {
      * @param town the town to recalculate production for
      * @param allResourceOffers all resource offers
      */
-    public static void recalculateProductionForOneTown(Town town, Map<String, ResourceOffer> allResourceOffers) {
+    private static void recalculateProductionForOneTown(Town town, Map<String, ResourceOffer> allResourceOffers) {
         //Get discovered resources
         List<String> discoveredResources = new ArrayList<>(getDiscoveredResources(town));
+
+        for(String key: allResourceOffers.keySet()) {
+            System.out.println("Offer Key: " + key);
+        }
+
+        for(String key: discoveredResources) {
+            System.out.println("Discovered Key: " + key);
+        }
 
         //Remove any discovered resources which are no longer on offer
         List<String> resourcesToRemove = new ArrayList<>();
@@ -191,9 +192,7 @@ public class TownProductionController {
      * 
      * Note: This method does not recalculate production for any towns
      */
-    public static void recalculateProductionForAllNations() {
-        Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
-
+    private static void recalculateProductionForAllNations(Map<String, ResourceOffer> allResourceOffers) {
         for(Nation nation: TownyUniverse.getInstance().getNations()) {
             recalculateProductionForOneNation(nation, allResourceOffers);
         }
@@ -207,7 +206,7 @@ public class TownProductionController {
      * @param nation the nation to recalculate production for
      * @param allResourceOffers all resource offers
      */
-    public static void recalculateProductionForOneNation(Nation nation, Map<String, ResourceOffer> allResourceOffers) {
+    private static void recalculateProductionForOneNation(Nation nation, Map<String, ResourceOffer> allResourceOffers) {
 
     }
 
@@ -215,8 +214,9 @@ public class TownProductionController {
      * Recalculate production for all towns and nations
      */
     public static void recalculateAllProduction() {
-        recalculateProductionForAllTowns();
-        recalculateProductionForAllNations();
+        Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
+        recalculateProductionForAllTowns(allResourceOffers);
+        recalculateProductionForAllNations(allResourceOffers);
     }
 
     /**

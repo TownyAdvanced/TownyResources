@@ -53,8 +53,7 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 			registerCommands();
-			TownProductionController.recalculateProductionForAllTowns();
-			TownProductionController.recalculateProductionForAllNations();			
+			TownProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -73,8 +72,7 @@ public class TownyResources extends JavaPlugin {
 		try {
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
-			TownProductionController.recalculateProductionForAllTowns();
-			TownProductionController.recalculateProductionForAllNations();			
+			TownProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to reload!");

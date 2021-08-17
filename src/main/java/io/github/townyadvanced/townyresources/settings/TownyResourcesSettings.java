@@ -41,14 +41,18 @@ public class TownyResourcesSettings {
 	}
 		
 	public static Map<String, ResourceOffer> getAllResourceOffers() {
+		return getResourceOffers(null);
+    }
+
+	public static Map<String, ResourceOffer> getResourceOffers(List<String> materialsToExclude) {
         sumOfAllOfferDiscoveryProbabilityWeights = 0;
-        Map<String, ResourceOffer> allResourceOffers = new HashMap<>();
-        allResourceOffers.putAll(getOffersInCategory("ores", getOffersOres()));
-        allResourceOffers.putAll(getOffersInCategory("trees", getOffersTrees()));
-        allResourceOffers.putAll(getOffersInCategory("crops", getOffersCrops()));
-        allResourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals()));
-        allResourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters()));   
-        return allResourceOffers;
+        Map<String, ResourceOffer> resourceOffers = new HashMap<>();
+        resourceOffers.putAll(getOffersInCategory("ores", getOffersOres(), materialsToExclude));
+        resourceOffers.putAll(getOffersInCategory("trees", getOffersTrees(), materialsToExclude));
+        resourceOffers.putAll(getOffersInCategory("crops", getOffersCrops(), materialsToExclude));
+        resourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals(), materialsToExclude));
+        resourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters(), materialsToExclude));   
+        return resourceOffers;
 	}
 
     private static Map<String, ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList) {

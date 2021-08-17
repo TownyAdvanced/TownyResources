@@ -42,7 +42,6 @@ public class TownyResourcesMessagingUtil {
         } else {
             String[] formattedListOfResources = 
                 resourcesAsString
-                .toLowerCase()
                 .replaceAll("-"," ")
                 .replaceAll("_"," ")
                 .split(",");

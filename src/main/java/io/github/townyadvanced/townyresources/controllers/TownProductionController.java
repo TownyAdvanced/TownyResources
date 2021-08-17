@@ -10,6 +10,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
+import io.github.townyadvanced.townyresources.objects.ResourceQuantity;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
@@ -207,8 +208,23 @@ public class TownProductionController {
 
     /**
      * Extracts town resources, and makes them available for collection
+     * 
+     * Extract to both town and nation
      */
-    public static void extractResources() {
-        
+    public static void extractAllResources() {
+        for(Town town: TownyUniverse.getInstance().getTowns()) {
+            //Get the list of resources which are already available for collection
+            
+            TODO- You don't need to make into a Material object while extracting!!!!
+            Fix this by retrieving a simpple material->amt hashmap from the settings class
+            
+            List<ResourceQuantity> alreadyAvailableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsList(town);
+            //Extract resources
+            
+            //Set the list of resouces available for collection
+            
+            
+        }
+
     }
 }

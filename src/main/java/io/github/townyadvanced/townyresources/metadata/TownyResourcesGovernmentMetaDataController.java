@@ -2,8 +2,10 @@ package io.github.townyadvanced.townyresources.metadata;
 
 import com.gmail.goosius.siegewar.SiegeWar;
 import com.palmergames.bukkit.towny.object.Government;
+import io.github.townyadvanced.townyresources.objects.ResourceQuantity;
 import org.bukkit.Material;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +69,27 @@ public class TownyResourcesGovernmentMetaDataController {
         return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
     }
 
-    public static void setAvailableForCollection(Government government, String availableForCollection) {
+    public static void setCollectedResources(Government government, String availableForCollection) {
         MetaDataUtil.setSdf(government, availableForCollectionMetadataKey, availableForCollection);
+    }
+
+    public static List<ResourceQuantity> getAvailableForCollectionAsList(Government town) {
+        List<ResourceQuantity> result = new ArrayList<>();
+        String collectedResourcesAsString = getAvailableForCollection(town);
+        if(!collectedResourcesAsString.isEmpty()) {
+            String[] collectedResourcesAsArray = collectedResourcesAsString.toUpperCase().split(",");
+            String[] collectedResourceMaterialAmount;
+            Material material;
+            int amount;            
+            ResourceQuantity resourceQuantity;
+            for(String collectedResource: collectedResourcesAsArray) {
+                collectedResourceMaterialAmount = collectedResource.split("-");
+                material = Material.getMaterial(collectedResourceMaterialAmount[0]);
+                amount = Integer.parseInt(collectedResourceMaterialAmount[1]);
+                resourceQuantity = new ResourceQuantity(material, amount);
+                result.add(resourceQuantity);                
+            }
+        }
+        return result;
     }
 }

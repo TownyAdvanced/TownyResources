@@ -1,8 +1,5 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.gmail.goosius.siegewar.TownOccupationController;
-import com.gmail.goosius.siegewar.settings.Translation;
-import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.ChatTools;
@@ -15,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

@@ -2,11 +2,9 @@ package io.github.townyadvanced.townyresources.metadata;
 
 import com.gmail.goosius.siegewar.SiegeWar;
 import com.palmergames.bukkit.towny.object.Government;
-import io.github.townyadvanced.townyresources.objects.ResourceQuantity;
-import org.bukkit.Material;
+import com.palmergames.bukkit.towny.object.Town;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 
@@ -31,6 +29,61 @@ public class TownyResourcesGovernmentMetaDataController {
         return MetaDataUtil.getSdf(government, discoveredMetadataKey).replaceAll(" ","");
     }
     
+     /**
+     * Get the discovered resources of a town
+     * 
+     * Note that the order is important
+     * 0 - level 1 resource
+     * 1 - level 2 resource
+     * etc.
+     * 
+     * @param town the town
+     * @return the town's discovered resources, as an IMMUTABLE list
+     */
+    public static List<String> getDiscoveredAsList(Town town) {
+        String discoveredString = getDiscovered(town);
+        if(discoveredString.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            String[] discoveredArray = discoveredString.split(",");
+            return Arrays.asList(discoveredArray);           
+        }
+    }
+       
+       
+       /* 
+    /**
+     * Get the discovered resources of a town
+     * 
+     * Note that the order is important
+     * 0 - level 1 resource
+     * 1 - level 2 resource
+     * etc.
+     * 
+     * @param town the town
+     * @return the town's discovered resources
+    */
+    /*
+    public static List<ResourceQuantity> getDiscoveredResources(Town town) {
+        List<ResourceQuantity> result = new ArrayList<>();
+        String resourcesString = getDiscovered(town);
+        String resouces;
+        int quantity;
+        if(!resourcesString.isEmpty()) {
+            String[] resourcesQuantitiesArray = resourcesString.split(",");
+            for(String resourceQuantityPair: resourcesQuantitiesArray) {
+                result.add(new ResourceQuantity(res
+            }
+            
+            return new ArrayList<>();
+        } else {
+            
+            return Arrays.asList(resourcesArray);        
+        }
+        return result;
+    }
+
+    */
     public static void setDiscovered(Government government, List<String> discoveredResources) {
         //Convert materials list to single string
         StringBuilder metadataStringBuilder = new StringBuilder();
@@ -64,32 +117,65 @@ public class TownyResourcesGovernmentMetaDataController {
     public static void setDailyProduction(Government government, String dailyProduction) {
         MetaDataUtil.setSdf(government, dailyProductionMetadataKey, dailyProduction);
     }
-
+    
     public static String getAvailableForCollection(Government government) {
         return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
     }
 
-    public static void setCollectedResources(Government government, String availableForCollection) {
-        MetaDataUtil.setSdf(government, availableForCollectionMetadataKey, availableForCollection);
+    public static Map<String, Integer> getDailyProductionAsMap(Government town) {
+       return getResourceQuantitiesStringAsMap(getDailyProduction(town));
     }
 
-    public static List<ResourceQuantity> getAvailableForCollectionAsList(Government town) {
-        List<ResourceQuantity> result = new ArrayList<>();
-        String collectedResourcesAsString = getAvailableForCollection(town);
-        if(!collectedResourcesAsString.isEmpty()) {
-            String[] collectedResourcesAsArray = collectedResourcesAsString.toUpperCase().split(",");
-            String[] collectedResourceMaterialAmount;
-            Material material;
-            int amount;            
-            ResourceQuantity resourceQuantity;
-            for(String collectedResource: collectedResourcesAsArray) {
-                collectedResourceMaterialAmount = collectedResource.split("-");
-                material = Material.getMaterial(collectedResourceMaterialAmount[0]);
-                amount = Integer.parseInt(collectedResourceMaterialAmount[1]);
-                resourceQuantity = new ResourceQuantity(material, amount);
-                result.add(resourceQuantity);                
-            }
-        }
-        return result;
+    public static Map<String, Integer> getAvailableForCollectionAsMap(Government town) {
+       return getResourceQuantitiesStringAsMap(getAvailableForCollection(town));
     }
+
+    private static Map<String, Integer> getResourceQuantitiesStringAsMap(String resourceQuantitiesString) {
+        Map<String,Integer> result = new HashMap<>();
+        if(!resourceQuantitiesString.isEmpty()) {
+            String[] resourceQuantitiesArray = resourceQuantitiesString.toUpperCase().split(",");
+            String[] resourceQuantityPair;
+            String resource;
+            int amount;
+            for(String resourceQuantityString: resourceQuantitiesArray) {
+               resourceQuantityPair = resourceQuantityString.split("-");
+               resource = resourceQuantityPair[0];
+               amount = Integer.parseInt(resourceQuantityPair[1]); 
+               result.put(resource, amount);
+            }        
+        }
+        return result;        
+    }
+    
+    public static void setAvailableForCollection(Government government, Map<String, Integer> availableForCollection) {
+        setResourceQuantitiesString(government, availableForCollectionMetadataKey, availableForCollection);
+    }
+    
+    public static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
+        /* 
+         * Build String
+         * Note: Do not order these according to discovery
+         * (it would not make sense for nations, and would not work reliably for towns)
+         */
+        StringBuilder resourceQuantitiesStringBuilder = new StringBuilder();
+        boolean firstEntry = true;
+        String resource;
+        int quantity;
+        for(Map.Entry<String,Integer> resourceQuantity: resourceQuantitiesMap.entrySet()) {
+            if(firstEntry) {
+                firstEntry = false;
+                resourceQuantitiesStringBuilder.append(", ");
+            }
+            resource = resourceQuantity.getKey();
+            quantity = resourceQuantity.getValue();
+            resourceQuantitiesStringBuilder
+                .append(resource)
+                .append("-")
+                .append(quantity);
+        }
+
+        //Set the string into metadata
+        MetaDataUtil.setSdf(government, resourceQuantitiesStringBuilder.toString() , metadataKey);        
+    }
+
 }

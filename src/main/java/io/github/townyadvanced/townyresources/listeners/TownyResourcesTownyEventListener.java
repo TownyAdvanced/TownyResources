@@ -44,7 +44,7 @@ public class TownyResourcesTownyEventListener implements Listener {
     @EventHandler
     public void onNewDay(PreNewDayEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            TownProductionController.extractResources();
+            TownProductionController.extractAllResources();
         }
     }
        

@@ -133,14 +133,14 @@ public class TownyResourcesGovernmentMetaDataController {
     private static Map<String, Integer> getResourceQuantitiesStringAsMap(String resourceQuantitiesString) {
         Map<String,Integer> result = new HashMap<>();
         if(!resourceQuantitiesString.isEmpty()) {
-            String[] resourceQuantitiesArray = resourceQuantitiesString.toUpperCase().split(",");
+            String[] resourceQuantitiesArray = resourceQuantitiesString.split(",");
             String[] resourceQuantityPair;
             String resource;
             int amount;
             for(String resourceQuantityString: resourceQuantitiesArray) {
                resourceQuantityPair = resourceQuantityString.split("-");
-               resource = resourceQuantityPair[0];
-               amount = Integer.parseInt(resourceQuantityPair[1]); 
+               amount = Integer.parseInt(resourceQuantityPair[0]); 
+               resource = resourceQuantityPair[1];
                result.put(resource, amount);
             }        
         }

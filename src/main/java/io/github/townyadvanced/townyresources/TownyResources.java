@@ -83,11 +83,11 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public static void info(String message) {
-		plugin.getLogger().info(getPrefix() + message);
+		plugin.getLogger().info(message);
 	}
 
 	public static void severe(String message) {
-		plugin.getLogger().severe(getPrefix() + message);
+		plugin.getLogger().severe(message);
 	}
 
 	private void printSickASCIIArt() {	

@@ -219,12 +219,6 @@ public class TownProductionController {
             //Get storage Limit modifier
             int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
             
-            //Get town cut normalized
-            double townCutNormalized = 1d - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-            
-            System.out.println("AVAILABLE RESOURCES: " + availableResources.size());
-            
-            
             //Extract resources
             String resource;
             int quantityToExtract;
@@ -232,7 +226,7 @@ public class TownProductionController {
             int storageLimit;
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
-                quantityToExtract = (int)((townProductionEntry.getValue() * townCutNormalized) + 0.5);
+                quantityToExtract =townProductionEntry.getValue();
                 if(availableResources.containsKey(resource)) {
                     //Don't go over limit
                     currentQuantity = availableResources.get(resource);

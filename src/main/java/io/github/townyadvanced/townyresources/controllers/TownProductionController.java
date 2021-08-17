@@ -22,12 +22,12 @@ public class TownProductionController {
      * Get the discovered resources of a town
      * 
      * @param town the town
-     * @return the town's discovered resources
+     * @return the town's discovered resources, as an IMMUTABLE list
      */
     public static List<String> getDiscoveredResources(Town town) {
         String resourcesString = TownyResourcesGovernmentMetaDataController.getDiscovered(town);
         if(resourcesString.isEmpty()) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         } else {
             String[] resourcesArray = resourcesString.split(",");
             return Arrays.asList(resourcesArray);        

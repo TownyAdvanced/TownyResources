@@ -41,7 +41,7 @@ public class TownyResourcesSettings {
 	}
 		
 	public static Map<String, ResourceOffer> getAllResourceOffers() {
-		return getResourceOffers(null);
+		return getResourceOffers(Collections.emptyList());
     }
 
 	public static Map<String, ResourceOffer> getResourceOffers(List<String> materialsToExclude) {
@@ -55,7 +55,7 @@ public class TownyResourcesSettings {
         return resourceOffers;
 	}
 
-    private static Map<String, ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList) {
+    private static Map<String, ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList, List<String> materialsToExclude) {
         Map<String, ResourceOffer> result = new HashMap<>();
         String[] offerAsArray;
         String offerMaterial;
@@ -65,6 +65,8 @@ public class TownyResourcesSettings {
         ResourceOffer newResourceOffer;
         
         for(String offer: offersList) {
+        	if(materialsToExclude.contains(offer))
+	        	continue;
             offerAsArray = offer.split("-");
             offerMaterial = offerAsArray[0];
             offerBaseAmount = (int)((Double.parseDouble(offerAsArray[1]) * 64) + 0.5);
@@ -186,11 +188,14 @@ public class TownyResourcesSettings {
 	public static String getString(TownyResourcesConfigNodes node) {
 		return config.getString(node.getRoot().toLowerCase(), node.getDefault());
 	}
-	
+
+	/**
+     * Return an IMMUTABLE list of integers
+	 */
 	public static List<Integer> getIntegerList(TownyResourcesConfigNodes configEntry) {
 		String configAsString = getString(configEntry);
 		if(configAsString.isEmpty()) {
-            return new ArrayList<>();
+            return Collections.emptyList();
 		} else {
 			configAsString = configAsString.replaceAll(" ","");
 			List<Integer> result = new ArrayList<>();
@@ -201,10 +206,13 @@ public class TownyResourcesSettings {
 		}    	
 	}
 	
+	/**
+     * Return an IMMUTABLE list of strings
+	 */
 	public static List<String> getStringList(TownyResourcesConfigNodes configEntry) {
 		String configAsString = getString(configEntry);
 		if(configAsString.isEmpty()) {
-            return new ArrayList<>();
+            return Collections.emptyList();
 		} else {
 			configAsString = configAsString.replaceAll(" ","");
 			String[] configAsArray = configAsString.split(",");

@@ -68,13 +68,17 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 				default:
 					showTownyResourcesHelp(player);
 			}		
+		} catch (TownyException te) {
+			//Expected type of exception (e.g. not enough money)
+			TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();  //TODO -Remove when done
+			//Unexpected exception
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
+			e.printStackTrace();  //TODO -Remove when done			
 		}
 	}
 
-	private void parseSurveyCommand(Player player) throws Exception{
+	private void parseSurveyCommand(Player player) throws TownyException{
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
 			
 		//Check if surveys are enabled

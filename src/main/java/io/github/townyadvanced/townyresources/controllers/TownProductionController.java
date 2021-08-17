@@ -15,7 +15,9 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TownProductionController {
 
@@ -30,7 +32,7 @@ public class TownProductionController {
      * @param alreadyDiscoveredResources list of the town's already-discovered resources
      * @throws TownyException 
      */
-    public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws Exception {
+    public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredResources) throws TownyException{
  		/*
  		 * Get the list of all possible resources which can be found in a new discovery
  		 * This list will be comprised of all resource offers, except already discovered resources
@@ -40,7 +42,7 @@ public class TownProductionController {
 
  		//Ensure there are enough candidates left for a new discovery
         if(resourceOfferCandidates.size() < 1)
-            throw new TownyException("msg_err_not_enough_offers_left");
+            throw new TownyException(TownyResourcesTranslation.of("msg_err_not_enough_offers_left"));
 
         //Generate a random number to determine which offer will win
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
@@ -159,6 +161,7 @@ public class TownProductionController {
             town.save();            
         } catch (Exception e) {
             TownyResources.severe("Problem recalculating production for town" + town.getName());
+            e.printStackTrace();
         }
     }
 
@@ -248,7 +251,8 @@ public class TownProductionController {
             town.save();
             
             } catch (Exception e) {
-                TownyResources.severe("Problem extracting resources for town" + town.getName());
+                TownyResources.severe("Problem extracting resources for town " + town.getName());
+                e.printStackTrace();
             }
         }        
     }

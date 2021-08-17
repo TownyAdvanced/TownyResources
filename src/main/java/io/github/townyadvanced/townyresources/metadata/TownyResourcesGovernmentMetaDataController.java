@@ -111,7 +111,7 @@ public class TownyResourcesGovernmentMetaDataController {
                 dailyProductionStringBuilder.append(", ");
             dailyProductionStringBuilder.append(dailyProduction.get(i));
         }
-        MetaDataUtil.setSdf(government, dailyProductionMetadataKey, dailyProductionStringBuilder.toString());
+        setDailyProduction(government, dailyProductionStringBuilder.toString());
     }
 
     public static void setDailyProduction(Government government, String dailyProduction) {
@@ -172,9 +172,9 @@ public class TownyResourcesGovernmentMetaDataController {
             resource = resourceQuantity.getKey();
             quantity = resourceQuantity.getValue();
             resourceQuantitiesStringBuilder
-                .append(resource)
+                .append(quantity)
                 .append("-")
-                .append(quantity);
+                .append(resource);
         }
 
         //Set the string into metadata

@@ -39,7 +39,7 @@ public class TownyResourcesTownEventListener implements Listener {
 			String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(town);
 			String availableAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(town);
 
-			if(productionAsString.isEmpty() || availableAsString.isEmpty())
+			if(productionAsString.isEmpty() && availableAsString.isEmpty())
 				return;
 
 			//Resources:	

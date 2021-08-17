@@ -34,7 +34,7 @@ public class TownyResourcesTownyEventListener implements Listener {
     public void onTownyDatabaseLoad(TownyLoadedDatabaseEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
             TownyResources.info("Towny database reload detected, reloading townyresources...");
-              TownyResources.getPlugin().loadAll();
+              TownyResources.getPlugin().reloadAll();
         }
     }
 

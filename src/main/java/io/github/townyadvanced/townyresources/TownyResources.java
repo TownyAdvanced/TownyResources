@@ -42,7 +42,7 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	/**
-	 * Load or reload towny resources
+	 * Load towny resources
 	 * 
 	 * @return true if load succeeded
 	 */
@@ -61,6 +61,26 @@ public class TownyResources extends JavaPlugin {
             return false;
         }
 		info("TownyResources loaded successfully.");		
+		return true;
+	}
+
+	/**
+	 * Re-Load towny resources
+	 * 
+	 * @return true if reload succeeded
+	 */
+	public boolean reloadAll() {
+		try {
+			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
+			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			TownProductionController.recalculateProductionForAllTowns();
+			TownProductionController.recalculateProductionForAllNations();			
+		} catch (Exception e) {
+            e.printStackTrace();
+            severe("TownyResources failed to reload!");
+            return false;
+        }
+		info("TownyResources reloaded successfully.");		
 		return true;
 	}
 

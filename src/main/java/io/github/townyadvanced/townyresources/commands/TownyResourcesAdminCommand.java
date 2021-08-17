@@ -1,29 +1,11 @@
 package io.github.townyadvanced.townyresources.commands;
 
 import com.gmail.goosius.siegewar.Messaging;
-import com.gmail.goosius.siegewar.SiegeController;
-import com.gmail.goosius.siegewar.TownOccupationController;
-import com.gmail.goosius.siegewar.enums.SiegeSide;
-import com.gmail.goosius.siegewar.enums.SiegeType;
-import com.gmail.goosius.siegewar.enums.SiegeWarPermissionNodes;
-import com.gmail.goosius.siegewar.metadata.NationMetaDataController;
-import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
-import com.gmail.goosius.siegewar.objects.Siege;
-import com.gmail.goosius.siegewar.settings.Settings;
 import com.gmail.goosius.siegewar.settings.Translation;
-import com.gmail.goosius.siegewar.timeractions.AttackerTimedWin;
-import com.gmail.goosius.siegewar.timeractions.DefenderTimedWin;
-import com.palmergames.bukkit.towny.TownyMessaging;
-import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.object.Nation;
-import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
-import com.palmergames.util.StringMgmt;
-import com.palmergames.util.TimeMgmt;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
-import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.command.Command;
@@ -32,7 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -88,7 +69,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	}
 
 	private void parseReloadCommand(CommandSender sender) {
-		if (TownyResources.getPlugin().loadAll()) {
+		if (TownyResources.getPlugin().reloadAll()) {
 			TownyResourcesMessagingUtil.sendMsg(sender, TownyResourcesTranslation.of("townyresources_reloaded_successfully"));
 			return;
 		}

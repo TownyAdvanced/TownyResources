@@ -65,10 +65,10 @@ public class TownyResourcesSettings {
         ResourceOffer newResourceOffer;
         
         for(String offer: offersList) {
-        	if(materialsToExclude.contains(offer))
-	        	continue;
-            offerAsArray = offer.split("-");
+        	offerAsArray = offer.split("-");
             offerMaterial = offerAsArray[0];
+            if(materialsToExclude.contains(offerMaterial))
+	        	continue;      
             offerBaseAmount = (int)((Double.parseDouble(offerAsArray[1]) * 64) + 0.5);
             offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
             offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;

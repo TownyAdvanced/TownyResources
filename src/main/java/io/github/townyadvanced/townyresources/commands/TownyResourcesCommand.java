@@ -12,6 +12,7 @@ import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.controllers.TownProductionController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
@@ -73,7 +74,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		}
 	}
 
-	private void parseSurveyCommand(Player player) throws TownyException{
+	private void parseSurveyCommand(Player player) throws Exception{
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
 			
 		//Check if surveys are enabled
@@ -86,7 +87,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Check if there are resources left to discover at the town
 		Town town = playerWorldCoord.getTownBlock().getTown();
-		List<String> discoveredResources = TownProductionController.getDiscoveredResources(town);
+		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
 		List<Integer> requiredNumTownblocksPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
 		if(discoveredResources.size() >= costPerResourceLevel.size())

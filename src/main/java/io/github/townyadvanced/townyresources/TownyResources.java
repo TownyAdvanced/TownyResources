@@ -4,6 +4,7 @@ import com.gmail.goosius.siegewar.command.SiegeWarAdminCommand;
 import com.gmail.goosius.siegewar.command.SiegeWarCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
+import io.github.townyadvanced.townyresources.controllers.TownProductionController;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -53,6 +54,8 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 			registerCommands();
+			TownProductionController.recalculateProductionForAllTowns();
+			TownProductionController.recalculateProductionForAllNations();			
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");

@@ -222,6 +222,9 @@ public class TownProductionController {
             //Get town cut normalized
             double townCutNormalized = 1d - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
             
+            System.out.println("AVAILABLE RESOURCES: " + availableResources.size());
+            
+            
             //Extract resources
             String resource;
             int quantityToExtract;

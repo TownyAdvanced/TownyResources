@@ -1,12 +1,12 @@
 package io.github.townyadvanced.townyresources;
 
-import com.gmail.goosius.siegewar.command.SiegeWarAdminCommand;
-import com.gmail.goosius.siegewar.command.SiegeWarCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.TownProductionController;
+import io.github.townyadvanced.townyresources.listeners.TownyResourcesBukkitEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
+import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownyEventListener;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.Bukkit;
@@ -14,7 +14,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public class TownyResources extends JavaPlugin {
 	
@@ -29,15 +28,15 @@ public class TownyResources extends JavaPlugin {
         	onDisable();
 
     }
-    
+
 	public String getVersion() {
 		return this.getDescription().getVersion();
 	}
-	
+
 	public static TownyResources getPlugin() {
 		return plugin;
 	}
-	
+
 	public static String getPrefix() {
 		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
 	}
@@ -64,13 +63,13 @@ public class TownyResources extends JavaPlugin {
 		info("TownyResources loaded successfully.");		
 		return true;
 	}
-	
+
 	public static void info(String message) {
-		plugin.getLogger().info(message);
+		plugin.getLogger().info(getPrefix() + message);
 	}
-	
+
 	public static void severe(String message) {
-		plugin.getLogger().severe(message);
+		plugin.getLogger().severe(getPrefix() + message);
 	}
 
 	private void printSickASCIIArt() {	
@@ -91,13 +90,15 @@ public class TownyResources extends JavaPlugin {
 			Bukkit.getLogger().info("                                           YMM                                            By Goosius                                           ");
 			Bukkit.getLogger().info("");	
 	}
-	
+
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
+		pm.registerEvents(new TownyResourcesBukkitEventListener(this), this);
+		pm.registerEvents(new TownyResourcesTownyEventListener(this), this);
 		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
 		pm.registerEvents(new TownyResourcesNationEventListener(this), this);		
 	}
-	
+
 	private void registerCommands() {
 		getCommand("townyresources").setExecutor(new TownyResourcesCommand());
 		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());

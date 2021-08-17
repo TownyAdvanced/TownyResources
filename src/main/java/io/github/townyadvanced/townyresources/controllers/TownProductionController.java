@@ -209,4 +209,18 @@ public class TownProductionController {
 
     }
 
+    /**
+     * Recalculate production for all towns and nations
+     */
+    public static void recalculateAllProduction() {
+        recalculateProductionForAllTowns();
+        recalculateProductionForAllNations();
+    }
+
+    /**
+     * Extracts town resources, and makes them available for collection
+     */
+    public static void extractResources() {
+        
+    }
 }

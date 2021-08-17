@@ -9,4 +9,8 @@ import java.util.Map;
 public class PlayerExtractionLimitsController {
     public static Map<Player, PlayerResourcesExtractionRecord> playerResourceExtractionRecordMap = new HashMap<>();
 
+    public static void saveDataOnPlayerExtractedResouces() {
+        
+        
+    }
 }

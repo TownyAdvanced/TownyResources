@@ -5,7 +5,10 @@ import com.palmergames.bukkit.towny.event.PreNewDayEvent;
 import com.palmergames.bukkit.towny.event.TownyLoadedDatabaseEvent;
 import com.palmergames.bukkit.towny.event.time.NewShortTimeEvent;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
+import io.github.townyadvanced.townyresources.controllers.TownProductionController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -19,34 +22,33 @@ public class TownyResourcesTownyEventListener implements Listener {
 	@SuppressWarnings("unused")
 	private final TownyResources plugin;
 	private static long nextProductionRecalculationTime = 0;
-	
-	public TownyResourcesTownyEventListener(TownyResources instance) {
 
+	public TownyResourcesTownyEventListener(TownyResources instance) {
 		plugin = instance;
 	}
-	
-	/*
-     * Whe the Towny database gets reloaded, Townyresources reloads  also.
+
+	/**
+     * Whe the Towny database gets reloaded, Townyresources reloads also.
      */
     @EventHandler
     public void onTownyDatabaseLoad(TownyLoadedDatabaseEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            TownyResources.info(SiegeWar.prefix + "Towny database reload detected, reloading townyresources...");
-                TownyResources.getPlugin().loadAll();
+            TownyResources.info("Towny database reload detected, reloading townyresources...");
+              TownyResources.getPlugin().loadAll();
         }
     }
-    
-    /*
+
+    /**
      * On Towny new day, town resources are automatically extracted.
      */
     @EventHandler
     public void onNewDay(PreNewDayEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            //TownProductionController.extractResources();
+            TownProductionController.extractResources();
         }
     }
-            
-    /*
+       
+    /**
      * On each ShortTime period, TownyResources saves data on player-extracted resources.
      * 
      * Every 10 mins, the produced town & nation resources are recalculated. 
@@ -54,11 +56,12 @@ public class TownyResourcesTownyEventListener implements Listener {
     @EventHandler
     public void onNewShortTime(NewShortTimeEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
+            PlayerExtractionLimitsController.saveDataOnPlayerExtractedResouces();
+
             if(System.currentTimeMillis() > nextProductionRecalculationTime) {
                 nextProductionRecalculationTime = System.currentTimeMillis() + 600000; //10 mins
-                //TownProductionController.recalculateTownAndNationProduction();                
+                TownProductionController.recalculateAllProduction();
             }
-            //PlayerExtractionLimitsController.saveDataOnPlayerExtractedResources();
         }
     }
 }

@@ -27,11 +27,11 @@ plugin_prefix: '&f[&6Towny Resources&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
 
 town.screen.header: "&2Resources:"
-town.screen.daily.production: '&2 > Daily Productivity &a[%s]&2: &f'
+town.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 town.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
 nation.screen.header: "&2Resources:"
-nation.screen.daily.production: '&2 > Daily Productivity &a[%s]&2: &f'
+nation.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
 help_collect: 'Collect all available extracted resources at your town and/or nation.'

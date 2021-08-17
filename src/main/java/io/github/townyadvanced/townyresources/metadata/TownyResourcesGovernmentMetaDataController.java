@@ -166,7 +166,8 @@ public class TownyResourcesGovernmentMetaDataController {
         for(Map.Entry<String,Integer> resourceQuantity: resourceQuantitiesMap.entrySet()) {
             if(firstEntry) {
                 firstEntry = false;
-                resourceQuantitiesStringBuilder.append(", ");
+            } else {
+                resourceQuantitiesStringBuilder.append(", ");                
             }
             resource = resourceQuantity.getKey();
             quantity = resourceQuantity.getValue();

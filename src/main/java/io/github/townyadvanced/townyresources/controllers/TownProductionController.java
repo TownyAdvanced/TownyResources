@@ -208,28 +208,41 @@ public class TownProductionController {
         for(Town town: TownyUniverse.getInstance().getTowns()) {
             try {
             //Get the list of resources which are already available for collection
-            Map<String,Integer> townResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
 
             //Get daily production
             Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(town);
 
+            //Get storage Limit modifier
+            int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
+            
             //Extract resources
             String resource;
-            int quantity;
-            for(Map.Entry<String, Integer> extractedResource: townDailyProduction.entrySet()) {
-                resource = extractedResource.getKey();
-                quantity = extractedResource.getValue();
-                if(townResources.containsKey(resource)) {
+            int quantityToExtract;
+            int currentQuantity;
+            int storageLimit;
+            for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
+                resource = townProductionEntry.getKey();
+                quantityToExtract = townProductionEntry.getValue();
+                if(availableResources.containsKey(resource)) {
+                    //Don't go over limit
+                    currentQuantity = availableResources.get(resource);
+                    storageLimit = quantityToExtract * storageLimitModifier;
+                    if(currentQuantity == storageLimit) {
+                        continue; //Already at limit
+                    } else if (currentQuantity + quantityToExtract > storageLimit) {
+                        quantityToExtract = storageLimit - currentQuantity; 
+                    }                       
                     //Add to existing available resources
-                    townResources.put(resource, quantity + townResources.get(resource));
+                    availableResources.put(resource, currentQuantity + quantityToExtract);
                 } else {
                     //Add new available resource
-                    townResources.put(resource, quantity);
+                    availableResources.put(resource, quantityToExtract);
                 }
             }
 
-            //Set the list of resources available for collection
-            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, townResources);    
+            //Set the list of available resources
+            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, availableResources);    
             
             //Save town
             town.save();

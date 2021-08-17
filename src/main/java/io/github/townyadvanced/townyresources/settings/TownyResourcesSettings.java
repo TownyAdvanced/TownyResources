@@ -27,7 +27,7 @@ public class TownyResourcesSettings {
 	public static List<Integer> getProductionPercentagesPerResourceLevel() {
 		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL);
 	}
-		
+	
 	public static List<Integer> getProductionTownLevelRequirementPerResourceLevel() {
 		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL);
 	}
@@ -222,5 +222,9 @@ public class TownyResourcesSettings {
 
 	public static boolean areSurveysEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_ENABLED);
+	}
+
+	public static int getStorageLimitModifier() {
+		return getInt(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_STORAGE_LIMIT_MODIFIER);
 	}
 }

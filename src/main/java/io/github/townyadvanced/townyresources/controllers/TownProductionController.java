@@ -60,22 +60,19 @@ public class TownProductionController {
         //Generate a random number to determine which offer will win
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
 
+        System.out.println("Num Candidates: " + resourceOfferCandidates.size());
+        System.out.println("Total weight: " + TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights());
+        System.out.println("Winning Number: " + winningNumber);
+         
         //Determine which  offer has won
         ResourceOffer winningCandidate = null;
         ResourceOffer candidate;
-        ResourceOffer nextCandidate = null;
-        for(int i = 0; i < resourceOfferCandidates.size() - 1; i++) {      //Don't check the last entry 
+        for(int i = 0; i < resourceOfferCandidates.size(); i++) { 
             candidate = resourceOfferCandidates.get(i);   
-            nextCandidate = resourceOfferCandidates.get(i+1);
-            if(winningNumber >= candidate.getDiscoveryId() && winningNumber < nextCandidate.getDiscoveryId()) {
+            if(winningNumber >= candidate.getDiscoveryId() && winningNumber < candidate.getDiscoveryId() + candidate.getDiscoveryProbabilityWeight()) {
                 winningCandidate = candidate;
                 break;
             }
-        }
-
-        //If no winner was found yet, the only remaining candidate is the last entry, which must be the winner
-        if(winningCandidate == null) {
-            winningCandidate = nextCandidate;
         }
 
         //Discover the resource
@@ -126,14 +123,6 @@ public class TownProductionController {
     private static void recalculateProductionForOneTown(Town town, Map<String, ResourceOffer> allResourceOffers) {
         //Get discovered resources
         List<String> discoveredResources = new ArrayList<>(getDiscoveredResources(town));
-
-        for(String key: allResourceOffers.keySet()) {
-            System.out.println("Offer Key: " + key);
-        }
-
-        for(String key: discoveredResources) {
-            System.out.println("Discovered Key: " + key);
-        }
 
         //Remove any discovered resources which are no longer on offer
         List<String> resourcesToRemove = new ArrayList<>();

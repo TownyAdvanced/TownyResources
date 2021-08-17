@@ -6,7 +6,7 @@ public class ResourceOffer {
     private final String material;              //Name of the resource material
     private final int baseAmount;               //Base amount of the resource    
     private final int discoveryProbabilityWeight;    //Indicates the probability that this offer will be discovered
-    private final int discoveryId;                   //Used during discovery, to identify the offer within the list of all other offers
+    private final int discoveryId;                   //Used during discovery, to identify the offer within the set of all offers
 
     public ResourceOffer(String category, String material, int baseAmount, int discoveryProbabilityWeight, int discoveryId) {
         this.category = category;

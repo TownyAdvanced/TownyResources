@@ -60,10 +60,6 @@ public class TownProductionController {
         //Generate a random number to determine which offer will win
         int winningNumber = (int)((Math.random() * TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights()) + 0.5);
 
-        System.out.println("Num Candidates: " + resourceOfferCandidates.size());
-        System.out.println("Total weight: " + TownyResourcesSettings.getSumOfAllOfferDiscoveryProbabilityWeights());
-        System.out.println("Winning Number: " + winningNumber);
-         
         //Determine which  offer has won
         ResourceOffer winningCandidate = null;
         ResourceOffer candidate;

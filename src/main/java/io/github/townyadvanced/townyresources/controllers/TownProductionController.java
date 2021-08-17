@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
+import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -130,7 +131,7 @@ public class TownProductionController {
      */
     public static void recalculateProductionForOneTown(Town town, Map<String, ResourceOffer> allResourceOffers) {
         //Get discovered resources
-        List<String> discoveredResources = getDiscoveredResources(town);
+        List<String> discoveredResources = new ArrayList<>(getDiscoveredResources(town));
 
         //Remove any discovered resources which are no longer on offer
         List<String> resourcesToRemove = new ArrayList<>();
@@ -140,6 +141,7 @@ public class TownProductionController {
         }
         if(!resourcesToRemove.isEmpty()) {
             discoveredResources.removeAll(resourcesToRemove);
+            TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredResources);
             town.save();
         }
 

@@ -142,7 +142,7 @@ public class TownyResourcesGovernmentMetaDataController {
     }
     
     private static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
-        //Order map
+        //Order map by descending values
         Map<String, Integer> sortedResourceQuantitiesMap = resourceQuantitiesMap.entrySet().stream()
         .sorted(Comparator.comparingInt(e -> -e.getValue()))
         .collect(Collectors.toMap(

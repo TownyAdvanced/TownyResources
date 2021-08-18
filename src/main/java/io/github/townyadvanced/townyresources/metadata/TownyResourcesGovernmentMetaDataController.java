@@ -5,6 +5,7 @@ import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Town;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -141,15 +142,25 @@ public class TownyResourcesGovernmentMetaDataController {
     }
     
     private static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
+        //Order map
+        Map<String, Integer> sortedResourceQuantitiesMap = resourceQuantitiesMap.entrySet().stream()
+        .sorted(Comparator.comparingInt(e -> -e.getValue()))
+        .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                (a, b) -> { throw new AssertionError(); },
+                LinkedHashMap::new
+        ));
+
         //Create list
         List<String> resourceQuantitiesList = new ArrayList<>();
-        for(Map.Entry<String,Integer> resourceQuantity: resourceQuantitiesMap.entrySet()) {
+        for(Map.Entry<String,Integer> resourceQuantity: sortedResourceQuantitiesMap.entrySet()) {
             resourceQuantitiesList.add(resourceQuantity.getKey() + "-" + resourceQuantity.getValue());
         }
         setResourceQuantitiesString(government, metadataKey, resourceQuantitiesList);
     }
 
-    public static void setResourceQuantitiesString(Government government, String metadataKey, List<String> resourceQuantitiesList) {
+    private static void setResourceQuantitiesString(Government government, String metadataKey, List<String> resourceQuantitiesList) {
         //Sort list so that the largest quantities come first
         Collections.sort(resourceQuantitiesList);
         
@@ -168,5 +179,4 @@ public class TownyResourcesGovernmentMetaDataController {
         //Set the string into metadata
         MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesAsStringBuilder.toString());        
     }
-
 }

@@ -43,7 +43,7 @@ discovery.message.trees: "&b%s has discovered a forest at %s!. Daily Production:
 discovery.message.crops: "&b%s has discovered fertile soil at %s!. Daily Production: %d %s."
 discovery.message.animals: "&b%s has discovered a herd of animals at %s!. Daily Production: %d %s."
 discovery.message.monsters: "&b%s has discovered a nest of monsters at %s!. Daily Production: %d %s."
-extraction.message: "&b%s towns produced resources."
+production.message: "&b%s towns produced resources."
 
 msg_err_daily_extraction_limit_reached: "&cDaily Extraction Limit Reached for %s (%d)."
 msg_err_survey_no_town: "&cThere is no town here to survey."

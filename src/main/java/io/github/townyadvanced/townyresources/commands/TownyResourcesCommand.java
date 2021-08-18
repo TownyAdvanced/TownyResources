@@ -11,7 +11,8 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
-import io.github.townyadvanced.townyresources.controllers.TownProductionController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceCollectionController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -120,7 +121,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
 				
 		//Discover a new resource (notification will be sent from here)
-		TownProductionController.discoverNewResource(resident, town, discoveredResources);
+		TownResourceDiscoveryController.discoverNewResource(resident, town, discoveredResources);
 	}
 	
 	private static void parseCollectCommand(Player player) throws TownyException {
@@ -143,7 +144,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_no_resources_available"));
 		
 		//Collect resources
-		TownProductionController.collectAvailableTownResources(player, town, availableForCollection);
+		TownResourceCollectionController.collectAvailableTownResources(player, town, availableForCollection);
 	}
 
 }

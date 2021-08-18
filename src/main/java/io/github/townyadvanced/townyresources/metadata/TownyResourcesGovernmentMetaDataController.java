@@ -137,8 +137,8 @@ public class TownyResourcesGovernmentMetaDataController {
         setResourceQuantitiesString(government, availableForCollectionMetadataKey, availableForCollection);
     }
     
-    public static void setDailyProduction(Government government, Map<String, Integer> availableForCollection) {
-        setResourceQuantitiesString(government, dailyProductionMetadataKey, availableForCollection);
+    public static void setDailyProduction(Government government, Map<String, Integer> dailyProduction) {
+        setResourceQuantitiesString(government, dailyProductionMetadataKey, dailyProduction);
     }
     
     private static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {

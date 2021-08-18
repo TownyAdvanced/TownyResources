@@ -227,4 +227,13 @@ public class TownyResourcesSettings {
 	public static int getStorageLimitModifier() {
 		return getInt(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_STORAGE_LIMIT_MODIFIER);
 	}
+
+	public static List<Double> getNormalizedProductionBonusesPerResourceLevel() {
+		List<Integer> percentageBonuses = getProductionPercentagesPerResourceLevel();
+		List<Double> normalizedBonuses = new ArrayList<>();
+		for(Integer percentageBonus: percentageBonuses) {
+			normalizedBonuses.add((double)percentageBonus / 100);
+		}
+		return normalizedBonuses;
+	}
 }

@@ -2,7 +2,7 @@ package io.github.townyadvanced.townyresources;
 
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
-import io.github.townyadvanced.townyresources.controllers.TownProductionController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesBukkitEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
 import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
@@ -53,7 +53,7 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 			registerCommands();
-			TownProductionController.recalculateAllProduction();
+			TownResourceProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -72,7 +72,7 @@ public class TownyResources extends JavaPlugin {
 		try {
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
-			TownProductionController.recalculateAllProduction();
+			TownResourceProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to reload!");

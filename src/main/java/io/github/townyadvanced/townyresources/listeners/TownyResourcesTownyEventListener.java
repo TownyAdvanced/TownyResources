@@ -1,14 +1,12 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.gmail.goosius.siegewar.SiegeWar;
 import com.palmergames.bukkit.towny.event.PreNewDayEvent;
 import com.palmergames.bukkit.towny.event.TownyLoadedDatabaseEvent;
 import com.palmergames.bukkit.towny.event.time.NewShortTimeEvent;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
-import io.github.townyadvanced.townyresources.controllers.TownProductionController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -44,7 +42,7 @@ public class TownyResourcesTownyEventListener implements Listener {
     @EventHandler
     public void onNewDay(PreNewDayEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
-            TownProductionController.extractAllResources();
+            TownResourceProductionController.produceAllResources();
         }
     }
        
@@ -60,7 +58,7 @@ public class TownyResourcesTownyEventListener implements Listener {
 
             if(System.currentTimeMillis() > nextProductionRecalculationTime) {
                 nextProductionRecalculationTime = System.currentTimeMillis() + 600000; //10 mins
-                TownProductionController.recalculateAllProduction();
+                TownResourceProductionController.recalculateAllProduction();
             }
         }
     }

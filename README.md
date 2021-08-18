@@ -16,6 +16,19 @@ This plugin is very helpful for a good *SiegeWar* experience, because in vanilla
 This plugin solve this problem by transforming **Resources** into a good reason for war. The wisdom of this is demonstrated by the success of the **Civlization** series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
 
+#### Nation-Building:
+This plugin assist nation building
+- Nations gets a big cut of the resouces of their towns.
+- Thus nations have a new and very lucrative reason for convincing towns to join them and stay with them.
+- This naturally encourages nation building.
+
+#### Town-Building:
+This plugin assists town building
+- Town resources are automatically produced by the town itself. 
+- However it is the mayor/assistants/treasurers who get to collect this.
+- This naturally encourages systems of town organisation to be developed, 
+  to determine how the town resources are to be distributed.
+
 #### Trading:
 This plugin assist trading:
 - By helping individual towns to become centres for the production of certain goods, natural trading activities are encouraged.

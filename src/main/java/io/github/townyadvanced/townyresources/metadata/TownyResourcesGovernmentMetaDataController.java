@@ -155,15 +155,12 @@ public class TownyResourcesGovernmentMetaDataController {
         //Create list
         List<String> resourceQuantitiesList = new ArrayList<>();
         for(Map.Entry<String,Integer> resourceQuantity: sortedResourceQuantitiesMap.entrySet()) {
-            resourceQuantitiesList.add(resourceQuantity.getKey() + "-" + resourceQuantity.getValue());
+            resourceQuantitiesList.add(resourceQuantity.getValue() + "-" + resourceQuantity.getKey());
         }
         setResourceQuantitiesString(government, metadataKey, resourceQuantitiesList);
     }
 
-    private static void setResourceQuantitiesString(Government government, String metadataKey, List<String> resourceQuantitiesList) {
-        //Sort list so that the largest quantities come first
-        Collections.sort(resourceQuantitiesList);
-        
+    private static void setResourceQuantitiesString(Government government, String metadataKey, List<String> resourceQuantitiesList) {        
         //Build string
         StringBuilder resourceQuantitiesAsStringBuilder = new StringBuilder();
         boolean firstEntry = true;

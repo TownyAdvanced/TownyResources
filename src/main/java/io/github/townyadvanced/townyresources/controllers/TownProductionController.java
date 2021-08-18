@@ -279,7 +279,11 @@ public class TownProductionController {
         int amount;
         ItemStack itemStack;
         for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
-            material = Material.getMaterial(mapEntry.getKey());
+            material = Material.getMaterial(mapEntry.getKey().toUpperCase());
+            if(material == null) {
+                TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_uknown_material", material));
+                continue;
+            }
             amount = mapEntry.getValue();
             itemStack = new ItemStack(material, amount);
             itemStackList.add(itemStack);

@@ -279,7 +279,7 @@ public class TownProductionController {
         int amount;
         ItemStack itemStack;
         for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
-            material = Material.valueOf(mapEntry.getKey());
+            material = Material.getMaterial(mapEntry.getKey());
             amount = mapEntry.getValue();
             itemStack = new ItemStack(material, amount);
             itemStackList.add(itemStack);

@@ -51,6 +51,7 @@ msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblock
 msg_err_survey_too_expensive: "&cYou cannot afford to do this survey. Required: %s, Balance: %s"
 msg_err_not_enough_offers_left: "&cSurvey not possible, because there are no offers left on the configured offers list."
 msg_err_cannot_collect_not_a_town_member: "&cYou must be a member of a town to collect resources."
+msg_err_cannot_collect_not_in_own_town: "&cYou must be in your town to collect resources."
 
 townyresources_reloaded_successfully: "TownyResources reloaded successfully."
 townyresources_failed_to_reload: "TownyResources failed to reload."

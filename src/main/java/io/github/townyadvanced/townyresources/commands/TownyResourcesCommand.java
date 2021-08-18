@@ -123,13 +123,21 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	}
 	
 	private static void parseCollectCommand(Player player) throws TownyException {
-		//Ensure player is in a town
+		//Ensure player a town member
 		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
 		if(!resident.hasTown()) 
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_a_town_member"));
 					
+		//Ensure player is actually in the town
+		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
+		if(!TownyUniverse.getInstance().hasTownBlock(playerWorldCoord))			
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_in_own_town"));
+			
+		Town town = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
+		if(town != resident.getTown())
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_in_own_town"));
+					
 		//Extract resources
-		Town town = resident.getTown();
 		TownProductionController.collectAvailableTownResources(player, town);
 	}
 

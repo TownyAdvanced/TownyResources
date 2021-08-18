@@ -4,6 +4,7 @@ import com.gmail.goosius.siegewar.TownOccupationController;
 import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -197,73 +198,80 @@ public class TownResourceProductionController {
     private static void produceAllResourcesForAllTowns() {
         int numProducingTowns = 0;
         for(Town town: TownyUniverse.getInstance().getTowns()) {
-            if(produceResourcesForOneTown(town))
+            if(produceResourcesForOneGovernment(town))
                 numProducingTowns++;
         }
         TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("production.message", numProducingTowns));        
     }
 
     /**
-     * Produce resources for just one town
-     * 
-     * @param town the town
-     * @return true if any resources were extracted
+     * Produce resources of all nations
      */
-    private static boolean produceResourcesForOneTown(Town town) {
+    private static void produceAllResourcesForAllNations() {
+        for(Nation nation: TownyUniverse.getInstance().getNations()) {
+            produceResourcesForOneGovernment(nation);
+        }
+    }
+
+    /**
+     * Utility Method 
+     * Produce resources for just one government (i.e either a town or nation)
+     * 
+     * @param government the government to produce resources
+     * @return true if any resources were produced
+     */
+    private static boolean produceResourcesForOneGovernment(Government government) {
         try {
             //Get daily production
-            Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(town);
+            Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(government);
     
             if(townDailyProduction.isEmpty())
                 return false;
                 
             //Get the list of resources which are already available for collection
-            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(government);
     
             //Get storage Limit modifier
             int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
             
-            //Extract resources
+            //Produce resources
             String resource;
-            int quantityToExtract;
+            int quantityToProduce;
             int currentQuantity;
             int storageLimit;
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
-                quantityToExtract =townProductionEntry.getValue();
+                quantityToProduce =townProductionEntry.getValue();
                 if(availableResources.containsKey(resource)) {
                     //Don't go over limit
                     currentQuantity = availableResources.get(resource);
-                    storageLimit = quantityToExtract * storageLimitModifier;
+                    storageLimit = quantityToProduce * storageLimitModifier;
                     if(currentQuantity == storageLimit) {
                         continue; //Already at limit
-                    } else if (currentQuantity + quantityToExtract > storageLimit) {
-                        quantityToExtract = storageLimit - currentQuantity; 
+                    } else if (currentQuantity + quantityToProduce > storageLimit) {
+                        quantityToProduce = storageLimit - currentQuantity; 
                     }                       
                     //Add to existing available resources
-                    availableResources.put(resource, currentQuantity + quantityToExtract);
+                    availableResources.put(resource, currentQuantity + quantityToProduce);
                 } else {
                     //Add new available resource
-                    availableResources.put(resource, quantityToExtract);
+                    availableResources.put(resource, quantityToProduce);
                 }
             }
     
             //Set the list of available resources
-            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, availableResources);    
+            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, availableResources);    
             
-            //Save town
-            town.save();                       
+            //Save government
+            government.save();                       
             } catch (Exception e) {
-                TownyResources.severe("Problem extracting resources for town " + town.getName());
+                TownyResources.severe("Problem producing resources for government " + government.getName());
                 e.printStackTrace();
                 return false;
             }
 
-        //Some resources were extracted. Return true;
+        //Some resources were produced. Return true;
         return true;
-    }
-
-    private static void produceAllResourcesForAllNations() {
     }
 
 }

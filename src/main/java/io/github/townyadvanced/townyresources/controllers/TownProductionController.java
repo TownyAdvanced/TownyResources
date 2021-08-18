@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
+import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -14,10 +15,12 @@ import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TownProductionController {
 
@@ -258,5 +261,41 @@ public class TownProductionController {
     }
 
     public static void extractAllResourcesForNations() {
+    }
+
+    /**
+     * Collect all available town resources
+     * Synchronized to avoid possibility of duping by 2 players collecting at same time.... 
+     * 
+     * @param player the player collecting
+     * @param town the town
+     */
+    public static synchronized void collectAvailableTownResources(Player player, Town town) {
+        Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+        List<ItemStack> itemStackList = new ArrayList<>();
+        
+        //Calculate stuff to give player
+        Material material;
+        int amount;
+        ItemStack itemStack;
+        for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
+            material = Material.valueOf(mapEntry.getKey());
+            amount = mapEntry.getValue();
+            itemStack = new ItemStack(material, amount);
+            itemStackList.add(itemStack);
+        }
+        
+        //Drop stuff near player
+        Towny.getPlugin().getServer().getScheduler().runTask(Towny.getPlugin(), new Runnable() {
+            public void run() {
+                Location location = player.getLocation();
+                for(ItemStack itemStack: itemStackList) {
+                    player.getWorld().dropItemNaturally(location, itemStack);                 
+                }
+            }
+        });    
+        
+        //Clear available list
+        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, Collections.emptyMap());
     }
 }

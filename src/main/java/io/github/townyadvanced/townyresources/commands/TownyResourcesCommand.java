@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.commands;
 
 import com.gmail.goosius.siegewar.Messaging;
 import com.gmail.goosius.siegewar.settings.Translation;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -121,8 +122,15 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		TownProductionController.discoverNewResource(resident, town, discoveredResources);
 	}
 	
-	private static void parseCollectCommand(Player player) {
-		
+	private static void parseCollectCommand(Player player) throws TownyException {
+		//Ensure player is in a town
+		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
+		if(!resident.hasTown()) 
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_a_town_member"));
+					
+		//Extract resources
+		Town town = resident.getTown();
+		TownProductionController.collectAvailableTownResources(player, town);
 	}
 
 }

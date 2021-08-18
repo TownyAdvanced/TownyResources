@@ -102,21 +102,6 @@ public class TownyResourcesGovernmentMetaDataController {
     public static String getDailyProduction(Government government) {
         return MetaDataUtil.getSdf(government, dailyProductionMetadataKey).replaceAll(" ","");
     }
-
-    public static void setDailyProduction(Government government, List<String> dailyProduction) {
-        StringBuilder dailyProductionStringBuilder = new StringBuilder();
-        for(int i = 0; i < dailyProduction.size(); i++) {
-            //Add comma before all entries except 1st
-            if(i != 0) 
-                dailyProductionStringBuilder.append(", ");
-            dailyProductionStringBuilder.append(dailyProduction.get(i));
-        }
-        setDailyProduction(government, dailyProductionStringBuilder.toString());
-    }
-
-    public static void setDailyProduction(Government government, String dailyProduction) {
-        MetaDataUtil.setSdf(government, dailyProductionMetadataKey, dailyProduction);
-    }
     
     public static String getAvailableForCollection(Government government) {
         return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
@@ -151,32 +136,37 @@ public class TownyResourcesGovernmentMetaDataController {
         setResourceQuantitiesString(government, availableForCollectionMetadataKey, availableForCollection);
     }
     
+    public static void setDailyProduction(Government government, List<String> availableForCollection) {
+        setResourceQuantitiesString(government, dailyProductionMetadataKey, availableForCollection);
+    }
+    
     public static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
-        /* 
-         * Build String
-         * Note: Do not order these according to discovery
-         * (it would not make sense for nations, and would not work reliably for towns)
-         */
-        StringBuilder resourceQuantitiesStringBuilder = new StringBuilder();
-        boolean firstEntry = true;
-        String resource;
-        int quantity;
+        //Create list
+        List<String> resourceQuantitiesList = new ArrayList<>();
         for(Map.Entry<String,Integer> resourceQuantity: resourceQuantitiesMap.entrySet()) {
+            resourceQuantitiesList.add(resourceQuantity.getKey() + "-" + resourceQuantity.getValue());
+        }
+        setResourceQuantitiesString(government, metadataKey, resourceQuantitiesList);
+    }
+
+    public static void setResourceQuantitiesString(Government government, String metadataKey, List<String> resourceQuantitiesList) {
+        //Sort list so that the largest quantities come first
+        Collections.sort(resourceQuantitiesList);
+        
+        //Build string
+        StringBuilder resourceQuantitiesAsStringBuilder = new StringBuilder();
+        boolean firstEntry = true;
+        for(String resourceQuantity: resourceQuantitiesList) {
             if(firstEntry) {
                 firstEntry = false;
             } else {
-                resourceQuantitiesStringBuilder.append(", ");                
+                resourceQuantitiesAsStringBuilder.append(", ");                
             }
-            resource = resourceQuantity.getKey();
-            quantity = resourceQuantity.getValue();
-            resourceQuantitiesStringBuilder
-                .append(quantity)
-                .append("-")
-                .append(resource);
+            resourceQuantitiesAsStringBuilder.append(resourceQuantity);
         }
 
         //Set the string into metadata
-        MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesStringBuilder.toString());        
+        MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesAsStringBuilder.toString());        
     }
 
 }

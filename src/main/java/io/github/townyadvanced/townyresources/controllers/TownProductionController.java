@@ -9,6 +9,7 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translation;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
@@ -201,24 +202,42 @@ public class TownProductionController {
     }
 
     /**
-     * Extracts town resources, and makes them available for collection
-     * 
-     * Extract to both town and nation
+     * Extract all resources
      */
     public static void extractAllResources() {
-        extractAllResourcesForTowns();
-        extractAllResourcesForNations();
+        extractAllResourcesForAllTowns();
+        extractAllResourcesForAllNations();
     }
-    
-    public static void extractAllResourcesForTowns() {
-        for(Town town: TownyUniverse.getInstance().getTowns()) {
-            try {
-            //Get the list of resources which are already available for collection
-            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
 
+    /**
+     * Extract resources of all towns
+     */
+    public static void extractAllResourcesForAllTowns() {
+        int numProducingTowns = 0;
+        for(Town town: TownyUniverse.getInstance().getTowns()) {
+            if(extractResourcesForOneTown(town))
+                numProducingTowns++;
+        }
+        TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("extraction.message", numProducingTowns));        
+    }
+
+    /**
+     * Extract resources for just one town
+     * 
+     * @param town the town
+     * @return true if any resources were extracted
+     */
+    private static boolean extractResourcesForOneTown(Town town) {
+        try {
             //Get daily production
             Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(town);
-
+    
+            if(townDailyProduction.isEmpty())
+                return false;
+                
+            //Get the list of resources which are already available for collection
+            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+    
             //Get storage Limit modifier
             int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
             
@@ -246,21 +265,23 @@ public class TownProductionController {
                     availableResources.put(resource, quantityToExtract);
                 }
             }
-
+    
             //Set the list of available resources
             TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, availableResources);    
             
             //Save town
-            town.save();
-            
+            town.save();                       
             } catch (Exception e) {
                 TownyResources.severe("Problem extracting resources for town " + town.getName());
                 e.printStackTrace();
+                return false;
             }
-        }        
+
+        //Some resources were extracted. Return true;
+        return true;
     }
 
-    public static void extractAllResourcesForNations() {
+    public static void extractAllResourcesForAllNations() {
     }
 
     /**

@@ -8,28 +8,28 @@ This plugin changes how resources  (*e.g. Wood, Coal, Wheat etc.*) work, by maki
  - There are (surprisingly) few good reasons for going to war in *Vanilla Towny + SiegeWar*:
     - Resources: **NO**, because sieging does not provide resources. 
     - Expansion: **NO**, because sieging does not provide land control. 
-    - Equipment: **NO**, because SiegeWar does not allow soldiers to stealing the equipment of enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*). 
+    - Equipment: **NO**, because SiegeWar does not allow soldiers to steal the equipment of killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*). 
     - Auto-Objectives: **NO**, because SiegeWar does not have this type of feature.
     - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
     - Personal: **NO**, because it creates toxicity.
-    - PVP: **YES**. However, such sieges usually upset those who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
+    - PVP: **YES**. However, such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
     - Plunder Money: **YES**. However, money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
  
   - *TownyResources* fixes this problem by transforming Resources into a good reason for war. 
-    - The wisdom of this is demonstrated by the success of the *Civlization* series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
+    - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
-
-#### Nation-Building:
-*TownyResources* assists nation building:
-- Nation loyalty becomes a much more important decision for a town. Whichever nation they join of will get a good share of their daily resource production. Thus mayors will be much more motivated to be in a nation which is active and helpful.
-- Correspondingly, nations will know they have to work harder to keep towns loyal to them.
-- These dynamics will naturally encourage the development of active and competitive nations.
 
 #### Town-Building:
 *TownyResources* assists town building:
 - Town resources are automatically produced by the town itself. 
 - However it is the mayors / assistants / treasurers who get to actually collect the resources.
 - This dynamic naturally encourages the development of town governance, to determine how the valuable town resources are to be distributed.
+
+#### Nation-Building:
+*TownyResources* assists nation building:
+- Nation loyalty becomes a much more important decision for a town. Whichever nation they are in will get a good share of their daily resource production. Thus mayors will be much more motivated to be in a nation which is active and helpful.
+- Correspondingly, nations will have to work harder to keep towns loyal to them, including devising fair and efficient systems of resource distribution.
+- These dynamics will naturally encourage the development of active and competitive nations.
 
 #### Trading:
 *TownyResources* assist trading:

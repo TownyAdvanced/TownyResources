@@ -1,13 +1,13 @@
 # TownyResources
 ## Introduction:
-This plugin changes how resources (*e.g. Wood, Coal, Wheat etc.*) work on your server, by making resources more valuable, and then giving each town a unique set of of automatically-produced resources.
+This plugin changes how resources  (*e.g. Wood, Coal, Wheat etc.*) work on your server, by making them more valuable, and then giving each town a unique set of of automatically-produced resources.
 ## Benefits:
 #### War (*SiegeWar*):
-This plugin is very helpful for a good *SiegeWar* experience, because in vanilla Towny+SW, there are few good reasons to go to war:
+This plugin is very helpful for a good *SiegeWar* experience, because in vanilla Towny+SW, there are surprisingly few good reasons for war:
  - **Resources:** No Good Reason, because sieging does not provide resources. 
  - **Expansion:** No Good Reason, because sieging does not provide land control. 
  - **Equipment:** No Good Reason, because SiegeWar does not allow soldiers to stealing the equipment of enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*). 
- - **Automatic Matchmaking and Objectives:** No Reason, because SiegeWar does not have this type of feature (*although it is being investigated [here](https://github.com/TownyAdvanced/SiegeWar/issues/335)*).
+ - **Automatically Generated Miltiary Objectives:** No Reason, because SiegeWar does not have this type of feature.
  - **Roleplaying:** No Good Reason, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
  - **Personal:** No Good Reason, because it creates toxicity.
  - **PVP:** Good Reason. *However*, such sieges usually upset those who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
@@ -17,17 +17,17 @@ This plugin solve this problem by transforming **Resources** into a good reason 
  <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
 
 #### Trading:
-This plugin provides a good reason for trade:
-- By helping individual towns to become centres for the production of certain resources & manufactured goods, natural trading activities are encouraged.
+This plugin assist trading:
+- By helping individual towns to become centres for the production of certain goods, natural trading activities are encouraged.
 
 #### Roleplaying:
 This plugin assists roleplaying:
-- By giving each town a "signature" set of resources, it helps to develop the character of each town.
+- By giving each town a "signature" set of resources, this helps to develop the character of each town.
  
 ## Mechanics: 
 #### Step 1: Make resources valuable.
 - Limit the amount of resources which players can extract each day.
-- The limit is high enough to allow players to feed themselves, and have enough materials for medieval-scale consumption, building and trading.
+- The limit is high enough for medieval-scale extraction, consumption, building, and trading.
 - However the limit is deliberately low enough to prevent ***INDUSTRIAL-SCALE FACTORIES***, which would flood the market & degrade the value of any towns which have that resource.
 
 #### Step 2: Give resources to towns.

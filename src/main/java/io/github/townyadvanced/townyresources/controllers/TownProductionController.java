@@ -137,8 +137,8 @@ public class TownProductionController {
                 townCutNormalized = 1 - nationCutNormalized;
             } 
     
-            //Build the town production list
-            List<String> townProduction = new ArrayList<>();
+            //Build the town production map
+            Map<String, Integer> townProduction = new HashMap<>();
             String materialName;
             double baseProductionAmount;
             int finalProductionAmount;
@@ -156,7 +156,7 @@ public class TownProductionController {
                 } else {
                     finalProductionAmount = (int)((baseProductionAmount * resourceLevelProductionModifierNormalized * townCutNormalized) + 0.5);
                 }            
-                townProduction.add(finalProductionAmount + "-" + materialName);
+                townProduction.put(materialName, finalProductionAmount);;
             }
     
             //Save data

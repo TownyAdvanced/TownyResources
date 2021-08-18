@@ -136,11 +136,11 @@ public class TownyResourcesGovernmentMetaDataController {
         setResourceQuantitiesString(government, availableForCollectionMetadataKey, availableForCollection);
     }
     
-    public static void setDailyProduction(Government government, List<String> availableForCollection) {
+    public static void setDailyProduction(Government government, Map<String, Integer> availableForCollection) {
         setResourceQuantitiesString(government, dailyProductionMetadataKey, availableForCollection);
     }
     
-    public static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
+    private static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
         //Create list
         List<String> resourceQuantitiesList = new ArrayList<>();
         for(Map.Entry<String,Integer> resourceQuantity: resourceQuantitiesMap.entrySet()) {

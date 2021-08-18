@@ -297,5 +297,8 @@ public class TownProductionController {
         
         //Clear available list
         TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, Collections.emptyMap());
+
+        //Notify Player
+        TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("        
     }
 }

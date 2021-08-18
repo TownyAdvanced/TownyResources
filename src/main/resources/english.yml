@@ -53,6 +53,7 @@ msg_err_not_enough_offers_left: "&cSurvey not possible, because there are no off
 msg_err_cannot_collect_not_a_town_member: "&cYou must be a member of a town to collect resources."
 msg_err_cannot_collect_not_in_own_town: "&cYou must be in your town to collect resources."
 msg_err_cannot_collect_uknown_material: "&cUnknown Material: %s. Cannot collect this resource."
+msg_err_cannot_collect_no_resources_available: '&cThere are no resources available for collection'
 
 townyresources_reloaded_successfully: "TownyResources reloaded successfully."
 townyresources_failed_to_reload: "TownyResources failed to reload."

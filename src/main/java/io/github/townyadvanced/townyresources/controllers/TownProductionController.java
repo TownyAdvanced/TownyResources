@@ -269,9 +269,9 @@ public class TownProductionController {
      * 
      * @param player the player collecting
      * @param town the town
+     * @param availableForCollection the list of currently available resources
      */
-    public static synchronized void collectAvailableTownResources(Player player, Town town) {
-        Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+    public static synchronized void collectAvailableTownResources(Player player, Town town, Map<String,Integer> availableForCollection) {        
         List<ItemStack> itemStackList = new ArrayList<>();
         
         //Calculate stuff to give player

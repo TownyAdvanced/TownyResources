@@ -26,6 +26,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	
@@ -136,9 +137,13 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		Town town = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
 		if(town != resident.getTown())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_in_own_town"));
-					
-		//Extract resources
-		TownProductionController.collectAvailableTownResources(player, town);
+			
+		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+		if(availableForCollection.isEmpty())
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_no_resources_available"));
+		
+		//Collect resources
+		TownProductionController.collectAvailableTownResources(player, town, availableForCollection);
 	}
 
 }

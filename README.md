@@ -79,7 +79,7 @@ How will *TownyResources* benefit my server ?
      - Personal: **NO**, because it creates toxicity.
      - PVP: **YES**. However, such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
      - Plunder Money: **YES**. However, money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
-     - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
+   - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
       - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
 2. Assists **Town Building:**

@@ -1,5 +1,5 @@
 # TownyResources
-TownyResources adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Wood, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
+TownyResources adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
 
 ## Installation Guide
 1. Ensure you have Towny 0.97.1.0+
@@ -16,7 +16,7 @@ TownyResources adds value to towns, by giving each one a unique set of automatic
 ###### Information
 - Town production information information is shown on the town screen. Example:
   > Resources:
-  <br> > Daily Production: 64 Oak Log 32 Coal
+  <br> > Daily Production: 64 Oak Log, 32 Emerald
 ###### Surveys
 - For resources to be produced by a town, they must first be *discovered*.
 - Each town can discover up to 4 Resource Types.
@@ -37,17 +37,19 @@ TownyResources adds value to towns, by giving each one a unique set of automatic
   - Resource Level **4**: Production bonus **+300%**, Minimum town level **8**
 - Produced resources are shown as available for collection on the town screen. Example:
   > Resources:
-  <br> > Daily Production: 64 Oak Log 32 Coal
-  <br> > Available For Collection: 64 Oak Log 32 Coal
+  <br> > Daily Production: 64 Oak Log, 32 Emerald
+  <br> > Available For Collection: 64 Oak Log, 32 Emerald
 ###### Resource Collection
-- To collect resources, as a mayor / assistant / treasurer, enter your town and run `/tr collect`
+- To collect town resources, as a mayor / assistant / treasurer, enter your town and run `/tr towncollect`
 - The available resources will then be dropped at your position.
-###### Nations & Resources
-....
-- 75% of the town resources are extracted by the town's owner nation (*natural or occupier*). 
-- 25% of the town resources are extracted by the town.
-- The owner king can collect the nation's cut at any time by running `/tr collect`.
-
+###### Nation Production
+- If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
+- Nation production is displayed on the nation screen:
+  > Resources:
+  <br> > Daily Production: 64 Oak Log 32 Coal, 32 Emerald
+  <br> > Available For Collection: 128 Oak Log 64 Coal, 64 Emerald
+- To collect nation  resources, as a king / assistant / treasurer, enter your capital and run `/tr nationcollect`
+- The available resources will then be dropped at your position.
 #### Daily Block-Breaking Limits for Players
 ###### Limits per Material
 - Block breaking is limited per material.

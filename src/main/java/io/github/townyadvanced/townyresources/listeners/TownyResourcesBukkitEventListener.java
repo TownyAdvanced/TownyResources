@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.listeners;
 
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,21 +23,17 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		plugin = instance;
 	}
 
-	/*
-	 * TownyResources limits the amount of mob drops of which each player can collect
-	 */
+	//Limit the picking up of resources (take care of drops like Beef)
 	@EventHandler()
 	public void onEntityPickupItem(EntityPickupItemEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
-			
+			PlayerExtractionLimitsController.processEntityPickupItemEvent(event);
 		}
 	}
 
-	/*
-	 * TownyResources limit the amount of resource blocks which each player can break.
-	 */
+	//Limit the breaking of resource blocks (takes care of breaking ores e.g. Diamond)
 	@EventHandler()
-	public void onEntityPickupItem(BlockBreakEvent event) {
+	public void onBlockBreak(BlockBreakEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
 			
 		}	

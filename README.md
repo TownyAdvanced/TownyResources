@@ -1,69 +1,7 @@
 # TownyResources
-## Introduction:
-This plugin changes how resources  (*e.g. Wood, Coal, Wheat etc.*) work, by making them more valuable, and then giving each town a unique set of of automatically-produced resources.
-## Benefits:
-#### War (*SiegeWar*):
-*TownyResources* provides a critical  piece of the *SiegeWar* experience: **A Good Reason to go to war.**
+TownyResources adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Wood, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
 
- - There are (surprisingly) few good reasons for going to war in *Vanilla Towny + SiegeWar*:
-    - Resources: **NO**, because sieging does not provide resources. 
-    - Expansion: **NO**, because sieging does not provide land control. 
-    - Equipment: **NO**, because SiegeWar does not allow soldiers to steal the equipment of killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*). 
-    - Auto-Objectives: **NO**, because SiegeWar does not have this type of feature.
-    - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
-    - Personal: **NO**, because it creates toxicity.
-    - PVP: **YES**. However, such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
-    - Plunder Money: **YES**. However, money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
- 
-  - *TownyResources* fixes this problem by transforming Resources into a good reason for war. 
-    - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
- <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
-
-#### Town-Building:
-*TownyResources* assists town building:
-- Town resources are automatically produced by the town itself. 
-- However it is the mayors / assistants / treasurers who get to actually collect the resources.
-- This dynamic naturally encourages the development of town governance, to determine how the valuable town resources are to be distributed.
-
-#### Nation-Building:
-*TownyResources* assists nation building:
-- Nation loyalty becomes a much more important decision for a town. Whichever nation they are in will get a good share of their daily resource production. Thus mayors will be much more motivated to be in a nation which is active and helpful.
-- Correspondingly, nations will have to work harder to keep towns loyal to them, including devising fair and efficient systems of resource distribution.
-- These dynamics will naturally encourage the development of active and competitive nations.
-
-#### Trading:
-*TownyResources* assist trading:
-- By turning individual towns into centres for the production of specific goods, natural trading activities are encouraged.
-
-#### Roleplaying:
-*TownyResources* assists roleplaying:
-- By giving each town a "signature" set of resources, this helps to develop the character of each town.
- 
-## Mechanics: 
-#### Step 1: Make resources valuable:
-- Limit the amount of resources which players can extract each day.
-- The limit is high enough for medieval-scale extraction, consumption, building, and trading.
-- However the limit is deliberately low enough to prevent ***INDUSTRIAL-SCALE FACTORIES***, which would flood the market & degrade the value of any towns which have that resource.
-
-#### Step 2: Give resources to towns:
-- Provide each town with a handful of automatically-extracted resources:
-  - Level 1 Resource - 100% daily productivity, requires town level 1 to extract.
-  - Level 2 Resource - 200% daily productivity, requires town level 4 to extract.
-  - Level 3 Resource - 300% daily productivity, requires town level 6 to extract.
-  - Level 4 Resource - 400% daily productivity, requires town level 8 to extract.
-- Before these resources can be extracted, they must be discovered via **surveys**. Survey are done by running `/t survey`, and each survey has a cost & num-townblocks requirement:
-    - Level 1 Resource - 250 cost, requires 10 townblocks.
-    - Level 2 Resource - 1000 cost, requires 50 townblocks.
-    - Level 3 Resource - 5000 cost, requires 100 townblocks.
-    - Level 4 Resource - 20000 cost, requires 200 townblocks.  
-- The mayor can collect the extracted resources at any time by running `/tr collect`.
-
-#### Step 3: Give town owners a cut of the resources:
-- 75% of the town resources are extracted by the town's owner nation (*natural or occupier*). 
-- 25% of the town resources are extracted by the town.
-- The owner king can collect the nation's cut at any time by running `/tr collect`.
-    
-## Installation Instructions:
+## Installation Guide
 1. Ensure you have Towny 0.97.1.0+
 2. Edit your townyperms.yml file, and add the following perms:
    > Mayor, Assistant, Treasurer:  ... townyresources.town.collect                                                            
@@ -72,3 +10,113 @@ This plugin changes how resources  (*e.g. Wood, Coal, Wheat etc.*) work, by maki
 3. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases)
 4. Drop the TownyResources jar into your plugins folder
 5. Start yor server
+
+## User Guide
+#### Town Production
+###### Information
+- Town production information information is shown on the town screen. Example:
+  > Resources:
+  <br> > Daily Production: 64 Oak Log 32 Coal
+###### Surveys
+- For resources to be produced by a town, they must first be *discovered*.
+- Each town can discover up to 4 Resource Types.
+- To discover a resource, enter the target town and run: `/tr survey`.
+- There are 4 Resource Levels.
+- Each successful survey reveals the next resource level.
+- Surveys have a cost and a minimum-num-townblocks requirement:
+  - Resource Level **1**: Cost **250**, Minimum num townblocks **10**
+  - Resource Level **2**: Cost **1000**, Minimum num townblocks **50**
+  - Resource Level **3**: Cost **5000**, Minumum num townblocks **100**
+  - Resource Level **4**: Cost **20000**, Minimum num townblocks **200**  
+###### Daily Production
+- On each new Towny day, towns produce resources.
+- Resource production is modified by the resource level:
+  - Resource Level **1**: Production bonus **N/A**, Mnimum town level **1**
+  - Resource Level **2**: Production bonus **+100%**, Minimum town level **4**
+  - Resource Level **3**: Production bonus **+200%**, Minimum town level **6**
+  - Resource Level **4**: Production bonus **+300%**, Minimum town level **8**
+- Produced resources are shown as available for collection on the town screen. Example:
+  > Resources:
+  <br> > Daily Production: 64 Oak Log 32 Coal
+  <br> > Available For Collection: 64 Oak Log 32 Coal
+###### Resource Collection
+- To collect resources, as a mayor / assistant / treasurer, enter your town and run `/tr collect`
+- The available resources will then be dropped at your position.
+###### Nations & Resources
+....
+- 75% of the town resources are extracted by the town's owner nation (*natural or occupier*). 
+- 25% of the town resources are extracted by the town.
+- The owner king can collect the nation's cut at any time by running `/tr collect`.
+
+#### Daily Block-Breaking Limits for Players
+###### Limits per Material
+- Block breaking is limited per material.
+- Example: If a player hits their daily limit for Wheat, they can still continue to extract other crops such as Potatoes, Carrots, Melons etc. (*historical note: in medieval times, farmers had to plant different crops just to survive*).
+###### Limits per Day
+- Block breaking is limited per day.
+- The block breaking records of all players are reset at Towny New Day.
+###### Information
+- When a player hits their daily block breaking limit for a particular material, they will see an information bar message. Example:
+  > Blah
+                                                                                                                                      >
+## F.A.Q:
+###### Question: 
+How will *TownyResources* benefit my server ? 
+###### Answer: 
+#### 5 Benefits:
+1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War:**
+
+   - There are surprisingly few good reasons to start a war in *SiegeWar*:
+     - Resources: **NO**, because sieging does not provide resources. 
+     - Expansion: **NO**, because sieging does not provide land control. 
+     - Equipment: **NO**, because SiegeWar does not allow soldiers to steal the equipment of killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*).       
+     - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
+     - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
+     - Personal: **NO**, because it creates toxicity.
+     - PVP: **YES**. However, such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
+     - Plunder Money: **YES**. However, money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
+     - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
+      - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also has generated-terrain & sandbox geopolitical strategy, and in which: 
+ <br> "*Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"*
+2. Assists **Town Building:**
+    - Town resources are automatically produced by the town itself. 
+    - However it is the mayors / assistants / treasurers who get to actually collect the resources.
+    - This dynamic naturally encourages the development of town governance, to determine how the valuable town resources are to be distributed.
+3. Assists **Nation Building:**
+    - Nation loyalty becomes a much more important decision for a town. Whichever nation they are in will get a good share of their daily resource production. Thus mayors will be much more motivated to be in a nation which is active and helpful.
+    - Correspondingly, nations will have to work harder to keep towns loyal to them, including devising fair and efficient systems of resource distribution.
+    - These dynamics will naturally encourage the development of active and competitive nations.
+4. Assists **Trading**
+    - By turning individual towns into centres for the production of specific goods, natural trading activities are encouraged.
+5. Assists **Roleplaying**
+    - By giving each town a "signature" set of resources, this helps to develop the character of each town.
+ 
+-----------
+###### Question. 
+Won't players complain..... ? 
+###### Answer. 
+Yes of course. As a server admin, you are lucky if your player's don't complain continually about basically everything.
+
+----------
+###### Question. 
+Is is ok that players cannot acquire as much stuff as before ?
+###### Answer. 
+Yes.
+<br>
+- If you gave each player daily gifts of multiple stacks of valuable blocks, would it make them want to play your server more ?
+- If you gave each player a massive boost to their resource extraction capabilities (God-Pickaxes for all), would that make them want to play your server more ?
+- The answer to both of these questions is **NO**.
+- It is not the rapid accumulation of large quantities of virtual items  which will make players want to keep playing on your server.
+- Rather it is quality of the server experience which will keep them coming back. 
+- *TownyResources* enhances that server experience by improving town building, nation building, trading, roleplaying, and most importantly, providing a strategic and non-personal reason for going to war, which reduces toxicity across the whole server. 
+
+----------
+###### Question. 
+Is is ok to prevent block-breaking in an "unnatural" way ?
+###### Answer. 
+Yes.
+<br>
+- Just as *Towny* prevents-block breaking to protect the **Architectural** value of towns, *TownyResources* prevents block-breaking to protect the **Economic** value of towns.
+- Both preventions are entirely unnatural, and are used for the same overall reason, of protecting town value.
+- Thus if a player truly believes that preserving natural Minecraft block operations is more important that preserving town value, then to avoid accusations of hypocrecy, they should disable all *Towny* block protections in their own town, prior to making any complaint about the unnaturalness of *Towny Resources* block protections..
+----------

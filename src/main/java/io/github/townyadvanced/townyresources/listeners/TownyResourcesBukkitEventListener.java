@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 
 /**
@@ -31,9 +32,9 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	}
 
 	@EventHandler()
-	public void onEntityDropItemEvent(EntityDropItemEvent event) {
+	public void onEntityDeathEvent(EntityDeathEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
-			PlayerExtractionLimitsController.processEntityDropItemEvent(event);
+			PlayerExtractionLimitsController.processEntityDeathEvent(event);
 		}
 	}
 

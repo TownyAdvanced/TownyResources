@@ -1,5 +1,5 @@
 # TownyResources
-TownyResources adds value to individual towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-resource-extraction.
+TownyResources adds value to individual towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
 
 # Installation Guide
 1. Ensure you have Towny 0.97.1.0+
@@ -21,24 +21,25 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - Before resources can be be produced by a town, they must first be discovered.
 - Resources can only be discovered by doing Surveys.
 - Each Survey discovers a resource of a new level and type: 
-  - Survey **1**: Reveals Level **1** Resource. Cost **250**. Minimum num townblocks **10**
-  - Survey **2**: Reveals Level **2** Resource. Cost **1000**. Minimum num townblocks **50**
-  - Survey **3**: Reveals Level **3** Resource. Cost **5000**. Minumum num townblocks **100**
-  - Survey **4**: Reveals Level **4** Resource. Cost **20000**. Minimum num townblocks **200**  
+  - Survey **1**: Reveals Level **1** Resource. Cost **250**. Minimum num townblocks **10**.
+  - Survey **2**: Reveals Level **2** Resource. Cost **1000**. Minimum num townblocks **50**.
+  - Survey **3**: Reveals Level **3** Resource. Cost **5000**. Minumum num townblocks **100**.
+  - Survey **4**: Reveals Level **4** Resource. Cost **20000**. Minimum num townblocks **200**.  
 - To do a Survey, enter the target town and run: `/tr survey`.
 - If the Survey succeeds, a global success message will be generated. Example:
   > Goosius1 has discovered ore deposits at Rome!. Daily Production: 16 Diamond.
 ###### Daily Production
 - On each new Towny New Day, towns automatically produce resources.
 - Production is modified by the resource level:
-  - Resource Level **1**: Production bonus **N/A**, Mnimum town level **1**
-  - Resource Level **2**: Production bonus **+100%**, Minimum town level **4**
-  - Resource Level **3**: Production bonus **+200%**, Minimum town level **6**
-  - Resource Level **4**: Production bonus **+300%**, Minimum town level **8**
-- Produced resources are shown as available for collection on the town screen. Example:
+  - Resource Level **1**: Production bonus **N/A**. Minimum town level **1**.
+  - Resource Level **2**: Production bonus **+100%**. Minimum town level **4**.
+  - Resource Level **3**: Production bonus **+200%**. Minimum town level **6**.
+  - Resource Level **4**: Production bonus **+300%**. Minimum town level **8**.
+- After resources are produced, they are shown as available for collection on the town screen. Example:
   > Resources:
   <br> > Daily Production: 64 Oak Log, 32 Emerald
   <br> > Available For Collection: 64 Oak Log, 32 Emerald
+- For each resource, a town can store a maximum of 5x the production amount. When stores are full, subsequent production is lost.                                                                                                      
 ###### Collecting Town Resources
 - To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/tr towncollect`
 - The available resources will then be dropped at your position.
@@ -96,15 +97,15 @@ How will *TownyResources* benefit my server ?
     - By giving each town a "signature" set of resources, this helps to develop the character of each town.
  
 -----------
-###### Question. 
+###### Question:
 Won't players complain..... ? 
-###### Answer. 
+###### Answer:
 Yes of course. As a server admin, you are lucky if your player's don't complain continually about basically everything.
 
 ----------
-###### Question. 
+###### Question: 
 Is is ok that players cannot acquire as much stuff as before ?
-###### Answer. 
+###### Answer:
 Yes.
 <br>
 - If you gave each player daily gifts of multiple stacks of valuable blocks, would it make them want to play your server more ?
@@ -115,12 +116,27 @@ Yes.
 - *TownyResources* enhances that server experience by improving town building, nation building, trading, roleplaying, and most importantly, providing a strategic and non-personal reason for going to war, thus reducing toxicity across the whole server. 
 
 ----------
-###### Question. 
+###### Question:
 Is is ok to prevent block-breaking in an "unnatural" way ?
-###### Answer. 
+###### Answer: 
 Yes.
 <br>
 - Just as *Towny* prevents-block breaking to protect the **Architectural** value of towns, *TownyResources* prevents block-breaking to protect the **Economic** value of towns.
-- Both preventions are entirely unnatural, and are used for the same overall reason; to protect town value.
+- Both preventions are entirely unnatural, and are used for the same overall reason - to protect town value.
 - Thus if a player truly believes that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrecy, they should first disable all *Towny* block protections in their own town, prior to making any complaints about the unnaturalness of *Towny Resources* protections.
 ----------
+###### Question: 
+What are the default configured survey offers & player extraction limits ?
+###### Answer:
+##### Base Resource Amounts:
+- Ancient Debris: 4
+- Diamonds: 8
+- Gold, Emeralds: 16
+- Lapis: ?
+- Coal: ?
+- Iron: ? 
+- Any type of log: 1 stack
+- Wheat: 1 stack
+<br<
+Resource    Survey Offer
+

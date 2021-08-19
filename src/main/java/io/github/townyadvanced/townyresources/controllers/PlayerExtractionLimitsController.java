@@ -9,7 +9,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,9 +41,12 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if(event.getEntity() instanceof Mob && event.getDamager() instanceof Player) {
-            //Mark the mob as recently hit by the player
-            mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());
+        if(!event.isCancelled()
+            && event.getEntity() instanceof Mob 
+            && event.getDamager() instanceof Player) {
+                System.out.println("Mob was hit by plaer");
+                //Mark the mob as recently hit by the player
+                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());
         }         
     }
 
@@ -53,13 +58,12 @@ public class PlayerExtractionLimitsController {
      * 
      * @param event the event
      */
-    public static void processEntityDropItemEvent(EntityDropItemEvent event) {
-        if(!event.isCancelled()
-            && event.getEntity().isDead()
-            && event.getEntity() instanceof Mob
+    public static void processEntityDeathEvent(EntityDeathEvent event) {
+        if(event.getEntity() instanceof Mob
             && (mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
                 || mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity()))) {
 
+            System.out.println("Now checking mob drop of mob jilled by player");
             //TODO - check if the resource type is restricted
             
             //Find the player who did the dirty deed
@@ -74,23 +78,25 @@ public class PlayerExtractionLimitsController {
                 //Get the full player extraction record
                 Map<Material, ExtractionRecordForOneResourceType> materialExtractionRecordForPlayer = allResourceExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());
 
-                //Get the player extraction record for the material
-                Material material = event.getItemDrop().getItemStack().getType();
-                ExtractionRecordForOneResourceType extractionRecordForMaterial = materialExtractionRecordForPlayer.get(material);            
-                if(extractionRecordForMaterial == null) {
-                    //TODO - Fix the next line it is just a dev artefact hack
-                    extractionRecordForMaterial = new ExtractionRecordForOneResourceType(null, material, 3);
-                    materialExtractionRecordForPlayer.put(material, extractionRecordForMaterial);
+                //Cycle each material dropped and decide what to do
+                for(ItemStack drop: event.getDrops()) {
+                    //Get the player extraction record for the material
+                    ExtractionRecordForOneResourceType extractionRecordForMaterial = materialExtractionRecordForPlayer.get(drop.getType());            
+                    if(extractionRecordForMaterial == null) {
+                        //TODO - Fix the next line it is just a dev artefact hack
+                        extractionRecordForMaterial = new ExtractionRecordForOneResourceType(null, drop.getType(), 3);
+                        materialExtractionRecordForPlayer.put(drop.getType(), extractionRecordForMaterial);
+                    }
+    
+                    //If the player is at their limit for the material, cancel the drop
+                    //Otherwise, allow the drop and update the limit
+                    if(extractionRecordForMaterial.isExtractionLimitReached()) {
+                        drop.setAmount(0);
+                        player.sendMessage("Limit Reached");
+                    } else {
+                        extractionRecordForMaterial.addExtractedAmount(drop.getAmount());
+                    } 
                 }
-
-                //If the player is at their limit for the material, cancel the drop
-                //Otherwise, allow the drop and update the limit
-                if(extractionRecordForMaterial.isExtractionLimitReached()) {
-                    event.setCancelled(true);
-                    player.sendMessage("Limit Reached");
-                } else {
-                    extractionRecordForMaterial.addExtractedAmount(event.getItemDrop().getItemStack().getAmount());
-                } 
             }            
         }               
     }

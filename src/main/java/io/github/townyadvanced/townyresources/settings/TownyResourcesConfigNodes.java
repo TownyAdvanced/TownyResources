@@ -141,7 +141,7 @@ public enum TownyResourcesConfigNodes {
 			"# Example: If the second value is 200, then the level 2 resource of a town will be 200% productive."),
 	TOWN_RESOURCES_PRODUCTION_STORAGE_LIMIT_MODIFIER(
 			"town_resources.production.storage_limit_modifier",
-			"3",
+			"5",
 			"",
 			"# This value determines the limit of how many resources of each type can be stored for collection.",
 			"# Example: If this value 3, and the daily production amount is 32 ..... then the storage limit is 96."),

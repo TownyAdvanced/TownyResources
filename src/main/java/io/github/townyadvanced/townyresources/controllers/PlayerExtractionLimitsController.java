@@ -20,16 +20,13 @@ public class PlayerExtractionLimitsController {
     public static void processEntityPickupItemEvent(EntityPickupItemEvent event) {
         if(event.getEntity() instanceof Player) {
             //Get the player extraction record
-            Map<Material, ExtractionRecordForOneResource> extractionRecordForPlayer = allExtractionRecords.get(event.getEntity());            
-            if(extractionRecordForPlayer == null) {
-                extractionRecordForPlayer = allExtractionRecords.put(event.getEntity(), new HashMap<>());   
-            } 
-                  
+            Map<Material, ExtractionRecordForOneResource> extractionRecordForPlayer = allExtractionRecords.computeIfAbsent(event.getEntity(), k -> new HashMap<>());
+
             //Get the player's extract record for the given material
             Material material = event.getItem().getItemStack().getType();
             ExtractionRecordForOneResource extractionRecordForResource = extractionRecordForPlayer.get(material);            
             if(extractionRecordForResource == null) {
-                extractionRecordForResource = extractionRecordForPlayer.put(material, new ExtractionRecordForOneResource(material,material, 10 ));
+                extractionRecordForResource = extractionRecordForPlayer.put(material, new ExtractionRecordForOneResource(material,material, 10));
             }
             
             //Process the item pickup

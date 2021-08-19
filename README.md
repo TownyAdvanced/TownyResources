@@ -4,8 +4,8 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 # Installation Guide
 1. Ensure you have Towny 0.97.1.0+
 2. Edit your townyperms.yml file, and add the following perms:
-   > Mayor, Assistant, Treasurer:  ... townyresources.town.collect                                                            
-   > King, Assistant, Treasurer: ... townyresources.nation.collect                                                                                                                       
+   > Mayor, Assistant, Treasurer:  ... townyresources.command.towncollect                                                            
+   > King, Assistant, Treasurer: ... townyresources.command.nationcollect                                                                                                                       
 2. Stop your server
 3. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases)
 4. Drop the TownyResources jar into your plugins folder
@@ -70,7 +70,6 @@ How will *TownyResources* benefit my server ?
 ###### Answer: 
 #### 5 Benefits:
 1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War:**
-
    - There are surprisingly few good reasons to start a war in *SiegeWar*:
      - Resources: **NO**, because sieging does not provide resources. 
      - Expansion: **NO**, because sieging does not provide land control. 

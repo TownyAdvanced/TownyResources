@@ -26,17 +26,23 @@ description: >
 plugin_prefix: '&f[&6Towny Resources&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
 
+### Reloading
+townyresources_reloaded_successfully: "TownyResources reloaded successfully."
+townyresources_failed_to_reload: "TownyResources failed to reload."
+admin_help_reload: 'Reload TownyResources.'
+
+### Town Screen
 town.screen.header: "&2Resources:"
 town.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 town.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
+### Nation Screen
 nation.screen.header: "&2Resources:"
 nation.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
-help_collect: 'Collect all available extracted resources at your town and/or nation.'
+### Surveys 
 help_survey: 'Survey the town at your current location, to discover new resources.'
-admin_help_reload: 'Reload TownyResources.'
 
 discovery.message.ores: "&b%s has discovered ore deposits at %s!. Daily Production: %d %s."
 discovery.message.trees: "&b%s has discovered a forest at %s!. Daily Production: %d %s."
@@ -45,18 +51,28 @@ discovery.message.animals: "&b%s has discovered a herd of animals at %s!. Daily 
 discovery.message.monsters: "&b%s has discovered a nest of monsters at %s!. Daily Production: %d %s."
 production.message: "&b%s towns produced resources."
 
-msg_err_daily_extraction_limit_reached: "&cDaily Extraction Limit Reached for %s (%d)."
 msg_err_survey_no_town: "&cThere is no town here to survey."
 msg_err_survey_all_resources_already_discovered: "&cAll the resources of this town have already been discovered."
 msg_err_survey_not_enough_townblocks: "&cThe town does not have enough townblocks for a survey. Required: %d, Actual: %d"
 msg_err_survey_too_expensive: "&cYou cannot afford to do this survey. Required: %s, Balance: %s"
 msg_err_not_enough_offers_left: "&cSurvey not possible, because there are no offers left on the configured offers list."
-msg_err_cannot_collect_not_a_town_member: "&cYou must be a member of a town to collect resources."
-msg_err_cannot_collect_not_in_own_town: "&cYou must be in your town to collect resources."
+
+### Collection
+help_towncollect: 'Collect all available resources at your town.'
+help_nationcollect: 'Collect all available resources at your nation.'
+
+resource.towncollect.success: "&2You have successfully collected all available town resources."
+resource.nationcollect.success: "&2You have successfully collected all available nation resources."
+
+msg_err_cannot_towncollect_not_a_town_member: "&cYou must be a member of a town to collect town resources."
+msg_err_cannot_towncollect_not_in_own_town: "&cYou must be in your town to collect town resources."
+msg_err_cannot_towncollect_no_resources_available: '&cThere are no town resources available for collection.'
+
+msg_err_cannot_nationcollect_not_a_town_member: "&cYou must be a member of a town to collect nation resources."
+msg_err_cannot_nationcollect_not_a_nation_member: "&cYou must be a member of a nation to collect nation resources."
+msg_err_cannot_nationcollect_not_in_capital: "&cYou must be in the capital to collect nation resources."
+msg_err_cannot_nationcollect_no_resources_available: '&cThere are no nation resources available for collection.'
+
 msg_err_cannot_collect_uknown_material: "&cUnknown Material: %s. Cannot collect this resource."
-msg_err_cannot_collect_no_resources_available: '&cThere are no resources available for collection.'
 
-townyresources_reloaded_successfully: "TownyResources reloaded successfully."
-townyresources_failed_to_reload: "TownyResources failed to reload."
 
-resource.collection.success: "&2You have successfully collected all available resources at your town."

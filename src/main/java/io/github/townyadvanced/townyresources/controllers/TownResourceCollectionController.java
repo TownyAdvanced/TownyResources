@@ -1,6 +1,8 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.palmergames.bukkit.towny.Towny;
+import com.palmergames.bukkit.towny.object.Government;
+import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
@@ -17,15 +19,30 @@ import java.util.Map;
 
 public class TownResourceCollectionController {
 
+    public static synchronized void collectAvailableResources(Player player, Town town, Map<String,Integer> availableForCollection) {
+        //Collect resources
+        collectAvailableTownResources(player, town, availableForCollection);
+        //Notify Player
+        TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.towncollect.success"));        
+    }
+    
+    public static synchronized void collectAvailableResources(Player player, Nation nation, Map<String,Integer> availableForCollection) {
+        //Collect resources
+        collectAvailableTownResources(player, nation, availableForCollection);
+        //Notify Player
+        TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.nationcollect.success"));        
+    }
+    
     /**
-     * Collect all available town resources
+     * Utility Method 
+     * Collect all available resources of a government
      * Synchronized to avoid possibility of duping by 2 players collecting at same time.... 
      * 
      * @param player the player collecting
-     * @param town the town
+     * @param government the government
      * @param availableForCollection the list of currently available resources
      */
-    public static synchronized void collectAvailableTownResources(Player player, Town town, Map<String,Integer> availableForCollection) {        
+    public static synchronized void collectAvailableTownResources(Player player, Government government, Map<String,Integer> availableForCollection) {        
         List<ItemStack> itemStackList = new ArrayList<>();
         
         //Calculate stuff to give player
@@ -35,7 +52,7 @@ public class TownResourceCollectionController {
         for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
             material = Material.getMaterial(mapEntry.getKey().toUpperCase());
             if(material == null) {
-                TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_uknown_material", material));
+                TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", material));
                 continue;
             }
             amount = mapEntry.getValue();
@@ -54,13 +71,10 @@ public class TownResourceCollectionController {
         });    
         
         //Clear available list
-        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(town, Collections.emptyMap());
+        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, Collections.emptyMap());
 
-        //Save town
-        town.save();
-        
-        //Notify Player
-        TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.collection.success"));
+        //Save government
+        government.save();
     }
     
 }

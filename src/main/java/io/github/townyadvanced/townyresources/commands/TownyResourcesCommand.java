@@ -6,6 +6,7 @@ import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.WorldCoord;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	
-	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "collect");
+	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "towncollect", "nationcollect");
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
@@ -42,8 +43,9 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 	private void showTownyResourcesHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/townyresources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "collect", TownyResourcesTranslation.of("help_collect")));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "survey", TownyResourcesTranslation.of("help_survey")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "towncollect", TownyResourcesTranslation.of("help_towncollect")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "nationcollect", TownyResourcesTranslation.of("help_nationcollect")));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -65,8 +67,11 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 				case "survey":
 					parseSurveyCommand(player);
 					break;
-				case "collect":
-					parseCollectCommand(player);
+				case "towncollect":
+					parseTownCollectCommand(player);
+					break;
+				case "nationcollect":
+					parseNationCollectCommand(player);
 					break;
 				default:
 					showTownyResourcesHelp(player);
@@ -124,27 +129,59 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		TownResourceDiscoveryController.discoverNewResource(resident, town, discoveredResources);
 	}
 	
-	private static void parseCollectCommand(Player player) throws TownyException {
+	private static void parseTownCollectCommand(Player player) throws TownyException {
 		//Ensure player a town member
 		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
 		if(!resident.hasTown()) 
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_a_town_member"));
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_a_town_member"));
 					
-		//Ensure player is actually in the town
+		//Ensure player is actually in a town
 		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
 		if(!TownyUniverse.getInstance().hasTownBlock(playerWorldCoord))			
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_in_own_town"));
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_in_own_town"));
 			
+		//Ensure player is actually in their own town
 		Town town = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
 		if(town != resident.getTown())
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_not_in_own_town"));
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_in_own_town"));
 			
+		//Ensure some resources are available
 		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
 		if(availableForCollection.isEmpty())
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_collect_no_resources_available"));
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_no_resources_available"));
 		
 		//Collect resources
 		TownResourceCollectionController.collectAvailableTownResources(player, town, availableForCollection);
+	}
+
+	private static void parseNationCollectCommand(Player player) throws TownyException {
+		//Ensure player a town member
+		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
+		if(!resident.hasTown()) 
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_a_town_member"));
+
+		//Ensure player is a nation member					
+		if(!resident.getTown().hasNation())
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_a_nation_member"));
+		
+		//Ensure player is actually in a town
+		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
+		if(!TownyUniverse.getInstance().hasTownBlock(playerWorldCoord))			
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_in_capital"));
+			
+		//Ensure player is actually in the capital
+		Town townHere = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
+		Nation nation = resident.getTown().getNation();
+		if(townHere != nation.getCapital())
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_in_capital"));
+			
+		//Ensure some resources are available
+		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(nation);
+		if(availableForCollection.isEmpty())
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_no_resources_available"));
+		
+		//Collect resources
+		TownResourceCollectionController.collectAvailableTownResources(player, nation, availableForCollection);
 	}
 
 }

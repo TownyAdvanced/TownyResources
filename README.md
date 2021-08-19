@@ -1,5 +1,5 @@
 # TownyResources
-TownyResources adds value to individual towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
+TownyResources adds value to individual towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-resource-extraction.
 
 # Installation Guide
 1. Ensure you have Towny 0.97.1.0+
@@ -53,7 +53,7 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 ###### Collecting Nation Resources
 - To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
-### Player Extraction Limits
+### Player Resource Extraction Limits
 ###### Limits per Material
 - Extraction is limited per material.
 - Example: If a player hits their daily limit for Wheat, they can still continue to extract other crops such as Potatoes, Carrots, Melons etc. (*historical note: in medieval times, farmers had to plant different crops just to survive*).

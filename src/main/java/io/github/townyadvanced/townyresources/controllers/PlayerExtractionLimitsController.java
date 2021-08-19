@@ -10,24 +10,22 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class PlayerExtractionLimitsController {
 
-    public static Map<Entity, Entity> mobsRecentlyHitByPlayers = new HashMap<>();
+    public static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
+    public static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
     public static Map<Entity, Map<Material, ExtractionRecordForOneResourceType>> allResourceExtractionRecords = new HashMap<>();
-    
     public static Map<Entity, Map<Material, ExtractionRecordForOneBlockType>> allBlockExtractionRecords = new HashMap<>();
     public static Map<Entity, Map<EntityType, ExtractionRecordForOneMobType>> allMobExtractionRecords = new HashMap<>();
-   
-   //TODO --- CALL ME FROM SHORT EVENT!!!!
-    public static void resetMobsRecentlyHitByPlayers() {
-        mobsRecentlyHitByPlayers.clear();
+
+    public static void resetMobsDamagedByPlayers() {
+        mobsDamagedByPlayersLastShortTick.clear();
+        mobsDamagedByPlayersLastShortTick.putAll(mobsDamagedByPlayersThisShortTick);
+        mobsDamagedByPlayersThisShortTick.clear();
     }
 
     public static void saveDataOnPlayerExtractedResources() {
@@ -43,7 +41,7 @@ public class PlayerExtractionLimitsController {
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if(event.getEntity() instanceof Mob && event.getDamager() instanceof Player) {
             //Mark the mob as recently hit by the player
-            mobsRecentlyHitByPlayers.put(event.getEntity(), event.getDamager());
+            mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());
         }         
     }
 
@@ -59,12 +57,19 @@ public class PlayerExtractionLimitsController {
         if(!event.isCancelled()
             && event.getEntity().isDead()
             && event.getEntity() instanceof Mob
-            && !mobsRecentlyHitByPlayers.containsKey(event.getEntity())) {
+            && (mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
+                || mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity()))) {
 
             //TODO - check if the resource type is restricted
             
-            //Get the player who did the dirty deed
-            Entity player = mobsRecentlyHitByPlayers.get(event.getEntity());
+            //Find the player who did the dirty deed
+            Entity player;
+            if(mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())) {
+                player = mobsDamagedByPlayersThisShortTick.get(event.getEntity());
+            } else {
+                player = mobsDamagedByPlayersLastShortTick.get(event.getEntity());                
+            }
+            
             if(player != null) {                       
                 //Get the full player extraction record
                 Map<Material, ExtractionRecordForOneResourceType> materialExtractionRecordForPlayer = allResourceExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());

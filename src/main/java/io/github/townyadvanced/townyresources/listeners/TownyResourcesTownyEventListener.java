@@ -54,6 +54,7 @@ public class TownyResourcesTownyEventListener implements Listener {
     @EventHandler
     public void onNewShortTime(NewShortTimeEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
+            PlayerExtractionLimitsController.resetMobsDamagedByPlayers();
             PlayerExtractionLimitsController.saveDataOnPlayerExtractedResources();
 
             if(System.currentTimeMillis() > nextProductionRecalculationTime) {

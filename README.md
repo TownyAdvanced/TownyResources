@@ -1,7 +1,7 @@
 # TownyResources
-TownyResources adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
+TownyResources adds value to individual towns, by giving each one a unique set of automatically-extracted resources (*e.g. Oak Log, Coal, Wheat etc.*), and then protecting that economic value with moderate limits to player-block-breaking.
 
-## Installation Guide
+# Installation Guide
 1. Ensure you have Towny 0.97.1.0+
 2. Edit your townyperms.yml file, and add the following perms:
    > Mayor, Assistant, Treasurer:  ... townyresources.town.collect                                                            
@@ -11,10 +11,10 @@ TownyResources adds value to towns, by giving each one a unique set of automatic
 4. Drop the TownyResources jar into your plugins folder
 5. Start yor server
 
-## User Guide
-#### Town Production
+# User Guide
+### Town Production
 ###### Information
-- Town production information information is shown on the town screen. Example:
+- Town production information is shown on the town screen. Example:
   > Resources:
   <br> > Daily Production: 64 Oak Log, 32 Emerald
 ###### Surveys
@@ -29,7 +29,7 @@ TownyResources adds value to towns, by giving each one a unique set of automatic
   - Resource Level **3**: Cost **5000**, Minumum num townblocks **100**
   - Resource Level **4**: Cost **20000**, Minimum num townblocks **200**  
 ###### Daily Production
-- On each new Towny day, towns produce resources.
+- On each new Towny day, towns automatically produce resources.
 - Resource production is modified by the resource level:
   - Resource Level **1**: Production bonus **N/A**, Mnimum town level **1**
   - Resource Level **2**: Production bonus **+100%**, Minimum town level **4**
@@ -39,26 +39,29 @@ TownyResources adds value to towns, by giving each one a unique set of automatic
   > Resources:
   <br> > Daily Production: 64 Oak Log, 32 Emerald
   <br> > Available For Collection: 64 Oak Log, 32 Emerald
-###### Resource Collection
-- To collect town resources, as a mayor / assistant / treasurer, enter your town and run `/tr towncollect`
+###### Collecting Town Resources
+- To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/tr towncollect`
 - The available resources will then be dropped at your position.
-###### Nation Production
-- If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
-- Nation production is displayed on the nation screen:
+### Nation Production
+###### Information
+- Nation production & collection information is shown on the nation screen. Example:
   > Resources:
   <br> > Daily Production: 64 Oak Log 32 Coal, 32 Emerald
   <br> > Available For Collection: 128 Oak Log 64 Coal, 64 Emerald
-- To collect nation  resources, as a king / assistant / treasurer, enter your capital and run `/tr nationcollect`
+###### Daily Production                                                                      >
+- If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
+###### Collecting Nation Resources
+- To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
-#### Daily Block-Breaking Limits for Players
+### Player Block-Breaking Limits
 ###### Limits per Material
-- Block breaking is limited per material.
+- Block-breaking is limited per material.
 - Example: If a player hits their daily limit for Wheat, they can still continue to extract other crops such as Potatoes, Carrots, Melons etc. (*historical note: in medieval times, farmers had to plant different crops just to survive*).
 ###### Limits per Day
-- Block breaking is limited per day.
-- The block breaking records of all players are reset at Towny New Day.
+- Block-breaking is limited per day.
+- The block-breaking records of all players are reset at Towny New Day.
 ###### Information
-- When a player hits their daily block breaking limit for a particular material, they will see an information bar message. Example:
+- When a player hits their daily block-breaking limit for a particular material, they will see an information bar message. Example:
   > Blah
                                                                                                                                       >
 ## F.A.Q:
@@ -108,9 +111,9 @@ Yes.
 - If you gave each player daily gifts of multiple stacks of valuable blocks, would it make them want to play your server more ?
 - If you gave each player a massive boost to their resource extraction capabilities (God-Pickaxes for all), would that make them want to play your server more ?
 - The answer to both of these questions is **NO**.
-- It is not the rapid accumulation of large quantities of virtual items  which will make players want to keep playing on your server.
+- It is not the rapid accumulation of large quantities of virtual stuff which will make players want to keep playing on your server.
 - Rather it is quality of the server experience which will keep them coming back. 
-- *TownyResources* enhances that server experience by improving town building, nation building, trading, roleplaying, and most importantly, providing a strategic and non-personal reason for going to war, which reduces toxicity across the whole server. 
+- *TownyResources* enhances that server experience by improving town building, nation building, trading, roleplaying, and most importantly, providing a strategic and non-personal reason for going to war, thus reducing toxicity across the whole server. 
 
 ----------
 ###### Question. 
@@ -119,6 +122,6 @@ Is is ok to prevent block-breaking in an "unnatural" way ?
 Yes.
 <br>
 - Just as *Towny* prevents-block breaking to protect the **Architectural** value of towns, *TownyResources* prevents block-breaking to protect the **Economic** value of towns.
-- Both preventions are entirely unnatural, and are used for the same overall reason, of protecting town value.
-- Thus if a player truly believes that preserving natural Minecraft block operations is more important that preserving town value, then to avoid accusations of hypocrecy, they should disable all *Towny* block protections in their own town, prior to making any complaint about the unnaturalness of *Towny Resources* block protections..
+- Both preventions are entirely unnatural, and are used for the same overall reason; to protect town value.
+- Thus if a player truly believes that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrecy, they should first disable all *Towny* block protections in their own town, prior to making any complaints about the unnaturalness of *Towny Resources* protections.
 ----------

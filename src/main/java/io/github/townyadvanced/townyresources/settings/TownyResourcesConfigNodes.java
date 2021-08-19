@@ -147,7 +147,7 @@ public enum TownyResourcesConfigNodes {
 			"# Example: If this value 3, and the daily production amount is 32 ..... then the storage limit is 96."),
 	TOWN_RESOURCES_PRODUCTION_NATION_TAX_PERCENTAGE(
 			"town_resources.production.nation_tax_percentage",
-			"75",
+			"50",
 			"",
 			"# The owner nation of a town gets this percentage of town production.",
 			"# The town gets the rest."),
@@ -158,7 +158,7 @@ public enum TownyResourcesConfigNodes {
 			""),
 	TOWN_RESOURCES_OFFERS_ORES(
 			"town_resources.offers.ores",
-			"Ancient_Debris-0.0625-10, Diamond-0.25-20, Emerald-0.5-20, Gold_Ore-0.5-20",
+			"Ancient_Debris-0.0625-10, Diamond-0.125-20, Emerald-0.25-20, Gold_Ore-0.25-20",
 			"",
 			"# This list determines the offers of 'ores' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -167,7 +167,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_TREES(
 			"town_resources.offers.trees",
-			"Oak_Log-2-5",
+			"Oak_Log-1-5",
 			"",
 			"# This list determines the offers of 'trees' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -176,7 +176,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_CROPS(
 			"town_resources.offers.crops",
-			"Wheat-2-5",
+			"Wheat-1-5",
 			"",
 			"# This list determines the offers of 'crops' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",
@@ -185,7 +185,7 @@ public enum TownyResourcesConfigNodes {
 			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
 	TOWN_RESOURCES_OFFERS_ANIMALS(
 			"town_resources.offers.animals",
-			"Beef-0.5-5",
+			"Beef-0.25-5",
 			"",
 			"# This list determines the offers of 'animals' resources which each town can gain.",
 			"# Each entry on the list has 3 values:",

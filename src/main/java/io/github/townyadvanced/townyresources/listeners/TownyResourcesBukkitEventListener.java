@@ -6,7 +6,8 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDropItemEvent;
 
 /**
  * 
@@ -19,15 +20,20 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	private final TownyResources plugin;
 	
 	public TownyResourcesBukkitEventListener(TownyResources instance) {
-
 		plugin = instance;
 	}
 
-	//Limit the picking up of resources (take care of drops like Beef)
 	@EventHandler()
-	public void onEntityPickupItem(EntityPickupItemEvent event) {
+	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
-			PlayerExtractionLimitsController.processEntityPickupItemEvent(event);
+			PlayerExtractionLimitsController.processEntityDamageByEntityEvent(event);
+		}
+	}
+
+	@EventHandler()
+	public void onEntityDropItemEvent(EntityDropItemEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {
+			PlayerExtractionLimitsController.processEntityDropItemEvent(event);
 		}
 	}
 

@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.controllers;
 
-import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOnePlayer;
 import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneResource;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;

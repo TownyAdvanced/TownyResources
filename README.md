@@ -18,19 +18,19 @@ TownyResources adds value to individual towns, by giving each one a unique set o
   > Resources:
   <br> > Daily Production: 64 Oak Log, 32 Emerald
 ###### Surveys
-- For resources to be produced by a town, they must first be *discovered*.
-- Each town can discover up to 4 Resource Types.
-- To discover a resource, enter the target town and run: `/tr survey`.
-- There are 4 Resource Levels.
-- Each successful survey reveals the next resource level.
-- Surveys have a cost and a minimum-num-townblocks requirement:
-  - Resource Level **1**: Cost **250**, Minimum num townblocks **10**
-  - Resource Level **2**: Cost **1000**, Minimum num townblocks **50**
-  - Resource Level **3**: Cost **5000**, Minumum num townblocks **100**
-  - Resource Level **4**: Cost **20000**, Minimum num townblocks **200**  
+- Before resources can be be produced by a town, they must first be discovered.
+- Resources can only be discovered by doing Surveys.
+- Each Survey discovers a resource of a new level and type: 
+  - Survey **1**: Reveals Level **1** Resource. Cost **250**. Minimum num townblocks **10**
+  - Survey **2**: Reveals Level **2** Resource. Cost **1000**. Minimum num townblocks **50**
+  - Survey **3**: Reveals Level **3** Resource. Cost **5000**. Minumum num townblocks **100**
+  - Survey **4**: Reveals Level **4** Resource. Cost **20000**. Minimum num townblocks **200**  
+- To do a Survey, enter the target town and run: `/tr survey`.
+- If the Survey succeeds, a global success message will be generated. Example:
+  > Goosius1 has discovered ore deposits at Rome!. Daily Production: 16 Diamond.
 ###### Daily Production
-- On each new Towny day, towns automatically produce resources.
-- Resource production is modified by the resource level:
+- On each new Towny New Day, towns automatically produce resources.
+- Production is modified by the resource level:
   - Resource Level **1**: Production bonus **N/A**, Mnimum town level **1**
   - Resource Level **2**: Production bonus **+100%**, Minimum town level **4**
   - Resource Level **3**: Production bonus **+200%**, Minimum town level **6**
@@ -48,20 +48,20 @@ TownyResources adds value to individual towns, by giving each one a unique set o
   > Resources:
   <br> > Daily Production: 64 Oak Log 32 Coal, 32 Emerald
   <br> > Available For Collection: 128 Oak Log 64 Coal, 64 Emerald
-###### Daily Production                                                                      >
+###### Daily Production
 - If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
 ###### Collecting Nation Resources
 - To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
-### Player Block-Breaking Limits
+### Player Extraction Limits
 ###### Limits per Material
-- Block-breaking is limited per material.
+- Extraction is limited per material.
 - Example: If a player hits their daily limit for Wheat, they can still continue to extract other crops such as Potatoes, Carrots, Melons etc. (*historical note: in medieval times, farmers had to plant different crops just to survive*).
 ###### Limits per Day
-- Block-breaking is limited per day.
-- The block-breaking records of all players are reset at Towny New Day.
+- Extraction is limited per day.
+- The extraction records of all players are reset at Towny New Day.
 ###### Information
-- When a player hits their daily block-breaking limit for a particular material, they will see an information bar message. Example:
+- When a player hits their daily extraction limit for a particular material, they will see an information bar message. Example:
   > Blah
                                                                                                                                       >
 ## F.A.Q:

@@ -4,10 +4,7 @@ import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneBloc
 import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneMobType;
 import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneResourceType;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Mob;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
@@ -41,13 +38,18 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if(!event.isCancelled()
-            && event.getEntity() instanceof Mob 
-            && event.getDamager() instanceof Player) {
+        if(!event.isCancelled() && event.getEntity() instanceof Mob) {
+            
+            if(event.getDamager() instanceof Player) {
                 System.out.println("Mob was hit by plaer");
                 //Mark the mob as recently hit by the player
-                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());
-        }         
+                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());                
+            } else if (event.getDamager() instanceof Projectile && ((Projectile)event.getDamager()).getShooter() instanceof Player) {
+                //Mark the mob as recently hit by the player
+                System.out.println("Mob was hit by plaer projectile");
+                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), (Entity)((Projectile)event.getDamager()).getShooter());                           
+            }
+        }
     }
 
     /**

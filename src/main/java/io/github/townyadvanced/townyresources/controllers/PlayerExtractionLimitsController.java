@@ -96,7 +96,7 @@ public class PlayerExtractionLimitsController {
                         drop.setAmount(0);
                         player.sendMessage("Limit Reached");
                     } else {
-                        extractionRecordForMaterial.addExtractedAmount(drop.getAmount());
+                        drop.setAmount(extractionRecordForMaterial.addExtractedAmount(drop.getAmount()));
                     } 
                 }
             }            

@@ -120,7 +120,7 @@ public class TownyResourcesSettings {
 				categoryExtractionLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
 				categoryExtractionLimitItems = (int)((categoryExtractionLimitStacks * 64) + 0.5);
 				for(int i = 2; i < categoryAsArray.length; i ++) {
-					material = Material.getMaterial(categoryAsArray[i]);
+					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
 						throw new TownyException("Unknown material in extraction category. Category: " + categoryAsString + ". Material: " + categoryAsArray[i]);
 					}

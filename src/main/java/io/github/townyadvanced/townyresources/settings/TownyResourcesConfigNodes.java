@@ -75,11 +75,11 @@ public enum TownyResourcesConfigNodes {
 			"{Carrots, 1, CARROTS}," +
 			"{Potatoes, 1, POTATOES}," +
 			"{Beetroot, 1, BEETROOT}," +
-			"{Pumpkin Seeds, 1, PUMPKIN SEEDS}," +
+			"{Pumpkin Seeds, 1, PUMPKIN_SEEDS}," +
 			"{Melon Slices, 1, MELON_SLICE}," +
 			"{Cocoa Beans, 1, COCOA_BEANS}," +
-			"{Pumpkin Blocks, 0.125, PUMPKIN_BLOCK}," +
-			"{Melon Blocks, 0.125, MELON_BLOCK}," +
+			"{Pumpkin Blocks, 0.125, PUMPKIN}," +
+			"{Melon Blocks, 0.125, MELON}," +
 			"{Cocoa Pods, 0.125, COCOA}," +
 			"{Kelp, 1, KELP}," +
 			"{Bamboo, 1, BAMBOO}," +
@@ -98,7 +98,8 @@ public enum TownyResourcesConfigNodes {
 			"{Bones, 1, BONE, BONE_BLOCK}," +
 			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
-			"{Beef, 0.25, BEEF, STEAK}," +
+			"{Beef, 0.25, BEEF, COOKED_BEEF}," +
+			"{Chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
 			"{Chorus Fruit, 1, CHORUS_FRUIT}," +
 			"{Ender Pearls, 0.125, ENDER_PEARL}",
 			"",
@@ -187,7 +188,7 @@ public enum TownyResourcesConfigNodes {
 			"" +
 			"{Common Dirt, 10, 2, DIRT}," +
 			"{Wood, 100, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
-			 "OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
+			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
 			"{Common Rocks, 100, 2, STONE, COBBLESTONE}," +
 			"{Uncommon Rocks, 50, 1, DIORITE, ANDESITE, GRANITE}," +
 			"{Terracotta, 25, 0.5, TERRACOTTA}," +
@@ -208,7 +209,7 @@ public enum TownyResourcesConfigNodes {
 			"{Carrots, 100, 1, CARROTS}," +
 			"{Potatoes, 100, 1, POTATOES}," +
 			"{Beetroots, 100, 1, BEETROOT}," +
-			"{Pumpkins, 100, 1, PUMPKIN SEEDS}," +
+			"{Pumpkins, 100, 1, PUMPKIN_SEEDS}," +
 			"{Melon Plants, 100, 1, MELON_SLICE}," +
 			"{Cocoa Plants, 100, 1, COCOA_BEANS}," +
 			"{Kelp, 50, 1, KELP}," +
@@ -226,10 +227,11 @@ public enum TownyResourcesConfigNodes {
 			"{A Herd of Animals, 100, 0.5, LEATHER}," +
 			"{A Herd of Rabbits, 100, 0.5, RABBIT_HIDE}," +
 			"{A Hest of Zombies, 100, 1, ROTTEN_FLESH}" +
-			"{A Hest of Skeletons, 100, 1, BONE}," +
+			"{A Hest of Skeletons, 100, 0.5, BONE}," +
 			"{A Herd of Pigs, 100, 0.25, PORKCHOP}," +
 			"{A Herd of Sheep, 100, 0.25, MUTTON}," +
 			"{A Herd of Cows, 100, 0.25, BEEF}," +
+			"{A Flock of Chickens, 100, 0.25, CHICKEN}," +			
 			"{A Nest of Endermen, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",

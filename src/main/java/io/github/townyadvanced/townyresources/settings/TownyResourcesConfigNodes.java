@@ -47,9 +47,9 @@ public enum TownyResourcesConfigNodes {
 			"{Quartz, 0.25, QUARTZ_BLOCK}," +
 			"{Prismarine, 0.125, PRISMARINE}," +
 			"{Obsidian, 0.125, OBSIDIAN}," +
-			"{Clay, 1, CLAY, CLAY_BLOCK}," +
+			"{Clay, 1, CLAY_BALL, CLAY}," +
 			"{Ice, 1, ICE, PACKED_ICE, BLUE_ICE}," +
-			"{Snow, 1, SNOW, SNOW_BLOCK}," +
+			"{Snow, 1, SNOW, SNOWBALL, SNOW_BLOCK}," +
 			"{Coal, 1, COAL, COAL_BLOCK}," +
 			"{Iron, 1, IRON_ORE, RAW_IRON}," +
 			"{Gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
@@ -192,8 +192,8 @@ public enum TownyResourcesConfigNodes {
 			"{Quartz, 25, 0.25, QUARTZ_BLOCK}," +
 			"{Prismarine, 10, 0.125, PRISMARINE}," +
 			"{Obsidian, 25, 0.125, OBSIDIAN}," +
-			"{Clay, 100, 1, CLAY}," +
-			"{Snow, 10, 1, SNOW}," +
+			"{Clay, 100, 1, CLAY_BALL}," +
+			"{Snow, 10, 1, SNOWBALL}," +
 			"{Coal, 100, 1, COAL}," +
 			"{Iron, 100, 0.5, RAW_IRON}," +
 			"{Gold, 100, 0.25, RAW_GOLD}," +

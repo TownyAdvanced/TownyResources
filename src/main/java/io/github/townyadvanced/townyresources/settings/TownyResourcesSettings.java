@@ -122,7 +122,7 @@ public class TownyResourcesSettings {
 				for(int i = 2; i < categoryAsArray.length; i ++) {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
-						throw new TownyException("Unknown material in extraction category. Category: " + categoryAsString + ". Material: " + categoryAsArray[i]);
+						throw new TownyException("Unknown material in extraction category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
 					}
 					materialsInCategory.add(material);
 				}

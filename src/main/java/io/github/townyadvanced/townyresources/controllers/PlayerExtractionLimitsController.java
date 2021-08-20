@@ -1,33 +1,47 @@
 package io.github.townyadvanced.townyresources.controllers;
 
-import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneBlockType;
-import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneMobType;
-import io.github.townyadvanced.townyresources.objects.ExtractionRecordForOneResourceType;
+import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PlayerExtractionLimitsController {
 
     public static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
     public static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
-    public static Map<Entity, Map<Material, ExtractionRecordForOneResourceType>> allResourceExtractionRecords = new HashMap<>();
-    public static Map<Entity, Map<Material, ExtractionRecordForOneBlockType>> allBlockExtractionRecords = new HashMap<>();
-    public static Map<Entity, Map<EntityType, ExtractionRecordForOneMobType>> allMobExtractionRecords = new HashMap<>();
+    public static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
+    public static Map<Entity, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
+    
 
     public static void resetMobsDamagedByPlayers() {
         mobsDamagedByPlayersLastShortTick.clear();
         mobsDamagedByPlayersLastShortTick.putAll(mobsDamagedByPlayersThisShortTick);
         mobsDamagedByPlayersThisShortTick.clear();
     }
+    
+    public static void loadAllResourceExtractionCategories() throws Exception{
+         //Load all categories
+         List<ResourceExtractionCategory> resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
+         //Clear the map
+         materialToResourceExtractionCategoryMap.clear();
+         //Put each material on the map
+         for(ResourceExtractionCategory category: resourceExtractionCategories) {
+             for(Material material: category.getMaterialsInCategory()) {
+                 materialToResourceExtractionCategoryMap.put(material, category);
+             }
+         }
+        
+    }
 
-    public static void saveDataOnPlayerExtractedResources() {
+    public static void saveAllPlayerExtractionRecords() {
         
         
     }
@@ -77,26 +91,25 @@ public class PlayerExtractionLimitsController {
             }
             
             if(player != null) {                       
-                //Get the full player extraction record
-                Map<Material, ExtractionRecordForOneResourceType> materialExtractionRecordForPlayer = allResourceExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());
+                //Get the player extraction record (create it if needed)
+                Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());
 
                 //Cycle each material dropped and decide what to do
                 for(ItemStack drop: event.getDrops()) {
-                    //Get the player extraction record for the material
-                    ExtractionRecordForOneResourceType extractionRecordForMaterial = materialExtractionRecordForPlayer.get(drop.getType());            
-                    if(extractionRecordForMaterial == null) {
-                        //TODO - Fix the next line it is just a dev artefact hack
-                        extractionRecordForMaterial = new ExtractionRecordForOneResourceType(null, drop.getType(), 3);
-                        materialExtractionRecordForPlayer.put(drop.getType(), extractionRecordForMaterial);
+                    //Get the extraction record for the material's category
+                    CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
+                    if(categoryExtractionRecord == null) {
+                        ResourceExtractionCategory extractionCategoryOfMaterial = materialToResourceExtractionCategoryMap.get(drop.getType());
+                        categoryExtractionRecord = new CategoryExtractionRecord(extractionCategoryOfMaterial);
+                        playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
                     }
     
-                    //If the player is at their limit for the material, cancel the drop
-                    //Otherwise, allow the drop and update the limit
-                    if(extractionRecordForMaterial.isExtractionLimitReached()) {
+                    //If the player is at their limit for the material, cancel the drop, otherwise allow it and update the limit
+                    if(categoryExtractionRecord.isExtractionLimitReached()) {
                         drop.setAmount(0);
                         player.sendMessage("Limit Reached");
                     } else {
-                        drop.setAmount(extractionRecordForMaterial.addExtractedAmount(drop.getAmount()));
+                        drop.setAmount(categoryExtractionRecord.addExtractedAmount(drop.getAmount()));
                     } 
                 }
             }            

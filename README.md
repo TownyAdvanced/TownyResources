@@ -118,11 +118,11 @@ Yes.
   - **Group B** 
     - Are given moderate daily limits to extracting resources, slowing down all their activities.
     - Set long term goals to manufacture expensive items such as god sets, shulker boxes, and beacons.
-    - Set long term goals to construct gigantic monuments for their towns/nations.
-    - At first, Even minor magical items, such as Efficiency II picks, are a great achievement.
+    - Set long term goals to construct gigantic monuments to honour themselves.
+    - At first, even minor magical items, such as Efficiency II picks, are a great achievement.
     - Within a month, they are still working towards their goals, improving their governments, trading actively, co-operating with allies, and competing with dangerous enemies who could deal serious setbacks to their goals.   
 <br>
-- Which group of players is more likely to keep playing on this server ?
+- Which group of players do you think is more likely to stay on this server ?
 
 ----------
 ###### Question:

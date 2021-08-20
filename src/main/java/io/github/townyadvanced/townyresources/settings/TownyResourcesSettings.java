@@ -3,10 +3,15 @@ package io.github.townyadvanced.townyresources.settings;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
+import org.bukkit.Material;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
@@ -47,11 +52,11 @@ public class TownyResourcesSettings {
 	public static Map<String, ResourceOffer> getResourceOffers(List<String> materialsToExclude) {
         sumOfAllOfferDiscoveryProbabilityWeights = 0;
         Map<String, ResourceOffer> resourceOffers = new HashMap<>();
-        resourceOffers.putAll(getOffersInCategory("ores", getOffersOres(), materialsToExclude));
-        resourceOffers.putAll(getOffersInCategory("trees", getOffersTrees(), materialsToExclude));
-        resourceOffers.putAll(getOffersInCategory("crops", getOffersCrops(), materialsToExclude));
-        resourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals(), materialsToExclude));
-        resourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters(), materialsToExclude));   
+        //resourceOffers.putAll(getOffersInCategory("ores", getOffersOres(), materialsToExclude));
+        //resourceOffers.putAll(getOffersInCategory("trees", getOffersTrees(), materialsToExclude));
+        //resourceOffers.putAll(getOffersInCategory("crops", getOffersCrops(), materialsToExclude));
+        //resourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals(), materialsToExclude));
+        //resourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters(), materialsToExclude));   
         return resourceOffers;
 	}
 
@@ -79,25 +84,53 @@ public class TownyResourcesSettings {
         return result;
     }
 
+	/**
+	 * Get all resource extraction categories
+	 * 
+	 * @return a list of all resource extraction categories
+	 * @throws TownyException a towny exception
+	 */
+	public static List<ResourceExtractionCategory> getResourceExtractionCategories() throws TownyException{
+		List<ResourceExtractionCategory> result = new ArrayList<>();
 
-    private static List<String> getOffersOres() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ORES);
-	}
+		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 
-    private static List<String> getOffersTrees() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_TREES);
-	}
-	
-    private static List<String> getOffersCrops() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CROPS);
-	}
-
-    private static List<String> getOffersAnimals() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_ANIMALS);
-	}
-
-    private static List<String> getOffersMonsters() {
-    	return getStringList(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MONSTERS);
+		if(!categoriesAsString.isEmpty()) {
+			Pattern pattern = Pattern.compile("\\{(\\w+)}", Pattern.CASE_INSENSITIVE);
+			Matcher matcher = pattern.matcher(categoriesAsString);
+			String categoryAsString;
+			String[] categoryAsArray;
+			String categoryName;
+			double categoryExtractionLimitStacks;
+			int categoryExtractionLimitItems;
+			Material material;
+			List<Material> materialsInCategory = new ArrayList<>();
+			ResourceExtractionCategory resourceExtractionCategory;
+			
+			while (matcher.find()) {
+				//Construct ResourceExtractCategory object
+				categoryAsString = matcher.group(1);
+				categoryAsArray = categoryAsString.split(",");
+				if(categoryAsArray.length < 2) {
+					throw new TownyException("Bad configuration for extraction category: " + categoryAsString);
+				}
+				categoryName = categoryAsArray[0].trim();
+				categoryExtractionLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
+				categoryExtractionLimitItems = (int)((categoryExtractionLimitStacks * 64) + 0.5);
+				for(int i = 2; i < categoryAsArray.length; i ++) {
+					material = Material.getMaterial(categoryAsArray[i]);
+					if(material == null) {
+						throw new TownyException("Unknown material in extraction category. Category: " + categoryAsString + ". Material: " + categoryAsArray[i]);
+					}
+					materialsInCategory.add(material);
+				}
+				resourceExtractionCategory = new ResourceExtractionCategory(categoryName, categoryExtractionLimitItems, materialsInCategory);
+				//Add to result
+				result.add(resourceExtractionCategory);
+			}		
+		}
+				
+		return result;
 	}
 
 	public static void loadConfig(String filepath, String version) throws IOException {

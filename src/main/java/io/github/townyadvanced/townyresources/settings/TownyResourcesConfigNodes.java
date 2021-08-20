@@ -36,8 +36,8 @@ public enum TownyResourcesConfigNodes {
 			"# If false, then daily player resource extraction limits are disabled."),
 			
 			//TODO ------- Add machine-limiting stuff here e.g. for cactuses and sugar.  Maybe???. Could b already covered
-	RESOURCE_EXTRACTION_CATEGORIES(			
-			"resource_extraction_categories",
+	RESOURCE_EXTRACTION_LIMITS_CATEGORIES(			
+			"resource_extraction_limits.categories",
 			"" +
 			"{Common Rocks, 6, STONE, COBBLESTONE}," +
 			"{Uncommon Rocks, 2, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +

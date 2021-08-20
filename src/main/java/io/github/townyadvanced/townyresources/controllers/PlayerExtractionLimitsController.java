@@ -97,7 +97,7 @@ public class PlayerExtractionLimitsController {
                 for(ItemStack drop: event.getDrops()) {
                     //Skip item if it is not listed as a restricted resource
                     if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
-                        return;
+                        continue;
                 
                     //Get the extraction record for the item's category
                     CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            

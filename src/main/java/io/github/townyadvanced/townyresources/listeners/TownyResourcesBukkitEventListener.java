@@ -42,7 +42,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	@EventHandler()
 	public void onBlockBreak(BlockBreakEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
-			
+			event.getBlock()
 		}	
 	}
 

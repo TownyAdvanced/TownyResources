@@ -28,7 +28,7 @@ public class ExtractionRecordForOneResourceType {
      * Add extracted amount to record
      * Return the amount to extract  (could be modified)
      * 
-     * @param amountToExtract extracted amount
+     * @param amountToExtract the amount to extract
      */
     public int addExtractedAmount(int amountToExtract) {
         if(amountAlreadyExtracted + amountToExtract > extractionLimit) { 

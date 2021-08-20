@@ -27,7 +27,7 @@ TownyResources adds value to individual towns, by giving each one a unique set o
   - Survey **4**: Reveals Level **4** Resource. Cost **20000**. Minimum num townblocks **200**.  
 - To do a Survey, enter the target town and run: `/tr survey`.
 - If the Survey succeeds, a global success message will be generated. Example:
-  > Goosius1 has discovered ore deposits at Rome!. Daily Production: 16 Diamond.
+  > Goosius1 has discovered coal deposits at Rome!. Daily Production: 64 Coal.
 ###### Daily Production
 - On each new Towny New Day, towns automatically produce resources.
 - Production is modified by the resource level:
@@ -47,8 +47,8 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 ###### Information
 - Nation production & collection information is shown on the nation screen. Example:
   > Resources:
-  <br> > Daily Production: 64 Oak Log 32 Coal, 32 Emerald
-  <br> > Available For Collection: 128 Oak Log 64 Coal, 64 Emerald
+  <br> > Daily Production: 64 Oak Log 64 Coal, 32 Emerald
+  <br> > Available For Collection: 128 Oak Log 128 Coal, 64 Emerald
 ###### Daily Production
 - If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
 ###### Collecting Nation Resources
@@ -104,16 +104,25 @@ Yes of course. As a server admin, you are lucky if your player's don't complain 
 
 ----------
 ###### Question: 
-Is is ok that players cannot acquire as much stuff as before ?
+Is is ok that players take longer to do things (*such as creating god sets or building epic monuments*) ?
 ###### Answer:
 Yes.
 <br>
-- If you gave each player daily gifts of multiple stacks of valuable blocks, would it make them want to play your server more ?
-- If you gave each player a massive boost to their resource extraction capabilities (God-Pickaxes for all), would that make them want to play your server more ?
-- The answer to both of these questions is **NO**.
-- It is not the rapid accumulation of large quantities of virtual stuff which will make players want to keep playing on your server.
-- Rather it is quality of the server experience which will keep them coming back. 
-- *TownyResources* enhances that server experience by improving town building, nation building, trading, roleplaying, and most importantly, providing a strategic and non-personal reason for going to war, thus reducing toxicity across the whole server. 
+- Consider 2 groups of players:
+  - **Group A**: 
+    - Are given daily gifts of money, any blocks they ask for, enhanced mining speed, and the flying ability to help them build faster.
+    - Within a few days, manufacture expensive items such as god sets, shulker boxes, and beacons.
+    - Within a few days, construct gigantic monuments to honour themselves.
+    - Within a month, their riches are almost limitless.
+    - Trading/diplomacy/sieges are now quite meaningless for them.
+  - **Group B** 
+    - Are given moderate daily limits to extracting resources, slowing down all their activities.
+    - Set long term goals to manufacture expensive items such as god sets, shulker boxes, and beacons.
+    - Set long term goals to construct gigantic monuments for their towns/nations.
+    - At first, Even minor magical items, such as Efficiency II picks, are a great achievement.
+    - Within a month, they are still working towards their goals, improving their governments, trading actively, co-operating with allies, and competing with dangerous enemies who could deal serious setbacks to their goals.   
+<br>
+- Which group of players is more likely to keep playing on this server ?
 
 ----------
 ###### Question:
@@ -123,20 +132,5 @@ Yes.
 <br>
 - Just as *Towny* prevents-block breaking to protect the **Architectural** value of towns, *TownyResources* prevents block-breaking to protect the **Economic** value of towns.
 - Both preventions are entirely unnatural, and are used for the same overall reason - to protect town value.
-- Thus if a player truly believes that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrecy, they should first disable all *Towny* block protections in their own town, prior to making any complaints about the unnaturalness of *Towny Resources* protections.
+- Thus if a player believes truly, that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrecy, they should first disable all *Towny* block protections in their own town, prior to making any complaints about the unnaturalness of *Towny Resources* protections.
 ----------
-###### Question: 
-What are the default configured survey offers & player extraction limits ?
-###### Answer:
-##### Base Resource Amounts:
-- Ancient Debris: 4
-- Diamonds: 8
-- Gold, Emeralds: 16
-- Lapis: ?
-- Coal: ?
-- Iron: ? 
-- Any type of log: 1 stack
-- Wheat: 1 stack
-<br<
-Resource    Survey Offer
-

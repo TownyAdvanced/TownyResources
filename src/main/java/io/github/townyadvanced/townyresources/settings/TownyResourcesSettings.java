@@ -92,10 +92,11 @@ public class TownyResourcesSettings {
 	 */
 	public static List<ResourceExtractionCategory> getResourceExtractionCategories() throws TownyException{
 		List<ResourceExtractionCategory> result = new ArrayList<>();
+		boolean problemLoadingExtractionCategories = false;
 
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 
-		System.out.println("Cat string: "+ categoriesAsString);
+		System.out.println("Cat string: "+ categoriesAsString);	
 		
 		if(!categoriesAsString.isEmpty()) {
 			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
@@ -114,7 +115,9 @@ public class TownyResourcesSettings {
 				categoryAsString = matcher.group(1);
 				categoryAsArray = categoryAsString.split(",");
 				if(categoryAsArray.length < 2) {
-					throw new TownyException("Bad configuration for extraction category: " + categoryAsString);
+					TownyResources.severe("Bad configuration for extraction category: " + categoryAsString);
+					problemLoadingExtractionCategories = true;
+					continue;
 				}
 				categoryName = categoryAsArray[0].trim();
 				categoryExtractionLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
@@ -122,7 +125,9 @@ public class TownyResourcesSettings {
 				for(int i = 2; i < categoryAsArray.length; i ++) {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
-						throw new TownyException("Unknown material in extraction category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
+						TownyResources.severe("Unknown material in extraction category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
+						problemLoadingExtractionCategories = true;
+						continue;
 					}
 					materialsInCategory.add(material);
 				}
@@ -131,8 +136,12 @@ public class TownyResourcesSettings {
 				result.add(resourceExtractionCategory);
 			}		
 		}
-				
-		return result;
+
+		if(problemLoadingExtractionCategories) {
+			throw new TownyException("Problem Loading Extraction Categories");
+		} else {
+			return result;
+		}
 	}
 
 	public static void loadConfig(String filepath, String version) throws IOException {

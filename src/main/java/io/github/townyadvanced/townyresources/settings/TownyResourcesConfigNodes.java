@@ -17,71 +17,95 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If true, the TownyResources system is enabled.",
 			"# if false, the TownyResources system is disabled."),		
-	DAILY_PLAYER_EXTRACTION_LIMITS(
-			"daily_player_extraction_limits",
+	RESOURCE_EXTRACTION_LIMITS(
+			"resource_extraction_limits",
 			"",
 			"",
 			"",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
-			"# |           Daily Player Extraction Limits             | #",
+			"# |             Resource Extraction Limits               | #",
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
-	DAILY_PLAYER_EXTRACTION_LIMITS_ENABLED(
-			"daily_player_extraction_limits.enabled",
+	RESOURCE_EXTRACTION_LIMITS_ENABLED(
+			"resource_extraction_limits.enabled",
 			"true",
 			"",
-			"# If true, then daily player extraction limits are enabled.",
-			"# If false, then daily player extraction limits are disabled."),
+			"# If true, then daily player resource extraction limits are enabled.",
+			"# If false, then daily player resource extraction limits are disabled."),
 			
-			//TODO ------- Add machine-limiting stuff here e.g. for cactuses and sugar
-			
-	DAILY_PLAYER_EXTRACTION_LIMITS_ORES(
-			"daily_player_extraction_limits.ores",
-			"Ancient_Debris-Ancient debris-0.03125, Diamond_Ore-Diamonds-0.125, Emerald-Emeralds-0.25, Gold_Ore-Gold-0.25",
+			//TODO ------- Add machine-limiting stuff here e.g. for cactuses and sugar.  Maybe???. Could b already covered
+	RESOURCE_EXTRACTION_CATEGORIES(			
+			"resource_extraction_categories",
+			"" +
+			"{Common Rocks, 6, STONE, COBBLESTONE}," +
+			"{Uncommon Rocks, 2, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +
+			"{Terracotta, 2, TERRACOTTA, WHITE_TERRACOTTA, ORANGE_TERRACOTTA, MAGENTA_TERRACOTTA, LIGHT_BLUE_TERRACOTTA, YELLOW_TERRACOTTA," +
+			"LIME_TERRACOTTA, PINK_TERRACOTTA, GREY_TERRACOTTA, LIGHT_GREY_TERRACOTTA, CYAN_TERRACOTTA," +
+			"PURPLE_TERRACOTTA, BLUE_TERRACOTTA, BROWN_TERRACOTTA, GREEN_TERRACOTTA, RED_TERRACOTTA,BLACK_TERRACOTTA}," +
+			"{Quartz, 0.25, QUARTZ_BLOCK}," +
+			"{Prismarine, 0.125, PRISMARINE}," +
+			"{Obsidian, 0.125, OBSIDIAN}," +
+			"{Clay, 1, CLAY, CLAY_BLOCK}," +
+			"{Ice, 1, ICE, PACKED_ICE, BLUE_ICE}," +
+			"{Snow, 1, SNOW, SNOW_BLOCK}," +
+			"{Coal, 1, COAL, COAL_BLOCK}," +
+			"{Iron, 1, IRON_ORE, RAW_IRON}," +
+			"{Gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
+			"{Emeralds, 0.25, EMERALD_ORE, EMERALD}," +
+			"{Diamonds, 0.125, DIAMOND_ORE, DIAMOND}," +
+			"{Redstone, 1, REDSTONE, REDSTONE_BLOCK}," +
+			"{Netherrack, 4, NETHERRACK}," +
+			"{Nether Quartz, 1, NETHER_QUARTZ_ORE, NETHER_QUARTZ}," +
+			"{Glowstone, 0.25, GLOWSTONE, GLOWSTONE_BLOCK}" +
+			"{End Stone, 4, END_STONE}," +
+			"{Ancient_Debris, 0.0625, ANCIENT_DEBRIS}," +
+			"{Wool, 1, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
+			"LIME_WOOL, PINK_WOOL, GREY_WOOL, LIGHT_GREY_WOOL, CYAN_WOOL," +
+			"PURPLE_WOOL, BLUE_WOOL, BROWN_WOOL, GREEN_WOOL, RED_WOOL,BLACK_WOOL}," +
+			"{Coral, 1, TUBE_CORAL, BRAIN_CORAL, BUBBLE_CORAL, FIRE_CORAL, HORN_CORAL," +
+			"TUBE_CORAL_BLOCK, BRAIN_CORAL_BLOCK, BUBBLE_CORAL_BLOCK, FIRE_CORAL_BLOCK, HORN_CORAL BLOCK," +
+			"DEAD_TUBE_CORAL_BLOCK, DEAD_BRAIN_CORAL_BLOCK, DEAD_BUBBLE_CORAL_BLOCK, DEAD_FIRE_CORAL_BLOCK, DEAD_HORN_CORAL_BLOCK," +
+			"TUBE_CORAL_FAN, BRAIN_CORAL_FAN, BUBBLE_CORAL_FAN, FIRE_CORAL_FAN, HORN_CORAL_FAN," +
+			"DEAD_TUBE_CORAL_FAN,  DEAD_BRAIN_CORAL_FAN,, DEAD_BUBBLE_CORAL_FAN, DEAD_FIRE_CORAL_FAN,DEAD_HORN_CORAL_FAN}," +
+			"{Wheat, 1, WHEAT}," +
+			"{Carrots, 1, CARROTS}," +
+			"{Potatoes, 1, POTATOES}," +
+			"{Beetroot, 1, BEETROOT}," +
+			"{Pumpkin Seeds, 1, PUMPKIN SEEDS}," +
+			"{Melon Slices, 1, MELON_SLICE}," +
+			"{Cocoa Beans, 1, COCOA_BEANS}," +
+			"{Pumpkin Blocks, 0.125, PUMPKIN_BLOCK}," +
+			"{Melon Blocks, 0.125, MELON_BLOCK}," +
+			"{Cocoa Pods, 0.125, COCOA}," +
+			"{Kelp, 1, KELP}," +
+			"{Bamboo, 1, BAMBOO}," +
+			"{Cactus, 1, CACTUS}," +
+			"{Mushrooms, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
+			"{Apples, 0.125, APPLE}," +
+			"{Vines, 0.25, VINE}," +
+			"{Fish, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
+			"{Gunpowder, 0.25, GUNPOWDER}," +
+			"{String, 0.5, STRING}," +
+			"{Spider eyes, 0.5, SPIDER_EYE}," +
+			"{Feather, 0.5, FEATHER}," +
+			"{Leather, 0.5, LEATHER}," +
+			"{Rabbit Hide, 0.5, RABBIT_HIDE}," +
+			"{Rotten Flesh, 1, ROTTEN_FLESH}" +
+			"{Bones, 1, BONE, BONE_BLOCK}," +
+			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
+			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
+			"{Beef, 0.25, BEEF, STEAK}," +
+			"{Chorus Fruit, 1, CHORUS_FRUIT}," +
+			"{Ender Pearls, 0.125, ENDER_PEARL}",
 			"",
-			"# This list determines the daily extraction limits for players for 'ores' resources.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Source block material",
-			"# 2 - Resource to display",
-			"# 2 - Daily Limit, in stacks"),
-	DAILY_PLAYER_EXTRACTION_LIMITS_TREES(
-			"daily_player_extraction_limits.trees",
-			"Oak_Log-Oak logs-1",
-			"",
-			"# This list determines the daily extraction limits for players for 'trees' resources.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Source block material",
-			"# 2 - Resource to display",
-			"# 2 - Daily Limit, in stacks"),
-	DAILY_PLAYER_EXTRACTION_LIMITS_CROPS(
-			"daily_player_extraction_limits.crops",
-			"Wheat-Wheat-1",
-			"",
-			"# This list determines the daily extraction limits for players for 'crops' resources.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Source block material",
-			"# 2 - Resource to display",
-			"# 2 - Daily Limit, in stacks"),
-	DAILY_PLAYER_EXTRACTION_LIMITS_ANIMALS(
-			"daily_player_extraction_limits.animals",
-			"Beef-Beef-0.25",
-			"",
-			"# This list determines the daily extraction limits for players for 'animals' resources.",
-			"# Each entry on the list has 2 values:",
-			"# 1 - Source material",
-			"# 2 - Resource to display",
-			"# 2 - Daily Limit, in stacks"),
-	DAILY_PLAYER_EXTRACTION_LIMITS_MONSTERS(
-			"daily_player_extraction_limits.monsters",
-			"",
-			"",
-			"# This list determines the daily extraction limits for players for 'monster' resources.",
-			"# Each entry on the list has 2 values:",
-			"# 1 - Source material",
-			"# 2 - Resource to display",
-			"# 2 - Daily Limit, in stacks"),
+			"# This list shows the resource extraction categories.",
+			"# ",
+			"# Each category is enclosed in curly brackets, and has 3 parts:",
+			"# 1 - The name of the category (used for messaging)",
+			"# 2-  The daily limit per player (in stacks)",
+			"# 3-  The list of materials in the category"),
 	TOWN_RESOURCES(
 			"town_resources",
 			"",
@@ -156,51 +180,63 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"",
 			""),
-	TOWN_RESOURCES_OFFERS_ORES(
-			"town_resources.offers.ores",
-			"Ancient_Debris-0.0625-10, Diamond-0.125-20, Emerald-0.25-20, Gold_Ore-0.25-20",
-			"",
-			"# This list determines the offers of 'ores' resources which each town can gain.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Name of resource",
-			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_TREES(
-			"town_resources.offers.trees",
-			"Oak_Log-1-5",
-			"",
-			"# This list determines the offers of 'trees' resources which each town can gain.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Name of resource",
-			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_CROPS(
-			"town_resources.offers.crops",
-			"Wheat-1-5",
-			"",
-			"# This list determines the offers of 'crops' resources which each town can gain.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Name of resource",
-			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_ANIMALS(
-			"town_resources.offers.animals",
-			"Beef-0.25-5",
-			"",
-			"# This list determines the offers of 'animals' resources which each town can gain.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Name of resource",
-			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery"),
-	TOWN_RESOURCES_OFFERS_MONSTERS(
-			"town_resources.offers.monsters",
-			"",
-			"",
-			"# This list determines the offers of  monsters' resources which each town can gain.",
-			"# Each entry on the list has 3 values:",
-			"# 1 - Name of resource",
-			"# 2 - Base daily production, in stacks",
-			"# 3 - Discovery chance weight (the higher this is, the more likely its discovery");
+	TOWN_RESOURCES_OFFERS_CATEGORIES(
+			"town_resources.offers.categories",
+			"" +
+			"{Common Dirt, 10, 2, DIRT}," +
+			"{Wood, 100, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
+			 "OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
+			"{Common Rocks, 100, 2, STONE, COBBLESTONE}," +
+			"{Uncommon Rocks, 50, 1, DIORITE, ANDESITE, GRANITE}," +
+			"{Terracotta, 25, 0.5, TERRACOTTA}," +
+			"{Quartz, 25, 0.25, QUARTZ_BLOCK}," +
+			"{Prismarine, 10, 0.125, PRISMARINE}," +
+			"{Obsidian, 25, 0.125, OBSIDIAN}," +
+			"{Clay, 100, 1, CLAY}," +
+			"{Snow, 10, 1, SNOW}," +
+			"{Coal, 100, 1, COAL}," +
+			"{Iron, 100, 0.5, RAW_IRON}," +
+			"{Gold, 100, 0.25, RAW_GOLD}," +
+			"{Emeralds, 100, 0.25, EMERALD}," +
+			"{Diamonds, 100, 0.125, DIAMOND}," +
+			"{Ancient Debris, 100, 0.0625, ANCIENT_DEBRIS}," +
+			"{Redstone, 100, 1, REDSTONE}," +
+			"{Ice, 25, 1, ICE}," +
+			"{Wheat, 100, 1, WHEAT}," +
+			"{Carrots, 100, 1, CARROTS}," +
+			"{Potatoes, 100, 1, POTATOES}," +
+			"{Beetroots, 100, 1, BEETROOT}," +
+			"{Pumpkins, 100, 1, PUMPKIN SEEDS}," +
+			"{Melon Plants, 100, 1, MELON_SLICE}," +
+			"{Cocoa Plants, 100, 1, COCOA_BEANS}," +
+			"{Kelp, 50, 1, KELP}," +
+			"{Bamboo, 50, 1, BAMBOO}," +
+			"{Cactus, 50, 1, CACTUS}," +
+			"{Mushrooms, 100, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
+			"{Apple Trees, 100, 0.125, APPLE}," +
+			"{Vines, 100, 0.25, VINE}," +
+			"{Fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
+			"{A Flock of Sheep, 100, 1, WHITE_WOOL}," +
+			"{A Nest of Creepers, 100, 0.25, GUNPOWDER}," +
+			"{A Nest of Spiders, 100, 0.5, STRING}," +
+			"{A Nest of Spiders, 100, 0.5, SPIDER_EYE}," +
+			"{A Flock of Chickens, 100, 0.5, FEATHER}," +
+			"{A Herd of Animals, 100, 0.5, LEATHER}," +
+			"{A Herd of Rabbits, 100, 0.5, RABBIT_HIDE}," +
+			"{A Hest of Zombies, 100, 1, ROTTEN_FLESH}" +
+			"{A Hest of Skeletons, 100, 1, BONE}," +
+			"{A Herd of Pigs, 100, 0.25, PORKCHOP}," +
+			"{A Herd of Sheep, 100, 0.25, MUTTON}," +
+			"{A Herd of Cows, 100, 0.25, BEEF}," +
+			"{A Nest of Endermen, 100, 0.125, ENDER_PEARL}",
+		   "",
+			"# This list shows the survey offer categories.",
+			"# ",
+			"# Each category is enclosed in curly brackets, and has 4 parts:",
+			"# 1 - The discovery name of the category (used for messaging)",
+			"# 2 - The discovery weight of the category (used during discovery)",
+			"# 3-  The base amount of the offer (in stacks)",
+			"# 4-  The list of materials in the category");
 
 	private final String Root;
 	private final String Default;

@@ -42,7 +42,7 @@ public class PlayerExtractionLimitsController {
     }
 
     public static void saveAllPlayerExtractionRecords() {
-        
+        //TODO  do every short tick
         
     }
 
@@ -53,7 +53,7 @@ public class PlayerExtractionLimitsController {
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if(!event.isCancelled() && event.getEntity() instanceof Mob) {
-            
+                    
             if(event.getDamager() instanceof Player) {
                 System.out.println("Mob was hit by plaer");
                 //Mark the mob as recently hit by the player
@@ -80,8 +80,7 @@ public class PlayerExtractionLimitsController {
                 || mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity()))) {
 
             System.out.println("Now checking mob drop of mob jilled by player");
-            //TODO - check if the resource type is restricted
-            
+                        
             //Find the player who did the dirty deed
             Entity player;
             if(mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())) {
@@ -94,9 +93,13 @@ public class PlayerExtractionLimitsController {
                 //Get the player extraction record (create it if needed)
                 Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());
 
-                //Cycle each material dropped and decide what to do
+                //Cycle each item dropped and decide what to do
                 for(ItemStack drop: event.getDrops()) {
-                    //Get the extraction record for the material's category
+                    //Skip item if it is not listed as a restricted resource
+                    if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
+                        return;
+                
+                    //Get the extraction record for the item's category
                     CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
                     if(categoryExtractionRecord == null) {
                         ResourceExtractionCategory extractionCategoryOfMaterial = materialToResourceExtractionCategoryMap.get(drop.getType());

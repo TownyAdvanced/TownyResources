@@ -58,7 +58,7 @@ public enum TownyResourcesConfigNodes {
 			"{Redstone, 1, REDSTONE, REDSTONE_BLOCK}," +
 			"{Netherrack, 4, NETHERRACK}," +
 			"{Nether Quartz, 1, NETHER_QUARTZ_ORE, NETHER_QUARTZ}," +
-			"{Glowstone, 0.25, GLOWSTONE, GLOWSTONE_BLOCK}" +
+			"{Glowstone, 0.25, GLOWSTONE, GLOWSTONE_BLOCK}," +
 			"{End Stone, 4, END_STONE}," +
 			"{Ancient_Debris, 0.0625, ANCIENT_DEBRIS}," +
 			"{Wool, 1, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
@@ -92,7 +92,7 @@ public enum TownyResourcesConfigNodes {
 			"{Feather, 0.5, FEATHER}," +
 			"{Leather, 0.5, LEATHER}," +
 			"{Rabbit Hide, 0.5, RABBIT_HIDE}," +
-			"{Rotten Flesh, 1, ROTTEN_FLESH}" +
+			"{Rotten Flesh, 1, ROTTEN_FLESH}," +
 			"{Bones, 1, BONE, BONE_BLOCK}," +
 			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +

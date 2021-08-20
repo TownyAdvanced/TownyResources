@@ -53,11 +53,14 @@ public enum TownyResourcesConfigNodes {
 			"{Coal, 1, COAL, COAL_BLOCK}," +
 			"{Iron, 1, IRON_ORE, RAW_IRON}," +
 			"{Gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
+			"{Gold Nugget, 0.25, GOLD_NUGGET, NETHER_GOLD_ORE}," +
+			
 			"{Emeralds, 0.25, EMERALD_ORE, EMERALD}," +
+			"{Lapis Lazuli, 0.25, LAPIS_LAZULI, LAPIS_BLOCK, LAPIS_ORE}," +			
 			"{Diamonds, 0.125, DIAMOND_ORE, DIAMOND}," +
 			"{Redstone, 1, REDSTONE, REDSTONE_BLOCK}," +
 			"{Netherrack, 4, NETHERRACK}," +
-			"{Nether Quartz, 1, NETHER_QUARTZ_ORE, NETHER_QUARTZ}," +
+			"{Nether Quartz, 1, NETHER_QUARTZ_ORE, QUARTZ}," +
 			"{Glowstone, 0.25, GLOWSTONE, GLOWSTONE_BLOCK}," +
 			"{End Stone, 4, END_STONE}," +
 			"{Ancient_Debris, 0.0625, ANCIENT_DEBRIS}," +

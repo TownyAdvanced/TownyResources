@@ -95,8 +95,10 @@ public class TownyResourcesSettings {
 
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 
+		System.out.println("Cat string: "+ categoriesAsString);
+		
 		if(!categoriesAsString.isEmpty()) {
-			Pattern pattern = Pattern.compile("\\{(\\w+)}", Pattern.CASE_INSENSITIVE);
+			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
 			Matcher matcher = pattern.matcher(categoriesAsString);
 			String categoryAsString;
 			String[] categoryAsArray;

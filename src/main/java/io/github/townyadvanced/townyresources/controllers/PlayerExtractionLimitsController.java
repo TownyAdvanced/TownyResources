@@ -30,10 +30,14 @@ public class PlayerExtractionLimitsController {
     public static void loadAllResourceExtractionCategories() throws Exception{
          //Load all categories
          List<ResourceExtractionCategory> resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
+         
+         System.out.println("num cats: " + resourceExtractionCategories.size());
          //Clear the map
          materialToResourceExtractionCategoryMap.clear();
          //Put each material on the map
          for(ResourceExtractionCategory category: resourceExtractionCategories) {
+            System.out.println(category.getCategoryName());
+         
              for(Material material: category.getMaterialsInCategory()) {
                  materialToResourceExtractionCategoryMap.put(material, category);
              }
@@ -95,10 +99,15 @@ public class PlayerExtractionLimitsController {
 
                 //Cycle each item dropped and decide what to do
                 for(ItemStack drop: event.getDrops()) {
+                
+                    System.out.println("a");
+                                                           
                     //Skip item if it is not listed as a restricted resource
                     if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
                         continue;
                 
+                    System.out.println("b");
+
                     //Get the extraction record for the item's category
                     CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
                     if(categoryExtractionRecord == null) {
@@ -106,6 +115,11 @@ public class PlayerExtractionLimitsController {
                         categoryExtractionRecord = new CategoryExtractionRecord(extractionCategoryOfMaterial);
                         playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
                     }
+                    System.out.println("xxx");
+                    System.out.println(categoryExtractionRecord.getResourceExtractionCategory().getCategoryName());
+                    System.out.println(categoryExtractionRecord.getExtractionLimitItems());
+                    System.out.println(categoryExtractionRecord.getAmountAlreadyExtracted());
+                    System.out.println(categoryExtractionRecord.isExtractionLimitReached());
     
                     //If the player is at their limit for the material, cancel the drop, otherwise allow it and update the limit
                     if(categoryExtractionRecord.isExtractionLimitReached()) {

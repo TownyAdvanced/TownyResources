@@ -38,4 +38,16 @@ public class CategoryExtractionRecord {
         }            
         return amountToExtract;  
     }
+
+    public ResourceExtractionCategory getResourceExtractionCategory() {
+        return resourceExtractionCategory;
+    }
+    
+    public int getExtractionLimitItems() {
+        return extractionLimitItems;
+    }
+    
+    public int getAmountAlreadyExtracted() {
+        return amountAlreadyExtracted;
+    }
 }

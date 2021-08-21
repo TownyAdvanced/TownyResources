@@ -6,9 +6,11 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockShearEntityEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
+import org.bukkit.event.player.PlayerShearEntityEvent;
 
 /**
  * 
@@ -44,5 +46,19 @@ public class TownyResourcesBukkitEventListener implements Listener {
 			PlayerExtractionLimitsController.processBlockBreakEvent(event);
 		}	
 	}
-
+	
+	@EventHandler()
+	public void onBlockShearEntityEvent(BlockShearEntityEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {
+			//Dispensers cannot shear entities
+			event.setCancelled(true);
+		}	
+	}
+	
+	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {
+			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);
+		}	
+	}
+	
 }

@@ -15,6 +15,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -184,6 +185,40 @@ public class PlayerExtractionLimitsController {
         }
     }
 
+    public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
+        //Get the player extraction record
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
+        
+        //Return if item is not listed as a restricted resource
+        Material itemMaterial = event.getItem().getType();
+        if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
+            return;
+
+        ///Get the category extraction record
+        CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
+             
+        /* 
+         * If player is at the limit, cancel the event
+         *
+         * If player is not at the limit, add extracted amount to record.                    
+         */
+        if(categoryExtractionRecord.isExtractionLimitReached()) {
+            event.setCancelled(true);
+        } else {
+            categoryExtractionRecord.addExtractedAmount(event.getItem().getAmount());                         
+        }
+                            
+        //If the limit has been reached, send a warning message
+        if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
+            String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+            int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
+            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+            categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+        }
+    }
+    
+    ///////////// HELPER METHODS //////////////////////
+    
     /**
      * Get the player extraction record (create it if needed)
      * 
@@ -199,7 +234,7 @@ public class PlayerExtractionLimitsController {
      * @return category extraction record for 1 player & 1 category
      */
     private static CategoryExtractionRecord getCategoryExtractionRecord(Map<Material, CategoryExtractionRecord> playerExtractionRecord, Material droppedMaterial) {    
-        //Search the player extraction record 
+        //Get the player extraction record 
         CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(droppedMaterial);            
                   
         /*
@@ -225,4 +260,5 @@ public class PlayerExtractionLimitsController {
         //Return category extraction record
         return categoryExtractionRecord;
     }
+
 }

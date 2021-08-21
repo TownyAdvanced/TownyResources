@@ -1,6 +1,13 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.settings.Translation;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.WorldCoord;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
@@ -27,7 +34,7 @@ public class PlayerExtractionLimitsController {
     public static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
     public static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
     public static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
-    public static Map<Entity, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
+    public static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
     public static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
 
     public static void resetMobsDamagedByPlayers() {
@@ -101,7 +108,7 @@ public class PlayerExtractionLimitsController {
             
             if(player != null) {                       
                 //Get the player extraction record
-                Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(player);
+                Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(player.getUniqueId());
                 
                 //Cycle each item dropped and decide what to do
                 for(ItemStack drop: event.getDrops()) {
@@ -136,7 +143,7 @@ public class PlayerExtractionLimitsController {
      */
     public static void processBlockBreakEvent(BlockBreakEvent event) {
         //Get the player extraction record
-        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer().getUniqueId());
 
         //Cycle each item dropped and decide what to do
         for(ItemStack drop: event.getBlock().getDrops()) {
@@ -188,14 +195,12 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-        System.out.println("Now processing shear event");
-
         // Only limit if sheep  (mooshroom & iron-golem mechanics don't seem worth limiting
         if(event.getEntity().getType() != EntityType.SHEEP)
             return;  
             
         //Get the player extraction record
-        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer().getUniqueId());
         
         DyeColor sheepColour = ((Sheep)event.getEntity()).getColor();
         Material itemMaterial = Material.getMaterial(sheepColour.toString() + "_WOOL");
@@ -203,8 +208,6 @@ public class PlayerExtractionLimitsController {
         //Return if item is not listed as a restricted resource        
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
-        
-        System.out.println("Item Material: " + itemMaterial);
 
         ///Get the category extraction record
         CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
@@ -236,16 +239,26 @@ public class PlayerExtractionLimitsController {
         if(event.getEntity().getType() != EntityType.CHICKEN)
             return;
         
+        //Return if chicken is not in a town
+        TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getEntity().getLocation());
+        if(townblock == null)
+            return;
+            
+        //Return if there is no townblock owner
+        Resident resident;
+        try {
+            resident = townblock.getResident();
+        } catch (NotRegisteredException nre) {return;}
+                
         //Get the player extraction record
-        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getEntity());
-
-        Material itemMaterial = event.getItemDrop().getItemStack().getType();
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(resident.getUUID());
                                                                                               
         //Return if item is not listed as a restricted resource
+        Material itemMaterial = event.getItemDrop().getItemStack().getType();
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
 
-        ///Get the category extract record
+        ///Get the category extraction record
         CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
              
         /* 
@@ -270,8 +283,8 @@ public class PlayerExtractionLimitsController {
      * 
      * @return player extraction record
      */
-    private static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(Entity player) {
-       return allPlayerExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());    
+    private static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(UUID playerUUID) {
+       return allPlayerExtractionRecords.computeIfAbsent(playerUUID, k -> new HashMap<>());    
     }
 
     /**

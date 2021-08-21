@@ -62,9 +62,10 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - Extraction is limited per day.
 - The extraction records of all players are reset at Towny New Day.
 ###### Limit Types
-- Block Drops: A block will only drop an item if broken by a player who is still below their daily limit for that item. Also, for all materials except STONE, COBBLESTONE, and SOIL, the block itself will not break if the player has reached their daily limit.
-- Mob Death Drops: A dead mob will only drop an item if killed by a player who is still below their daily limit for that item. 
-- Mob Shear Drops: A sheared mob will only drop an item if sheared by a player who is still below their daily limit for that item.
+- Broken Block Drops: A block will only drop an item if broken by a player who is still below their daily limit for that item. Also, for all materials except STONE, COBBLESTONE, and SOIL, the block itself will not break if the player has reached their daily limit.
+- Dead Mob Drops: A dead mob will only drop an item if killed by a player who is still below their daily limit for that item. 
+- Sheared Sheep Drops: A sheared mob will only drop an item if sheared by a player who is still below their daily limit for that item.
+- Chicken Egg Drops: A chicken...
 
 ###### Information
 - When a player hits their daily extraction limit for a particular category of material, they will see an information bar message. Example:

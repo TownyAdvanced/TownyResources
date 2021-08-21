@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
@@ -155,17 +156,18 @@ public class TownyResourcesSettings {
 		}
 	}
 
-	public static void loadConfig(String filepath, String version) throws IOException {
+	public static void loadConfig(String filepath, String version) throws TownyException{
 		if (FileMgmt.checkOrCreateFile(filepath)) {
 			File file = new File(filepath);
 
 			// read the config.yml into memory
 			config = new CommentedConfiguration(file);
 			if (!config.load())
-				sendError("Failed to load Config!");
+				throw new TownyException("Failed to load Config!");
 
 			setDefaults(version, file);
 			config.save();
+			TownyResources.info("Config Loaded");
 		}
 	}
 

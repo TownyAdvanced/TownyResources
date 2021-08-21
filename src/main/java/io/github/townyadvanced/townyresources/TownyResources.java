@@ -118,12 +118,14 @@ public class TownyResources extends JavaPlugin {
 		pm.registerEvents(new TownyResourcesBukkitEventListener(this), this);
 		pm.registerEvents(new TownyResourcesTownyEventListener(this), this);
 		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
-		pm.registerEvents(new TownyResourcesNationEventListener(this), this);		
+		pm.registerEvents(new TownyResourcesNationEventListener(this), this);
+		TownyResources.info("Listeners Loaded");		
 	}
 
 	private void registerCommands() {
 		getCommand("townyresources").setExecutor(new TownyResourcesCommand());
 		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());
+		TownyResources.info("Commands Loaded");		
 	}
 
 }

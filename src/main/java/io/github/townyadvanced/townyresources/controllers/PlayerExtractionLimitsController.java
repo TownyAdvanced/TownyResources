@@ -44,7 +44,7 @@ public class PlayerExtractionLimitsController {
                  materialToResourceExtractionCategoryMap.put(material, category);
              }
          }
-        
+         TownyResources.info("All Resource Extraction Categories Loaded");        
     }
 
     public static void saveAllPlayerExtractionRecords() {

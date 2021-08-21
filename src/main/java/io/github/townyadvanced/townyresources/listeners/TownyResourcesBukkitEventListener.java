@@ -38,11 +38,10 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		}
 	}
 
-	//Limit the breaking of resource blocks (takes care of breaking ores e.g. Diamond)
 	@EventHandler()
 	public void onBlockBreak(BlockBreakEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
-//			event.getBlock()
+			PlayerExtractionLimitsController.processBlockBreakEvent(event);
 		}	
 	}
 

@@ -89,19 +89,19 @@ public enum TownyResourcesConfigNodes {
 			"{Vines, 0.25, VINE}," +
 			"{Fish, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
 			"{Gunpowder, 0.25, GUNPOWDER}," +
-			"{String, 0.5, STRING}," +
-			"{Spider eyes, 0.5, SPIDER_EYE}," +
-			"{Feather, 0.5, FEATHER}," +
-			"{Leather, 0.5, LEATHER}," +
-			"{Rabbit Hide, 0.5, RABBIT_HIDE}," +
+			"{String, 0.25, STRING}," +
+			"{Spider eyes, 0.25, SPIDER_EYE}," +
+			"{Feathers, 0.25, FEATHER}," +
+			"{Leather, 0.25, LEATHER}," +
+			"{Rabbit Hides, 0.25, RABBIT_HIDE}," +
 			"{Rotten Flesh, 1, ROTTEN_FLESH}," +
 			"{Bones, 0.5, BONE, BONE_BLOCK}," +
 			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
 			"{Beef, 0.25, BEEF, COOKED_BEEF}," +
 			"{Chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
-			"{Egg, 0.25, EGG}," +			
-			"{Chorus Fruit, 1, CHORUS_FRUIT}," +
+			"{Eggs, 0.25, EGG}," +			
+			"{Chorus Fruits, 0.25, CHORUS_FRUIT}," +
 			"{Ender Pearls, 0.125, ENDER_PEARL}",
 			"",
 			"# This list shows the resource extraction categories.",
@@ -222,11 +222,11 @@ public enum TownyResourcesConfigNodes {
 			"{Fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
 			"{A Flock of Sheep, 100, 1, WHITE_WOOL}," +
 			"{A Nest of Creepers, 100, 0.25, GUNPOWDER}," +
-			"{A Nest of Spiders, 100, 0.5, STRING}," +
-			"{A Nest of Spiders, 100, 0.5, SPIDER_EYE}," +
-			"{A Flock of Chickens, 100, 0.5, FEATHER}," +
-			"{A Herd of Animals, 100, 0.5, LEATHER}," +
-			"{A Herd of Rabbits, 100, 0.5, RABBIT_HIDE}," +
+			"{A Nest of Spiders, 100, 0.25, STRING}," +
+			"{A Nest of Spiders, 100, 0.25, SPIDER_EYE}," +
+			"{A Flock of Chickens, 100, 0.25, FEATHER}," +
+			"{A Herd of Animals, 100, 0.25, LEATHER}," +
+			"{A Herd of Rabbits, 100, 0.25, RABBIT_HIDE}," +
 			"{A Hest of Zombies, 100, 1, ROTTEN_FLESH}" +
 			"{A Hest of Skeletons, 100, 0.5, BONE}," +
 			"{A Herd of Pigs, 100, 0.25, PORKCHOP}," +

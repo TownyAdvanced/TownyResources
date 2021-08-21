@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -134,4 +135,46 @@ public class PlayerExtractionLimitsController {
             }            
         }               
     }
+
+    /**
+     * A broken block must meet the following criteria to drop items:
+     * -> It must have been broken by a player who was below their daily extraction limit for the dropped items.
+     * 
+     * @param event the event - this event is only called for Players (not entities)
+     */
+    public static void processBlockBreakEvent(BlockBreakEvent event) {
+        //Get the player extraction record (create it if needed)
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.computeIfAbsent(event.getPlayer(), k -> new HashMap<>());
+
+        //Cycle each item dropped and decide what to do
+        for(ItemStack drop: event.getBlock().getDrops()) {
+                                                   
+            //Skip item if it is not listed as a restricted resource
+            if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
+                continue;
+
+            //Get the extraction record for the item's category
+            CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
+            if(categoryExtractionRecord == null) {
+                ResourceExtractionCategory resourceExtractionCategory = materialToResourceExtractionCategoryMap.get(drop.getType());
+                categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
+                playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
+            }
+             
+            //If player is at the limit, set the drop to 0, otherwise add to the record and possibly reduce the drop                     
+            if(categoryExtractionRecord.isExtractionLimitReached()) {
+               drop.setAmount(0);
+            } else {
+                drop.setAmount(categoryExtractionRecord.addExtractedAmount(drop.getAmount()));                    
+            }
+                                
+            //If the limit has been reached, send a warning message
+            if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
+                String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+                int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
+                event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+                categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+            }
+        }
+    }        
 }

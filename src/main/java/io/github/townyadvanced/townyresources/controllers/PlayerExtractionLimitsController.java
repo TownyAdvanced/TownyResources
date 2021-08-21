@@ -270,10 +270,8 @@ public class PlayerExtractionLimitsController {
         } else {
             categoryExtractionRecord.addExtractedAmount(event.getItemDrop().getItemStack().getAmount());                         
         }
-                            
-        //If the limit has been reached, send a warning message
-        if(categoryExtractionRecord.isExtractionLimitReached())
-            sendLimitReachedWarningMessage((Player)event.getEntity(), categoryExtractionRecord);                       
+                 
+        //Do not send a warning message in the case of egg drops.
     }
   
     ///////////// HELPER METHODS //////////////////////

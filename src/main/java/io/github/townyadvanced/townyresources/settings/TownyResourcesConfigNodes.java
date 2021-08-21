@@ -100,6 +100,7 @@ public enum TownyResourcesConfigNodes {
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
 			"{Beef, 0.25, BEEF, COOKED_BEEF}," +
 			"{Chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
+			"{Egg, 0.25, EGG}," +			
 			"{Chorus Fruit, 1, CHORUS_FRUIT}," +
 			"{Ender Pearls, 0.125, ENDER_PEARL}",
 			"",
@@ -231,7 +232,8 @@ public enum TownyResourcesConfigNodes {
 			"{A Herd of Pigs, 100, 0.25, PORKCHOP}," +
 			"{A Herd of Sheep, 100, 0.25, MUTTON}," +
 			"{A Herd of Cows, 100, 0.25, BEEF}," +
-			"{A Flock of Chickens, 100, 0.25, CHICKEN}," +			
+			"{A Flock of Chickens, 100, 0.25, CHICKEN}," +	
+			"{A Flock of Hens, 100, 0.25, EGG}," +						
 			"{A Nest of Endermen, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",

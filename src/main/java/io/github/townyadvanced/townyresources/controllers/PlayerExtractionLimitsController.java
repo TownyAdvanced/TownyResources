@@ -161,11 +161,11 @@ public class PlayerExtractionLimitsController {
                 playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
             }
              
-            //If player is at the limit, set the drop to 0, otherwise add to the record and possibly reduce the drop                     
+            //If player is at the limit, cancel the event, otherwise add to the record                     
             if(categoryExtractionRecord.isExtractionLimitReached()) {
-               drop.setAmount(0);
+                event.setCancelled(true);
             } else {
-                drop.setAmount(categoryExtractionRecord.addExtractedAmount(drop.getAmount()));                    
+                categoryExtractionRecord.addExtractedAmount(drop.getAmount());
             }
                                 
             //If the limit has been reached, send a warning message

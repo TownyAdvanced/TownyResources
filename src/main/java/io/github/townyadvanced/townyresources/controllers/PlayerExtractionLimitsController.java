@@ -164,7 +164,7 @@ public class PlayerExtractionLimitsController {
                         event.setCancelled(true);
                 }
             } else {
-                categoryExtractionRecord.addExtractedAmount(drop.getAmount());
+                categoryExtractionRecord.addExtractedAmount(drop.getAmount());                         
             }
                                 
             //If the limit has been reached, send a warning message (except if STONE, COBBLE, DIRT, then don't send message).

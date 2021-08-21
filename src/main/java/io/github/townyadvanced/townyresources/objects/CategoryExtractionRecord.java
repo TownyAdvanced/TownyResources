@@ -29,7 +29,7 @@ public class CategoryExtractionRecord {
      * @param amountToExtract the amount to extract
      */
     public int addExtractedAmount(int amountToExtract) {
-        if(amountAlreadyExtracted + amountToExtract > extractionLimitItems) { 
+        if(amountAlreadyExtracted + amountToExtract >= extractionLimitItems) { 
             //We hit the limit
             amountToExtract = extractionLimitItems - amountAlreadyExtracted;
             amountAlreadyExtracted = extractionLimitItems;

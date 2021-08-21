@@ -237,7 +237,8 @@ public class PlayerExtractionLimitsController {
      */
     public static void processItemSpawnEvent(ItemSpawnEvent event) {    
         //Return if not an egg
-        if(event.getEntityType() != EntityType.EGG)
+        Material itemMaterial = event.getEntity().getItemStack().getType();        
+        if(itemMaterial != Material.EGG)
             return;
         
         //Return if location is not in a town
@@ -255,7 +256,6 @@ public class PlayerExtractionLimitsController {
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(resident.getUUID());
                                                                                               
         //Return if item is not listed as a restricted resource
-        Material itemMaterial = Material.EGG;
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
 
@@ -269,7 +269,7 @@ public class PlayerExtractionLimitsController {
         if(categoryExtractionRecord.isExtractionLimitReached()) {
             event.setCancelled(true);
         } else {
-            categoryExtractionRecord.addExtractedAmount(1);                         
+            categoryExtractionRecord.addExtractedAmount(event.getEntity().getItemStack().getAmount());                         
         }
                  
         //Do not send a warning message in the case of egg drops.

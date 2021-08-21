@@ -55,15 +55,20 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
 ### Player Resource Extraction Limits
-###### Limits per Material
-- Extraction is limited per material.
-- Example: If a player hits their daily limit for Wheat, they can still continue to extract other crops such as Potatoes, Carrots, Melons etc. (*historical note: in medieval times, farmers had to plant different crops just to survive*).
-###### Limits per Day
+###### Limit Categories
+- Extraction is limited per category of material.
+- Example: The category of "Common Rocks" contains EARTH and COBBLESTONE. Extracting either of those items counts towards the daily limit (in this case 6 stacks).
+###### Limit Schedule
 - Extraction is limited per day.
 - The extraction records of all players are reset at Towny New Day.
+###### Limit Types
+- Block Drops: A block will only drop an item if broken by a player who is still below their daily limit for that item. Also, for all materials except STONE, COBBLESTONE, and SOIL, the block itself will not break if the player has reached their daily limit.
+- Mob Death Drops: A dead mob will only drop an item if killed by a player who is still below their daily limit for that item. 
+- Mob Shear Drops: A sheared mob will only drop an item if sheared by a player who is still below their daily limit for that item.
+
 ###### Information
-- When a player hits their daily extraction limit for a particular material, they will see an information bar message. Example:
-  > Blah
+- When a player hits their daily extraction limit for a particular category of material, they will see an information bar message. Example:
+  > Daily Extraction limit reached for Beetroot (64)
                                                                                                                                       >
 ## F.A.Q:
 ###### Question: 

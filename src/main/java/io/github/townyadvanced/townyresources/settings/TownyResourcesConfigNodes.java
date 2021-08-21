@@ -63,7 +63,7 @@ public enum TownyResourcesConfigNodes {
 			"{Glowstone, 0.25, GLOWSTONE_DUST, GLOWSTONE}," +
 			"{End Stone, 4, END_STONE}," +
 			"{Ancient_Debris, 0.0625, ANCIENT_DEBRIS}," +
-			"{Wool, 1, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
+			"{Wool, 0.5, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
 			"LIME_WOOL, PINK_WOOL, GRAY_WOOL, LIGHT_GRAY_WOOL, CYAN_WOOL," +
 			"PURPLE_WOOL, BLUE_WOOL, BROWN_WOOL, GREEN_WOOL, RED_WOOL,BLACK_WOOL}," +
 			"{Coral, 1, TUBE_CORAL, BRAIN_CORAL, BUBBLE_CORAL, FIRE_CORAL, HORN_CORAL," +
@@ -220,7 +220,7 @@ public enum TownyResourcesConfigNodes {
 			"{Apple Trees, 100, 0.125, APPLE}," +
 			"{Vines, 100, 0.25, VINE}," +
 			"{Fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
-			"{A Flock of Sheep, 100, 1, WHITE_WOOL}," +
+			"{A Flock of Sheep, 100, 0.5, WHITE_WOOL}," +
 			"{A Nest of Creepers, 100, 0.25, GUNPOWDER}," +
 			"{A Nest of Spiders, 100, 0.25, STRING}," +
 			"{A Nest of Spiders, 100, 0.25, SPIDER_EYE}," +

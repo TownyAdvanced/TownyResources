@@ -55,6 +55,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		}	
 	}
 	
+	@EventHandler()
 	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);

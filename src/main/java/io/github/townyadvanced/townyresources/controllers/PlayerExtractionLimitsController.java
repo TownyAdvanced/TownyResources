@@ -186,13 +186,17 @@ public class PlayerExtractionLimitsController {
     }
 
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
+
+        System.out.println("Now processing shear event");
         //Get the player extraction record
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
         
+        System.out.println("A");
         //Return if item is not listed as a restricted resource
         Material itemMaterial = event.getItem().getType();
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
+        System.out.println("B");
 
         ///Get the category extraction record
         CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            

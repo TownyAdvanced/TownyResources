@@ -19,7 +19,8 @@ public class TownyResourcesTownyEventListener implements Listener {
 
 	@SuppressWarnings("unused")
 	private final TownyResources plugin;
-	private static long nextProductionRecalculationTime = 0;
+	private static int PRODUCTION_RECALCULATION_INTERVAL_MILLIS = 600000; //10 mins
+	private static long nextProductionRecalculationTime = System.currentTimeMillis() + PRODUCTION_RECALCULATION_INTERVAL_MILLIS;
 
 	public TownyResourcesTownyEventListener(TownyResources instance) {
 		plugin = instance;
@@ -58,7 +59,7 @@ public class TownyResourcesTownyEventListener implements Listener {
             PlayerExtractionLimitsController.saveAllPlayerExtractionRecords();
 
             if(System.currentTimeMillis() > nextProductionRecalculationTime) {
-                nextProductionRecalculationTime = System.currentTimeMillis() + 600000; //10 mins
+                nextProductionRecalculationTime = System.currentTimeMillis() + PRODUCTION_RECALCULATION_INTERVAL_MILLIS; 
                 TownResourceProductionController.recalculateAllProduction();
             }
         }

@@ -236,28 +236,33 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processItemSpawnEvent(ItemSpawnEvent event) {    
-        //Return if not an egg
+        //Return if item is not an egg
         Material itemMaterial = event.getEntity().getItemStack().getType();        
         if(itemMaterial != Material.EGG)
             return;
-        
-        //Return if location is not in a town
-        TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getLocation());
-        if(townblock == null)
-            return;
-            
-        //Return if there is no townblock owner
-        Resident resident;
-        try {
-            resident = townblock.getResident();
-        } catch (NotRegisteredException nre) {return;}
-                
-        //Get the player extraction record
-        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(resident.getUUID());
-                                                                                              
+                                                                                                      
         //Return if item is not listed as a restricted resource
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
+
+        //If location is not a town, cancel the event
+        TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getLocation());           
+        if(townblock == null) {
+            event.setCancelled(true);
+            return;
+        }
+            
+        //If there is no townblock owner, cancel the event
+        Resident resident;
+        try {
+            resident = townblock.getResident();
+        } catch (NotRegisteredException nre) {
+            event.setCancelled(true);
+            return;
+        }
+                
+        //Get the player extraction record
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(resident.getUUID());
 
         ///Get the category extraction record
         CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            

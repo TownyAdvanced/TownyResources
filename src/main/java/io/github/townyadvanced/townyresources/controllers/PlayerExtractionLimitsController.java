@@ -149,8 +149,9 @@ public class PlayerExtractionLimitsController {
             CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, drop.getType());                                            
                  
             /* 
-             * If player is at the limit, cancel the event (with exception of STONE, COBBLE, DIRT ... where only the drop is cancelled)
-             * If player is not at the limit, allow event                    
+             * If player is at the limit, cancel the event (except if STONE, COBBLE, DIRT, then only cancel the drop).
+             *
+             * If player is not at the limit, add extracted amount to record.                    
              */
             if(categoryExtractionRecord.isExtractionLimitReached()) {
                 switch(drop.getType()) {
@@ -160,13 +161,13 @@ public class PlayerExtractionLimitsController {
                         event.setDropItems(false);
                         break;
                     default:                        
+                        event.setCancelled(true);
                 }
-                event.setCancelled(true);
             } else {
                 categoryExtractionRecord.addExtractedAmount(drop.getAmount());
             }
                                 
-            //If the limit has been reached, send a warning message (with exception for STONE, COBBLE, DIRT ... where message is not sent)
+            //If the limit has been reached, send a warning message (except if STONE, COBBLE, DIRT, then don't send message).
             if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
                 switch(drop.getType()) {
                     case STONE:

@@ -28,7 +28,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 
 	@EventHandler()
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
 			PlayerExtractionLimitsController.processEntityDamageByEntityEvent(event);
 		}
 	}
@@ -42,14 +42,14 @@ public class TownyResourcesBukkitEventListener implements Listener {
 
 	@EventHandler()
 	public void onBlockBreak(BlockBreakEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
 			PlayerExtractionLimitsController.processBlockBreakEvent(event);
 		}	
 	}
 	
 	@EventHandler()
 	public void onBlockShearEntityEvent(BlockShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
 			//Dispensers cannot shear entities
 			event.setCancelled(true);
 		}	
@@ -57,7 +57,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler()
 	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
 			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);
 		}	
 	}
@@ -65,8 +65,8 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler()
 	public void onPlayerShearEntityEvent(EntityDropItemEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
-			//PlayerExtractionLimitsController.processEntityDropItemEvent(event);
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
+			PlayerExtractionLimitsController.processEntityDropItemEvent(event);
 		}	
 	}
 	

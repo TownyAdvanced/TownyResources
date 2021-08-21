@@ -16,6 +16,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,7 +28,7 @@ public class PlayerExtractionLimitsController {
     public static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
     public static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
     public static Map<Entity, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
-    
+    public static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
 
     public static void resetMobsDamagedByPlayers() {
         mobsDamagedByPlayersLastShortTick.clear();
@@ -60,15 +61,16 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if(!event.isCancelled() && event.getEntity() instanceof Mob) {
-                    
-            if(event.getDamager() instanceof Player) {
-                //Mark the mob as recently hit by the player
-                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());                
-            } else if (event.getDamager() instanceof Projectile && ((Projectile)event.getDamager()).getShooter() instanceof Player) {
-                //Mark the mob as recently hit by the player
-                mobsDamagedByPlayersThisShortTick.put(event.getEntity(), (Entity)((Projectile)event.getDamager()).getShooter());                           
-            }
+        //Return if not a mob
+        if(!(event.getEntity() instanceof Mob))
+            return;
+                
+        if(event.getDamager() instanceof Player) {
+            //Mark the mob as recently hit by the player
+            mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());                
+        } else if (event.getDamager() instanceof Projectile && ((Projectile)event.getDamager()).getShooter() instanceof Player) {
+            //Mark the mob as recently hit by the player
+            mobsDamagedByPlayersThisShortTick.put(event.getEntity(), (Entity)((Projectile)event.getDamager()).getShooter());                           
         }
     }
 
@@ -119,12 +121,8 @@ public class PlayerExtractionLimitsController {
                     }
                                         
                     //If the limit has been reached, send a warning message
-                    if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-                        String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
-                        int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-                        ((Player)player).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
-                        categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
-                    }
+                    if(categoryExtractionRecord.isExtractionLimitReached())
+                        sendLimitReachedWarningMessage((Player)event.getEntity(), categoryExtractionRecord);                       
                 }
             }            
         }               
@@ -170,22 +168,25 @@ public class PlayerExtractionLimitsController {
             }
                                 
             //If the limit has been reached, send a warning message (except if STONE, COBBLE, DIRT, then don't send message).
-            if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
+            if(categoryExtractionRecord.isExtractionLimitReached()) {
                 switch(drop.getType()) {
                     case STONE:
                     case COBBLESTONE:
                     case DIRT:
                         break;
                     default:                        
-                        String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
-                        int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-                        event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
-                        categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+                        sendLimitReachedWarningMessage(event.getPlayer(), categoryExtractionRecord);                       
                 }             
             }
         }
     }
 
+    /**
+     * Process player shear entity event
+     * Limits extraction of wool
+     * 
+     * @param event event
+     */
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
         System.out.println("Now processing shear event");
 
@@ -199,12 +200,11 @@ public class PlayerExtractionLimitsController {
         DyeColor sheepColour = ((Sheep)event.getEntity()).getColor();
         Material itemMaterial = Material.getMaterial(sheepColour.toString() + "_WOOL");
         
-        System.out.println("A");
-              
         //Return if item is not listed as a restricted resource        
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
-        System.out.println("B");
+        
+        System.out.println("Item Material: " + itemMaterial);
 
         ///Get the category extraction record
         CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
@@ -217,20 +217,54 @@ public class PlayerExtractionLimitsController {
         if(categoryExtractionRecord.isExtractionLimitReached()) {
             event.setCancelled(true);
         } else {
-            categoryExtractionRecord.addExtractedAmount(event.getItem().getAmount());                         
+            categoryExtractionRecord.addExtractedAmount(2); //Had to hardcode the amount because the event doesn't have it                         
         }
                             
         //If the limit has been reached, send a warning message
-        if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-            String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
-            int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
-            categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
-        }
+        if(categoryExtractionRecord.isExtractionLimitReached())
+            sendLimitReachedWarningMessage(event.getPlayer(), categoryExtractionRecord);                       
     }
     
+    /**
+     * Process entity drop item events
+     * Limits extraction of eggs, by hens who drop them
+     * 
+     * @param event event
+     */
+    public static void processEntityDropItemEvent(EntityDropItemEvent event) {
+        //Return if not a chicken
+        if(event.getEntity().getType() != EntityType.CHICKEN)
+            return;
+        
+        //Get the player extraction record
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getEntity());
+
+        Material itemMaterial = event.getItemDrop().getItemStack().getType();
+                                                                                              
+        //Return if item is not listed as a restricted resource
+        if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
+            return;
+
+        ///Get the category extract record
+        CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
+             
+        /* 
+         * If player is at the limit, cancel the event 
+         * If player is not at the limit, add extracted amount to record.                    
+         */
+        if(categoryExtractionRecord.isExtractionLimitReached()) {
+            event.setCancelled(true);
+        } else {
+            categoryExtractionRecord.addExtractedAmount(event.getItemDrop().getItemStack().getAmount());                         
+        }
+                            
+        //If the limit has been reached, send a warning message
+        if(categoryExtractionRecord.isExtractionLimitReached())
+            sendLimitReachedWarningMessage((Player)event.getEntity(), categoryExtractionRecord);                       
+    }
+  
     ///////////// HELPER METHODS //////////////////////
-    
+  
     /**
      * Get the player extraction record (create it if needed)
      * 
@@ -273,4 +307,12 @@ public class PlayerExtractionLimitsController {
         return categoryExtractionRecord;
     }
 
+    private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
+        if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
+            String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+            int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+            categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
+        }
+    }
 }

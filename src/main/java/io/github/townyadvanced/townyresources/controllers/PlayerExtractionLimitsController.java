@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class PlayerExtractionLimitsController {
          materialToResourceExtractionCategoryMap.clear();
          //Put each material on the map
          for(ResourceExtractionCategory category: resourceExtractionCategories) {
-            System.out.println(category.getCategoryName());
+            System.out.println(category.getCategoryName() + ": " + Arrays.toString(category.getMaterialsInCategory().toArray())) ;
          
              for(Material material: category.getMaterialsInCategory()) {
                  materialToResourceExtractionCategoryMap.put(material, category);
@@ -111,8 +112,8 @@ public class PlayerExtractionLimitsController {
                     //Get the extraction record for the item's category
                     CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
                     if(categoryExtractionRecord == null) {
-                        ResourceExtractionCategory extractionCategoryOfMaterial = materialToResourceExtractionCategoryMap.get(drop.getType());
-                        categoryExtractionRecord = new CategoryExtractionRecord(extractionCategoryOfMaterial);
+                        ResourceExtractionCategory resourceExtractionCategory = materialToResourceExtractionCategoryMap.get(drop.getType());
+                        categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
                         playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
                     }
                     System.out.println("xxx");

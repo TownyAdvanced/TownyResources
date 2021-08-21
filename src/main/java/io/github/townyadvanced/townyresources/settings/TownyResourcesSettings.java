@@ -111,18 +111,25 @@ public class TownyResourcesSettings {
 			ResourceExtractionCategory resourceExtractionCategory;
 			
 			while (matcher.find()) {
-				//Construct ResourceExtractCategory object
-				categoryAsString = matcher.group(1);
+				//Read one resource extraction category
+				categoryAsString = matcher.group(1);   
 				categoryAsArray = categoryAsString.split(",");
 				if(categoryAsArray.length < 2) {
 					TownyResources.severe("Bad configuration for extraction category: " + categoryAsString);
 					problemLoadingExtractionCategories = true;
 					continue;
 				}
+				
+				//Read name
 				categoryName = categoryAsArray[0].trim();
+				
+				//Read limit
 				categoryExtractionLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
 				categoryExtractionLimitItems = (int)((categoryExtractionLimitStacks * 64) + 0.5);
-				for(int i = 2; i < categoryAsArray.length; i ++) {
+				
+				//Read Materials
+				materialsInCategory.clear();
+				for(int i = 2; i < categoryAsArray.length; i++) {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
 						TownyResources.severe("Unknown material in extraction category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
@@ -131,7 +138,10 @@ public class TownyResourcesSettings {
 					}
 					materialsInCategory.add(material);
 				}
+				
+				//Construct ResourceExtractionCategory object
 				resourceExtractionCategory = new ResourceExtractionCategory(categoryName, categoryExtractionLimitItems, materialsInCategory);
+				
 				//Add to result
 				result.add(resourceExtractionCategory);
 			}		

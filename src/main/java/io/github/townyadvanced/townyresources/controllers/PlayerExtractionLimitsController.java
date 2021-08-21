@@ -17,10 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerExtractionLimitsController {
 
@@ -99,9 +96,9 @@ public class PlayerExtractionLimitsController {
             }
             
             if(player != null) {                       
-                //Get the player extraction record (create it if needed)
-                Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());
-
+                //Get the player extraction record
+                Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(player);
+                
                 //Cycle each item dropped and decide what to do
                 for(ItemStack drop: event.getDrops()) {
                                                            
@@ -109,14 +106,9 @@ public class PlayerExtractionLimitsController {
                     if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
                         continue;
 
-                    //Get the extraction record for the item's category
-                    CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
-                    if(categoryExtractionRecord == null) {
-                        ResourceExtractionCategory resourceExtractionCategory = materialToResourceExtractionCategoryMap.get(drop.getType());
-                        categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
-                        playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
-                    }
-                     
+                    ///Get the category extract record
+                    CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, drop.getType());                                            
+
                     //If player is at the limit, set the drop to 0, otherwise add to the record and possibly reduce the drop                     
                     if(categoryExtractionRecord.isExtractionLimitReached()) {
                        drop.setAmount(0);
@@ -143,26 +135,21 @@ public class PlayerExtractionLimitsController {
      * @param event the event - this event is only called for Players (not entities)
      */
     public static void processBlockBreakEvent(BlockBreakEvent event) {
-        //Get the player extraction record (create it if needed)
-        Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.computeIfAbsent(event.getPlayer(), k -> new HashMap<>());
+        //Get the player extraction record
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
 
         //Cycle each item dropped and decide what to do
         for(ItemStack drop: event.getBlock().getDrops()) {
-                                                   
+                                                                                              
             //Skip item if it is not listed as a restricted resource
             if(!materialToResourceExtractionCategoryMap.containsKey(drop.getType()))
                 continue;
 
-            //Get the extraction record for the item's category
-            CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(drop.getType());            
-            if(categoryExtractionRecord == null) {
-                ResourceExtractionCategory resourceExtractionCategory = materialToResourceExtractionCategoryMap.get(drop.getType());
-                categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
-                playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
-            }
-             
+            ///Get the category extract record
+            CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, drop.getType());                                            
+                 
             /* 
-             * If player is at the limit, cancel the event (Exception for STONE, COBBLE, DIRT ... where only the drop is cancelled)
+             * If player is at the limit, cancel the event (with exception of STONE, COBBLE, DIRT ... where only the drop is cancelled)
              * If player is not at the limit, allow event                    
              */
             if(categoryExtractionRecord.isExtractionLimitReached()) {
@@ -179,7 +166,7 @@ public class PlayerExtractionLimitsController {
                 categoryExtractionRecord.addExtractedAmount(drop.getAmount());
             }
                                 
-            //If the limit has been reached, send a warning message (Except for STONE, COBBLE, DIRT ... where no message is sent)
+            //If the limit has been reached, send a warning message (with exception for STONE, COBBLE, DIRT ... where message is not sent)
             if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
                 switch(drop.getType()) {
                     case STONE:
@@ -194,5 +181,47 @@ public class PlayerExtractionLimitsController {
                 }             
             }
         }
-    }        
+    }
+
+    /**
+     * Get the player extraction record (create it if needed)
+     * 
+     * @return player extraction record
+     */
+    private static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(Entity player) {
+       return allPlayerExtractionRecords.computeIfAbsent(player, k -> new HashMap<>());    
+    }
+
+    /**
+     * Get the category extract record (create it if needed)
+     * 
+     * @return category extraction record for 1 player & 1 category
+     */
+    private static CategoryExtractionRecord getCategoryExtractionRecord(Map<Material, CategoryExtractionRecord> playerExtractionRecord, Material droppedMaterial) {    
+        //Search the player extraction record 
+        CategoryExtractionRecord categoryExtractionRecord = playerExtractionRecord.get(droppedMaterial);            
+                  
+        /*
+         * If player has not yet extracted the material, check if they have extracted that CATEGORY of material.
+         * 
+         * If yes, re-use the category extraction record.
+         * If no, create a new category extraction record.
+         */
+        if(categoryExtractionRecord == null) {
+            ResourceExtractionCategory resourceExtractionCategory = materialToResourceExtractionCategoryMap.get(droppedMaterial);                
+            for(CategoryExtractionRecord existingCategoryExtractRecord: new ArrayList<>(playerExtractionRecord.values())) {
+                if(existingCategoryExtractRecord.getResourceExtractionCategory().getMaterialsInCategory().contains(droppedMaterial)) {
+                    categoryExtractionRecord = existingCategoryExtractRecord;
+                    break;
+                }                                       
+            }
+            if(categoryExtractionRecord == null) {
+                categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
+            }
+            playerExtractionRecord.put(droppedMaterial, categoryExtractionRecord);
+        }
+        
+        //Return category extraction record
+        return categoryExtractionRecord;
+    }
 }

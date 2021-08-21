@@ -10,6 +10,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -186,14 +187,21 @@ public class PlayerExtractionLimitsController {
     }
 
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-
         System.out.println("Now processing shear event");
+
+        // Only limit if sheep  (mooshroom & iron-golem mechanics don't seem worth limiting
+        if(event.getEntity().getType() != EntityType.SHEEP)
+            return;  
+            
         //Get the player extraction record
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer());
         
+        DyeColor sheepColour = ((Sheep)event.getEntity()).getColor();
+        Material itemMaterial = Material.getMaterial(sheepColour.toString() + "_WOOL");
+        
         System.out.println("A");
-        //Return if item is not listed as a restricted resource
-        Material itemMaterial = event.getItem().getType();
+              
+        //Return if item is not listed as a restricted resource        
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
         System.out.println("B");

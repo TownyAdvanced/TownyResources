@@ -62,4 +62,12 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		}	
 	}
 	
+	
+	@EventHandler()
+	public void onPlayerShearEntityEvent(EntityDropItemEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {
+			//PlayerExtractionLimitsController.processEntityDropItemEvent(event);
+		}	
+	}
+	
 }

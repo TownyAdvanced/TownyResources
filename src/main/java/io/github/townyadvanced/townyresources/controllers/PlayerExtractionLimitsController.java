@@ -241,14 +241,20 @@ public class PlayerExtractionLimitsController {
         if(itemMaterial != Material.EGG)
             return;
                                                                                                       
+        System.out.println("x");    
+
         //Return if item is not listed as a restricted resource
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
+            
+        System.out.println("y");    
 
         //If location is not a town, cancel the event
         TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getLocation());           
         if(townblock == null) {
+            System.out.println("Event cancelled");
             event.setCancelled(true);
+            //event.getEntity().getItemStack().setAmount(0);
             return;
         }
             
@@ -257,7 +263,9 @@ public class PlayerExtractionLimitsController {
         try {
             resident = townblock.getResident();
         } catch (NotRegisteredException nre) {
+            System.out.println("Event cancelled");
             event.setCancelled(true);
+            //event.getEntity().getItemStack().setAmount(0);
             return;
         }
                 

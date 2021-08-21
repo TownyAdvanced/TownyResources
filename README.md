@@ -55,22 +55,32 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
 ### Player Resource Extraction Limits
-###### Limit Categories
-- Extraction is limited per category of material.
-- Example: The category of "Common Rocks" contains EARTH and COBBLESTONE. Extracting either of those items counts towards the daily limit (in this case 6 stacks).
+###### Resource Categories
+- Extraction is limited per resource category.
+- Example: The resource category of "Common Rocks" contains both EARTH and COBBLESTONE. Extracting either of those items counts towards the daily limit (in this case 6 stacks).
 ###### Limit Schedule
 - Extraction is limited per day.
 - The extraction records of all players are reset at Towny New Day.
-###### Limit Types
-- Broken Block Drops: A block will only drop an item if broken by a player who is still below their daily limit for that item. Also, on reaching the limit for all materials except STONE, COBBLESTONE, and SOIL, the block itself will not break.
-- Dead Mob Drops: A dead mob will only drop an item if killed by a player who is still below their daily limit for that item. 
-- Sheared Sheep Drops: A sheared sheep will only drop an item if sheared by a player who is still below their daily limit for wool.
-- Chicken Egg Drops: A chicken will only lay an egg if it is within the owned town-plot of a player who is still below their daily limit for eggs. 
-
+###### Limit Mechanisms
+- Block Breaking:
+  - If a player breaks a block and it drops an item, this counts towards the player's daily extraction limit for that item.
+  - After a player's daily extraction limit is reached, they cannot longer break blocks of that type. (*Exception: Stone, Cobblestone, and Dirt - which can still be broken but drop nothing*).
+  - Blocks do not drop items in any other circumstance.
+- Mob Deaths:
+  - If a player hits a mob and it shortly dies and drops an item, this counts towards the player's daily limit for that item.
+  - After a player's daily extraction limit is reached, they cannot cause dead-mob-drops of that type.
+  - Mobs do not drop items on death in any other circumstance.
+- Sheep Shearing: 
+  - If a player shears a sheep, this counts +2 towards the player's daily limit for wool.
+  - When a player's limit is reached, they can no longer shear sheep.
+  - Sheep do not drop wool via in any other circumstance.
+- Egg Laying: 
+  - If a chicken lays an egg within an owned town-plot, this counts towards the owner player's daily limit for eggs.
+  - When the player's egg limit is reached, chickens no longer drop eggs in their owned town-plots.  
+  - Chickens do not drop eggs in any other circumstance.
 ###### Information
 - When a player hits their daily extraction limit for a particular category of material, they will see an information bar message. Example:
   > Daily Extraction limit reached for Beetroot (64)
-                                                                                                                                      >
 ## F.A.Q:
 ###### Question: 
 How will *TownyResources* benefit my server ? 

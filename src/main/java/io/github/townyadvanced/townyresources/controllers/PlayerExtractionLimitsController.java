@@ -73,18 +73,22 @@ public class PlayerExtractionLimitsController {
     }
 
     /**
-     * If a mob drops a restricted resource on death,
-     * 
-     * then the drop is cancelled,
-     * unless the mob was recently hit by a player who was below their personal extraction limit for the mob type.
+     * A Mob which dies must meet the following criteria to drop items:
+     * -> It must have been recently hit by a player who was below their daily extraction limit for the dropped items.
      * 
      * @param event the event
      */
     public static void processEntityDeathEvent(EntityDeathEvent event) {
-        if(event.getEntity() instanceof Mob
-            && (mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
-                || mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity()))) {
-                        
+        if(event.getEntity() instanceof Mob) {
+
+            //If the mob was not recently hit by a player, it drops nothing
+            if (!mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
+                && !mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity())) {
+                for(ItemStack drop: event.getDrops()) {
+                    drop.setAmount(0);
+                }
+            }
+
             //Find the player who did the dirty deed
             Entity player;
             if(mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())) {

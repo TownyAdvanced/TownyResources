@@ -24,6 +24,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -229,18 +230,18 @@ public class PlayerExtractionLimitsController {
     }
     
     /**
-     * Process entity drop item events
-     * Limits extraction of eggs, by hens who drop them
+     * Process on item spawning event
+     * Limits extraction of eggs
      * 
      * @param event event
      */
-    public static void processEntityDropItemEvent(EntityDropItemEvent event) {
-        //Return if not a chicken
-        if(event.getEntity().getType() != EntityType.CHICKEN)
+    public static void processItemSpawnEvent(ItemSpawnEvent event) {    
+        //Return if not an egg
+        if(event.getEntityType() != EntityType.EGG)
             return;
         
-        //Return if chicken is not in a town
-        TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getEntity().getLocation());
+        //Return if location is not in a town
+        TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getLocation());
         if(townblock == null)
             return;
             
@@ -254,7 +255,7 @@ public class PlayerExtractionLimitsController {
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(resident.getUUID());
                                                                                               
         //Return if item is not listed as a restricted resource
-        Material itemMaterial = event.getItemDrop().getItemStack().getType();
+        Material itemMaterial = Material.EGG;
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
 
@@ -268,7 +269,7 @@ public class PlayerExtractionLimitsController {
         if(categoryExtractionRecord.isExtractionLimitReached()) {
             event.setCancelled(true);
         } else {
-            categoryExtractionRecord.addExtractedAmount(event.getItemDrop().getItemStack().getAmount());                         
+            categoryExtractionRecord.addExtractedAmount(1);                         
         }
                  
         //Do not send a warning message in the case of egg drops.

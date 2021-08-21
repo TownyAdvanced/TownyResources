@@ -1,9 +1,15 @@
 package io.github.townyadvanced.townyresources.controllers;
 
+import com.gmail.goosius.siegewar.settings.Translation;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -35,9 +41,7 @@ public class PlayerExtractionLimitsController {
          //Clear the map
          materialToResourceExtractionCategoryMap.clear();
          //Put each material on the map
-         for(ResourceExtractionCategory category: resourceExtractionCategories) {
-            TownyResources.info(category.getCategoryName() + ": " + Arrays.toString(category.getMaterialsInCategory().toArray())) ;
-         
+         for(ResourceExtractionCategory category: resourceExtractionCategories) {         
              for(Material material: category.getMaterialsInCategory()) {
                  materialToResourceExtractionCategoryMap.put(material, category);
              }
@@ -107,14 +111,21 @@ public class PlayerExtractionLimitsController {
                         categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory);
                         playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
                     }
-    
-                    //If the player is at their limit for the material, cancel the drop, otherwise allow it and update the limit
+                     
+                    //If player is at the limit, set the drop to 0, otherwise add to the record and possibly reduce the drop                     
                     if(categoryExtractionRecord.isExtractionLimitReached()) {
-                        drop.setAmount(0);
-                        player.sendMessage("Limit Reached");
+                       drop.setAmount(0);
                     } else {
-                        drop.setAmount(categoryExtractionRecord.addExtractedAmount(drop.getAmount()));
-                    } 
+                        drop.setAmount(categoryExtractionRecord.addExtractedAmount(drop.getAmount()));                    
+                    }
+                                        
+                    //If the limit has been reached, send a warning message
+                    if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
+                        String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+                        int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
+                        ((Player)player).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+                        categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+                    }
                 }
             }            
         }               

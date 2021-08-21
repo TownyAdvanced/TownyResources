@@ -5,15 +5,17 @@ package io.github.townyadvanced.townyresources.objects;
  */
 public class CategoryExtractionRecord {
     private final ResourceExtractionCategory resourceExtractionCategory;
-    private final int extractionLimitItems;  // Convenience variable
+    private final int extractionLimitItems;  //Convenience variable
     private boolean extractionLimitReached;  //convenience variable
     private int amountAlreadyExtracted; 
+    private long nextLimitWarningTime;    //Time when next warning is allowed. Used to reduce the number of messages 
     
     public CategoryExtractionRecord(ResourceExtractionCategory resourceExtractionCategory) {
         this.resourceExtractionCategory = resourceExtractionCategory;
         this.extractionLimitItems = resourceExtractionCategory.getCategoryExtractionLimitItems();
         this.amountAlreadyExtracted = 0;
         this.extractionLimitReached = false;
+        this.nextLimitWarningTime = 0;
     }
 
     public boolean isExtractionLimitReached() {
@@ -42,12 +44,12 @@ public class CategoryExtractionRecord {
     public ResourceExtractionCategory getResourceExtractionCategory() {
         return resourceExtractionCategory;
     }
-    
-    public int getExtractionLimitItems() {
-        return extractionLimitItems;
+
+    public long getNextLimitWarningTime() {
+        return nextLimitWarningTime;
     }
-    
-    public int getAmountAlreadyExtracted() {
-        return amountAlreadyExtracted;
+
+    public void setNextLimitWarningTime(long nextLimitWarningTime) {
+        this.nextLimitWarningTime = nextLimitWarningTime;
     }
 }

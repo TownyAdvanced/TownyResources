@@ -161,19 +161,37 @@ public class PlayerExtractionLimitsController {
                 playerExtractionRecord.put(drop.getType(), categoryExtractionRecord);
             }
              
-            //If player is at the limit, cancel the event, otherwise add to the record                     
+            /* 
+             * If player is at the limit, cancel the event (Exception for STONE, COBBLE, DIRT ... where only the drop is cancelled)
+             * If player is not at the limit, allow event                    
+             */
             if(categoryExtractionRecord.isExtractionLimitReached()) {
+                switch(drop.getType()) {
+                    case STONE:
+                    case COBBLESTONE:
+                    case DIRT:
+                        event.setDropItems(false);
+                        break;
+                    default:                        
+                }
                 event.setCancelled(true);
             } else {
                 categoryExtractionRecord.addExtractedAmount(drop.getAmount());
             }
                                 
-            //If the limit has been reached, send a warning message
+            //If the limit has been reached, send a warning message (Except for STONE, COBBLE, DIRT ... where no message is sent)
             if(categoryExtractionRecord.isExtractionLimitReached() && System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-                String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
-                int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-                event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
-                categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+                switch(drop.getType()) {
+                    case STONE:
+                    case COBBLESTONE:
+                    case DIRT:
+                        break;
+                    default:                        
+                        String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+                        int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
+                        event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+                        categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + 5000);
+                }             
             }
         }
     }        

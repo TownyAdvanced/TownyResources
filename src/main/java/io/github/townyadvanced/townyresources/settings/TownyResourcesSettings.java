@@ -96,9 +96,9 @@ public class TownyResourcesSettings {
 
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 
-		System.out.println("Cat string: "+ categoriesAsString);	
+		//TownyResources.info("Cat string: "+ categoriesAsString);	
 		
-		if(!categoriesAsString.isEmpty()) {
+		if(!categoriesAsString.isEmpty()) {		
 			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
 			Matcher matcher = pattern.matcher(categoriesAsString);
 			String categoryAsString;
@@ -112,7 +112,8 @@ public class TownyResourcesSettings {
 			
 			while (matcher.find()) {
 				//Read one resource extraction category
-				categoryAsString = matcher.group(1);   
+				categoryAsString = matcher.group(1);
+				   
 				categoryAsArray = categoryAsString.split(",");
 				if(categoryAsArray.length < 2) {
 					TownyResources.severe("Bad configuration for extraction category: " + categoryAsString);
@@ -128,7 +129,7 @@ public class TownyResourcesSettings {
 				categoryExtractionLimitItems = (int)((categoryExtractionLimitStacks * 64) + 0.5);
 				
 				//Read Materials
-				materialsInCategory.clear();
+				materialsInCategory = new ArrayList<>();
 				for(int i = 2; i < categoryAsArray.length; i++) {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {

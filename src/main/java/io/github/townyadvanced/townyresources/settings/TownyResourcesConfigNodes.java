@@ -95,7 +95,7 @@ public enum TownyResourcesConfigNodes {
 			"{Leather, 0.5, LEATHER}," +
 			"{Rabbit Hide, 0.5, RABBIT_HIDE}," +
 			"{Rotten Flesh, 1, ROTTEN_FLESH}," +
-			"{Bones, 1, BONE, BONE_BLOCK}," +
+			"{Bones, 0.5, BONE, BONE_BLOCK}," +
 			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
 			"{Beef, 0.25, BEEF, COOKED_BEEF}," +

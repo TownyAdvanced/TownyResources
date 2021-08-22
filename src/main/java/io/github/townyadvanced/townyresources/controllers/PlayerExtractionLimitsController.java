@@ -25,6 +25,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -231,7 +232,7 @@ public class PlayerExtractionLimitsController {
     
     /**
      * Process on item spawning event
-     * Limits extraction of eggs
+     * Limits egg creation
      * 
      * @param event event
      */
@@ -240,21 +241,15 @@ public class PlayerExtractionLimitsController {
         Material itemMaterial = event.getEntity().getItemStack().getType();        
         if(itemMaterial != Material.EGG)
             return;
-                                                                                                      
-        System.out.println("x");    
 
         //Return if item is not listed as a restricted resource
         if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
             return;
-            
-        System.out.println("y");    
 
         //If location is not a town, cancel the event
         TownBlock townblock = TownyAPI.getInstance().getTownBlock(event.getLocation());           
         if(townblock == null) {
-            System.out.println("Event cancelled");
             event.setCancelled(true);
-            //event.getEntity().getItemStack().setAmount(0);
             return;
         }
             
@@ -263,9 +258,7 @@ public class PlayerExtractionLimitsController {
         try {
             resident = townblock.getResident();
         } catch (NotRegisteredException nre) {
-            System.out.println("Event cancelled");
             event.setCancelled(true);
-            //event.getEntity().getItemStack().setAmount(0);
             return;
         }
                 
@@ -287,9 +280,52 @@ public class PlayerExtractionLimitsController {
                  
         //Do not send a warning message in the case of egg drops.
     }
-  
+        
+    /**
+     * Process fishing event
+     * Limits player fishing of resources
+     * 
+     * @param event event
+     */
+    public static void processPlayerFishEvent(PlayerFishEvent event) {
+        //Get the player extraction record
+        Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer().getUniqueId());
+        
+        //Return if nothing is caught yet
+        if(event.getState() != PlayerFishEvent.State.CAUGHT_FISH && event.getState() != PlayerFishEvent.State.CAUGHT_ENTITY)
+            return;
+
+        //Return is caught entity is not an item
+        if(!(event.getCaught() instanceof Item))
+            return;
+
+        //Return if item is not listed as a restricted resource        
+        Material itemMaterial = ((Item)event.getCaught()).getItemStack().getType();
+        if(!materialToResourceExtractionCategoryMap.containsKey(itemMaterial))
+            return;
+
+        ///Get the category extraction record
+        CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, itemMaterial);                                            
+             
+        /* 
+         * If player is at the limit, cancel the event
+         *
+         * If player is not at the limit, add extracted amount to record.                    
+         */
+        if(categoryExtractionRecord.isExtractionLimitReached()) {
+            event.setCancelled(true);
+        } else {
+            categoryExtractionRecord.addExtractedAmount(((Item)event.getCaught()).getItemStack().getAmount());                       
+        }
+                            
+        //If the limit has been reached, send a warning message
+        if(categoryExtractionRecord.isExtractionLimitReached())
+            sendLimitReachedWarningMessage(event.getPlayer(), categoryExtractionRecord);            
+    }
+
+
     ///////////// HELPER METHODS //////////////////////
-  
+
     /**
      * Get the player extraction record (create it if needed)
      * 

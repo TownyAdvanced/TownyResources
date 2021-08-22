@@ -36,7 +36,13 @@ public class TownyResourcesMessagingUtil {
                 sendMsg(player, message);
         }
     }
-    
+
+    /**
+     * Note: All spaces will already be removed
+     * 
+     * @param resourcesAsString
+     * @return
+     */
     public static String[] formatResourcesStringForTownyDisplay(String resourcesAsString) {
         String[] amountMaterialPair;
     
@@ -47,12 +53,13 @@ public class TownyResourcesMessagingUtil {
             String[] resourcesAsArray = 
                 resourcesAsString
                 .toLowerCase()
+                .replaceAll("_", " ")
                 .split(",");
             //Capitalize the first letter of each material 
             String[] resourcesAsFormattedArray = new String[resourcesAsArray.length];
             for(int i = 0; i < resourcesAsArray.length; i++) {
                 amountMaterialPair = resourcesAsArray[i].split("-");                                
-                resourcesAsFormattedArray[i] = amountMaterialPair[0] + amountMaterialPair[1].substring(0,1).substring(1).replaceAll("_","");                              
+                resourcesAsFormattedArray[i] = amountMaterialPair[0] + " " + amountMaterialPair[1].substring(0,1).toUpperCase() + amountMaterialPair[1].substring(1);                              
             }
             //Shorter result if it is too long
             if(resourcesAsFormattedArray.length > 20) {

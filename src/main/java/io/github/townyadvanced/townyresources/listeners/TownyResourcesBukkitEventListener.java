@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources.listeners;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,6 +14,7 @@ import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 
 /**
@@ -81,10 +83,17 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	}
 	
 	
+	@EventHandler()
 	public void playerLoginEvent(PlayerLoginEvent event) {
 		if(TownyResourcesSettings.isEnabled()) {		
 			PlayerExtractionLimitsController.processPlayerLoginEvent(event);
 		}			
 	}
 
+	@EventHandler()
+	public void playerLoginEvent(PlayerQuitEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {		
+			PlayerExtractionLimitsController.processPlayerQuitEvent(event);
+		}			
+	}
 }

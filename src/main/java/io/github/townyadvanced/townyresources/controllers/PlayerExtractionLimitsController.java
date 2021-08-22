@@ -23,6 +23,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -376,6 +377,15 @@ public class PlayerExtractionLimitsController {
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
         }
     }
+        
+    public static ResourceExtractionCategory getResourceExtractionCategory(String givenCategoryName) {
+        for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories) {
+            if(resourceExtractionCategory.getCategoryName().equals(givenCategoryName)) {
+                return resourceExtractionCategory;
+            }
+        }
+        return null;
+    }
 
     /**
      * Player logs in
@@ -393,12 +403,14 @@ public class PlayerExtractionLimitsController {
         }
     }
 
-    public static ResourceExtractionCategory getResourceExtractionCategory(String givenCategoryName) {
-        for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories) {
-            if(resourceExtractionCategory.getCategoryName().equals(givenCategoryName)) {
-                return resourceExtractionCategory;
-            }
-        }
-        return null;
+    /**
+     *
+     *  Player logs out
+     *  -> Save record to DB
+     *  -> Remove record from map 
+     * @param event player quit event
+     */
+    public static void processPlayerQuitEvent(PlayerQuitEvent event) {
+            
     }
 }

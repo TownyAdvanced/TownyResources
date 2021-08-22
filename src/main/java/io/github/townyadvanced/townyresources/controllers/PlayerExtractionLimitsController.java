@@ -1,6 +1,8 @@
 package io.github.townyadvanced.townyresources.controllers;
 
+import com.gmail.goosius.siegewar.metadata.ResidentMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
@@ -411,6 +413,18 @@ public class PlayerExtractionLimitsController {
      * @param event player quit event
      */
     public static void processPlayerQuitEvent(PlayerQuitEvent event) {
-            
+        synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
+            Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.get(event.getPlayer().getUniqueId());                       
+            if(playerExtractionRecord != null) {
+                //Save record to db
+                Resident resident = TownyUniverse.getInstance().getResident(event.getPlayer().getUniqueId());
+                if(resident != null) {
+                    TownyResourcesResidentMetaDataController.setPlayerExtractionRecord(resident, playerExtractionRecord);
+                    resident.save();
+                }
+                //Remove entry from map
+                allPlayerExtractionRecords.remove(event.getPlayer().getUniqueId());
+            }            
+        }  
     }
 }

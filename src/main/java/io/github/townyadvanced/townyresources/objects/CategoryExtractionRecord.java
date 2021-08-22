@@ -20,12 +20,16 @@ public class CategoryExtractionRecord {
         this.nextLimitWarningTime = 0;
     }
     
-    public CategoryExtractionRecord(String resourceExtractionCategoryName, int amountAlreadyExtracted) {
-        this.resourceExtractionCategory = PlayerExtractionLimitsController.getResourceExtractionCategory(resourceExtractionCategoryName);
+    public CategoryExtractionRecord(ResourceExtractionCategory resourceExtractionCategory, int amountAlreadyExtracted) {
+        this.resourceExtractionCategory = resourceExtractionCategory;
         this.extractionLimitItems = resourceExtractionCategory.getCategoryExtractionLimitItems();
         this.amountAlreadyExtracted = amountAlreadyExtracted;        
         this.extractionLimitReached = amountAlreadyExtracted >= extractionLimitItems;
         this.nextLimitWarningTime = 0;
+    }
+    
+    public int getAmountAlreadyExtracted() {
+        return amountAlreadyExtracted;
     }
 
     public boolean isExtractionLimitReached() {

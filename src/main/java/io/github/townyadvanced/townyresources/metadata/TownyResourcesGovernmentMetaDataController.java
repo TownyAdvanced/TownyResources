@@ -183,7 +183,6 @@ public class TownyResourcesGovernmentMetaDataController {
             }
             resourceQuantitiesAsStringBuilder.append(resourceQuantity);
         }
-
         //Set the string into metadata
         MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesAsStringBuilder.toString());        
     }

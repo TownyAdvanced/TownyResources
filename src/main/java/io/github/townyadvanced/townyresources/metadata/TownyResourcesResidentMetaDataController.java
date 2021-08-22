@@ -3,12 +3,13 @@ package io.github.townyadvanced.townyresources.metadata;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 
@@ -26,7 +27,7 @@ public class TownyResourcesResidentMetaDataController {
 	}
 
     private final static String
-        extractionRecordMetadataKey = "townyresources_extractionRecord";  //e.g.   "25-common_rocks,64-wheat"
+        extractionRecordMetadataKey = "townyresources_extractionRecord";  //e.g.   "25-common_rocks, 64-wheat"
 
 
     public static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(Player player) {
@@ -48,7 +49,10 @@ public class TownyResourcesResidentMetaDataController {
             categoryArray = category.split(",");
             amountExtracted = Integer.parseInt(categoryArray[0]);
             categoryName = categoryArray[1];
-            categoryExtractionRecord = new CategoryExtractionRecord(categoryName, amountExtracted);
+            ResourceExtractionCategory resourceExtractionCategory = PlayerExtractionLimitsController.getResourceExtractionCategory(categoryName);
+            if(resourceExtractionCategory == null)
+                continue; //Unknown category            
+            categoryExtractionRecord = new CategoryExtractionRecord(resourceExtractionCategory, amountExtracted);
             for(Material material: categoryExtractionRecord.getResourceExtractionCategory().getMaterialsInCategory()) {
                 result.put(material, categoryExtractionRecord);                
             }
@@ -58,5 +62,25 @@ public class TownyResourcesResidentMetaDataController {
     }
 
 
-
+    public static void setPlayerExtractionRecord(Resident resident, Map<Material, CategoryExtractionRecord> playerExtractionRecord) {
+        //Save the players's extraction record
+        Set<CategoryExtractionRecord> categoryExtractionRecords = new HashSet<>(playerExtractionRecord.values());
+        StringBuilder recordAsString = new StringBuilder();
+        boolean firstEntry = true;
+        for(CategoryExtractionRecord categoryExtractionRecord: categoryExtractionRecords) {
+            if(firstEntry) {
+               firstEntry = false; 
+            } else {
+                recordAsString.append(", ");
+            }
+            recordAsString
+                .append(categoryExtractionRecord.getAmountAlreadyExtracted())
+                .append("-")
+                .append(categoryExtractionRecord.getResourceExtractionCategory().getCategoryName());
+        }
+        if(!recordAsString.isEmpty()) {
+            //Set the string into metadata
+            MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, recordAsString.toString());    
+        }
+    }
 }

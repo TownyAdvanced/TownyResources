@@ -1,19 +1,18 @@
 package io.github.townyadvanced.townyresources;
 
+import com.gmail.goosius.siegewar.tasks.DynmapTask;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
-import io.github.townyadvanced.townyresources.controllers.TownResourceCollectionController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
-import io.github.townyadvanced.townyresources.listeners.TownyResourcesBukkitEventListener;
-import io.github.townyadvanced.townyresources.listeners.TownyResourcesNationEventListener;
-import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownEventListener;
-import io.github.townyadvanced.townyresources.listeners.TownyResourcesTownyEventListener;
+import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dynmap.DynmapAPI;
 
 import java.io.File;
 
@@ -119,6 +118,8 @@ public class TownyResources extends JavaPlugin {
 		pm.registerEvents(new TownyResourcesTownyEventListener(this), this);
 		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
 		pm.registerEvents(new TownyResourcesNationEventListener(this), this);
+		if(isDynmapTownyInstalled())
+			pm.registerEvents(new TownyResourcesDynmapTownyListener(this), this);
 		TownyResources.info("Listeners Loaded");		
 	}
 
@@ -128,4 +129,8 @@ public class TownyResources extends JavaPlugin {
 		TownyResources.info("Commands Loaded");		
 	}
 
+	private boolean isDynmapTownyInstalled() {
+		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
+		return dynmapTowny != null;
+	}
 }

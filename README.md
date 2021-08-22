@@ -5,11 +5,13 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 1. Ensure you have Towny 0.97.1.0+
 2. Edit your townyperms.yml file, and add the following perms:
    > Mayor, Assistant, Treasurer:  ... townyresources.command.towncollect                                                            
-   > King, Assistant, Treasurer: ... townyresources.command.nationcollect                                                                                                                       
-2. Stop your server
-3. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases)
-4. Drop the TownyResources jar into your plugins folder
-5. Start yor server
+   > King, Assistant, Treasurer: ... townyresources.command.nationcollect     
+3. If you have the TownyDynmap plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
+   > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`                                                                                                      
+4. Stop your server
+5. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases)
+6. Drop the TownyResources jar into your plugins folder
+7. Start yor server
 
 # User Guide
 ### Town Production

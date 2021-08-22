@@ -1,16 +1,15 @@
-name: ${project.artifactId}
-main: ${project.groupId}.${project.name}.${project.artifactId}
+name: TownyResources
+main: io.github.townadvanced.TownyResources
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
 prefix: ${project.artifactId}
 depend: [Towny]
-softdepend: [SiegeWar]
+softdepend: [SiegeWar,Dynmap-Towny]
 loadbefore: [SiegeWar]
 
-description: This is an add-on plugin for Towny, which provides towns and nations with valuable natural resources, creating a good reason for wars and trading.
-
+description: This is an add-on plugin for Towny, which gives each town a unique set of automatically-extracted resources, and then protects the economic value of those resources with moderate limits to player resource extraction.
 commands:
     townyresources:
         aliases: [tr]

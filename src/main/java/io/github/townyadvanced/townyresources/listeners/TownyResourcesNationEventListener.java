@@ -47,11 +47,11 @@ public class TownyResourcesNationEventListener implements Listener {
 			textLines.add(TownyResourcesTranslation.of("nation.screen.header"));
 				
 			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
-			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForTownyDisplay(productionAsString); 
+			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForGovernmentScreenDisplay(productionAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.daily.production", resourcesAsFormattedArray.length)));
 
 			// > Available For Collection [2]: 64 oak log, 64 sugar cane
-			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForTownyDisplay(availableAsString); 
+			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForGovernmentScreenDisplay(availableAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.available.for.collection", resourcesAsFormattedArray.length)));
 			
 			event.addLines(textLines);

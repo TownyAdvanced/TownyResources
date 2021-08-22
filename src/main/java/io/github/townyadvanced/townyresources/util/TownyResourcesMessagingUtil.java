@@ -1,5 +1,6 @@
 package io.github.townyadvanced.townyresources.util;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -37,33 +38,21 @@ public class TownyResourcesMessagingUtil {
         }
     }
 
-    /**
-     * Note: All spaces will already be removed
-     * 
-     * @param resourcesAsString
-     * @return
-     */
-    public static String[] formatResourcesStringForTownyDisplay(String resourcesAsString) {
-        String[] amountMaterialPair;
-    
+    public static String[] formatResourcesStringForGovernmentScreenDisplay(String resourcesAsString) {
         if(resourcesAsString.length() == 0) {
             return new String[0];
         } else {
             //Convert given string to array
-            String[] resourcesAsArray = 
+            String[] resourcesAsFormattedArray = 
+                WordUtils.capitalizeFully(
                 resourcesAsString
-                .toLowerCase()
-                .replaceAll("_", " ")
+                .replaceAll("-", " ")
+                .replaceAll("_", " "))
                 .split(",");
-            //Capitalize the first letter of each material 
-            String[] resourcesAsFormattedArray = new String[resourcesAsArray.length];
-            for(int i = 0; i < resourcesAsArray.length; i++) {
-                amountMaterialPair = resourcesAsArray[i].split("-");                                
-                resourcesAsFormattedArray[i] = amountMaterialPair[0] + " " + amountMaterialPair[1].substring(0,1).toUpperCase() + amountMaterialPair[1].substring(1);                              
-            }
+
             //Shorter result if it is too long
             if(resourcesAsFormattedArray.length > 20) {
-                resourcesAsFormattedArray = Arrays.copyOf(resourcesAsArray, 21);
+                resourcesAsFormattedArray = Arrays.copyOf(resourcesAsFormattedArray, 21);
                 resourcesAsFormattedArray[20] = "...";
             }
             //Return result
@@ -75,25 +64,11 @@ public class TownyResourcesMessagingUtil {
         if(resourcesAsString.length() == 0) {
             return "";
         } else {
-            String[] resourcesAsFormattedArray = formatResourcesStringForTownyDisplay(resourcesAsString);
-            //Build result string
-            StringBuilder result = new StringBuilder();
-            boolean firstEntry = true;
-            for(String resource: resourcesAsFormattedArray) {
-                if(firstEntry) {
-                    firstEntry = false;
-                } else {
-                    result.append(", ");
-                }
-                result.append(resource);
-            }
-            //Return result
-            return result.toString();
+            return WordUtils.capitalizeFully(resourcesAsString.replaceAll("_", " ").replaceAll("-", " "));
         }
     }
 
-    public static String formatMaterialForDisplay(Material winningMaterial) {
-        String materialNameLowercase = winningMaterial.toString().toLowerCase().replaceAll("_","");
-        return materialNameLowercase.substring(0,1).toUpperCase() + materialNameLowercase.substring(1);                      
+    public static String formatMaterialForDisplay(Material material) {
+        return WordUtils.capitalizeFully(material.toString().replaceAll("_", " "));
     }
 }

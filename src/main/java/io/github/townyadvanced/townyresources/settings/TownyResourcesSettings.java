@@ -195,7 +195,7 @@ public class TownyResourcesSettings {
 				categoryName = categoryAsArray[0].trim();
 				
 				//Read disovery weight
-				categoryDiscoveryWeight = Integer.parseInt(categoryAsArray[1]);
+				categoryDiscoveryWeight = Integer.parseInt(categoryAsArray[1].trim());
 				
 				//Read base amount
 				categoryBaseAmountStacks = Double.parseDouble(categoryAsArray[2].trim());
@@ -203,7 +203,7 @@ public class TownyResourcesSettings {
 				
 				//Read Materials
 				materialsInCategory = new ArrayList<>();
-				for(int i = 2; i < categoryAsArray.length; i++) {
+				for(int i = 3; i < categoryAsArray.length; i++) {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
 						TownyResources.severe("Unknown material in offer category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);

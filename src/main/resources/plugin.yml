@@ -1,5 +1,5 @@
 name: TownyResources
-main: io.github.townadvanced.TownyResources
+main: io.github.townyadvanced.townyresources.TownyResources
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
 author: Goosius

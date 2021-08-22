@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.util;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -40,16 +41,30 @@ public class TownyResourcesMessagingUtil {
         if(resourcesAsString.length() == 0) {
             return new String[0];
         } else {
-            String[] formattedListOfResources = 
+            //Convert given string to array
+            String[] resourcesAsArray = 
                 resourcesAsString
                 .replaceAll("-"," ")
                 .replaceAll("_"," ")
+                .toLowerCase()
                 .split(",");
-            if(formattedListOfResources.length > 20) {
-                formattedListOfResources = Arrays.copyOf(formattedListOfResources, 21);
-                formattedListOfResources[20] = "...";
+            //Capitalize the first letter of each item 
+            String[] result = new String[resourcesAsArray.length];
+            for(int i = 0; i < resourcesAsArray.length; i++) {
+                result[i] = resourcesAsArray[i].substring(0,1).toUpperCase() + resourcesAsArray[i].substring(1);              
             }
-            return formattedListOfResources;
+            //Shorter result if it is too long
+            if(result.length > 20) {
+                result = Arrays.copyOf(resourcesAsArray, 21);
+                result[20] = "...";
+            }
+            //Return result
+            return result;
         }
+    }
+
+    public static String formatMaterialForDisplay(Material winningMaterial) {
+        String materialName = winningMaterial.toString();
+        return materialName.substring(0,1).toUpperCase() + materialName.substring(1);                      
     }
 }

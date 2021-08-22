@@ -81,14 +81,6 @@ public class TownResourceDiscoveryController {
         TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredMaterials);
         town.save();
 
-   		//Send global message
-   		int levelOfNewResource = discoveredMaterials.size();
-   		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
-        int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
-   		String categoryName = winningCategory.getName();
-        String materialName = winningMaterial.toString();
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
-
         //Recalculate Town Production
         TownResourceProductionController.recalculateProductionForOneTown(town);
 
@@ -98,6 +90,13 @@ public class TownResourceDiscoveryController {
         } else if (town.hasNation()) {
             TownResourceProductionController.recalculateProductionForOneNation(town.getNation());
         }
+        
+         //Send global message
+   		int levelOfNewResource = discoveredMaterials.size();
+   		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
+        int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
+   		String categoryName = winningCategory.getName();
+        String materialName = TownyResourcesMessagingUtil.formatMaterialForDisplay(winningMaterial);
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
     }
-
 }

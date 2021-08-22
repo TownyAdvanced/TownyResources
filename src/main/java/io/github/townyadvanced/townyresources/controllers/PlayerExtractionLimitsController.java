@@ -5,6 +5,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -20,6 +21,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,11 +29,12 @@ import java.util.*;
 
 public class PlayerExtractionLimitsController {
 
-    public static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
-    public static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
-    public static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
-    public static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
-    public static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
+    private static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
+    private static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
+    private static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
+    private static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
+    private static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
+    private static final String PLAYER_EXTRACTION_RECORD_DATA_LOCK = "Lock";
 
     public static void resetMobsDamagedByPlayers() {
         mobsDamagedByPlayersLastShortTick.clear();
@@ -368,6 +371,22 @@ public class PlayerExtractionLimitsController {
             int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
+        }
+    }
+
+    /**
+     * Player logs in
+     * -> Load players record from the DB and 
+     * -> Add it to the map in memory
+     *
+     * @param event the login event
+     */
+    public static void processPlayerLoginEvent(PlayerLoginEvent event) {
+        synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
+            Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesGovernmentMetaDataController.getPlayerExtractionRecord(event.getPlayer());
+            if(!playerExtractionRecord.isEmpty()) {
+                allPlayerExtractionRecords.put(event.getPlayer().getUniqueId(), playerExtractionRecord);
+            }            
         }
     }
 }

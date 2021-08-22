@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.metadata;
 
 import com.gmail.goosius.siegewar.SiegeWar;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -17,24 +18,32 @@ import java.util.stream.Collectors;
  * @author Goosius
  *
  */
-public class TownyResourcesGovernmentMetaDataController {
+public class TownyResourcesResidentMetaDataController {
+
 
 	@SuppressWarnings("unused")
 	private TownyResources plugin;
 
-	public TownyResourcesGovernmentMetaDataController(TownyResources plugin) {
+	public TownyResourcesResidentMetaDataController(TownyResources plugin) {
 		this.plugin = plugin;
 	}
 
-    private static String
-        discoveredMetadataKey = "townyresources_discovered",  //e.g.   OAK_LOG, SUGAR
-        dailyProductionMetadataKey = "townyresources_dailyproduction",  //e.g.   32-OAK_LOG, 32-SUGAR
-        availableForCollectionMetadataKey = "townyresources_availableforcollection";  //e.g.  64-OAK_LOG, 64-SUGAR
+    private final static String
+        extractionRecordMetadataKey = "townyresources_extractionRecord";  //e.g.   "Common Rocks-25,Wheat-64"
 
-    public static String getDiscovered(Government government) {
-        return MetaDataUtil.getSdf(government, discoveredMetadataKey).replaceAll(" ","");
+    public static String getExtractionRecord(Resident resident) {
+        return MetaDataUtil.getSdf(resident, extractionRecordMetadataKey);
     }
     
+
+    public static Map<Material, CategoryExtractionRecord> getExtractionRecord(Player player) {
+        Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
+        if(resident == null)
+            return new HashMap<>();
+        String recordAsString = MetaDataUtil.getSdf(resident, extractionRecordMetadataKey);;
+        
+    }
+
     
      /**
      * Get the discovered resources of a town
@@ -186,5 +195,10 @@ public class TownyResourcesGovernmentMetaDataController {
 
         //Set the string into metadata
         MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesAsStringBuilder.toString());        
+    }
+
+    public static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(Player player) {
+        
+        
     }
 }

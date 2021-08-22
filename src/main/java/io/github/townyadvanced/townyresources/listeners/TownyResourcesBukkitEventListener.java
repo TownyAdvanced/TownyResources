@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 
 /**
@@ -72,11 +73,18 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		}	
 	}
 	
-		@EventHandler()
+	@EventHandler()
 	public void playerFishEvent(PlayerFishEvent event) {
 		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {		
 			PlayerExtractionLimitsController.processPlayerFishEvent(event);
 		}	
 	}
 	
+	
+	public void playerLoginEvent(PlayerLoginEvent event) {
+		if(TownyResourcesSettings.isEnabled()) {		
+			PlayerExtractionLimitsController.processPlayerLoginEvent(event);
+		}			
+	}
+
 }

@@ -1,5 +1,7 @@
 package io.github.townyadvanced.townyresources.objects;
 
+import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
+
 /**
  * This class represents an extraction record in a particular category, for just one player.
  */
@@ -15,6 +17,14 @@ public class CategoryExtractionRecord {
         this.extractionLimitItems = resourceExtractionCategory.getCategoryExtractionLimitItems();
         this.amountAlreadyExtracted = 0;
         this.extractionLimitReached = false;
+        this.nextLimitWarningTime = 0;
+    }
+    
+    public CategoryExtractionRecord(String resourceExtractionCategoryName, int amountAlreadyExtracted) {
+        this.resourceExtractionCategory = PlayerExtractionLimitsController.getResourceExtractionCategory(resourceExtractionCategoryName);
+        this.extractionLimitItems = resourceExtractionCategory.getCategoryExtractionLimitItems();
+        this.amountAlreadyExtracted = amountAlreadyExtracted;        
+        this.extractionLimitReached = amountAlreadyExtracted >= extractionLimitItems;
         this.nextLimitWarningTime = 0;
     }
 

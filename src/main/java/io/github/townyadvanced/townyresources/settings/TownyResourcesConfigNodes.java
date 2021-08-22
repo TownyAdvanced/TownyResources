@@ -34,36 +34,40 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If true, then daily player resource extraction limits are enabled.",
 			"# If false, then daily player resource extraction limits are disabled."),
-			
-			//TODO ------- Add machine-limiting stuff here e.g. for cactuses and sugar.  Maybe???. Could b already covered
 	RESOURCE_EXTRACTION_LIMITS_CATEGORIES(			
 			"resource_extraction_limits.categories",
 			"" +
-			"{Common Rocks, 6, STONE, COBBLESTONE}," +
-			"{Uncommon Rocks, 2, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +
-			"{Terracotta, 2, TERRACOTTA, WHITE_TERRACOTTA, ORANGE_TERRACOTTA, MAGENTA_TERRACOTTA, LIGHT_BLUE_TERRACOTTA, YELLOW_TERRACOTTA," +
+			"{common_dirt, 5, DIRT, DIRT_PATH, FARMLAND}," + 
+			"{uncommon_dirt, 2, PODZOL, ROOTED_DIRT, MYCELIUM}," +
+			"{rare_dirt, 1, SOUL_SAND, SOUL_SOIL}," +
+			"{wood, 3, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG," +
+			"CRIMSON_STEM, WARPED_STEM, OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD," +
+			"ACACIA_WOOD, DARK_OAK_WOOD, CRIMSON_HYPHAE, WARPED_HYPHAE}" +
+			"{common_rocks, 6, STONE, COBBLESTONE}," +
+			"{uncommon_rocks, 2, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +
+			"{terracotta, 2, TERRACOTTA, WHITE_TERRACOTTA, ORANGE_TERRACOTTA, MAGENTA_TERRACOTTA, LIGHT_BLUE_TERRACOTTA, YELLOW_TERRACOTTA," +
 			"LIME_TERRACOTTA, PINK_TERRACOTTA, GRAY_TERRACOTTA, LIGHT_GRAY_TERRACOTTA, CYAN_TERRACOTTA," +
 			"PURPLE_TERRACOTTA, BLUE_TERRACOTTA, BROWN_TERRACOTTA, GREEN_TERRACOTTA, RED_TERRACOTTA,BLACK_TERRACOTTA}," +
-			"{Quartz, 0.25, QUARTZ_BLOCK}," +
-			"{Prismarine, 0.125, PRISMARINE}," +
-			"{Obsidian, 0.125, OBSIDIAN}," +
-			"{Clay, 1, CLAY_BALL, CLAY}," +
-			"{Ice, 1, ICE, PACKED_ICE, BLUE_ICE}," +
-			"{Snow, 1, SNOW, SNOWBALL, SNOW_BLOCK}," +
-			"{Coal, 1, COAL, COAL_BLOCK}," +
-			"{Iron, 1, IRON_ORE, RAW_IRON}," +
-			"{Gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
-			"{Gold Nugget, 0.25, GOLD_NUGGET, NETHER_GOLD_ORE}," +
-			"{Emeralds, 0.25, EMERALD_ORE, EMERALD}," +
-			"{Lapis Lazuli, 0.25, LAPIS_LAZULI, LAPIS_BLOCK, LAPIS_ORE}," +			
-			"{Diamonds, 0.125, DIAMOND_ORE, DIAMOND}," +
-			"{Redstone, 1, REDSTONE, REDSTONE_BLOCK}," +
-			"{Netherrack, 4, NETHERRACK}," +
-			"{Nether Quartz, 1, NETHER_QUARTZ_ORE, QUARTZ}," +
-			"{Glowstone, 0.25, GLOWSTONE_DUST, GLOWSTONE}," +
-			"{End Stone, 4, END_STONE}," +
-			"{Ancient_Debris, 0.0625, ANCIENT_DEBRIS}," +
-			"{Wool, 0.5, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
+			"{quartz, 0.25, QUARTZ_BLOCK}," +
+			"{prismarine, 0.125, PRISMARINE}," +
+			"{obsidian, 0.125, OBSIDIAN}," +
+			"{clay, 1, CLAY_BALL, CLAY}," +
+			"{ice, 1, ICE, PACKED_ICE, BLUE_ICE}," +
+			"{snow, 1, SNOW, SNOWBALL, SNOW_BLOCK}," +
+			"{coal, 1, COAL, COAL_BLOCK}," +
+			"{iron, 1, IRON_ORE, RAW_IRON}," +
+			"{gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
+			"{gold_nuggets, 0.25, GOLD_NUGGET, NETHER_GOLD_ORE}," +
+			"{emeralds, 0.25, EMERALD_ORE, EMERALD}," +
+			"{lapis_Lazuli, 0.25, LAPIS_LAZULI, LAPIS_BLOCK, LAPIS_ORE}," +			
+			"{diamonds, 0.125, DIAMOND_ORE, DIAMOND}," +
+			"{redstone, 1, REDSTONE, REDSTONE_BLOCK}," +
+			"{netherrack, 4, NETHERRACK}," +
+			"{nether_quartz, 1, NETHER_QUARTZ_ORE, QUARTZ}," +
+			"{glowstone, 0.25, GLOWSTONE_DUST, GLOWSTONE}," +
+			"{end_Stone, 4, END_STONE}," +
+			"{ancient_debris, 0.0625, ANCIENT_DEBRIS}," +
+			"{wool, 0.5, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
 			"LIME_WOOL, PINK_WOOL, GRAY_WOOL, LIGHT_GRAY_WOOL, CYAN_WOOL," +
 			"PURPLE_WOOL, BLUE_WOOL, BROWN_WOOL, GREEN_WOOL, RED_WOOL,BLACK_WOOL}," +
 			"{Coral, 1, TUBE_CORAL, BRAIN_CORAL, BUBBLE_CORAL, FIRE_CORAL, HORN_CORAL," +
@@ -71,38 +75,38 @@ public enum TownyResourcesConfigNodes {
 			"DEAD_TUBE_CORAL_BLOCK, DEAD_BRAIN_CORAL_BLOCK, DEAD_BUBBLE_CORAL_BLOCK, DEAD_FIRE_CORAL_BLOCK, DEAD_HORN_CORAL_BLOCK," +
 			"TUBE_CORAL_FAN, BRAIN_CORAL_FAN, BUBBLE_CORAL_FAN, FIRE_CORAL_FAN, HORN_CORAL_FAN," +
 			"DEAD_TUBE_CORAL_FAN, DEAD_BRAIN_CORAL_FAN, DEAD_BUBBLE_CORAL_FAN, DEAD_FIRE_CORAL_FAN,DEAD_HORN_CORAL_FAN}," +
-			"{Wheat, 1, WHEAT}," +
-			"{Carrots, 1, CARROTS}," +
-			"{Potatoes, 1, POTATOES}," +
-			"{Beetroot, 1, BEETROOT}," +
-			"{Pumpkin Seeds, 1, PUMPKIN_SEEDS}," +
-			"{Melon Slices, 1, MELON_SLICE}," +
-			"{Cocoa Beans, 1, COCOA_BEANS}," +
-			"{Pumpkin Blocks, 0.125, PUMPKIN}," +
-			"{Melon Blocks, 0.125, MELON}," +
-			"{Cocoa Pods, 0.125, COCOA}," +
-			"{Kelp, 1, KELP}," +
-			"{Bamboo, 1, BAMBOO}," +
-			"{Cactus, 1, CACTUS}," +
-			"{Mushrooms, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
-			"{Apples, 0.125, APPLE}," +
-			"{Vines, 0.25, VINE}," +
-			"{Fish, 0.5, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
-			"{Gunpowder, 0.25, GUNPOWDER}," +
-			"{String, 0.25, STRING}," +
-			"{Spider eyes, 0.25, SPIDER_EYE}," +
-			"{Feathers, 0.25, FEATHER}," +
-			"{Leather, 0.25, LEATHER}," +
-			"{Rabbit Hides, 0.25, RABBIT_HIDE}," +
-			"{Rotten Flesh, 0.5, ROTTEN_FLESH}," +
-			"{Bones, 0.5, BONE, BONE_BLOCK}," +
-			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
-			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +
-			"{Beef, 0.25, BEEF, COOKED_BEEF}," +
-			"{Chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
-			"{Eggs, 0.25, EGG}," +			
-			"{Chorus Fruits, 0.25, CHORUS_FRUIT}," +
-			"{Ender Pearls, 0.125, ENDER_PEARL}",
+			"{wheat, 1, WHEAT}," +
+			"{carrots, 1, CARROTS}," +
+			"{potatoes, 1, POTATOES}," +
+			"{beetroot, 1, BEETROOT}," +
+			"{pumpkin_seeds, 1, PUMPKIN_SEEDS}," +
+			"{melon_slices, 1, MELON_SLICE}," +
+			"{cocoa_beans, 1, COCOA_BEANS}," +
+			"{pumpkin_blocks, 0.125, PUMPKIN}," +
+			"{melon_blocks, 0.125, MELON}," +
+			"{cocoa_pods, 0.125, COCOA}," +
+			"{kelp, 1, KELP}," +
+			"{bamboo, 1, BAMBOO}," +
+			"{cactus, 1, CACTUS}," +
+			"{mushrooms, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
+			"{apples, 0.125, APPLE}," +
+			"{vines, 0.25, VINE}," +
+			"{fish, 0.5, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
+			"{gunpowder, 0.25, GUNPOWDER}," +
+			"{string, 0.25, STRING}," +
+			"{spider_eyes, 0.25, SPIDER_EYE}," +
+			"{feathers, 0.25, FEATHER}," +
+			"{leather, 0.25, LEATHER}," +
+			"{rabbit_hides, 0.25, RABBIT_HIDE}," +
+			"{rotten_flesh, 0.5, ROTTEN_FLESH}," +
+			"{bones, 0.5, BONE, BONE_BLOCK}," +
+			"{pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
+			"{mutton, 0.25, MUTTON, COOKED_MUTTON}," +
+			"{beef, 0.25, BEEF, COOKED_BEEF}," +
+			"{chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
+			"{eggs, 0.25, EGG}," +			
+			"{chorus_fruits, 0.25, CHORUS_FRUIT}," +
+			"{ender_pearls, 0.125, ENDER_PEARL}",
 			"",
 			"# This list shows the resource extraction categories.",
 			"# ",
@@ -187,59 +191,59 @@ public enum TownyResourcesConfigNodes {
 	TOWN_RESOURCES_OFFERS_CATEGORIES(
 			"town_resources.offers.categories",
 			"" +
-			"{Common Dirt, 10, 2, DIRT}," +
-			"{Wood, 100, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
+			"{common_dirt, 10, 2, DIRT}," +
+			"{wood, 100, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
 			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
-			"{Common Rocks, 100, 2, STONE, COBBLESTONE}," +
-			"{Uncommon Rocks, 50, 1, DIORITE, ANDESITE, GRANITE}," +
-			"{Terracotta, 25, 0.5, TERRACOTTA}," +
-			"{Quartz, 25, 0.25, QUARTZ_BLOCK}," +
-			"{Prismarine, 10, 0.125, PRISMARINE}," +
-			"{Obsidian, 25, 0.125, OBSIDIAN}," +
-			"{Clay, 100, 1, CLAY_BALL}," +
-			"{Snow, 10, 1, SNOWBALL}," +
-			"{Coal, 100, 1, COAL}," +
-			"{Iron, 100, 0.5, RAW_IRON}," +
-			"{Gold, 100, 0.25, RAW_GOLD}," +
-			"{Emeralds, 100, 0.25, EMERALD}," +
-			"{Diamonds, 100, 0.125, DIAMOND}," +
-			"{Ancient Debris, 100, 0.0625, ANCIENT_DEBRIS}," +
-			"{Redstone, 100, 1, REDSTONE}," +
-			"{Ice, 25, 1, ICE}," +
-			"{Wheat, 100, 1, WHEAT}," +
-			"{Carrots, 100, 1, CARROTS}," +
-			"{Potatoes, 100, 1, POTATOES}," +
-			"{Beetroots, 100, 1, BEETROOT}," +
-			"{Pumpkins, 100, 1, PUMPKIN_SEEDS}," +
-			"{Melon Plants, 100, 1, MELON_SLICE}," +
-			"{Cocoa Plants, 100, 1, COCOA_BEANS}," +
-			"{Kelp, 50, 1, KELP}," +
-			"{Bamboo, 50, 1, BAMBOO}," +
-			"{Cactus, 50, 1, CACTUS}," +
-			"{Mushrooms, 100, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
-			"{Apple Trees, 100, 0.125, APPLE}," +
-			"{Vines, 100, 0.25, VINE}," +
-			"{Fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
-			"{a Flock of Sheep, 100, 0.5, WHITE_WOOL}," +
-			"{a Nest of Creepers, 100, 0.25, GUNPOWDER}," +
-			"{a Nest of Spiders, 100, 0.25, STRING}," +
-			"{a Nest of Spiders, 100, 0.25, SPIDER_EYE}," +
-			"{a Flock of Chickens, 100, 0.25, FEATHER}," +
-			"{a Herd of Animals, 100, 0.25, LEATHER}," +
-			"{a Herd of Rabbits, 100, 0.25, RABBIT_HIDE}," +
-			"{a Nest of Zombies, 100, 1, ROTTEN_FLESH}" +
-			"{a Nest of Skeletons, 100, 0.5, BONE}," +
-			"{a Herd of Pigs, 100, 0.25, PORKCHOP}," +
-			"{a Herd of Sheep, 100, 0.25, MUTTON}," +
-			"{a Herd of Cows, 100, 0.25, BEEF}," +
-			"{a Flock of Chickens, 100, 0.25, CHICKEN}," +	
-			"{a Flock of Hens, 100, 0.25, EGG}," +						
-			"{a Nest of Endermen, 100, 0.125, ENDER_PEARL}",
+			"{common_rocks, 100, 2, STONE, COBBLESTONE}," +
+			"{uncommon_rocks, 50, 1, DIORITE, ANDESITE, GRANITE}," +
+			"{terracotta, 25, 0.5, TERRACOTTA}," +
+			"{quartz, 25, 0.25, QUARTZ_BLOCK}," +
+			"{prismarine, 10, 0.125, PRISMARINE}," +
+			"{obsidian, 25, 0.125, OBSIDIAN}," +
+			"{clay, 100, 1, CLAY_BALL}," +
+			"{ice, 25, 1, ICE}," +
+			"{snow, 10, 1, SNOWBALL}," +
+			"{coal, 100, 1, COAL}," +
+			"{iron, 100, 0.5, RAW_IRON}," +
+			"{gold, 100, 0.25, RAW_GOLD}," +
+			"{emeralds, 100, 0.25, EMERALD}," +
+			"{diamonds, 100, 0.125, DIAMOND}," +
+			"{ancient_debris, 100, 0.0625, ANCIENT_DEBRIS}," +
+			"{redstone, 100, 1, REDSTONE}," +
+			"{wheat, 100, 1, WHEAT}," +
+			"{carrots, 100, 1, CARROTS}," +
+			"{potatoes, 100, 1, POTATOES}," +
+			"{beetroots, 100, 1, BEETROOT}," +
+			"{pumpkins, 100, 1, PUMPKIN_SEEDS}," +
+			"{melon_slices, 100, 1, MELON_SLICE}," +
+			"{cocoa_plants, 100, 1, COCOA_BEANS}," +
+			"{kelp, 50, 1, KELP}," +
+			"{bamboo, 50, 1, BAMBOO}," +
+			"{cactus, 50, 1, CACTUS}," +
+			"{mushrooms, 100, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
+			"{apple_trees, 100, 0.125, APPLE}," +
+			"{vines, 100, 0.25, VINE}," +
+			"{fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
+			"{wool, 100, 0.5, WHITE_WOOL}," +
+			"{gunpowder, 100, 0.25, GUNPOWDER}," +
+			"{string, 100, 0.25, STRING}," +
+			"{spider_eyes, 100, 0.25, SPIDER_EYE}," +
+			"{feathers, 100, 0.25, FEATHER}," +
+			"{leather, 100, 0.25, LEATHER}," +
+			"{rabbit_hide, 100, 0.25, RABBIT_HIDE}," +
+			"{rotten_flesh, 100, 1, ROTTEN_FLESH}" +
+			"{bones, 100, 0.5, BONE}," +
+			"{pork, 100, 0.25, PORKCHOP}," +
+			"{mutton, 100, 0.25, MUTTON}," +
+			"{beef, 100, 0.25, BEEF}," +
+			"{chickens, 100, 0.25, CHICKEN}," +	
+			"{eggs, 100, 0.25, EGG}," +						
+			"{ender_pearls, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",
 			"# ",
 			"# Each category is enclosed in curly brackets, and has 4 parts:",
-			"# 1 - The discovery name of the category (used for messaging)",
+			"# 1 - The name of the category (used for messaging)",
 			"# 2 - The discovery weight of the category (used during discovery)",
 			"# 3-  The base amount of the offer (in stacks)",
 			"# 4-  The list of materials in the category");

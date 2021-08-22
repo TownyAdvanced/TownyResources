@@ -95,7 +95,8 @@ public class TownResourceDiscoveryController {
    		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
    		String categoryName = winningCategory.getName();
+        String translatedCategoryName = TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1]; 
         String materialName = TownyResourcesMessagingUtil.formatMaterialForDisplay(winningMaterial);
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), translatedCategoryName, town.getName(), preTaxProduction, materialName));
     }
 }

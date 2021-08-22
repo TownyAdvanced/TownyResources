@@ -6,6 +6,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesResidentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -30,7 +31,8 @@ import java.util.*;
 public class PlayerExtractionLimitsController {
 
     private static Map<Entity, Entity> mobsDamagedByPlayersThisShortTick = new HashMap<>();
-    private static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();   
+    private static Map<Entity, Entity> mobsDamagedByPlayersLastShortTick = new HashMap<>();  
+    private static List<ResourceExtractionCategory> resourceExtractionCategories = new ArrayList<>();
     private static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
     private static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
     private static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
@@ -44,7 +46,7 @@ public class PlayerExtractionLimitsController {
     
     public static void loadAllResourceExtractionCategories() throws Exception{
          //Load all categories
-         List<ResourceExtractionCategory> resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
+         resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
          //Clear the map
          materialToResourceExtractionCategoryMap.clear();
          //Put each material on the map
@@ -367,9 +369,10 @@ public class PlayerExtractionLimitsController {
 
     private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
         if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-            String categoryName= categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+            String categoryName = categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
+            String translatedCategoryName = TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0]; 
             int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", categoryName, categoryExtractionLimit)));                    
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit)));                    
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
         }
     }
@@ -383,10 +386,19 @@ public class PlayerExtractionLimitsController {
      */
     public static void processPlayerLoginEvent(PlayerLoginEvent event) {
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
-            Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesGovernmentMetaDataController.getPlayerExtractionRecord(event.getPlayer());
+            Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(event.getPlayer());
             if(!playerExtractionRecord.isEmpty()) {
                 allPlayerExtractionRecords.put(event.getPlayer().getUniqueId(), playerExtractionRecord);
             }            
         }
+    }
+
+    public static ResourceExtractionCategory getResourceExtractionCategory(String givenCategoryName) {
+        for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories) {
+            if(resourceExtractionCategory.getCategoryName().equals(givenCategoryName)) {
+                return resourceExtractionCategory;
+            }
+        }
+        return null;
     }
 }

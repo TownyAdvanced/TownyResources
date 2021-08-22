@@ -87,14 +87,14 @@ public enum TownyResourcesConfigNodes {
 			"{Mushrooms, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
 			"{Apples, 0.125, APPLE}," +
 			"{Vines, 0.25, VINE}," +
-			"{Fish, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
+			"{Fish, 0.5, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
 			"{Gunpowder, 0.25, GUNPOWDER}," +
 			"{String, 0.25, STRING}," +
 			"{Spider eyes, 0.25, SPIDER_EYE}," +
 			"{Feathers, 0.25, FEATHER}," +
 			"{Leather, 0.25, LEATHER}," +
 			"{Rabbit Hides, 0.25, RABBIT_HIDE}," +
-			"{Rotten Flesh, 1, ROTTEN_FLESH}," +
+			"{Rotten Flesh, 0.5, ROTTEN_FLESH}," +
 			"{Bones, 0.5, BONE, BONE_BLOCK}," +
 			"{Pork, 0.25, PORKCHOP, COOKED_PORKCHOP}," +
 			"{Mutton, 0.25, MUTTON, COOKED_MUTTON}," +

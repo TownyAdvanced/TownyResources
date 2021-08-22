@@ -63,21 +63,26 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - The extraction records of all players are reset at Towny New Day.
 ###### Limit Mechanisms
 - Block Breaking:
-  - If a player breaks a block and it drops an item, this counts towards the player's daily extraction limit for that item.
-  - After a player's daily extraction limit is reached, they cannot longer break blocks of that type. (*Exception: Stone, Cobblestone, and Dirt - which can still be broken but drop nothing*).
+  - Before a player's daily limit is reached, if they break a block and it drops an item, this counts towards their daily limit for that item's category.
+  - After a player's daily limit is reached, they cannot longer break blocks in that category (*Exception: Stone, Cobblestone, and Dirt - which can still be broken but drop nothing*).
   - Blocks do not drop items in any other circumstance.
 - Mob Deaths:
-  - If a player hits a mob and it shortly dies and drops an item, this counts towards the player's daily limit for that item.
-  - After a player's daily extraction limit is reached, they cannot cause dead-mob-drops of that type.
+  - Before a player's daily limit is reached, if they kill a mob and it drops an item, this counts towards their daily limit for that item's category.
+  - After a player's daily limit is reached, mobs they kill will no longer drop items in that category.
   - Mobs do not drop items on death in any other circumstance.
+- Fishing: 
+  - Before a player's daily limit is reached, if they catch an item while fishing, this count towards their daily limit for that item's category.
+  - After a player's daily limit is reached, they can no longer catch items in that category.  
 - Sheep Shearing: 
-  - If a player shears a sheep, this counts +2 towards the player's daily limit for wool.
-  - When a player's limit is reached, they can no longer shear sheep.
+  - Before a player's daily limit is reached, if they shear a sheep, this counts +2 towards the player's daily limit for wool.
+  - After a player's daily limit is reached, they can no longer shear sheep.
   - Sheep do not drop wool via in any other circumstance.
 - Egg Laying: 
-  - If a chicken lays an egg within an owned town-plot, this counts towards the owner player's daily limit for eggs.
-  - When the player's egg limit is reached, chickens no longer drop eggs in their owned town-plots.  
+  - Before a player's daily limit is reached, eggs dropped within their owned town plots, count towards their daily limit for eggs.
+  - After a player's daily limit is reached, chickens will no longer drop eggs in their owned town plots. 
   - Chickens do not drop eggs in any other circumstance.
+
+
 ###### Information
 - When a player hits their daily extraction limit for a particular category of material, they will see an information bar message. Example:
   > Daily Extraction limit reached for Beetroot (64)
@@ -85,7 +90,7 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 ###### Question: 
 How will *TownyResources* benefit my server ? 
 ###### Answer: 
-#### 5 Benefits:
+#### 6 Benefits:
 1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War:**
    - There are surprisingly few good reasons to start a war in *SiegeWar*:
      - Resources: **NO**, because sieging does not provide resources. 
@@ -109,6 +114,11 @@ How will *TownyResources* benefit my server ?
     - These dynamics will naturally encourage the development of active and competitive nations.
 4. Assists **Trading**
     - By turning individual towns into centres for the production of specific goods, natural trading activities are encouraged.
+5. Reduces **Grind**
+    - Repetitive multi-hour grinds are largely eliminated.
+    - Before, a multi-hour grind could grant a player a significant competitive advantage over other players, *TownyResources* imposes limits and effectively tells such players to **STOP** after a certain time.  
+    - First, this is good for player mental health.
+    - Second, expending extra effort for resource advantage is still possible, but more varied and interesting activities are required e.g. farming multiple varieties of crops, cave explorations, ruins exploration, trading. 
 5. Assists **Roleplaying**
     - By giving each town a "signature" set of resources, this helps to develop the character of each town.
  

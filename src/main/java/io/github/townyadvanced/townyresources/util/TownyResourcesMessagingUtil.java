@@ -71,23 +71,11 @@ public class TownyResourcesMessagingUtil {
         }
     }
     
-    public static String formatResourcesStringForDynmapTownyDisplay(String resourcesAsString) {
-        String[] amountMaterialPair;
-    
+    public static String formatResourcesStringForDynmapTownyDisplay(String resourcesAsString) {    
         if(resourcesAsString.length() == 0) {
             return "";
         } else {
-            //Convert given string to array
-            String[] resourcesAsArray = 
-                resourcesAsString
-                .toLowerCase()
-                .split(",");
-            //Capitalize the first letter of each material 
-            String[] resourcesAsFormattedArray = new String[resourcesAsArray.length];
-            for(int i = 0; i < resourcesAsArray.length; i++) {
-                amountMaterialPair = resourcesAsArray[i].split("-");                                
-                resourcesAsFormattedArray[i] = amountMaterialPair[0] + amountMaterialPair[1].substring(0,1).substring(1).replaceAll("_","");                              
-            }
+            String[] resourcesAsFormattedArray = formatResourcesStringForTownyDisplay(resourcesAsString);
             //Build result string
             StringBuilder result = new StringBuilder();
             boolean firstEntry = true;
@@ -104,9 +92,8 @@ public class TownyResourcesMessagingUtil {
         }
     }
 
-
     public static String formatMaterialForDisplay(Material winningMaterial) {
-        String materialNameLowercase = winningMaterial.toString().toLowerCase();
+        String materialNameLowercase = winningMaterial.toString().toLowerCase().replaceAll("_","");
         return materialNameLowercase.substring(0,1).toUpperCase() + materialNameLowercase.substring(1);                      
     }
 }

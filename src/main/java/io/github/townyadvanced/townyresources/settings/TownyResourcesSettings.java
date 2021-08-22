@@ -11,6 +11,7 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
+import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
 import org.bukkit.Material;
 
@@ -93,11 +94,9 @@ public class TownyResourcesSettings {
 	 */
 	public static List<ResourceExtractionCategory> getResourceExtractionCategories() throws TownyException{
 		List<ResourceExtractionCategory> result = new ArrayList<>();
-		boolean problemLoadingExtractionCategories = false;
+		boolean problemLoadingCategories = false;
 
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
-
-		//TownyResources.info("Cat string: "+ categoriesAsString);	
 		
 		if(!categoriesAsString.isEmpty()) {		
 			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
@@ -105,8 +104,8 @@ public class TownyResourcesSettings {
 			String categoryAsString;
 			String[] categoryAsArray;
 			String categoryName;
-			double categoryExtractionLimitStacks;
-			int categoryExtractionLimitItems;
+			double categoryLimitStacks;
+			int categoryLimitItems;
 			Material material;
 			List<Material> materialsInCategory = new ArrayList<>();
 			ResourceExtractionCategory resourceExtractionCategory;
@@ -118,7 +117,7 @@ public class TownyResourcesSettings {
 				categoryAsArray = categoryAsString.split(",");
 				if(categoryAsArray.length < 2) {
 					TownyResources.severe("Bad configuration for extraction category: " + categoryAsString);
-					problemLoadingExtractionCategories = true;
+					problemLoadingCategories = true;
 					continue;
 				}
 				
@@ -126,8 +125,8 @@ public class TownyResourcesSettings {
 				categoryName = categoryAsArray[0].trim();
 				
 				//Read limit
-				categoryExtractionLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
-				categoryExtractionLimitItems = (int)((categoryExtractionLimitStacks * 64) + 0.5);
+				categoryLimitStacks = Double.parseDouble(categoryAsArray[1].trim());
+				categoryLimitItems = (int)((categoryLimitStacks * 64) + 0.5);
 				
 				//Read Materials
 				materialsInCategory = new ArrayList<>();
@@ -135,27 +134,100 @@ public class TownyResourcesSettings {
 					material = Material.getMaterial(categoryAsArray[i].trim());
 					if(material == null) {
 						TownyResources.severe("Unknown material in extraction category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
-						problemLoadingExtractionCategories = true;
+						problemLoadingCategories = true;
 						continue;
 					}
 					materialsInCategory.add(material);
 				}
 				
 				//Construct ResourceExtractionCategory object
-				resourceExtractionCategory = new ResourceExtractionCategory(categoryName, categoryExtractionLimitItems, materialsInCategory);
+				resourceExtractionCategory = new ResourceExtractionCategory(categoryName, categoryLimitItems, materialsInCategory);
 				
 				//Add to result
 				result.add(resourceExtractionCategory);
 			}		
 		}
 
-		if(problemLoadingExtractionCategories) {
+		if(problemLoadingCategories) {
 			throw new TownyException("Problem Loading Extraction Categories");
 		} else {
 			return result;
 		}
 	}
 
+	/**
+	 * Get all resource offer categories
+	 * 
+	 * @return a list of all resource offer categories
+	 * @throws TownyException a towny exception
+	 */
+	public static List<ResourceOfferCategory> getResourceOfferCategories() throws TownyException{
+		List<ResourceOfferCategory> result = new ArrayList<>();
+		boolean problemLoadingCategories = false;
+
+		String categoriesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES);
+		
+		if(!categoriesAsString.isEmpty()) {		
+			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
+			Matcher matcher = pattern.matcher(categoriesAsString);
+			String categoryAsString;
+			String[] categoryAsArray;
+			String categoryName;
+			int categoryDiscoveryWeight;
+			double categoryBaseAmountStacks;
+			int categoryBaseAmountItems;			
+			Material material;
+			List<Material> materialsInCategory = new ArrayList<>();
+			ResourceOfferCategory resourceOfferCategory;
+			
+			while (matcher.find()) {
+				//Read one resource offer category
+				categoryAsString = matcher.group(1);
+				   
+				categoryAsArray = categoryAsString.split(",");
+				if(categoryAsArray.length < 2) {
+					TownyResources.severe("Bad configuration for offer category: " + categoryAsString);
+					problemLoadingCategories = true;
+					continue;
+				}
+				
+				//Read name
+				categoryName = categoryAsArray[0].trim();
+				
+				//Read disovery weight
+				categoryDiscoveryWeight = Integer.parseInt(categoryAsArray[1]);
+				
+				//Read base amount
+				categoryBaseAmountStacks = Double.parseDouble(categoryAsArray[2].trim());
+				categoryBaseAmountItems = (int)((categoryBaseAmountStacks * 64) + 0.5);
+				
+				//Read Materials
+				materialsInCategory = new ArrayList<>();
+				for(int i = 2; i < categoryAsArray.length; i++) {
+					material = Material.getMaterial(categoryAsArray[i].trim());
+					if(material == null) {
+						TownyResources.severe("Unknown material in offer category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
+						problemLoadingCategories = true;
+						continue;
+					}
+					materialsInCategory.add(material);
+				}
+				
+				//Construct ResourceExtractionCategory object
+				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory);
+				
+				//Add to result
+				result.add(resourceOfferCategory);
+			}		
+		}
+
+		if(problemLoadingCategories) {
+			throw new TownyException("Problem Loading Resource Offers");
+		} else {
+			return result;
+		}
+	}
+	
 	public static void loadConfig(String filepath, String version) throws TownyException{
 		if (FileMgmt.checkOrCreateFile(filepath)) {
 			File file = new File(filepath);

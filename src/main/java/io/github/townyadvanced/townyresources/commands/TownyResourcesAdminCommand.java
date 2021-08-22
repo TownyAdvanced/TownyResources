@@ -1,7 +1,5 @@
 package io.github.townyadvanced.townyresources.commands;
 
-import com.gmail.goosius.siegewar.Messaging;
-import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -44,7 +42,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	 	try {
 			//This permission check handles all the perms checks
 			if (sender instanceof Player && !sender.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_ADMIN_COMMAND.getNode(args[0]))) {
-				Messaging.sendErrorMsg(sender, Translation.of("msg_err_command_disable"));
+				TownyResourcesMessagingUtil.sendErrorMsg(sender, TownyResourcesTranslation.of("msg_err_command_disable"));
 				return;
 			}
 			switch (args[0]) {
@@ -65,7 +63,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/townyresourcesadmin"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reload", Translation.of("admin_help_reload")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reload", TownyResourcesTranslation.of("admin_help_reload")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {

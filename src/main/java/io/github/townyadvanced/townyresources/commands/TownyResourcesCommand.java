@@ -1,7 +1,5 @@
 package io.github.townyadvanced.townyresources.commands;
 
-import com.gmail.goosius.siegewar.Messaging;
-import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -61,7 +59,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		try {
 			//This permission check handles all the perms checks
 			if (!player.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_COMMAND.getNode(args[0]))) {
-				Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+				TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_command_disable"));
 				return;
 			}
 			switch (args[0]) {
@@ -92,7 +90,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			
 		//Check if surveys are enabled
 		if(!TownyResourcesSettings.areSurveysEnabled())
-			throw new TownyException(Translation.of("msg_err_command_disable"));
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_command_disable"));
 			
 		//Check if there is a town here
 		if(!playerWorldCoord.hasTownBlock())

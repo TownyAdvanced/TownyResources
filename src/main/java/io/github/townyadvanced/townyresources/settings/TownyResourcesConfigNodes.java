@@ -220,21 +220,21 @@ public enum TownyResourcesConfigNodes {
 			"{Apple Trees, 100, 0.125, APPLE}," +
 			"{Vines, 100, 0.25, VINE}," +
 			"{Fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
-			"{A Flock of Sheep, 100, 0.5, WHITE_WOOL}," +
-			"{A Nest of Creepers, 100, 0.25, GUNPOWDER}," +
-			"{A Nest of Spiders, 100, 0.25, STRING}," +
-			"{A Nest of Spiders, 100, 0.25, SPIDER_EYE}," +
-			"{A Flock of Chickens, 100, 0.25, FEATHER}," +
-			"{A Herd of Animals, 100, 0.25, LEATHER}," +
-			"{A Herd of Rabbits, 100, 0.25, RABBIT_HIDE}," +
-			"{A Hest of Zombies, 100, 1, ROTTEN_FLESH}" +
-			"{A Hest of Skeletons, 100, 0.5, BONE}," +
-			"{A Herd of Pigs, 100, 0.25, PORKCHOP}," +
-			"{A Herd of Sheep, 100, 0.25, MUTTON}," +
-			"{A Herd of Cows, 100, 0.25, BEEF}," +
-			"{A Flock of Chickens, 100, 0.25, CHICKEN}," +	
-			"{A Flock of Hens, 100, 0.25, EGG}," +						
-			"{A Nest of Endermen, 100, 0.125, ENDER_PEARL}",
+			"{a Flock of Sheep, 100, 0.5, WHITE_WOOL}," +
+			"{a Nest of Creepers, 100, 0.25, GUNPOWDER}," +
+			"{a Nest of Spiders, 100, 0.25, STRING}," +
+			"{a Nest of Spiders, 100, 0.25, SPIDER_EYE}," +
+			"{a Flock of Chickens, 100, 0.25, FEATHER}," +
+			"{a Herd of Animals, 100, 0.25, LEATHER}," +
+			"{a Herd of Rabbits, 100, 0.25, RABBIT_HIDE}," +
+			"{a Nest of Zombies, 100, 1, ROTTEN_FLESH}" +
+			"{a Nest of Skeletons, 100, 0.5, BONE}," +
+			"{a Herd of Pigs, 100, 0.25, PORKCHOP}," +
+			"{a Herd of Sheep, 100, 0.25, MUTTON}," +
+			"{a Herd of Cows, 100, 0.25, BEEF}," +
+			"{a Flock of Chickens, 100, 0.25, CHICKEN}," +	
+			"{a Flock of Hens, 100, 0.25, EGG}," +						
+			"{a Nest of Endermen, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",
 			"# ",

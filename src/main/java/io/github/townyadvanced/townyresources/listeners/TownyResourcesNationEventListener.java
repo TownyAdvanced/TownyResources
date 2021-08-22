@@ -2,7 +2,6 @@ package io.github.townyadvanced.townyresources.listeners;
 
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
-import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
@@ -48,11 +47,11 @@ public class TownyResourcesNationEventListener implements Listener {
 			textLines.add(TownyResourcesTranslation.of("nation.screen.header"));
 				
 			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
-			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(productionAsString); 
+			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForTownyDisplay(productionAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.daily.production", resourcesAsFormattedArray.length)));
 
 			// > Available For Collection [2]: 64 oak log, 64 sugar cane
-			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(availableAsString); 
+			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForTownyDisplay(availableAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.available.for.collection", resourcesAsFormattedArray.length)));
 			
 			event.addLines(textLines);

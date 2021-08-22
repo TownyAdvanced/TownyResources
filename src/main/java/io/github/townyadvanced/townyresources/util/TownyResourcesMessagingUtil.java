@@ -37,31 +37,66 @@ public class TownyResourcesMessagingUtil {
         }
     }
     
-    public static String[] formatResourcesStringForDisplay(String resourcesAsString) {
+    public static String[] formatResourcesStringForTownyDisplay(String resourcesAsString) {
+        String[] amountMaterialPair;
+    
         if(resourcesAsString.length() == 0) {
             return new String[0];
         } else {
             //Convert given string to array
             String[] resourcesAsArray = 
                 resourcesAsString
-                .replaceAll("-"," ")
-                .replaceAll("_"," ")
                 .toLowerCase()
                 .split(",");
-            //Capitalize the first letter of each item 
-            String[] result = new String[resourcesAsArray.length];
+            //Capitalize the first letter of each material 
+            String[] resourcesAsFormattedArray = new String[resourcesAsArray.length];
             for(int i = 0; i < resourcesAsArray.length; i++) {
-                result[i] = resourcesAsArray[i].substring(0,1).toUpperCase() + resourcesAsArray[i].substring(1);              
+                amountMaterialPair = resourcesAsArray[i].split("-");                                
+                resourcesAsFormattedArray[i] = amountMaterialPair[0] + amountMaterialPair[1].substring(0,1).substring(1).replaceAll("_","");                              
             }
             //Shorter result if it is too long
-            if(result.length > 20) {
-                result = Arrays.copyOf(resourcesAsArray, 21);
-                result[20] = "...";
+            if(resourcesAsFormattedArray.length > 20) {
+                resourcesAsFormattedArray = Arrays.copyOf(resourcesAsArray, 21);
+                resourcesAsFormattedArray[20] = "...";
             }
             //Return result
-            return result;
+            return resourcesAsFormattedArray;
         }
     }
+    
+    public static String formatResourcesStringForDynmapTownyDisplay(String resourcesAsString) {
+        String[] amountMaterialPair;
+    
+        if(resourcesAsString.length() == 0) {
+            return "";
+        } else {
+            //Convert given string to array
+            String[] resourcesAsArray = 
+                resourcesAsString
+                .toLowerCase()
+                .split(",");
+            //Capitalize the first letter of each material 
+            String[] resourcesAsFormattedArray = new String[resourcesAsArray.length];
+            for(int i = 0; i < resourcesAsArray.length; i++) {
+                amountMaterialPair = resourcesAsArray[i].split("-");                                
+                resourcesAsFormattedArray[i] = amountMaterialPair[0] + amountMaterialPair[1].substring(0,1).substring(1).replaceAll("_","");                              
+            }
+            //Build result string
+            StringBuilder result = new StringBuilder();
+            boolean firstEntry = true;
+            for(String resource: resourcesAsFormattedArray) {
+                if(firstEntry) {
+                    firstEntry = false;
+                } else {
+                    result.append(", ");
+                }
+                result.append(resource);
+            }
+            //Return result
+            return result.toString();
+        }
+    }
+
 
     public static String formatMaterialForDisplay(Material winningMaterial) {
         String materialNameLowercase = winningMaterial.toString().toLowerCase();

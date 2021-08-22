@@ -19,14 +19,14 @@ import java.util.Map;
 
 public class TownResourceCollectionController {
 
-    public static synchronized void collectAvailableResources(Player player, Town town, Map<String,Integer> availableForCollection) {
+    public static synchronized void collectAvailableResources(Player player, Town town, Map<Material,Integer> availableForCollection) {
         //Collect resources
         collectAvailableTownResources(player, town, availableForCollection);
         //Notify Player
         TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.towncollect.success"));        
     }
     
-    public static synchronized void collectAvailableResources(Player player, Nation nation, Map<String,Integer> availableForCollection) {
+    public static synchronized void collectAvailableResources(Player player, Nation nation, Map<Material,Integer> availableForCollection) {
         //Collect resources
         collectAvailableTownResources(player, nation, availableForCollection);
         //Notify Player
@@ -42,15 +42,15 @@ public class TownResourceCollectionController {
      * @param government the government
      * @param availableForCollection the list of currently available resources
      */
-    public static synchronized void collectAvailableTownResources(Player player, Government government, Map<String,Integer> availableForCollection) {        
+    public static synchronized void collectAvailableTownResources(Player player, Government government, Map<Material,Integer> availableForCollection) {        
         List<ItemStack> itemStackList = new ArrayList<>();
         
         //Calculate stuff to give player
         Material material;
         int amount;
         ItemStack itemStack;
-        for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
-            material = Material.getMaterial(mapEntry.getKey().toUpperCase());
+        for(Map.Entry<Material,Integer> mapEntry: availableForCollection.entrySet()) {
+            material = mapEntry.getKey();
             if(material == null) {
                 TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", material));
                 continue;

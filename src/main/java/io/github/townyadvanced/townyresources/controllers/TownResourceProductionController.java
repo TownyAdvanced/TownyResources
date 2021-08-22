@@ -4,12 +4,15 @@ import com.gmail.goosius.siegewar.TownOccupationController;
 import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
+import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
@@ -27,8 +30,8 @@ public class TownResourceProductionController {
      */
     public static void recalculateAllProduction() {
         Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
-        recalculateProductionForAllTowns(allResourceOffers);
-        recalculateProductionForAllNations(allResourceOffers);
+        recalculateProductionForAllTowns();
+        recalculateProductionForAllNations();
         TownyResources.info("All Production Recalculated");
     }
 
@@ -37,9 +40,9 @@ public class TownResourceProductionController {
      * 
      * Note: This method does not recalculate production for any nations
      */
-    private static void recalculateProductionForAllTowns(Map<String, ResourceOffer> allResourceOffers) {
+    private static void recalculateProductionForAllTowns() {
         for(Town town: TownyUniverse.getInstance().getTowns()) {           
-            recalculateProductionForOneTown(town, allResourceOffers);
+            recalculateProductionForOneTown(town);
         }
     }
 
@@ -49,18 +52,19 @@ public class TownResourceProductionController {
      * Note: This method does not recalculate the nation production
      *         
      * @param town the town to recalculate production for
-     * @param allResourceOffers all resource offers
      */
-    static void recalculateProductionForOneTown(Town town, Map<String, ResourceOffer> allResourceOffers) {
+    static void recalculateProductionForOneTown(Town town) {
         try {
             //Get discovered resources
-            List<String> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
+            List<Material> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
     
             //Remove any discovered resources which are no longer on offer
-            List<String> resourcesToRemove = new ArrayList<>();
-            for(String resource: discoveredResources) {
-                if(!allResourceOffers.containsKey(resource))
+            Map<Material, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
+            List<Material> resourcesToRemove = new ArrayList<>();
+            for(Material resource: discoveredResources) {
+                if(!allOffers.containsKey(resource)) {
                     resourcesToRemove.add(resource);
+                }
             }
             if(!resourcesToRemove.isEmpty()) {
                 discoveredResources.removeAll(resourcesToRemove);
@@ -77,7 +81,7 @@ public class TownResourceProductionController {
             }
     
             //Build the town production map
-            Map<String, Integer> townProduction = calculateProduction(allResourceOffers, town, townCutNormalized);
+            Map<Material, Integer> townProduction = calculateProduction(town, townCutNormalized);
     
             //Save data
             TownyResourcesGovernmentMetaDataController.setDailyProduction(town, townProduction);    
@@ -93,9 +97,9 @@ public class TownResourceProductionController {
      * 
      * Note: This method does not recalculate production for any towns
      */
-    private static void recalculateProductionForAllNations(Map<String, ResourceOffer> allResourceOffers) {
+    private static void recalculateProductionForAllNations() {
         for(Nation nation: TownyUniverse.getInstance().getNations()) {
-            recalculateProductionForOneNation(nation, allResourceOffers);
+            recalculateProductionForOneNation(nation);
         }
     }
 
@@ -105,16 +109,15 @@ public class TownResourceProductionController {
      * Note: This method does not recalculate production for any towns
 
      * @param nation the nation to recalculate production for
-     * @param allResourceOffers all resource offers
      */
-    static void recalculateProductionForOneNation(Nation nation, Map<String, ResourceOffer> allResourceOffers) {
+    static void recalculateProductionForOneNation(Nation nation) {
         double nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
         List<Town> occupiedForeignTowns = TownOccupationController.getOccupiedForeignTowns(nation);
         List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
-        Map<String,Integer> nationProduction = new HashMap<>();
+        Map<Material,Integer> nationProduction = new HashMap<>();
         List<Town> townsToTakeFrom = new ArrayList<>();
-        Map<String,Integer> resourcesTakenFromTown;
-        String takenResource;
+        Map<Material,Integer> resourcesTakenFromTown;
+        Material takenResource;
         int takenQuantity;
         
         //Build list of towns to take from
@@ -128,9 +131,9 @@ public class TownResourceProductionController {
         //Take resources from towns and give to nation
         for(Town town: townsToTakeFrom) {
             //Take resources from town
-            resourcesTakenFromTown = calculateProduction(allResourceOffers, town, nationCutNormalized);
+            resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
             //Add resources to nation
-            for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
+            for(Map.Entry<Material, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
                 takenResource = resourceTakenFromTown.getKey();
                 takenQuantity = resourceTakenFromTown.getValue();
                 if(nationProduction.containsKey(takenResource)) {
@@ -152,21 +155,23 @@ public class TownResourceProductionController {
      * Calculate Production
      * This can be used for a town or nation
      * 
-     * @param allResourceOffers all resource offers
      * @param town the town producing the resource
      * @param cutNormalized the cut of the resource to return
      * @return the production as a map, with each value multiplied by the given cutNormalized value
      */
-    private static Map<String, Integer> calculateProduction(Map<String, ResourceOffer> allResourceOffers, Town town, double cutNormalized) {        
+    private static Map<Material, Integer> calculateProduction(Town town, double cutNormalized) {        
+        //Get all offers
+        Map<Material, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
+        
         //Get discovered resources
-        List<String> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
+        List<Material> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
 
         //Get configured resource level bonuses
         List<Double> normalizedBonusesPerResourceLevel = TownyResourcesSettings.getNormalizedProductionBonusesPerResourceLevel();
 
         //Calculate the production
-        Map<String, Integer> production = new HashMap<>();
-        String materialName;
+        Map<Material, Integer> production = new HashMap<>();
+        Material material;
         double baseProducedAmount;
         int finalProducedAmount;
 
@@ -174,10 +179,10 @@ public class TownResourceProductionController {
             //Ensure town meets the town level requirement to produce the resource
             if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) 
                 break;
-            materialName = discoveredResources.get(i);
-            baseProducedAmount = allResourceOffers.get(materialName).getBaseAmount();
+            material = discoveredResources.get(i);
+            baseProducedAmount = allOffers.get(material).getBaseAmountItems();
             finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
-            production.put(materialName, finalProducedAmount);
+            production.put(material, finalProducedAmount);
         }
             
         return production;
@@ -224,23 +229,23 @@ public class TownResourceProductionController {
     private static boolean produceResourcesForOneGovernment(Government government) {
         try {
             //Get daily production
-            Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(government);
+            Map<Material, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(government);
     
             if(townDailyProduction.isEmpty())
                 return false;
                 
             //Get the list of resources which are already available for collection
-            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(government);
+            Map<Material,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(government);
     
             //Get storage Limit modifier
             int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
             
             //Produce resources
-            String resource;
+            Material resource;
             int quantityToProduce;
             int currentQuantity;
             int storageLimit;
-            for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
+            for(Map.Entry<Material, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
                 quantityToProduce =townProductionEntry.getValue();
                 if(availableResources.containsKey(resource)) {
@@ -274,5 +279,6 @@ public class TownResourceProductionController {
         //Some resources were produced. Return true;
         return true;
     }
+
 
 }

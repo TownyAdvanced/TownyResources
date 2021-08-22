@@ -5,32 +5,31 @@ import org.bukkit.Material;
 import java.util.List;
 
 public class ResourceOfferCategory {
-    private final String categoryName;
-    private final int categoryDiscoveryWeight;
-    private final int categoryBaseOfferItems;   
+    private final String name;
+    private final int discoveryWeight;
+    private final int baseAmountItems;    
     private final List<Material> materialsInCategory;
 
-    public ResourceOfferCategory(String categoryName, int categoryDiscoveryWeight, int categoryBaseOfferItems, List<Material> materialsInCategory) {
-        this.categoryName = categoryName;
-        this.categoryDiscoveryWeight = categoryDiscoveryWeight;
-        this.categoryBaseOfferItems = categoryBaseOfferItems;
+    public ResourceOfferCategory(String name, int discoveryWeight, int baseOfferItems, List<Material> materialsInCategory) {
+        this.name = name;
+        this.discoveryWeight = discoveryWeight;
+        this.baseAmountItems = baseOfferItems;
         this.materialsInCategory = materialsInCategory;
     }
 
-
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public int getCategoryBaseOfferItems() {
-        return categoryBaseOfferItems;
+    public int getBaseAmountItems() {
+        return baseAmountItems;
     }
 
     public List<Material> getMaterialsInCategory() {
         return materialsInCategory;
     }
 
-    public int getCategoryDiscoveryWeight() {
-        return categoryDiscoveryWeight;
+    public int getDiscoveryWeight() {
+        return discoveryWeight;
     }
 }

@@ -4,6 +4,7 @@ import com.gmail.goosius.siegewar.tasks.DynmapTask;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceOffersController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
@@ -54,8 +55,9 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 			registerCommands();
-			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			TownResourceOffersController.loadAllResourceOfferCategories();
+			TownResourceProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -74,8 +76,9 @@ public class TownyResources extends JavaPlugin {
 		try {
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
-			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			TownResourceOffersController.loadAllResourceOfferCategories();
+			TownResourceProductionController.recalculateAllProduction();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to reload!");

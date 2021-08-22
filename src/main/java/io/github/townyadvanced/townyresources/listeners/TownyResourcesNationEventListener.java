@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.listeners;
 
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
@@ -35,23 +36,26 @@ public class TownyResourcesNationEventListener implements Listener {
 	@EventHandler
 	public void onNationStatusScreen(NationStatusScreenEvent event) {
 		if (TownyResourcesSettings.isEnabled()) {
-			List<String> textLines = new ArrayList<>();
 			Nation nation = event.getNation();
+			String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(nation);
+			String availableAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(nation);
 
-			//Resources:
-			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
+			if(productionAsString.isEmpty() && availableAsString.isEmpty())
+				return;
 
-			// > Daily Productivity [2]: 96 oak Log, 96 sugar cane, 24 gold_ore
-			String resourcesAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(nation);
-			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			//Resources:	
+			List<String> textLines = new ArrayList<>();
+			textLines.add(TownyResourcesTranslation.of("nation.screen.header"));
+				
+			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
+			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(productionAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.daily.production", resourcesAsFormattedArray.length)));
 
-			// > Available For Collection [2]: 192 oak log, 192 sugar cane, 48 gold ore
-			resourcesAsString = TownyResourcesGovernmentMetaDataController.getAvailableForCollection(nation);
-			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(resourcesAsString); 
+			// > Available For Collection [2]: 64 oak log, 64 sugar cane
+			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForDisplay(availableAsString); 
 			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("nation.screen.available.for.collection", resourcesAsFormattedArray.length)));
-
-	        event.addLines(textLines);
+			
+			event.addLines(textLines);
 		}
 	}
 }

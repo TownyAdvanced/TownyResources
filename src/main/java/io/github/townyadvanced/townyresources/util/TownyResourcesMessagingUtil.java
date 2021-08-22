@@ -64,7 +64,7 @@ public class TownyResourcesMessagingUtil {
     }
 
     public static String formatMaterialForDisplay(Material winningMaterial) {
-        String materialName = winningMaterial.toString();
-        return materialName.substring(0,1).toUpperCase() + materialName.substring(1);                      
+        String materialNameLowercase = winningMaterial.toString().toLowerCase();
+        return materialNameLowercase.substring(0,1).toUpperCase() + materialNameLowercase.substring(1);                      
     }
 }

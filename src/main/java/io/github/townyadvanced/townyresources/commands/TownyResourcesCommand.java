@@ -182,7 +182,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_no_resources_available"));
 		
 		//Collect resources
-		TownResourceCollectionController.collectAvailableTownResources(player, nation, availableForCollection);
+		TownResourceCollectionController.collectAvailableNationResources(player, nation, availableForCollection);
 	}
 
 }

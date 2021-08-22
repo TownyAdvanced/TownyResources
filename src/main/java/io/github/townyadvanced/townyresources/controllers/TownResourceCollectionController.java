@@ -19,16 +19,16 @@ import java.util.Map;
 
 public class TownResourceCollectionController {
 
-    public static synchronized void collectAvailableResources(Player player, Town town, Map<Material,Integer> availableForCollection) {
+    public static synchronized void collectAvailableTownResources(Player player, Town town, Map<Material,Integer> availableForCollection) {
         //Collect resources
-        collectAvailableTownResources(player, town, availableForCollection);
+        collectAvailableGovernmentResources(player, town, availableForCollection);
         //Notify Player
         TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.towncollect.success"));        
     }
     
-    public static synchronized void collectAvailableResources(Player player, Nation nation, Map<Material,Integer> availableForCollection) {
+    public static synchronized void collectAvailableNationResources(Player player, Nation nation, Map<Material,Integer> availableForCollection) {
         //Collect resources
-        collectAvailableTownResources(player, nation, availableForCollection);
+        collectAvailableGovernmentResources(player, nation, availableForCollection);
         //Notify Player
         TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.nationcollect.success"));        
     }
@@ -42,7 +42,7 @@ public class TownResourceCollectionController {
      * @param government the government
      * @param availableForCollection the list of currently available resources
      */
-    public static synchronized void collectAvailableTownResources(Player player, Government government, Map<Material,Integer> availableForCollection) {        
+    private static synchronized void collectAvailableGovernmentResources(Player player, Government government, Map<Material,Integer> availableForCollection) {        
         List<ItemStack> itemStackList = new ArrayList<>();
         
         //Calculate stuff to give player

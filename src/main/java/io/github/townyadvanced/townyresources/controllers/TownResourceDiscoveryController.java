@@ -62,7 +62,7 @@ public class TownResourceDiscoveryController {
         }
                 
         //Determine which offer has won
-        int winningNumber = (int)((Math.random() * discoveryId) + 0.5);
+        int winningNumber = (int)((Math.random() * discoveryId));
         ResourceOfferCategory winningCategory = null;
         for(Map.Entry<Integer, ResourceOfferCategory> candidate: discoveryMap.entrySet()) {
             if(winningNumber >= candidate.getKey() && winningNumber < candidate.getKey() + candidate.getValue().getDiscoveryWeight()) {
@@ -72,7 +72,7 @@ public class TownResourceDiscoveryController {
         }
         
         //Determine the winning material
-        winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()) + 0.5);
+        winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
         Material winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
         
         //Discover the resource

@@ -58,7 +58,7 @@
 ###### Collecting Nation Resources
 - To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
 - The available resources will then be dropped at your position.
-### Player Resource Extraction Limits
+### Daily Extraction Limits
 ###### Resource Categories
 - Extraction is limited per resource category.
 - Example: The resource category of "Common Rocks" contains both EARTH and COBBLESTONE. Extracting either of those items counts towards the daily limit.

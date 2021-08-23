@@ -73,7 +73,8 @@ msg_err_cannot_nationcollect_no_resources_available: '&cThere are no nation reso
 msg_err_cannot_collect_uknown_material: "&cUnknown Material: %s. Cannot collect this resource."
 
 # Player Extraction Limits
-msg_error_daily_extraction_limit_reached: "&cDaily Extraction limit reached for %s (%d)"
+msg_error_daily_extraction_limit_reached: "&cDaily extraction limit reached for %s (%d)"
+daily_extraction_limits_reset: "&bAll daily extraction limits have been reset."
 
 # Resource Categories
 # The format of each of these is:  'extraction name, discovery name'

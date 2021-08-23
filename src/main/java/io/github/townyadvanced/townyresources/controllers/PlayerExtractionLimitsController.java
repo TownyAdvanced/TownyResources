@@ -434,6 +434,9 @@ public class PlayerExtractionLimitsController {
             }
             //Clear any records which are in memory.
             allPlayerExtractionRecords.clear();
+            //Send global message            
+            TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("daily_extraction_limits_reset"));        
+
         }                     
     }
 

@@ -69,7 +69,7 @@
 ### Daily Extraction Limits
 ###### Resource Categories
 - Extraction is limited per resource category.
-- Example: The resource category of "Common Rocks" contains both EARTH and COBBLESTONE. Extracting either of those items counts towards the daily limit.
+- Example: The resource category of "Common Rocks" contains both STONE and COBBLESTONE. Extracting either of those items counts towards the daily limit.
 ###### Limit Schedule
 - Extraction is limited per *Towny* day.
 - The daily extraction limits of all players are reset at *Towny* New Day.

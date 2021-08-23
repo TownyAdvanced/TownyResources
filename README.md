@@ -89,12 +89,13 @@
     - Before a player's daily limit is reached, eggs dropped within their owned town plots, count towards their daily limit for eggs.
     - After a player's daily limit is reached, chickens will not drop eggs in their owned town plots. 
 # Admin Guide
-###### Reload
-- Configure Offers
+###### Configuration
+- Resource Offers
   - Resource Offers are configured in the *TownyResources* config.yml file.
   - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care when removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 
-- Configure Daily Extraction Limits
+- Daily Extraction Limits
   - Daily Extraction Limits for each resources are are configured in the *TownyResources* config.yml file.
+###### Commands
 - `/tra reload` - Reload TownyResouces
 
 # F.A.Q:

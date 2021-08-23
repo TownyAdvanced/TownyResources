@@ -28,7 +28,7 @@ public class TownyResourcesDynmapTownyListener implements Listener {
         if (TownyResourcesSettings.isEnabled()) {
             if (event.getDescription().contains("%town_resources%")) {
                 String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(event.getTown());
-                String formattedProductionAsString = TownyResourcesMessagingUtil.formatResourcesStringForDynmapTownyDisplay(productionAsString);
+                String formattedProductionAsString = TownyResourcesMessagingUtil.formatProductionStringForDynmapTownyDisplay(productionAsString);
                 String finalDescription = event.getDescription().replace("%town_resources%", formattedProductionAsString);
                 event.setDescription(finalDescription);
             }

@@ -58,6 +58,7 @@ public enum TownyResourcesConfigNodes {
 			"{iron, 1, IRON_ORE, RAW_IRON}," +
 			"{gold, 0.25, GOLD_ORE, DEEPSLATE_GOLD_ORE, RAW_GOLD}," +
 			"{gold_nuggets, 0.25, GOLD_NUGGET, NETHER_GOLD_ORE}," +
+			"{copper, 0.25, COPPER_ORE, RAW_COPPER}," +			
 			"{emeralds, 0.25, EMERALD_ORE, EMERALD}," +
 			"{lapis_Lazuli, 0.25, LAPIS_LAZULI, LAPIS_BLOCK, LAPIS_ORE}," +			
 			"{diamonds, 0.125, DIAMOND_ORE, DIAMOND}," +
@@ -206,6 +207,7 @@ public enum TownyResourcesConfigNodes {
 			"{coal, 100, 1, COAL}," +
 			"{iron, 100, 0.5, RAW_IRON}," +
 			"{gold, 100, 0.25, RAW_GOLD}," +
+			"{copper, 100, 0.25, RAW_COPPER}," +			
 			"{emeralds, 100, 0.25, EMERALD}," +
 			"{diamonds, 100, 0.125, DIAMOND}," +
 			"{ancient_debris, 100, 0.0625, ANCIENT_DEBRIS}," +

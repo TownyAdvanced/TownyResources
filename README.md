@@ -13,7 +13,7 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 6. Drop the TownyResources jar into your plugins folder
 7. Start yor server
 
-# User Guide
+# Player Guide
 ### Town Production
 ###### Information
 - Town production information is shown on the town screen. Example:
@@ -63,32 +63,40 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 ###### Limit Schedule
 - Extraction is limited per day.
 - The extraction records of all players are reset at Towny New Day.
-###### Limit Mechanisms
-- Block Breaking:
-  - Before a player's daily limit is reached, if they break a block and it drops an item, this counts towards their daily limit for that item's category.
-  - After a player's daily limit is reached, they cannot longer break blocks in that category (*Exception: Stone, Cobblestone, and Dirt - which can still be broken but drop nothing*).
-  - Blocks do not drop items in any other circumstance.
-- Mob Deaths:
-  - Before a player's daily limit is reached, if they kill a mob and it drops an item, this counts towards their daily limit for that item's category.
-  - After a player's daily limit is reached, mobs they kill will no longer drop items in that category.
-  - Mobs do not drop items on death in any other circumstance.
-- Fishing: 
-  - Before a player's daily limit is reached, if they catch an item while fishing, this count towards their daily limit for that item's category.
-  - After a player's daily limit is reached, they can no longer catch items in that category.  
-- Sheep Shearing: 
-  - Before a player's daily limit is reached, if they shear a sheep, this counts +2 towards the player's daily limit for wool.
-  - After a player's daily limit is reached, they can no longer shear sheep.
-  - Sheep do not drop wool via in any other circumstance.
-- Egg Laying: 
-  - Before a player's daily limit is reached, eggs dropped within their owned town plots, count towards their daily limit for eggs.
-  - After a player's daily limit is reached, chickens will no longer drop eggs in their owned town plots. 
-  - Chickens do not drop eggs in any other circumstance.
-
-
 ###### Information
 - When a player hits their daily extraction limit for a particular category of material, they will see an information bar message. Example:
   > Daily Extraction limit reached for Beetroot (64)
-## F.A.Q:
+###### Limit Mechanisms
+- Resources can only be extracted in the following circumstances:
+  - Block Drops:
+    - Before a player's daily limit is reached, if they break a block and it drops an item, this counts towards their daily limit for that item's category.
+    - After a player's daily limit is reached:
+      - Ancient Debris: Block does not break; Warning message is sent.
+      - Dirt, Rock, Cobblestone: Block breaks; No warning message is sent.
+      - All other blocks: Block breaks; Warning message is sent.
+  - Mob Death Drops:
+    - Before a player's daily limit is reached, if they kill a mob and it drops an item, this counts towards their daily limit for that item's category.
+    - After a player's daily limit is reached, if they kill a mob which would otherwise drop an item in that category, it does not and a warning message is sent.
+  - Fishing: 
+    - Before a player's daily limit is reached, if they catch an item while fishing, this counts towards their daily limit for that item's category.
+    - After a player's daily limit is reached, if a fishing action would catch an item in that category, it does not and a warning message is sent.
+  - Sheep Shearing: 
+    - Before a player's daily limit is reached, if they shear a sheep, this counts +2 towards the player's daily limit for the wool category.
+    - After a player's daily limit is reached, if they try to shear a sheep they cannot, and a warning message is sent.
+  - Egg Laying: 
+    - Before a player's daily limit is reached, eggs dropped within their owned town plots, count towards their daily limit for eggs.
+    - After a player's daily limit is reached, chickens will not drop eggs in their owned town plots. 
+# Admin Guide
+###### Reload
+- `/tra reload` - Reload TownyResouces
+- Configure Daily Extraction Limits
+  - Daily Extraction Limits for each resources are are configured in the *TownyResources* config.yml file.
+  - *NOTE*: After you make change to the daily extraction limits, individual player records do not change until new Towny New Day.
+- Configure Offers
+  - Resource Offers are configured in the *TownyResources* config.yml file.
+  - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care when removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 
+
+# F.A.Q:
 ###### Question: 
 How will *TownyResources* benefit my server ? 
 ###### Answer: 
@@ -117,10 +125,8 @@ How will *TownyResources* benefit my server ?
 4. Assists **Trading**
     - By turning individual towns into centres for the production of specific goods, natural trading activities are encouraged.
 5. Reduces **Grind**
-    - Repetitive multi-hour grinds are largely eliminated.
-    - Before, a multi-hour grind could grant a player a significant competitive advantage over other players, *TownyResources* imposes limits and effectively tells such players to **STOP** after a certain time.  
-    - First, this is good for player mental health.
-    - Second, expending extra effort for resource advantage is still possible, but more varied and interesting activities are required e.g. farming multiple varieties of crops, cave explorations, ruins exploration, trading. 
+    - Before, a multi-hour grind could grant a player a significant economic advantage over other players. *TownyResources* puts a hard cap on how much can be gained by each grind, thus facilitating a server a economy where extensive grinding simply has no part.
+    - It is still possible to expend extra effort for a resource advantage over other players, but more varied and interesting activities are required to achieve it e.g. farming multiple varieties of crops, cave explorations, ruins exploration, trading, war. 
 5. Assists **Roleplaying**
     - By giving each town a "signature" set of resources, this helps to develop the character of each town.
  
@@ -140,7 +146,7 @@ Yes.
   - **Group A**: 
     - Are given daily gifts of money, any blocks they ask for, enhanced mining speed, and the flying ability to help them build faster.
     - Within a few days, manufacture expensive items such as god sets, shulker boxes, and beacons.
-    - Within a few days, construct gigantic monuments to honour themselves.
+    - Within a few weeks, construct gigantic monuments to honour themselves.
     - Within a month, their riches are almost limitless.
     - Trading/diplomacy/sieges are now quite meaningless for them.
   - **Group B** 

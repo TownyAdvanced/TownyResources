@@ -60,11 +60,11 @@ public class TownyResourcesMessagingUtil {
         }
     }
     
-    public static String formatResourcesStringForDynmapTownyDisplay(String resourcesAsString) {    
-        if(resourcesAsString.length() == 0) {
+    public static String formatProductionStringForDynmapTownyDisplay(String productionAsString) {    
+        if(productionAsString.length() == 0) {
             return "";
         } else {
-            return WordUtils.capitalizeFully(resourcesAsString.replaceAll("_", " ").replaceAll("-", " "));
+            return WordUtils.capitalizeFully(productionAsString.replaceAll("_", " ").replaceAll("\\d+-", ""));
         }
     }
 

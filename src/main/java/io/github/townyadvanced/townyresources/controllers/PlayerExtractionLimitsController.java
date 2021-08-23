@@ -13,6 +13,7 @@ import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -160,19 +161,15 @@ public class PlayerExtractionLimitsController {
             CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, drop.getType());                                            
                  
             /* 
-             * If player is at the limit, cancel the event (except if STONE, COBBLE, DIRT, then only cancel the drop).
+             * If player is at the limit, cancel the drop (except if ANCIENT_DEBRIS, then cancel the whole break).
              *
              * If player is not at the limit, add extracted amount to record.                    
              */
             if(categoryExtractionRecord.isExtractionLimitReached()) {
-                switch(drop.getType()) {
-                    case STONE:
-                    case COBBLESTONE:
-                    case DIRT:
-                        event.setDropItems(false);
-                        break;
-                    default:                        
-                        event.setCancelled(true);
+                if(drop.getType() == Material.ANCIENT_DEBRIS) {
+                    event.setCancelled(true);                    
+                } else {
+                    event.setDropItems(false);                    
                 }
             } else {
                 categoryExtractionRecord.addExtractedAmount(drop.getAmount());                         
@@ -375,7 +372,11 @@ public class PlayerExtractionLimitsController {
             String categoryName = categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
             String translatedCategoryName = TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0]; 
             int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit)));                    
+            String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit);
+            //Send temporary action bar message
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + errorString));
+            //Send longer-lasting chat message
+            TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);                    
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
         }
     }

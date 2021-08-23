@@ -37,15 +37,14 @@ public enum TownyResourcesConfigNodes {
 	RESOURCE_EXTRACTION_LIMITS_CATEGORIES(			
 			"resource_extraction_limits.categories",
 			"" +
-			"{common_dirt, 5, DIRT, DIRT_PATH, FARMLAND}," + 
-			"{uncommon_dirt, 2, PODZOL, ROOTED_DIRT, MYCELIUM}," +
-			"{rare_dirt, 1, SOUL_SAND, SOUL_SOIL}," +
-			"{wood, 3, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG," +
-			"CRIMSON_STEM, WARPED_STEM, OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD," +
-			"ACACIA_WOOD, DARK_OAK_WOOD, CRIMSON_HYPHAE, WARPED_HYPHAE}" +
-			"{common_rocks, 6, STONE, COBBLESTONE}," +
-			"{uncommon_rocks, 2, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +
-			"{terracotta, 2, TERRACOTTA, WHITE_TERRACOTTA, ORANGE_TERRACOTTA, MAGENTA_TERRACOTTA, LIGHT_BLUE_TERRACOTTA, YELLOW_TERRACOTTA," +
+			"{common_dirt, 3, DIRT, DIRT_PATH, FARMLAND}," + 
+			"{uncommon_dirt, 1, PODZOL, ROOTED_DIRT, MYCELIUM}," +
+			"{rare_dirt, 1, SOUL_SOIL}," +
+			"{gravel, 1, GRAVEL}," +			
+			"{sand, 3, SAND}," +								
+			"{common_rocks, 2.5, STONE, COBBLESTONE}," +
+			"{uncommon_rocks, 1.5, DIORITE, ANDESITE, GRANITE, MOSSY_COBBLESTONE, MAGMA_BLOCK, BASALT}," +
+			"{terracotta, 1.5, TERRACOTTA, WHITE_TERRACOTTA, ORANGE_TERRACOTTA, MAGENTA_TERRACOTTA, LIGHT_BLUE_TERRACOTTA, YELLOW_TERRACOTTA," +
 			"LIME_TERRACOTTA, PINK_TERRACOTTA, GRAY_TERRACOTTA, LIGHT_GRAY_TERRACOTTA, CYAN_TERRACOTTA," +
 			"PURPLE_TERRACOTTA, BLUE_TERRACOTTA, BROWN_TERRACOTTA, GREEN_TERRACOTTA, RED_TERRACOTTA,BLACK_TERRACOTTA}," +
 			"{quartz, 0.25, QUARTZ_BLOCK}," +
@@ -68,6 +67,9 @@ public enum TownyResourcesConfigNodes {
 			"{glowstone, 0.25, GLOWSTONE_DUST, GLOWSTONE}," +
 			"{end_Stone, 4, END_STONE}," +
 			"{ancient_debris, 0.0625, ANCIENT_DEBRIS}," +
+			"{wood, 3.5, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG," +
+			"CRIMSON_STEM, WARPED_STEM, OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD," +
+			"ACACIA_WOOD, DARK_OAK_WOOD, CRIMSON_HYPHAE, WARPED_HYPHAE}" +
 			"{wool, 0.5, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL," +
 			"LIME_WOOL, PINK_WOOL, GRAY_WOOL, LIGHT_GRAY_WOOL, CYAN_WOOL," +
 			"PURPLE_WOOL, BLUE_WOOL, BROWN_WOOL, GREEN_WOOL, RED_WOOL,BLACK_WOOL}," +
@@ -192,26 +194,28 @@ public enum TownyResourcesConfigNodes {
 	TOWN_RESOURCES_OFFERS_CATEGORIES(
 			"town_resources.offers.categories",
 			"" +
-			"{common_dirt, 10, 2, DIRT}," +
-			"{wood, 100, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
-			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
+			"{common_dirt, 25, 2, DIRT}," +
+			"{gravel, 100, 1, GRAVEL}," +			
+			"{sand, 100, 2, SAND}," +								
 			"{common_rocks, 100, 2, STONE, COBBLESTONE}," +
-			"{uncommon_rocks, 50, 1, DIORITE, ANDESITE, GRANITE}," +
-			"{terracotta, 25, 0.5, TERRACOTTA}," +
-			"{quartz, 25, 0.25, QUARTZ_BLOCK}," +
-			"{prismarine, 10, 0.125, PRISMARINE}," +
-			"{obsidian, 25, 0.125, OBSIDIAN}," +
+			"{uncommon_rocks, 100, 1, DIORITE, ANDESITE, GRANITE}," +
+			"{terracotta, 100, 0.5, TERRACOTTA}," +
+			"{quartz, 100, 0.25, QUARTZ_BLOCK}," +
+			"{prismarine, 100, 0.125, PRISMARINE}," +
+			"{obsidian, 100, 0.125, OBSIDIAN}," +
 			"{clay, 100, 1, CLAY_BALL}," +
 			"{ice, 25, 1, ICE}," +
-			"{snow, 10, 1, SNOWBALL}," +
-			"{coal, 100, 1, COAL}," +
-			"{iron, 100, 0.5, RAW_IRON}," +
-			"{gold, 100, 0.25, RAW_GOLD}," +
+			"{snow, 25, 1, SNOWBALL}," +
+			"{coal, 200, 1, COAL}," +
+			"{iron, 200, 0.5, RAW_IRON}," +
+			"{gold, 200, 0.25, RAW_GOLD}," +
 			"{copper, 100, 0.25, RAW_COPPER}," +			
-			"{emeralds, 100, 0.25, EMERALD}," +
-			"{diamonds, 100, 0.125, DIAMOND}," +
-			"{ancient_debris, 100, 0.0625, ANCIENT_DEBRIS}," +
+			"{emeralds, 200, 0.25, EMERALD}," +
+			"{diamonds, 200, 0.125, DIAMOND}," +
 			"{redstone, 100, 1, REDSTONE}," +
+			"{ancient_debris, 200, 0.0625, ANCIENT_DEBRIS}," +
+			"{wood, 200, 1, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
+			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
 			"{wheat, 100, 1, WHEAT}," +
 			"{carrots, 100, 1, CARROTS}," +
 			"{potatoes, 100, 1, POTATOES}," +
@@ -219,15 +223,15 @@ public enum TownyResourcesConfigNodes {
 			"{pumpkins, 100, 1, PUMPKIN_SEEDS}," +
 			"{melon_slices, 100, 1, MELON_SLICE}," +
 			"{cocoa_plants, 100, 1, COCOA_BEANS}," +
-			"{kelp, 50, 1, KELP}," +
-			"{bamboo, 50, 1, BAMBOO}," +
-			"{cactus, 50, 1, CACTUS}," +
+			"{kelp, 100, 1, KELP}," +
+			"{bamboo, 100, 1, BAMBOO}," +
+			"{cactus, 100, 1, CACTUS}," +
 			"{mushrooms, 100, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
 			"{apple_trees, 100, 0.125, APPLE}," +
 			"{vines, 100, 0.25, VINE}," +
 			"{fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
 			"{wool, 100, 0.5, WHITE_WOOL}," +
-			"{gunpowder, 100, 0.25, GUNPOWDER}," +
+			"{gunpowder, 200, 0.25, GUNPOWDER}," +
 			"{string, 100, 0.25, STRING}," +
 			"{spider_eyes, 100, 0.25, SPIDER_EYE}," +
 			"{feathers, 100, 0.25, FEATHER}," +

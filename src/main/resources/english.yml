@@ -80,6 +80,8 @@ msg_error_daily_extraction_limit_reached: "&cDaily Extraction limit reached for 
 resource_category_common_dirt: 'Common Dirt, common dirt'
 resource_category_uncommon_dirt: 'Uncommon Dirt, uncommon dirt'
 resource_category_rare_dirt: 'Rare Dirt, rare dirt'
+resource_category_gravel: 'Gravel, Gravel'
+resource_category_sand: 'Sand, Sand'
 resource_category_wood: 'Wood, "wood'
 resource_category_common_rocks: 'Common Rocks, common rocks'
 resource_category_uncommon_rocks: 'Uncommon Rocks, uncommon rocks'

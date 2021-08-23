@@ -26,7 +26,6 @@ public class TownResourceProductionController {
      * Recalculate production for all towns and nations
      */
     public static void recalculateAllProduction() {
-        Map<String, ResourceOffer> allResourceOffers = TownyResourcesSettings.getAllResourceOffers();
         recalculateProductionForAllTowns();
         recalculateProductionForAllNations();
         TownyResources.info("All Production Recalculated");

@@ -77,7 +77,7 @@ public class TownyResources extends JavaPlugin {
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
-			PlayerExtractionLimitsController.reloadExtractionRecordsForLoggedInPlayers();
+			PlayerExtractionLimitsController.reloadAllExtractionRecordsForLoggedInPlayers();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to reload!");

@@ -5,7 +5,9 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 1. Ensure you have Towny 0.97.1.0+
 2. Edit your townyperms.yml file, and add the following perms:
    > Mayor, Assistant, Treasurer:  ... townyresources.command.towncollect                                                            
-   > King, Assistant, Treasurer: ... townyresources.command.nationcollect     
+   > King, Assistant, Treasurer: ... townyresources.command.nationcollect
+3. Using your permissions plugin, give this to any admins who are not already op:
+   > townyresources.admin.command.*                                                                     
 3. If you have the TownyDynmap plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
    > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`                                                                                                      
 4. Stop your server

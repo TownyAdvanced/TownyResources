@@ -458,13 +458,13 @@ public class PlayerExtractionLimitsController {
     }
 
     /**
-     * Reload the extraction records of all logged in players
+     * Reload all the extraction records of logged in players
      * 
      * NOTE: This method does NOT reset the records, 
      *   thus a player who has hit a limit cannot start extracting again,
-     *   unless an admin increased the configured resource limit prior to running this method.
+     *   unless an admin had increased the configured resource limit prior to running this method.
      */
-    public static void reloadExtractionRecordsForLoggedInPlayers() {
+    public static void reloadAllExtractionRecordsForLoggedInPlayers() {
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             //Save extraction records of all online players
             saveExtractionRecordsForOnlinePlayers();
@@ -479,6 +479,7 @@ public class PlayerExtractionLimitsController {
                     allPlayerExtractionRecords.put(player.getUniqueId(), playerExtractionRecord);
                 }
             }
-        }      
+        }    
+        TownyResources.info("All extraction records reloaded for logged in players");  
     }
 }

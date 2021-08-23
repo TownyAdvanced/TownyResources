@@ -15,3 +15,14 @@ commands:
         aliases: [tr]
     townyresourcesadmin:
         aliases: [tra]
+
+permissions:
+    townyresources.command.survey:
+        description: User is able to do a survey.
+        default: true
+
+    townyresources.admin.command.*:
+        description: User is able to do all townyresouces admin commands.
+        default: op
+        children:
+            townyresources.admin.command.reload: true

@@ -102,7 +102,7 @@
   - Resource Offers are configured in the *TownyResources* config.yml file.
   - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care when removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 
 - Daily Extraction Limits
-  - Daily Extraction Limits for each resources are are configured in the *TownyResources* config.yml file.
+  - Daily Extraction Limits are configured in the *TownyResources* config.yml file.
 ###### Commands
 - `/tra reload` - Reload TownyResouces
 
@@ -122,7 +122,7 @@ How will *TownyResources* benefit my server ?
      - PVP: **YES**. However ... such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
      - Plunder Money: **YES**. However ... money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
    - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
-      - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also provides generated-terrain & sandbox geopolitical strategy, and in which: 
+      - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"***
 2. Assists **Town Building:**
     - Town resources are automatically produced by the town itself. 
@@ -177,5 +177,5 @@ Yes.
 <br>
 - Just as *Towny* prevents-block breaking to protect the **Architectural** value of towns, *TownyResources* prevents block-breaking to protect the **Economic** value of towns.
 - Both protectionss are entirely unnatural, and are used for the same overall reason - to protect town value.
-- Thus if a player truly believes that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrecy, they should first disable all *Towny* block protections in their own town, prior to making any complaint about the unnaturalness of *Towny Resources* protections.
+- Thus if a player truly believes that preserving natural Minecraft block operations is more important than preserving the value of towns, then to avoid accusations of hypocrisy, they should first disable all *Towny* block protections in their own town, prior to making any complaint about the unnaturalness of *Towny Resources* protections.
 ----------

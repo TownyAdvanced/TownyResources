@@ -91,7 +91,6 @@ TownyResources adds value to individual towns, by giving each one a unique set o
 - `/tra reload` - Reload TownyResouces
 - Configure Daily Extraction Limits
   - Daily Extraction Limits for each resources are are configured in the *TownyResources* config.yml file.
-  - *NOTE*: After you make change to the daily extraction limits, individual player records do not change until new Towny New Day.
 - Configure Offers
   - Resource Offers are configured in the *TownyResources* config.yml file.
   - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care when removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 

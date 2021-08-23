@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources;
 
-import com.gmail.goosius.siegewar.tasks.DynmapTask;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -13,7 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dynmap.DynmapAPI;
 
 import java.io.File;
 
@@ -55,9 +53,9 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			registerListeners();
 			registerCommands();
-			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
+			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -76,9 +74,10 @@ public class TownyResources extends JavaPlugin {
 		try {
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
-			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
+			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			PlayerExtractionLimitsController.reloadExtractionRecordsForLoggedInPlayers();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to reload!");

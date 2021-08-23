@@ -440,7 +440,7 @@ public class PlayerExtractionLimitsController {
     /**
      * Save the extraction records of all online residents
      */
-    public static void saveAllPlayerExtractionRecords() {
+    public static void saveExtractionRecordsForOnlinePlayers() {
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             Resident resident;
             Map<Material, CategoryExtractionRecord> playerExtractionRecord;
@@ -457,4 +457,28 @@ public class PlayerExtractionLimitsController {
         }                     
     }
 
+    /**
+     * Reload the extraction records of all logged in players
+     * 
+     * NOTE: This method does NOT reset the records, 
+     *   thus a player who has hit a limit cannot start extracting again,
+     *   unless an admin increased the configured resource limit prior to running this method.
+     */
+    public static void reloadExtractionRecordsForLoggedInPlayers() {
+        synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
+            //Save extraction records of all online players
+            saveExtractionRecordsForOnlinePlayers();
+            //Clear the in-memory player extraction records
+            allPlayerExtractionRecords.clear();                        
+            //Reload extraction records of all online players
+            Resident resident;
+            for(Player player: Bukkit.getOnlinePlayers()) {
+                resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
+                if(resident != null) {
+                    Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(player);
+                    allPlayerExtractionRecords.put(player.getUniqueId(), playerExtractionRecord);
+                }
+            }
+        }      
+    }
 }

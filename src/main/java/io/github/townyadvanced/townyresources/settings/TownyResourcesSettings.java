@@ -365,4 +365,8 @@ public class TownyResourcesSettings {
 		}
 		return normalizedBonuses;
 	}
+	
+	public static boolean areResourceExtractionLimitsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_ENABLED);
+	}
 }

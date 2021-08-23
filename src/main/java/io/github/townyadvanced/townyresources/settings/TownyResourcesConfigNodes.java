@@ -82,7 +82,6 @@ public enum TownyResourcesConfigNodes {
 			"{carrots, 1, CARROTS}," +
 			"{potatoes, 1, POTATOES}," +
 			"{beetroot, 1, BEETROOT}," +
-			"{pumpkin_seeds, 1, PUMPKIN_SEEDS}," +
 			"{melon_slices, 1, MELON_SLICE}," +
 			"{cocoa_beans, 1, COCOA_BEANS}," +
 			"{pumpkin_blocks, 0.125, PUMPKIN}," +

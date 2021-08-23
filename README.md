@@ -1,6 +1,16 @@
 # TownyResources
 *TownyResources* adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
 
+Key Benefits:
+1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War**.
+2. Assists **Town Building**.
+3. Assists **Nation Building**.
+4. Assists **Trading**.
+5. Reduces **Grind**.
+6. Assists **Roleplaying**.
+
+(*details in the FAQ section below*)
+
 # Installation Guide
 1. Ensure you have *Towny* 0.97.1.0 +.
 2. Edit your townyperms.yml file, and add the following perms:
@@ -110,8 +120,8 @@
 ###### Question: 
 How will *TownyResources* benefit my server ? 
 ###### Answer: 
-#### 6 Benefits:
-1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War:**
+#### 6 Key Benefits:
+1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War**:
    - There are surprisingly few good reasons to start a war in *SiegeWar*:
      - Resources: **NO**, because sieging does not provide resources. 
      - Expansion: **NO**, because sieging does not provide land control. 
@@ -119,26 +129,26 @@ How will *TownyResources* benefit my server ?
      - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
      - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
      - Personal: **NO**, because it creates toxicity.
-     - PVP: **YES**. However ... such sieges usually upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
-     - Plunder Money: **YES**. However ... money is usually regarded by players as less satifying & less useful than the acquisition of material resources.
+     - PVP: **YES**. However ... such sieges often upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
+     - Plunder Money: **YES**. However ... money is often regarded by players as less satifying & less useful than the acquisition of material resources.
    - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
       - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"***
-2. Assists **Town Building:**
+2. Assists **Town Building**:
     - Town resources are automatically produced by the town itself. 
     - However it is the mayors / assistants / treasurers who get to actually collect the resources.
     - This dynamic naturally encourages the development of good town governance, to determine how the valuable town resources are to be distributed.
-3. Assists **Nation Building:**
+3. Assists **Nation Building**:
     - Joining a nation, and staying in it, becomes a much more important decision for a town. Whichever nation they are in will get a good share of their daily resource production. Thus mayors will be much more motivated to be in a nation which is active and helpful.
     - Correspondingly, town loyalty becomes much more important for nations. Nations must work harder to keep their towns, by being more active, more helpful, and developing good governance, including fair and efficient systems of resource distribution.
     - These dynamics will naturally encourage the development of active and competitive nations.
-4. Assists **Trading**
+4. Assists **Trading**:
     - By turning individual towns into centres for the production of specific goods, trading activities are naturally encouraged.
-5. Reduces **Grind**
+5. Reduces **Grind**:
     - Without *TownyResources*, a multi-hour grind can grant a player a significant economic advantage over other players.
     - *TownyResources* puts a hard cap on how much can be gained by each grind, thus facilitating a server a economy where extensive grinding simply has no part.
     - With *TownyResources*, it is still possible to expend extra effort for a resource advantage over other players, but more varied and interesting activities are required to achieve it e.g. farming multiple varieties of crops, cave explorations, ruins explorations, trading, war. 
-5. Assists **Roleplaying**
+6. Assists **Roleplaying**
     - By giving each town a unique "signature" set of resources, this helps to develop the character of each town.
  
 -----------

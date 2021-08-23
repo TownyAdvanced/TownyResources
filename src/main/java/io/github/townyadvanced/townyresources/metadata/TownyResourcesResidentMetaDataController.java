@@ -46,7 +46,7 @@ public class TownyResourcesResidentMetaDataController {
         int amountExtracted;
         String[] categories = recordAsString.replaceAll(" ", "").split(",");
         for(String category: categories) {
-            categoryArray = category.split(",");
+            categoryArray = category.split("-");
             amountExtracted = Integer.parseInt(categoryArray[0]);
             categoryName = categoryArray[1];
             ResourceExtractionCategory resourceExtractionCategory = PlayerExtractionLimitsController.getResourceExtractionCategory(categoryName);

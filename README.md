@@ -16,12 +16,12 @@
      ```
      - townyresources.admin.command.*
      ```                                                                           
-3. If you have the *TownyDynmap* plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
+4. If you have the *TownyDynmap* plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
    > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`                                                                                                      
-4. Stop your server.
-5. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
-6. Drop the TownyResources jar into your plugins folder.
-7. Start yor server.
+5. Stop your server.
+6. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
+7. Drop the TownyResources jar into your plugins folder.
+8. Start yor server.
 
 # Player Guide
 ### Town Production

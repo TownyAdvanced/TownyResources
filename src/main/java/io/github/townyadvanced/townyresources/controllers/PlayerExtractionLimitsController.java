@@ -1,13 +1,11 @@
 package io.github.townyadvanced.townyresources.controllers;
 
-import com.gmail.goosius.siegewar.metadata.ResidentMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesResidentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
@@ -16,6 +14,7 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -40,7 +39,7 @@ public class PlayerExtractionLimitsController {
     private static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
     private static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
     private static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
-    private static final String PLAYER_EXTRACTION_RECORD_DATA_LOCK = "Lock";
+    private static final String PLAYER_EXTRACTION_RECORD_DATA_LOCK = "LOCK";
 
     public static void resetMobsDamagedByPlayers() {
         mobsDamagedByPlayersLastShortTick.clear();
@@ -60,11 +59,6 @@ public class PlayerExtractionLimitsController {
              }
          }
          TownyResources.info("All Resource Extraction Categories Loaded");        
-    }
-
-    public static void saveAllPlayerExtractionRecords() {
-        //TODO  do every short tick
-        
     }
 
     /**
@@ -407,7 +401,6 @@ public class PlayerExtractionLimitsController {
     }
 
     /**
-     *
      *  Player logs out
      *  -> Save record to DB
      *  -> Remove record from map 
@@ -428,4 +421,36 @@ public class PlayerExtractionLimitsController {
             }            
         }  
     }
+
+    /**
+     * Reset the daily extraction limits for all residents (even the ones who are offline)
+     */
+    public static void resetDailyExtractionLimits() {
+        synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
+            //Reset records in db
+            for(Resident resident: TownyUniverse.getInstance().getResidents()) {
+                TownyResourcesResidentMetaDataController.removePlayerExtractionRecord(resident);
+                resident.save();    
+            }
+            //Clear any records which are in memory.
+            allPlayerExtractionRecords.clear();
+        }                     
+    }
+
+    /**
+     * Save the extraction records of all online residents
+     */
+    public static void saveAllPlayerExtractionRecords() {
+        synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
+            Resident resident;
+            for(Player player: Bukkit.getOnlinePlayers()) {
+                resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
+                if(resident != null) {
+                    TownyResourcesResidentMetaDataController.removePlayerExtractionRecord(resident);
+                    resident.save();    
+                }
+            }
+        }                     
+    }
+
 }

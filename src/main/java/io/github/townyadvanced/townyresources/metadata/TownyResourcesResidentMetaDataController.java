@@ -80,7 +80,11 @@ public class TownyResourcesResidentMetaDataController {
         }
         if(!recordAsString.isEmpty()) {
             //Set the string into metadata
-            MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, recordAsString.toString());    
+            MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, recordAsString.toString());     
         }
+    }
+    
+    public static void removePlayerExtractionRecord(Resident resident) {
+        MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, null);            
     }
 }

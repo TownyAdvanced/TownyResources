@@ -44,6 +44,7 @@ public class TownyResourcesTownyEventListener implements Listener {
     public void onNewDay(PreNewDayEvent event) {
         if(TownyResourcesSettings.isEnabled()) {
             TownResourceProductionController.produceAllResources();
+            PlayerExtractionLimitsController.resetDailyExtractionLimits();
         }
     }
        

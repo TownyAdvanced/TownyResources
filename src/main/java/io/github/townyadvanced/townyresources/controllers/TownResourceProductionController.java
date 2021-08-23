@@ -266,7 +266,8 @@ public class TownResourceProductionController {
             TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, availableResources);    
             
             //Save government
-            government.save();                       
+            government.save();        
+                           
             } catch (Exception e) {
                 TownyResources.severe("Problem producing resources for government " + government.getName());
                 e.printStackTrace();

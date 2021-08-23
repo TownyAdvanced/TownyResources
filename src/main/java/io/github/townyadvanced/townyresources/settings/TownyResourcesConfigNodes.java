@@ -229,7 +229,9 @@ public enum TownyResourcesConfigNodes {
 			"{apple_trees, 100, 0.125, APPLE}," +
 			"{vines, 100, 0.25, VINE}," +
 			"{fish, 100, 1, COD, SALMON, PUFFERFISH, TROPICAL_FISH}," +
-			"{wool, 100, 0.5, WHITE_WOOL}," +
+			"{wool, 100, 0.5, WHITE_WOOL}," +			
+			"{nether_warts, 1, NETHER_WART}," +
+			"{chorus_fruits, 1, CHORUS_FRUIT}," +		
 			"{gunpowder, 200, 0.25, GUNPOWDER}," +
 			"{string, 100, 0.25, STRING}," +
 			"{spider_eyes, 100, 0.25, SPIDER_EYE}," +

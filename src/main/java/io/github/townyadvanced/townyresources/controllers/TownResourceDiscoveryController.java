@@ -44,7 +44,6 @@ public class TownResourceDiscoveryController {
  	        //Add category as a candidate
  	        candidateCategories.add(category);
         }
- 		
  		//Ensure there are enough candidates left for a new discovery
         if(candidateCategories.size() < 1)
             throw new TownyException(TownyResourcesTranslation.of("msg_err_not_enough_offers_left"));

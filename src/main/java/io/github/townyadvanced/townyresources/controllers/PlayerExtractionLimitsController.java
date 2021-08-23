@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -42,23 +43,29 @@ public class PlayerExtractionLimitsController {
     private static final String PLAYER_EXTRACTION_RECORD_DATA_LOCK = "LOCK";
 
     public static void resetMobsDamagedByPlayers() {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         mobsDamagedByPlayersLastShortTick.clear();
         mobsDamagedByPlayersLastShortTick.putAll(mobsDamagedByPlayersThisShortTick);
         mobsDamagedByPlayersThisShortTick.clear();
     }
     
     public static void loadAllResourceExtractionCategories() throws Exception{
-         //Load all categories
-         resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
-         //Clear the map
-         materialToResourceExtractionCategoryMap.clear();
-         //Put each material on the map
-         for(ResourceExtractionCategory category: resourceExtractionCategories) {         
-             for(Material material: category.getMaterialsInCategory()) {
-                 materialToResourceExtractionCategoryMap.put(material, category);
-             }
-         }
-         TownyResources.info("All Resource Extraction Categories Loaded");        
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
+        //Load all categories
+        resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
+        //Clear the map
+        materialToResourceExtractionCategoryMap.clear();
+        //Put each material on the map
+        for(ResourceExtractionCategory category: resourceExtractionCategories) {         
+            for(Material material: category.getMaterialsInCategory()) {
+                materialToResourceExtractionCategoryMap.put(material, category);
+            }
+        }
+        TownyResources.info("All Resource Extraction Categories Loaded");        
     }
 
     /**
@@ -67,6 +74,9 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+    
         //Return if not a mob
         if(!(event.getEntity() instanceof Mob))
             return;
@@ -87,8 +97,10 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDeathEvent(EntityDeathEvent event) {
-        if(event.getEntity() instanceof Mob) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
 
+        if(event.getEntity() instanceof Mob) {
             //If the mob was not recently hit by a player, it drops nothing
             if (!mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
                 && !mobsDamagedByPlayersLastShortTick.containsKey(event.getEntity())) {
@@ -141,6 +153,9 @@ public class PlayerExtractionLimitsController {
      * @param event the event - this event is only called for Players (not entities)
      */
     public static void processBlockBreakEvent(BlockBreakEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         //Get the player extraction record
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer().getUniqueId());
 
@@ -190,6 +205,9 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         // Only limit if sheep  (mooshroom & iron-golem mechanics don't seem worth limiting
         if(event.getEntity().getType() != EntityType.SHEEP)
             return;  
@@ -230,6 +248,9 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processItemSpawnEvent(ItemSpawnEvent event) {    
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         //Return if item is not an egg
         Material itemMaterial = event.getEntity().getItemStack().getType();        
         if(itemMaterial != Material.EGG)
@@ -281,6 +302,9 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerFishEvent(PlayerFishEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         //Get the player extraction record
         Map<Material, CategoryExtractionRecord> playerExtractionRecord = getPlayerExtractionRecord(event.getPlayer().getUniqueId());
         
@@ -392,6 +416,9 @@ public class PlayerExtractionLimitsController {
      * @param event the login event
      */
     public static void processPlayerLoginEvent(PlayerLoginEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(event.getPlayer());
             if(!playerExtractionRecord.isEmpty()) {
@@ -407,6 +434,9 @@ public class PlayerExtractionLimitsController {
      * @param event player quit event
      */
     public static void processPlayerQuitEvent(PlayerQuitEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.get(event.getPlayer().getUniqueId());                       
             if(playerExtractionRecord != null) {
@@ -426,6 +456,9 @@ public class PlayerExtractionLimitsController {
      * Reset the daily extraction limits for all residents (even the ones who are offline)
      */
     public static void resetDailyExtractionLimits() {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             //Reset records in db
             for(Resident resident: TownyUniverse.getInstance().getResidents()) {
@@ -444,6 +477,9 @@ public class PlayerExtractionLimitsController {
      * Save the extraction records of all online residents
      */
     public static void saveExtractionRecordsForOnlinePlayers() {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             Resident resident;
             Map<Material, CategoryExtractionRecord> playerExtractionRecord;
@@ -468,6 +504,9 @@ public class PlayerExtractionLimitsController {
      *   unless an admin had increased the configured resource limit prior to running this method.
      */
     public static void reloadAllExtractionRecordsForLoggedInPlayers() {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+            return;
+
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             //Save extraction records of all online players
             saveExtractionRecordsForOnlinePlayers();

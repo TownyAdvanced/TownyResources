@@ -443,11 +443,15 @@ public class PlayerExtractionLimitsController {
     public static void saveAllPlayerExtractionRecords() {
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             Resident resident;
+            Map<Material, CategoryExtractionRecord> playerExtractionRecord;
             for(Player player: Bukkit.getOnlinePlayers()) {
-                resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-                if(resident != null) {
-                    TownyResourcesResidentMetaDataController.removePlayerExtractionRecord(resident);
-                    resident.save();    
+                playerExtractionRecord = allPlayerExtractionRecords.get(player.getUniqueId());
+                if(playerExtractionRecord != null) {
+                    resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
+                    if(resident != null) {
+                        TownyResourcesResidentMetaDataController.setPlayerExtractionRecord(resident, playerExtractionRecord);
+                        resident.save();    
+                    }
                 }
             }
         }                     

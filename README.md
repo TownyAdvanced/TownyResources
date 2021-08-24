@@ -1,5 +1,5 @@
 # TownyResources
-*TownyResources* adds value to towns, by giving each one a unique set of automatically-extracted resources (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
+*TownyResources* adds value to towns, by giving each one a unique set of automatically-generated resources (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
 
 Key Benefits:
 1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War**.

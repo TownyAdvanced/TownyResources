@@ -133,7 +133,7 @@ How will *TownyResources* benefit my server ?
      - Plunder Money: **YES**. However ... money is often regarded by players as less satifying & less useful than the acquisition of material resources.
    - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
       - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
- <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5))"***
+ <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars" ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5)))***
 2. Assists **Town Building**:
     - Town resources are automatically produced by the town itself. 
     - However it is the mayors / assistants / treasurers who get to actually collect the resources.

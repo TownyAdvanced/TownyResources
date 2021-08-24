@@ -51,11 +51,11 @@ public class TownyResources extends JavaPlugin {
 			printSickASCIIArt();
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
-			registerListeners();
-			registerCommands();
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			registerCommands();
+			registerListeners();
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");

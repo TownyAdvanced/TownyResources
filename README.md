@@ -110,7 +110,7 @@ Key Benefits:
 ###### Configuration
 - Resource Offers
   - Resource Offers are configured in the *TownyResources* config.yml file.
-  - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care when removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 
+  - ***WARNING***: If you reconfigure the offers list, it will change not only future discoveries, but also existing discoveries. Take particular care if removing an offer category, as this will remove the correponding discovery from any any towns towns which have already paid for it. 
 - Daily Extraction Limits
   - Daily Extraction Limits are configured in the *TownyResources* config.yml file.
 ###### Commands

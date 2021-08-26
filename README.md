@@ -124,14 +124,14 @@ How will *TownyResources* benefit my server ?
 1. Provides a critical part of the *SiegeWar* experience - **A Good Reason To Start A War**:
    - There are surprisingly few good reasons to start a war in *SiegeWar*:
      - Resources: **NO**, because sieging does not provide resources. 
-     - Expansion: **NO**, because sieging does not provide land control. 
-     - Equipment: **NO**, because SiegeWar does not allow soldiers to steal equipment from killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*).       
-     - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
+     - Equipment: **NO**, because SiegeWar does not allow soldiers to steal equipment from killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*).
+     - Full Territorial Control: **NO**, because sieging does not provide full territorial control of occupied towns (*i.e. block breaking/placing etc.*). 
      - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
-     - Personal: **NO**, because it creates toxicity.
-     - PVP: **YES**. However ... such sieges often upset players who want to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
-     - Plunder Money: **YES**. However ... money is often regarded by players as less satifying & less useful than the acquisition of material resources.
-   - *TownyResources* fixes this problem by transforming Resources into a good reason to start a war. 
+     - Personal: **NO**, because although wars can start for this reason, it is generally not good, because it can create toxicity.
+     - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
+     - PVP: **PARTIAL**. PVP is a fine reason for fighting in games like *Call-of-Duty* or *Battlefield*, however in *Minecraft-Towny*, it often upsets players who are trying to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
+     - Victory Rewards: **PARTIAL**. The rewards of victory are limited to a one-time plunder money steal, climbing the `\n list`, coloring the map, and achieving a higher nation claims bonus. This set of rewards has some value, but is often regarded by players as less satifying & less useful than the acquisition of material resources.    
+   - *TownyResources* fixes this problem by transforming Resources into a **GOOD** reason to start a war. 
       - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars" ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5)))***
 2. Assists **Town Building**:

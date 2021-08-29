@@ -34,6 +34,12 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If true, then daily player resource extraction limits are enabled.",
 			"# If false, then daily player resource extraction limits are disabled."),
+	RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS(
+			"resource_extraction_limits.cooldown_after_daily_limit_warning_message_millis",
+			"5000",
+			"",
+			"# The cooldown after a player receives a daily-limit warning message.",
+			"# During this time they cannot receive another daily-limit warning message for the same material."),
 	RESOURCE_EXTRACTION_LIMITS_CATEGORIES(			
 			"resource_extraction_limits.categories",
 			"" +

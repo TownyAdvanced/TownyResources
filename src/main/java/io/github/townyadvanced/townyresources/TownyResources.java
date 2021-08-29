@@ -55,10 +55,10 @@ public class TownyResources extends JavaPlugin {
 	 */
 	public boolean loadAll() {
 		try {
-			printSickASCIIArt();			
+			printSickASCIIArt();
 			townyVersionCheck();
 			setupIntegrationsWithOtherPlugins();
-			//Load settings and languages			
+			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			//Load controllers
@@ -70,7 +70,7 @@ public class TownyResources extends JavaPlugin {
 			registerListeners();
 		} catch (TownyException te) {
             severe("TownyResources failed to load! Disabling!");
-            return false;		
+            return false;
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -87,7 +87,7 @@ public class TownyResources extends JavaPlugin {
 	 */
 	public boolean reloadAll() {
 		try {
-			//Load settings and languages			
+			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			//Load controllers

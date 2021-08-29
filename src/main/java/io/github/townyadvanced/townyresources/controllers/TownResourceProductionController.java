@@ -1,8 +1,6 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
-import com.gmail.goosius.siegewar.settings.Settings;
-import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
@@ -290,6 +288,4 @@ public class TownResourceProductionController {
         //Some resources were produced. Return true;
         return true;
     }
-
-
 }

@@ -85,8 +85,7 @@ public class TownResourceDiscoveryController {
         TownResourceProductionController.recalculateProductionForOneTown(town);
 
         //Recalculate Nation Production
-        boolean siegeWarTownOccupationEnabled = TownyResources.getPlugin().isSiegeWarInstalled() && SiegeWarSettings.getWarSiegeEnabled();         
-        if(siegeWarTownOccupationEnabled && TownOccupationController.isTownOccupied(town)) {
+        if(TownyResources.getPlugin().isSiegeWarOccupationEnabled() && TownOccupationController.isTownOccupied(town)) {
             TownResourceProductionController.recalculateProductionForOneNation(TownOccupationController.getTownOccupier(town));
         } else if (town.hasNation()) {
             TownResourceProductionController.recalculateProductionForOneNation(town.getNation());

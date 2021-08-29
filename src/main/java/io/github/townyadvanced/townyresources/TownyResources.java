@@ -1,5 +1,8 @@
 package io.github.townyadvanced.townyresources;
 
+import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.util.Version;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -12,12 +15,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dynmap.towny.DynmapTownyPlugin;
 
 import java.io.File;
 
 public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
+	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
 	
@@ -50,12 +55,9 @@ public class TownyResources extends JavaPlugin {
 	 */
 	public boolean loadAll() {
 		try {
-			printSickASCIIArt();
-			//Determine if other plugins are installed
-			Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
-			siegeWarInstalled = siegeWar != null;
-			Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
-			dynmapTownyInstalled = dynmapTowny!= null;
+			printSickASCIIArt();			
+			townyVersionCheck();
+			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages			
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
@@ -66,6 +68,9 @@ public class TownyResources extends JavaPlugin {
 			//Load commands and listeners
 			registerCommands();
 			registerListeners();
+		} catch (TownyException te) {
+            severe("TownyResources failed to load! Disabling!");
+            return false;		
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -146,8 +151,30 @@ public class TownyResources extends JavaPlugin {
 	public boolean isDynmapTownyInstalled() {
 		return dynmapTownyInstalled;
 	}
+
+	public boolean isSiegeWarOccupationEnabled() {
+		return siegeWarInstalled && SiegeWarSettings.getWarSiegeEnabled();
+	}
 	
-	public boolean isSiegeWarInstalled() {
-		return siegeWarInstalled;
+	private String getTownyVersion() {
+        return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
+    }
+    
+	private void townyVersionCheck() throws TownyException{
+		String actualTownyVersion = getTownyVersion();
+        boolean comparisonResult = Version.fromString(actualTownyVersion).compareTo(requiredTownyVersion) >= 0;        
+		if (comparisonResult) {
+			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
+		} else {
+			info("Towny version " + actualTownyVersion + " found.");
+		}
+    }
+    
+    private void setupIntegrationsWithOtherPlugins() {
+		//Determine if other plugins are installed
+		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
+		siegeWarInstalled = siegeWar != null;
+		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
+		dynmapTownyInstalled = dynmapTowny!= null;
 	}
 }

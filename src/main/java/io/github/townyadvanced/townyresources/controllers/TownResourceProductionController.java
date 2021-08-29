@@ -1,6 +1,8 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
+import com.gmail.goosius.siegewar.settings.Settings;
+import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
@@ -66,15 +68,10 @@ public class TownResourceProductionController {
                 TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredResources);
                 town.save();
             }
-    
+
             //Determine town cut
-            double townCutNormalized;
-            if(town.hasNation() || TownOccupationController.isTownOccupied(town)) {
-                townCutNormalized = 1 - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-            } else {
-                townCutNormalized = 1;
-            }
-    
+            double townCutNormalized = calculateTownCutNormalized(town);
+
             //Build the town production map
             Map<Material, Integer> townProduction = calculateProduction(town, townCutNormalized);
     
@@ -85,6 +82,18 @@ public class TownResourceProductionController {
             TownyResources.severe("Problem recalculating production for town" + town.getName());
             e.printStackTrace();
         }
+    }
+
+    private static double calculateTownCutNormalized(Town town) {
+        boolean siegeWarTownOccupationEnabled = TownyResources.getPlugin().isSiegeWarInstalled() && SiegeWarSettings.getWarSiegeEnabled();         
+        if(
+            town.hasNation() 
+            || 
+            (siegeWarTownOccupationEnabled && TownOccupationController.isTownOccupied(town))
+        ) 
+            return 1 - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
+        else
+            return 1;
     }
 
     /**
@@ -106,24 +115,34 @@ public class TownResourceProductionController {
      * @param nation the nation to recalculate production for
      */
     static void recalculateProductionForOneNation(Nation nation) {
-        double nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-        List<Town> occupiedForeignTowns = TownOccupationController.getOccupiedForeignTowns(nation);
-        List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
-        Map<Material,Integer> nationProduction = new HashMap<>();
         List<Town> townsToTakeFrom = new ArrayList<>();
+        
+        //Build list of towns to take from
+        boolean siegeWarTownOccupationEnabled = TownyResources.getPlugin().isSiegeWarInstalled() && SiegeWarSettings.getWarSiegeEnabled();         
+        if(siegeWarTownOccupationEnabled) {
+            //SW occupation enabled
+            //All all home towns, except those occupied by foreign nations
+            List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
+            for(Town town: nation.getTowns()) {
+                if(!occupiedHomeTowns.contains(town) || TownOccupationController.getTownOccupier(town) == nation) {
+                    townsToTakeFrom.add(town);
+                }
+            }
+            //Add all foreign occupied towns
+            List<Town> occupiedForeignTowns = TownOccupationController.getOccupiedForeignTowns(nation);               
+            townsToTakeFrom.addAll(occupiedForeignTowns);
+        } else {
+            //SW occupation disabled
+            //Add all home towns
+            townsToTakeFrom.addAll(nation.getTowns());
+        }
+        
+        //Take resources from towns and give to nation
+        double nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
+        Map<Material,Integer> nationProduction = new HashMap<>();
         Map<Material,Integer> resourcesTakenFromTown;
         Material takenResource;
         int takenQuantity;
-        
-        //Build list of towns to take from
-        for(Town town: nation.getTowns()) {
-            if(!occupiedHomeTowns.contains(town) || TownOccupationController.getTownOccupier(town) == nation) {
-                townsToTakeFrom.add(town);
-            }
-        }
-        townsToTakeFrom.addAll(occupiedForeignTowns);
-        
-        //Take resources from towns and give to nation
         for(Town town: townsToTakeFrom) {
             //Take resources from town
             resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);

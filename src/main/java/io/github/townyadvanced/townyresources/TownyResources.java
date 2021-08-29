@@ -18,6 +18,8 @@ import java.io.File;
 public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
+	private static boolean siegeWarInstalled;
+	private static boolean dynmapTownyInstalled; 
 	
     @Override
     public void onEnable() {
@@ -49,11 +51,19 @@ public class TownyResources extends JavaPlugin {
 	public boolean loadAll() {
 		try {
 			printSickASCIIArt();
+			//Determine if other plugins are installed
+			Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
+			siegeWarInstalled = siegeWar != null;
+			Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
+			dynmapTownyInstalled = dynmapTowny!= null;
+			//Load settings and languages			
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			//Load commands and listeners
 			registerCommands();
 			registerListeners();
 		} catch (Exception e) {
@@ -72,8 +82,10 @@ public class TownyResources extends JavaPlugin {
 	 */
 	public boolean reloadAll() {
 		try {
+			//Load settings and languages			
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
@@ -131,8 +143,11 @@ public class TownyResources extends JavaPlugin {
 		TownyResources.info("Commands Loaded");		
 	}
 
-	private boolean isDynmapTownyInstalled() {
-		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
-		return dynmapTowny != null;
+	public boolean isDynmapTownyInstalled() {
+		return dynmapTownyInstalled;
+	}
+	
+	public boolean isSiegeWarInstalled() {
+		return siegeWarInstalled;
 	}
 }

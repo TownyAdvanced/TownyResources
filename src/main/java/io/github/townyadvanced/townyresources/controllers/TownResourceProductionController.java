@@ -116,7 +116,7 @@ public class TownResourceProductionController {
         
         //Build list of towns to take from
         if(TownyResources.getPlugin().isSiegeWarInstalled()) {
-            //All all home towns, except those occupied by foreign nations
+            //Add all home towns, except those occupied by foreign nations
             List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
             for(Town town: nation.getTowns()) {
                 if(!occupiedHomeTowns.contains(town) || TownOccupationController.getTownOccupier(town) == nation) {

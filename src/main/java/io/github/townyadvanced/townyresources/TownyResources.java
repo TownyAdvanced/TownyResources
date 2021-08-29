@@ -1,5 +1,8 @@
 package io.github.townyadvanced.townyresources;
 
+import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.util.Version;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -18,6 +21,9 @@ import java.io.File;
 public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
+	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
+	private static boolean siegeWarInstalled;
+	private static boolean dynmapTownyInstalled; 
 	
     @Override
     public void onEnable() {
@@ -49,13 +55,21 @@ public class TownyResources extends JavaPlugin {
 	public boolean loadAll() {
 		try {
 			printSickASCIIArt();
+			townyVersionCheck();
+			setupIntegrationsWithOtherPlugins();
+			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			//Load commands and listeners
 			registerCommands();
 			registerListeners();
+		} catch (TownyException te) {
+            severe("TownyResources failed to load! Disabling!");
+            return false;
 		} catch (Exception e) {
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
@@ -72,8 +86,10 @@ public class TownyResources extends JavaPlugin {
 	 */
 	public boolean reloadAll() {
 		try {
+			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
@@ -131,8 +147,40 @@ public class TownyResources extends JavaPlugin {
 		TownyResources.info("Commands Loaded");		
 	}
 
-	private boolean isDynmapTownyInstalled() {
+	public boolean isDynmapTownyInstalled() {
+		return dynmapTownyInstalled;
+	}
+
+	/**
+	* This method is used before checking for the effects of occupation on resources.
+	* Ideally we would also like to check if siegewar is enabled before doing this.
+	* However to do that, we would need to load siegewar before townyresources,
+	* which would change the position of resources on the town screen.
+	* Maybe this will be added in future, especially if someone actually needs it. 
+	*/
+	public boolean isSiegeWarInstalled() {
+		return siegeWarInstalled;
+	}
+	
+	private String getTownyVersion() {
+        return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
+    }
+    
+	private void townyVersionCheck() throws TownyException{
+		String actualTownyVersion = getTownyVersion();
+        boolean comparisonResult = Version.fromString(actualTownyVersion).compareTo(requiredTownyVersion) >= 0;        
+		if (comparisonResult) {
+			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
+		} else {
+			info("Towny version " + actualTownyVersion + " found.");
+		}
+    }
+    
+    private void setupIntegrationsWithOtherPlugins() {
+		//Determine if other plugins are installed
+		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
+		siegeWarInstalled = siegeWar != null;
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
-		return dynmapTowny != null;
+		dynmapTownyInstalled = dynmapTowny!= null;
 	}
 }

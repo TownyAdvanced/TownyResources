@@ -1,7 +1,6 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -39,7 +38,7 @@ public class PlayerExtractionLimitsController {
     private static List<ResourceExtractionCategory> resourceExtractionCategories = new ArrayList<>();
     private static Map<Material, ResourceExtractionCategory> materialToResourceExtractionCategoryMap = new HashMap<>();    
     private static Map<UUID, Map<Material, CategoryExtractionRecord>> allPlayerExtractionRecords = new HashMap<>();
-    private static final int DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS = 5000;
+    private static int cooldownAfterDailyLimitWarningMessageMillis;
     private static final String PLAYER_EXTRACTION_RECORD_DATA_LOCK = "LOCK";
 
     public static void resetMobsDamagedByPlayers() {
@@ -54,7 +53,8 @@ public class PlayerExtractionLimitsController {
     public static void loadAllResourceExtractionCategories() throws Exception{
         if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
             return;
-
+        //Load the message delay
+        cooldownAfterDailyLimitWarningMessageMillis = TownyResourcesSettings.getCooldownAfterDailyLimitWarningMessageMillis();
         //Load all categories
         resourceExtractionCategories = TownyResourcesSettings.getResourceExtractionCategories();
         //Clear the map
@@ -395,7 +395,7 @@ public class PlayerExtractionLimitsController {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + errorString));
             //Send longer-lasting chat message
             TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);                    
-            categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + DELAY_BETWEEN_LIMIT_MESSAGES_MILLIS);
+            categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + cooldownAfterDailyLimitWarningMessageMillis);
         }
     }
         

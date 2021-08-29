@@ -1,12 +1,10 @@
 package io.github.townyadvanced.townyresources.settings;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
@@ -368,5 +366,9 @@ public class TownyResourcesSettings {
 	
 	public static boolean areResourceExtractionLimitsEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_ENABLED);
+	}
+
+	public static int getCooldownAfterDailyLimitWarningMessageMillis() {
+		return getInt(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS);
 	}
 }

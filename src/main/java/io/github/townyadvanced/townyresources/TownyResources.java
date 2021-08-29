@@ -151,8 +151,15 @@ public class TownyResources extends JavaPlugin {
 		return dynmapTownyInstalled;
 	}
 
-	public boolean isSiegeWarOccupationEnabled() {
-		return siegeWarInstalled && SiegeWarSettings.getWarSiegeEnabled();
+	/**
+	* This method is used before checking for the effects of occupation on resources.
+	* Ideally we would also like to check if siegewar is enabled before doing this.
+	* However to do that, we would need to load siegewar before townyresources,
+	* which would change the position of resources on the town screen.
+	* Maybe this will be added in future, especially if someone actually needs it. 
+	*/
+	public boolean isSiegeWarInstalled() {
+		return siegeWarInstalled;
 	}
 	
 	private String getTownyVersion() {

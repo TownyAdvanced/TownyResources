@@ -86,7 +86,7 @@ public class TownResourceProductionController {
         if(
             town.hasNation() 
             || 
-            (TownyResources.getPlugin().isSiegeWarOccupationEnabled() && TownOccupationController.isTownOccupied(town))
+            (TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town))
         ) 
             return 1 - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
         else
@@ -115,7 +115,7 @@ public class TownResourceProductionController {
         List<Town> townsToTakeFrom = new ArrayList<>();
         
         //Build list of towns to take from
-        if(TownyResources.getPlugin().isSiegeWarOccupationEnabled()) {
+        if(TownyResources.getPlugin().isSiegeWarInstalled()) {
             //All all home towns, except those occupied by foreign nations
             List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
             for(Town town: nation.getTowns()) {

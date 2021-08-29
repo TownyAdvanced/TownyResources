@@ -1,7 +1,6 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
-import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -85,7 +84,7 @@ public class TownResourceDiscoveryController {
         TownResourceProductionController.recalculateProductionForOneTown(town);
 
         //Recalculate Nation Production
-        if(TownyResources.getPlugin().isSiegeWarOccupationEnabled() && TownOccupationController.isTownOccupied(town)) {
+        if(TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town)) {
             TownResourceProductionController.recalculateProductionForOneNation(TownOccupationController.getTownOccupier(town));
         } else if (town.hasNation()) {
             TownResourceProductionController.recalculateProductionForOneNation(town.getNation());

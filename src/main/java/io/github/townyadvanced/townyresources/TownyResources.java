@@ -68,9 +68,11 @@ public class TownyResources extends JavaPlugin {
 			registerCommands();
 			registerListeners();
 		} catch (TownyException te) {
+			severe(te.getMessage());
             severe("TownyResources failed to load! Disabling!");
             return false;
 		} catch (Exception e) {
+			severe(e.getMessage());
             e.printStackTrace();
             severe("TownyResources failed to load! Disabling!");
             return false;
@@ -96,6 +98,7 @@ public class TownyResources extends JavaPlugin {
 			PlayerExtractionLimitsController.reloadAllExtractionRecordsForLoggedInPlayers();
 		} catch (Exception e) {
             e.printStackTrace();
+			severe(e.getMessage());
             severe("TownyResources failed to reload!");
             return false;
         }
@@ -169,7 +172,7 @@ public class TownyResources extends JavaPlugin {
 	private void townyVersionCheck() throws TownyException{
 		String actualTownyVersion = getTownyVersion();
         boolean comparisonResult = Version.fromString(actualTownyVersion).compareTo(requiredTownyVersion) >= 0;        
-		if (comparisonResult) {
+		if (!comparisonResult) {
 			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
 		} else {
 			info("Towny version " + actualTownyVersion + " found.");

@@ -20,6 +20,10 @@
 	  <id>jitpack.io</id>
 	  <url>https://jitpack.io</url>
 	</repository>
+    <repository>
+      <id>lang-utils-repo</id>
+      <url>https://ci.nyaacat.com/maven/</url>
+    </repository>
   </repositories>
   
   <dependencies>
@@ -41,6 +45,11 @@
 	  <version>0.4.7</version>
 	  <scope>provided</scope>
 	</dependency>
+    <dependency>
+      <groupId>com.meowj</groupId>
+      <artifactId>LangUtils</artifactId>
+  	  <version>2.3-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,5 +1,7 @@
 package io.github.townyadvanced.townyresources.util;
 
+import com.meowj.langutils.lang.LanguageHelper;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,8 +13,11 @@ import com.palmergames.bukkit.util.Colors;
 
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TownyResourcesMessagingUtil {
 
@@ -42,15 +47,24 @@ public class TownyResourcesMessagingUtil {
         if(resourcesAsString.length() == 0) {
             return new String[0];
         } else {
-            //Convert given string to array
-            String[] resourcesAsFormattedArray = 
-                WordUtils.capitalizeFully(
-                resourcesAsString
-                .replaceAll("-", " ")
-                .replaceAll("_", " "))
-                .split(",");
-
-            //Shorter result if it is too long
+            //Convert given string to formatted list
+            List<String> resourcesAsFormattedList = new ArrayList<>();    
+            String[] resourcesAsArray = resourcesAsString.split(",");                
+            String[] amountAndMaterialName;
+            String amount;
+            String materialName;
+            String languageAwareMaterialName;
+            for(String resourceAsString: resourcesAsArray) {
+                amountAndMaterialName = resourceAsString.split("-");
+                amount = amountAndMaterialName[0];
+                materialName = amountAndMaterialName[1];
+                ItemStack fakeItemStack = new ItemStack(Material.getMaterial(materialName));
+                languageAwareMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getServerLocale());
+                resourcesAsFormattedList.add(amount + " " + languageAwareMaterialName);                
+                //WordUtils.capitalizeFully(
+            }            
+            //Convert formatter list to array, and shorten if too long
+            String[] resourcesAsFormattedArray =  resourcesAsFormattedList.toArray(new String[0]);
             if(resourcesAsFormattedArray.length > 20) {
                 resourcesAsFormattedArray = Arrays.copyOf(resourcesAsFormattedArray, 21);
                 resourcesAsFormattedArray[20] = "...";

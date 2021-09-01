@@ -53,7 +53,7 @@ Key Benefits:
 ###### Daily Production
 - On each new Towny New Day, towns automatically produce resources.
 - Production is modified by the resource level:
-  - Resource Level **1**: Production bonus **N/A**. Minimum town level **1**.
+  - Resource Level **1**: Production bonus **N/A**. Minimum town level **2**.
   - Resource Level **2**: Production bonus **+100%**. Minimum town level **4**.
   - Resource Level **3**: Production bonus **+200%**. Minimum town level **6**.
   - Resource Level **4**: Production bonus **+300%**. Minimum town level **8**.

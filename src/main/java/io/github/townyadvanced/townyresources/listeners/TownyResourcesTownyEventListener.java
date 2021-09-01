@@ -19,8 +19,8 @@ public class TownyResourcesTownyEventListener implements Listener {
 
 	@SuppressWarnings("unused")
 	private final TownyResources plugin;
-	private static int PRODUCTION_RECALCULATION_INTERVAL_MILLIS = 600000; //10 mins.
-	private static long nextProductionRecalculationTime = 0;  //0, so that it executes on the first short tick. 
+	private static int PRODUCTION_RECALCULATION_INTERVAL_MILLIS = 600000; //10 mins
+	private static long nextProductionRecalculationTime = 0; //0 so that it recalculates immediately on the 1st short tick
 
 	public TownyResourcesTownyEventListener(TownyResources instance) {
 		plugin = instance;

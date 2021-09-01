@@ -78,7 +78,7 @@ public class TownyResourcesResidentMetaDataController {
                 .append("-")
                 .append(categoryExtractionRecord.getResourceExtractionCategory().getCategoryName());
         }
-        if(!recordAsString.isEmpty()) {
+        if(!recordAsString.toString().isEmpty()) {
             //Set the string into metadata
             MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, recordAsString.toString());     
         }

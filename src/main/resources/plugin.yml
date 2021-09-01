@@ -5,7 +5,7 @@ api-version: ${project.bukkitAPIVersion}
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
 prefix: ${project.artifactId}
-depend: [Towny]
+depend: [Towny,LangUtils]
 softdepend: [SiegeWar,Dynmap-Towny]
 loadbefore: [SiegeWar]
 

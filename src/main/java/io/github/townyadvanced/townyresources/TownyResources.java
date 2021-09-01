@@ -24,6 +24,7 @@ public class TownyResources extends JavaPlugin {
 	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
+	private static boolean languageUtilsInstalled;
 	
     @Override
     public void onEnable() {
@@ -165,6 +166,10 @@ public class TownyResources extends JavaPlugin {
 		return siegeWarInstalled;
 	}
 	
+	public boolean isLanguageUtilsInstalled() {
+		return dynmapTownyInstalled;
+	}
+	
 	private String getTownyVersion() {
         return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
     }
@@ -185,5 +190,7 @@ public class TownyResources extends JavaPlugin {
 		siegeWarInstalled = siegeWar != null;
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
 		dynmapTownyInstalled = dynmapTowny!= null;
+		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
+		languageUtilsInstalled = languageUtils!= null;
 	}
 }

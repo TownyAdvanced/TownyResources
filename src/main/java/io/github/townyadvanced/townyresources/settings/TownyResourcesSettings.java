@@ -372,7 +372,7 @@ public class TownyResourcesSettings {
 		return getInt(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS);
 	}
 
-	public static String getServerLocale() {
-		return "en";
+	public static String getMaterialsDisplayLanguage() {
+		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_LANGUAGE_MATERIALS_DISPLAY_LANGUAGE);
 	}
 }

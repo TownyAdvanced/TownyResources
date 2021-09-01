@@ -62,7 +62,7 @@ public class TownyResources extends JavaPlugin {
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
 			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
-			TownResourceProductionController.recalculateAllProduction();
+            //NOTE: We do not recalculate production here, because we need for SW to load before that will give accurate results
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 			//Load commands and listeners
 			registerCommands();

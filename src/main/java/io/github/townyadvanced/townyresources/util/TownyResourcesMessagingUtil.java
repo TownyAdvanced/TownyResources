@@ -43,35 +43,19 @@ public class TownyResourcesMessagingUtil {
         }
     }
 
+    /**
+     *  Convert resource string to something we can send to chat utils
+     *
+     * @param resourcesAsString resource string
+     * @return an array we can use on the town/nation screen
+     */
     public static String[] formatResourcesStringForGovernmentScreenDisplay(String resourcesAsString) {
-        if(resourcesAsString.length() == 0) {
-            return new String[0];
-        } else {
-            //Convert given string to formatted list
-            List<String> resourcesAsFormattedList = new ArrayList<>();    
-            String[] resourcesAsArray = resourcesAsString.split(",");                
-            String[] amountAndMaterialName;
-            String amount;
-            String materialName;
-            String languageAwareMaterialName;
-            for(String resourceAsString: resourcesAsArray) {
-                amountAndMaterialName = resourceAsString.split("-");
-                amount = amountAndMaterialName[0];
-                materialName = amountAndMaterialName[1];
-                ItemStack fakeItemStack = new ItemStack(Material.getMaterial(materialName));
-                languageAwareMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getServerLocale());
-                resourcesAsFormattedList.add(amount + " " + languageAwareMaterialName);                
-                //WordUtils.capitalizeFully(
-            }            
-            //Convert formatter list to array, and shorten if too long
-            String[] resourcesAsFormattedArray =  resourcesAsFormattedList.toArray(new String[0]);
-            if(resourcesAsFormattedArray.length > 20) {
-                resourcesAsFormattedArray = Arrays.copyOf(resourcesAsFormattedArray, 21);
-                resourcesAsFormattedArray[20] = "...";
-            }
-            //Return result
-            return resourcesAsFormattedArray;
+        String[] resourcesAsFormattedArray = convertResourceAmountsStringToFormattedArray(resourcesAsString);
+        if(resourcesAsFormattedArray.length > 20) {
+            resourcesAsFormattedArray = Arrays.copyOf(resourcesAsFormattedArray, 21);
+            resourcesAsFormattedArray[20] = "...";
         }
+        return resourcesAsFormattedArray;
     }
     
     public static String formatProductionStringForDynmapTownyDisplay(String productionAsString) {    
@@ -84,5 +68,34 @@ public class TownyResourcesMessagingUtil {
 
     public static String formatMaterialForDisplay(Material material) {
         return WordUtils.capitalizeFully(material.toString().replaceAll("_", " "));
+    }
+
+    /**
+     * Convert a resource amount string formatted array
+     * @param resourcesAmountsString e.g. "64-WHEAT,64-COAL"
+     * @return e.g. ["64 Wheat","64 Coal"]
+     */
+    private static String[] convertResourceAmountsStringToFormattedArray(String resourcesAmountsString) {
+         if(resourcesAmountsString.length() == 0) {
+            return new String[0];
+        } else {
+            //Convert given string to formatted list
+            List<String> resourcesAsFormattedList = new ArrayList<>();    
+            String[] resourcesAsArray = resourcesAmountsString.split(",");                
+            String[] amountAndMaterialName;
+            String amount;
+            String materialName;
+            String languageAwareMaterialName;
+            for(String resourceAsString: resourcesAsArray) {
+                amountAndMaterialName = resourceAsString.split("-");
+                amount = amountAndMaterialName[0];
+                materialName = amountAndMaterialName[1];
+                ItemStack fakeItemStack = new ItemStack(Material.getMaterial(materialName));
+                languageAwareMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getServerLocale());
+                resourcesAsFormattedList.add(amount + " " + languageAwareMaterialName);                
+                //WordUtils.capitalizeFully(
+            }       
+            return resourcesAsFormattedList.toArray(new String[0]);
+        }     
     }
 }

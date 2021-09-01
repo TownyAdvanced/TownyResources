@@ -167,7 +167,7 @@ public class TownyResources extends JavaPlugin {
 	}
 	
 	public boolean isLanguageUtilsInstalled() {
-		return dynmapTownyInstalled;
+		return languageUtilsInstalled;
 	}
 	
 	private String getTownyVersion() {

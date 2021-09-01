@@ -259,8 +259,17 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - The name of the category (used for messaging)",
 			"# 2 - The discovery weight of the category (used during discovery)",
 			"# 3-  The base amount of the offer (in stacks)",
-			"# 4-  The list of materials in the category");
-
+			"# 4-  The list of materials in the category"),
+	TOWN_RESOURCES_LANGUAGE(
+			"town_resources.language",
+			"",
+			"",
+			""),			
+	TOWN_RESOURCES_LANGUAGE_MATERIALS_DISPLAY_LANGUAGE(
+			"town_resources.language.materials_display_language",
+			"zh_cn",
+			"",
+			"# If you have the LanguageUtils plugin installed, materials will be automatically translated into this locale/language.");
 	private final String Root;
 	private final String Default;
 	private String[] comments;

@@ -27,11 +27,12 @@ Key Benefits:
      - townyresources.admin.command.*
      ```                                                                           
 4. If you have the *TownyDynmap* plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
-   > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`                                                                                                      
-5. Stop your server.
-6. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
-7. Drop the TownyResources jar into your plugins folder.
-8. Start yor server.
+   > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`    
+5. If you want to translate Material names to a Non-English language, click [here](https://github.com/NyaaCat/LanguageUtils/releases) to download the Jar for the *LanguageUtils* plugin, and drop it into your plugins folder. The language is configured in the *TownyResources* Config.yml file.
+6. Stop your server.
+7. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
+8. Drop the TownyResources jar into your plugins folder.
+9. Start yor server.
 
 # Player Guide
 ### Town Production

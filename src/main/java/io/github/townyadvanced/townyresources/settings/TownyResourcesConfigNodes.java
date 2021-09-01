@@ -43,7 +43,7 @@ public enum TownyResourcesConfigNodes {
 	RESOURCE_EXTRACTION_LIMITS_CATEGORIES(			
 			"resource_extraction_limits.categories",
 			"" +
-			"{common_dirt, 3, DIRT, FARMLAND}," + 
+			"{common_dirt, 3, DIRT, FARMLAND}," +
 			"{uncommon_dirt, 1, PODZOL, ROOTED_DIRT, MYCELIUM}," +
 			"{rare_dirt, 1, SOUL_SOIL}," +
 			"{gravel, 1, GRAVEL}," +			

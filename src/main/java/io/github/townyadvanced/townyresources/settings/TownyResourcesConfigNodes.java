@@ -259,7 +259,10 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - The name of the category (used for messaging)",
 			"# 2 - The discovery weight of the category (used during discovery)",
 			"# 3-  The base amount of the offer (in stacks)",
-			"# 4-  The list of materials in the category"),
+			"# 4-  The list of materials in the category",
+			"# ",
+			"# The default values give a weight of 200 to strategic resources (coal, iron etc.), and 100 to most non-strategic resources. (wheat, quartz etc.)",
+			"# This gives each survey approx. 30% chance to discover a strategic resources, and a 70% to discover a non-strategic resource."),
 	TOWN_RESOURCES_LANGUAGE(
 			"town_resources.language",
 			"",

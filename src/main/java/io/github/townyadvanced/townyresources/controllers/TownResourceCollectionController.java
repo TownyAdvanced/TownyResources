@@ -23,23 +23,6 @@ import java.util.Map;
 public class TownResourceCollectionController {
 
     public static synchronized void collectAvailableTownResources(Player player, Town town, Map<String,Integer> availableForCollection) {
-
-        if(TownyResources.getPlugin().isSlimeFunInstalled()) {
-            SlimefunItem slimeFunItem = SlimefunItem.getByID("BUCKET_OF_OIL");
-            //If null, return		
-            //Create the stack to drop
-            ItemStack itemStack = slimeFunItem.getRecipeOutput();
-            //Set the amount
-            itemStack.setAmount(1);
-            //Drop stuff near player
-            Towny.getPlugin().getServer().getScheduler().runTask(Towny.getPlugin(), new Runnable() {
-                public void run() {
-                    Location location = player.getLocation();
-                    player.getWorld().dropItemNaturally(location, itemStack);                 
-                }
-            });    
-        }
-
         //Collect resources
         collectAvailableGovernmentResources(player, town, availableForCollection);
         //Notify Player

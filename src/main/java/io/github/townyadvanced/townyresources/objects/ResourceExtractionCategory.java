@@ -1,7 +1,5 @@
 package io.github.townyadvanced.townyresources.objects;
 
-import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Material;
 
 import java.util.List;

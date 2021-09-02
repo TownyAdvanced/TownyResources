@@ -128,7 +128,7 @@ public class TownyResourcesMessagingUtil {
     
     public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory) {
         String categoryName = resourceExtractionCategory.getName();
-        if(TownyResourcesTranslation.hasKey(categoryName)) {
+        if(TownyResourcesTranslation.hasKey("resource_category_" + categoryName)) {
             return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0];
         } else {
             return formatMaterialNameForDisplay(categoryName);
@@ -137,7 +137,7 @@ public class TownyResourcesMessagingUtil {
 
     public static String formatOfferCategoryNameForDisplay(ResourceOfferCategory resourceOfferCategory) {
         String categoryName = resourceOfferCategory.getName();
-        if(TownyResourcesTranslation.hasKey(categoryName)) {
+        if(TownyResourcesTranslation.hasKey("resource_category_"+ categoryName)) {
             return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1].trim();
         } else {
             return formatMaterialNameForDisplay(categoryName);

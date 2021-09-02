@@ -149,7 +149,7 @@ public class TownyResourcesMessagingUtil {
         if(material == null) {
             if(TownyResources.getPlugin().isSlimeFunInstalled()) {
                 SlimefunItem slimefunItem = SlimefunItem.getByID(materialName);
-                return slimefunItem.getItemName().replaceAll("&.","");                
+                return slimefunItem.getItemName().replaceAll("\\W","");                
             } 
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           

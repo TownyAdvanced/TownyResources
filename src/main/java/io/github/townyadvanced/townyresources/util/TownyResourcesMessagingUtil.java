@@ -1,6 +1,8 @@
 package io.github.townyadvanced.townyresources.util;
 
 import com.meowj.langutils.lang.LanguageHelper;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
+import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.apache.commons.lang.WordUtils;
@@ -78,27 +80,13 @@ public class TownyResourcesMessagingUtil {
                 String[] resourcesAsArray = resourcesAsString.replaceAll("\\d+-", "").split(",");
                 String translatedMaterialName;
                 for(String resourceAsString: resourcesAsArray) {
-                    translatedMaterialName = getTranslatedMaterialName(resourceAsString);                    
+                    translatedMaterialName = formatMaterialNameForDisplay(resourceAsString);                    
                     resourcesAsFormattedList.add(translatedMaterialName);                
                 }                       
                 return Arrays.toString(resourcesAsFormattedList.toArray()).replace("[","").replace("]","");                
             } else {
                 return WordUtils.capitalizeFully(resourcesAsString.replaceAll("_", " ").replaceAll("\\d+-", ""));
             }
-        }
-    }
-
-    /**
-     * Format one material for display.
-     * 
-     * @param material the material
-     * @return the formatted material name
-     */
-    public static String formatMaterialForDisplay(String material) {
-        if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {
-            return getTranslatedMaterialName(material);
-        } else {
-            return WordUtils.capitalizeFully(material.replaceAll("_", " "));
         }
     }
 
@@ -124,7 +112,7 @@ public class TownyResourcesMessagingUtil {
                 amountAndMaterialName = resourceAsString.split("-");
                 amount = amountAndMaterialName[0];
                 materialName = amountAndMaterialName[1];
-                translatedMaterialName = getTranslatedMaterialName(materialName);                    
+                translatedMaterialName = formatMaterialNameForDisplay(materialName);                    
                 resourcesAsFormattedList.add(amount + " " + translatedMaterialName);                
             }       
             return resourcesAsFormattedList.toArray(new String[0]);                    
@@ -137,8 +125,26 @@ public class TownyResourcesMessagingUtil {
                 .split(",");                
         }
     }
+    
+    public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory) {
+        String categoryName = resourceExtractionCategory.getName();
+        if(TownyResourcesTranslation.hasKey(categoryName)) {
+            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0];
+        } else {
+            return formatMaterialNameForDisplay(categoryName);
+        }
+    }
+
+    public static String formatOfferCategoryNameForDisplay(ResourceOfferCategory resourceOfferCategory) {
+        String categoryName = resourceOfferCategory.getName();
+        if(TownyResourcesTranslation.hasKey(categoryName)) {
+            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1].trim();
+        } else {
+            return formatMaterialNameForDisplay(categoryName);
+        }
+    }
         
-    public static String getTranslatedMaterialName(String materialName) {
+    public static String formatMaterialNameForDisplay(String materialName) {
         Material material = Material.getMaterial(materialName);
         if(material == null) {
             if(TownyResources.getPlugin().isSlimeFunInstalled()) {
@@ -153,6 +159,6 @@ public class TownyResourcesMessagingUtil {
             }
         }
         //Couldn't find a translation. Return un-translated material name
-        return materialName;
+        return WordUtils.capitalizeFully(materialName.replaceAll("_", " "));
     }
 }

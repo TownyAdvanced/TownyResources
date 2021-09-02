@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.03
+version: 0.02
 language: english
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -43,6 +43,7 @@ nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2:
 
 ### Surveys 
 help_survey: 'Survey the town at your current location, to discover new resources.'
+discovery.success: "&b%s has discovered %s at %s!. Daily Production: %d %s."
 
 msg_err_survey_no_town: "&cThere is no town here to survey."
 msg_err_survey_all_resources_already_discovered: "&cAll the resources of this town have already been discovered."
@@ -141,5 +142,3 @@ resource_category_chickens: 'Chicken, a flock of chickens'
 resource_category_eggs: 'Eggs, a flock of hens'
 resource_category_ender_pearls: 'Ender Pearls, a nest of endermen'
 
-#Added in 0.03
-discovery.success: "&b%s has discovered %s &bat %s!. Daily Production: %d %s."

@@ -22,22 +22,6 @@ public class ResourceOfferCategory {
         return name;
     }
 
-    /**
-     * There are 3 possibilities here
-     * 1. The category is in the translations file
-     * 2. The category is a valid material name
-     * 3. None of the above
-     * 
-     * @return the translated category name
-     */
-    public String getTranslatedName() {
-        if(TownyResourcesTranslation.hasKey("resource_category_" + name)) {
-            return TownyResourcesTranslation.of("resource_category_" + name).split(",")[1].trim(); 
-        } else {
-            return TownyResourcesMessagingUtil.getTranslatedMaterialName(name);           
-        }
-    }
-
     public int getBaseAmountItems() {
         return baseAmountItems;
     }

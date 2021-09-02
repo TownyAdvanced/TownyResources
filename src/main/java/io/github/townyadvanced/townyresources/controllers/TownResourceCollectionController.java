@@ -61,7 +61,8 @@ public class TownResourceCollectionController {
             material = Material.getMaterial(materialName);                        
             if(material != null) {
                 itemStack = new ItemStack(material, amount);
-                itemStackList.add(itemStack);            
+                itemStackList.add(itemStack); 
+                continue;           
             }
             
             //Try creating a slimefun itemstack
@@ -71,6 +72,7 @@ public class TownResourceCollectionController {
                     itemStack = slimeFunItem.getRecipeOutput();
                     itemStack.setAmount(amount);
                     itemStackList.add(itemStack);                                
+                    continue;           
                 }
             }
 

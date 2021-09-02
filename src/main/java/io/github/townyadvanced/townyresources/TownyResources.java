@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources;
 import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.util.Version;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -11,7 +12,11 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Bukkit;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +30,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
+	private static boolean slimeFunInstalled;
 	
     @Override
     public void onEnable() {
@@ -165,9 +171,13 @@ public class TownyResources extends JavaPlugin {
 	public boolean isSiegeWarInstalled() {
 		return siegeWarInstalled;
 	}
-	
+
 	public boolean isLanguageUtilsInstalled() {
 		return languageUtilsInstalled;
+	}
+
+	public boolean isSlimeFunInstalled() {
+		return slimeFunInstalled;
 	}
 	
 	private String getTownyVersion() {
@@ -188,9 +198,30 @@ public class TownyResources extends JavaPlugin {
 		//Determine if other plugins are installed
 		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
 		siegeWarInstalled = siegeWar != null;
+		if(siegeWarInstalled) 
+			info("SiegeWar Integration Enabled");
+		else
+			info("SiegeWar Integration Not Enabled");					
+
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
-		dynmapTownyInstalled = dynmapTowny!= null;
+		dynmapTownyInstalled = dynmapTowny != null;
+		if(dynmapTownyInstalled) 
+			info("DynmapTowny Integration Enabled");
+		else
+			info("DynmapTowny Integration Not Enabled");					
+
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
-		languageUtilsInstalled = languageUtils!= null;
+		languageUtilsInstalled = languageUtils != null;
+		if(languageUtilsInstalled) 
+			info("LanguageUtils Integration Enabled");
+		else
+			info("LanguageUtils Integration Not Enabled");					
+
+		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("slimefun");
+		slimeFunInstalled = slimeFun != null;
+		if(slimeFunInstalled) 
+			info("Slimefun Integration Enabled");
+		else
+			info("Slimefun Integration Not Enabled");					
 	}
 }

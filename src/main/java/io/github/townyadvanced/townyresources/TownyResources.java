@@ -57,6 +57,8 @@ public class TownyResources extends JavaPlugin {
 		try {
 			printSickASCIIArt();
 			townyVersionCheck();
+			//Setup integrations with other plugins
+			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
@@ -67,8 +69,6 @@ public class TownyResources extends JavaPlugin {
 			//Load commands and listeners
 			registerCommands();
 			registerListeners();
-			//Setup integrations with other plugins
-			setupIntegrationsWithOtherPlugins();
 		} catch (TownyException te) {
 			severe(te.getMessage());
             severe("TownyResources failed to load! Disabling!");

@@ -190,7 +190,7 @@ public class TownyResources extends JavaPlugin {
 		siegeWarInstalled = siegeWar != null;
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
 		dynmapTownyInstalled = dynmapTowny!= null;
-		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
+		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils!= null;
 	}
 }

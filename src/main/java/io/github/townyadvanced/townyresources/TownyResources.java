@@ -1,9 +1,7 @@
 package io.github.townyadvanced.townyresources;
 
-import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.util.Version;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -12,11 +10,7 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Bukkit;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -217,7 +211,7 @@ public class TownyResources extends JavaPlugin {
 		else
 			info("LanguageUtils Integration Not Enabled");					
 
-		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("slimefun");
+		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("Slimefun");
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
 			info("Slimefun Integration Enabled");

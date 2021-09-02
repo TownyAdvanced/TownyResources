@@ -1,7 +1,5 @@
 package io.github.townyadvanced.townyresources.objects;
 
-import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
-
 /**
  * This class represents an extraction record in a particular category, for just one player.
  */
@@ -65,5 +63,5 @@ public class CategoryExtractionRecord {
 
     public void setNextLimitWarningTime(long nextLimitWarningTime) {
         this.nextLimitWarningTime = nextLimitWarningTime;
-    }
+    }   
 }

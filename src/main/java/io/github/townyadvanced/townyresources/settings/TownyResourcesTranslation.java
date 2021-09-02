@@ -74,6 +74,10 @@ public final class TownyResourcesTranslation {
 		return StringMgmt.translateHexColors(parseSingleLineString(data));
 	}
 
+	public static boolean hasKey(String key) {
+		return language.contains(key.toLowerCase());
+	}
+
 	/**
 	 * Translates give key into its respective language. 
 	 *

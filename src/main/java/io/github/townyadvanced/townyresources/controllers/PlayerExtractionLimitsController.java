@@ -387,8 +387,7 @@ public class PlayerExtractionLimitsController {
 
     private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
         if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-            String categoryName = categoryExtractionRecord.getResourceExtractionCategory().getCategoryName();
-            String translatedCategoryName = TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0]; 
+            String translatedCategoryName = categoryExtractionRecord.getResourceExtractionCategory().getTranslatedName();
             int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
             String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit);
             //Send temporary action bar message

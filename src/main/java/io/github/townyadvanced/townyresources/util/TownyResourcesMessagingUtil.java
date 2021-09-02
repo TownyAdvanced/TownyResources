@@ -138,14 +138,14 @@ public class TownyResourcesMessagingUtil {
         }
     }
         
-    private static String getTranslatedMaterialName(String materialName) {
+    public static String getTranslatedMaterialName(String materialName) {
         Material material = Material.getMaterial(materialName);
         if(material == null) {
             if(TownyResources.getPlugin().isSlimeFunInstalled()) {
                 SlimefunItem slimefunItem = SlimefunItem.getByID(materialName);
                 return slimefunItem.getItemName();                
             } else {
-                return materialName; //Shouldn't get here, but handled as failsafe
+                return materialName; //No material found. Return untranslated name
             }
         } else {           
             ItemStack fakeItemStack = new ItemStack(material);

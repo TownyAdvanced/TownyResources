@@ -12,7 +12,7 @@ Key Benefits:
 (*details in the FAQ section below*)
 
 # Installation Guide
-1. Ensure you have *Towny* 0.97.1.0 +.
+1. Ensure you have *Towny* version 0.97.1.0 +.
 2. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```
@@ -22,18 +22,18 @@ Key Benefits:
      ```
      - townyresources.command.nationcollect
      ```
-3. Using your permissions plugin, give this to any admins who are not already op:
+3. Using your permissions plugin, give this to any admins who are not already OP:
      ```
      - townyresources.admin.command.*
      ```                                                                           
-4. If you have the *TownyDynmap* plugin installed ([download](https://github.com/TownyAdvanced/Dynmap-Towny/releases)), add this to the 'infowindow' section of your Dynmap-Towny config file:
+4. If you have the *Dynmap-Towny* plugin installed ([download](https://github.com/TownyAdvanced/Dynmap-Towny/releases)), add this to the 'infowindow' section of your *Dynmap-Towny* config file:
    > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`    
-5. If you have the *Slimefun* plugin installed ([download](https://github.com/Slimefun/Slimefun4/releases)), you can add slimefun items to the **offers** list by using Slimefun item ID's. Example:
+5. If you have the *Slimefun* plugin installed ([download](https://github.com/Slimefun/Slimefun4/releases)), you can add slimefun items to the **offers** list by using *Slimefun* item ID's. Example:
    > `...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{TIN_DUST, 100, 1, TIN_DUST}...`
 5. If you have the *LangUtils* plugin installed ([download](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/)), set your preferred Material language in the *TownyResources* Config.yml file.
 6. Stop your server.
-7. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
-8. Drop the TownyResources jar into your plugins folder.
+7. Download the latest *TownyResources* Jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
+8. Drop the *TownyResources* Jar into your plugins folder.
 9. Start yor server.
 
 # Player Guide

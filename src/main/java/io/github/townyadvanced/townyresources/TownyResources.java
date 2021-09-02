@@ -57,7 +57,6 @@ public class TownyResources extends JavaPlugin {
 		try {
 			printSickASCIIArt();
 			townyVersionCheck();
-			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
 			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
@@ -68,6 +67,8 @@ public class TownyResources extends JavaPlugin {
 			//Load commands and listeners
 			registerCommands();
 			registerListeners();
+			//Setup integrations with other plugins
+			setupIntegrationsWithOtherPlugins();
 		} catch (TownyException te) {
 			severe(te.getMessage());
             severe("TownyResources failed to load! Disabling!");
@@ -203,19 +204,19 @@ public class TownyResources extends JavaPlugin {
 			info("DynmapTowny Integration Enabled");
 		else
 			info("DynmapTowny Integration Not Enabled");					
-
-		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
-		languageUtilsInstalled = languageUtils != null;
-		if(languageUtilsInstalled) 
-			info("LanguageUtils Integration Enabled");
-		else
-			info("LanguageUtils Integration Not Enabled");					
-
+				
 		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("Slimefun");
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
 			info("Slimefun Integration Enabled");
 		else
-			info("Slimefun Integration Not Enabled");					
+			info("Slimefun Integration Not Enabled");
+			
+		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
+		languageUtilsInstalled = languageUtils != null;
+		if(languageUtilsInstalled) 
+			info("LanguageUtils Integration Enabled");
+		else
+			info("LanguageUtils Integration Not Enabled");						
 	}
 }

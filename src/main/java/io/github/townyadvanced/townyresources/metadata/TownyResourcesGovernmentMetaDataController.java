@@ -47,16 +47,14 @@ public class TownyResourcesGovernmentMetaDataController {
      * @param town the town
      * @return the town's discovered resources, as an IMMUTABLE list
      */
-    public static List<Material> getDiscoveredAsList(Town town) {
+    public static List<String> getDiscoveredAsList(Town town) {
         String discoveredMaterialsString = getDiscovered(town);
         if(discoveredMaterialsString.isEmpty()) {
             return Collections.emptyList();
         } else {
             String[] discoveredMaterialsArray = discoveredMaterialsString.split(",");
-            List<Material> result = new ArrayList<>();
-            for(String discoveredMaterial: discoveredMaterialsArray) {
-                result.add(Material.getMaterial(discoveredMaterial));
-            }
+            List<String> result = new ArrayList<>();
+            result.addAll(Arrays.asList(discoveredMaterialsArray));
             return result;
         }
     }
@@ -96,13 +94,13 @@ public class TownyResourcesGovernmentMetaDataController {
 
     */
     
-    public static void setDiscovered(Government government, List<Material> discoveredResources) {
+    public static void setDiscovered(Government government, List<String> discoveredResources) {
         //Convert materials list to single string
         StringBuilder metadataStringBuilder = new StringBuilder();
         for(int i= 0; i < discoveredResources.size();i++) {
             if(i !=0)
                 metadataStringBuilder.append(", "); 
-            metadataStringBuilder.append(discoveredResources.get(i).toString()); //TODO nice format pls
+            metadataStringBuilder.append(discoveredResources.get(i));
         }
         setDiscovered(government, metadataStringBuilder.toString());
     }
@@ -119,16 +117,16 @@ public class TownyResourcesGovernmentMetaDataController {
         return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
     }
 
-    public static Map<Material, Integer> getDailyProductionAsMap(Government town) {
+    public static Map<String, Integer> getDailyProductionAsMap(Government town) {
        return getResourceQuantitiesStringAsMap(getDailyProduction(town));
     }
 
-    public static Map<Material, Integer> getAvailableForCollectionAsMap(Government town) {
+    public static Map<String, Integer> getAvailableForCollectionAsMap(Government town) {
        return getResourceQuantitiesStringAsMap(getAvailableForCollection(town));
     }
 
-    private static Map<Material, Integer> getResourceQuantitiesStringAsMap(String resourceQuantitiesString) {
-        Map<Material,Integer> result = new HashMap<>();
+    private static Map<String, Integer> getResourceQuantitiesStringAsMap(String resourceQuantitiesString) {
+        Map<String,Integer> result = new HashMap<>();
         if(!resourceQuantitiesString.isEmpty()) {
             String[] resourceQuantitiesArray = resourceQuantitiesString.split(",");
             String[] resourceQuantityPair;
@@ -138,23 +136,23 @@ public class TownyResourcesGovernmentMetaDataController {
                resourceQuantityPair = resourceQuantityString.split("-");
                amount = Integer.parseInt(resourceQuantityPair[0]); 
                resource = resourceQuantityPair[1];
-               result.put(Material.getMaterial(resource), amount);
+               result.put(resource, amount);
             }        
         }
         return result;        
     }
     
-    public static void setAvailableForCollection(Government government, Map<Material, Integer> availableForCollection) {
+    public static void setAvailableForCollection(Government government, Map<String, Integer> availableForCollection) {
         setResourceQuantitiesString(government, availableForCollectionMetadataKey, availableForCollection);
     }
     
-    public static void setDailyProduction(Government government, Map<Material, Integer> dailyProduction) {
+    public static void setDailyProduction(Government government, Map<String, Integer> dailyProduction) {
         setResourceQuantitiesString(government, dailyProductionMetadataKey, dailyProduction);
     }
     
-    private static void setResourceQuantitiesString(Government government, String metadataKey, Map<Material, Integer> resourceQuantitiesMap) {
+    private static void setResourceQuantitiesString(Government government, String metadataKey, Map<String, Integer> resourceQuantitiesMap) {
         //Order map by descending values
-        Map<Material, Integer> sortedResourceQuantitiesMap = resourceQuantitiesMap.entrySet().stream()
+        Map<String, Integer> sortedResourceQuantitiesMap = resourceQuantitiesMap.entrySet().stream()
         .sorted(Comparator.comparingInt(e -> -e.getValue()))
         .collect(Collectors.toMap(
                 Map.Entry::getKey,
@@ -165,7 +163,7 @@ public class TownyResourcesGovernmentMetaDataController {
 
         //Create list
         List<String> resourceQuantitiesList = new ArrayList<>();
-        for(Map.Entry<Material,Integer> resourceQuantity: sortedResourceQuantitiesMap.entrySet()) {
+        for(Map.Entry<String,Integer> resourceQuantity: sortedResourceQuantitiesMap.entrySet()) {
             resourceQuantitiesList.add(resourceQuantity.getValue() + "-" + resourceQuantity.getKey());
         }
         setResourceQuantitiesString(government, metadataKey, resourceQuantitiesList);

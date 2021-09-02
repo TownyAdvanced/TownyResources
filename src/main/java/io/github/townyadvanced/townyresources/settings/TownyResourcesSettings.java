@@ -11,7 +11,9 @@ import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
@@ -175,7 +177,8 @@ public class TownyResourcesSettings {
 			double categoryBaseAmountStacks;
 			int categoryBaseAmountItems;			
 			Material material;
-			List<Material> materialsInCategory = new ArrayList<>();
+			List<String> materialsInCategory;
+			String materialName;
 			ResourceOfferCategory resourceOfferCategory;
 			
 			while (matcher.find()) {
@@ -202,13 +205,13 @@ public class TownyResourcesSettings {
 				//Read Materials
 				materialsInCategory = new ArrayList<>();
 				for(int i = 3; i < categoryAsArray.length; i++) {
-					material = Material.getMaterial(categoryAsArray[i].trim());
-					if(material == null) {
+					materialName = categoryAsArray[i].trim();				
+					if(!isValidMaterial(materialName)) {
 						TownyResources.severe("Unknown material in offer category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
 						problemLoadingCategories = true;
-						continue;
+						continue;						
 					}
-					materialsInCategory.add(material);
+					materialsInCategory.add(materialName);
 				}
 				
 				//Construct ResourceExtractionCategory object
@@ -224,6 +227,18 @@ public class TownyResourcesSettings {
 		} else {
 			return result;
 		}
+	}
+	
+	private static boolean isValidMaterial(String materialName) {
+		Material material = Material.getMaterial(materialName);
+		if(material != null)
+			return true;  	//Known material
+		if(TownyResources.getPlugin().isSlimeFunInstalled()) {
+		   	SlimefunItem slimeFunItem = SlimefunItem.getByID(materialName);
+			if(slimeFunItem != null)
+				return true;  //Known material 
+		}
+		return false; //Unknown material		
 	}
 	
 	public static void loadConfig(String filepath, String version) throws TownyException{

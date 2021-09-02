@@ -8,9 +8,9 @@ public class ResourceOfferCategory {
     private final String name;
     private final int discoveryWeight;
     private final int baseAmountItems;    
-    private final List<Material> materialsInCategory;
+    private final List<String> materialsInCategory;
 
-    public ResourceOfferCategory(String name, int discoveryWeight, int baseOfferItems, List<Material> materialsInCategory) {
+    public ResourceOfferCategory(String name, int discoveryWeight, int baseOfferItems, List<String> materialsInCategory) {
         this.name = name;
         this.discoveryWeight = discoveryWeight;
         this.baseAmountItems = baseOfferItems;
@@ -25,7 +25,7 @@ public class ResourceOfferCategory {
         return baseAmountItems;
     }
 
-    public List<Material> getMaterialsInCategory() {
+    public List<String> getMaterialsInCategory() {
         return materialsInCategory;
     }
 

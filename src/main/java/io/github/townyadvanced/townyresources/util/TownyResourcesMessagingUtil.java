@@ -144,13 +144,15 @@ public class TownyResourcesMessagingUtil {
             if(TownyResources.getPlugin().isSlimeFunInstalled()) {
                 SlimefunItem slimefunItem = SlimefunItem.getByID(materialName);
                 return slimefunItem.getItemName();                
-            } else {
-                return materialName; //No material found. Return untranslated name
+            } 
+        } else {
+            if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           
+                ItemStack fakeItemStack = new ItemStack(material);
+                String translatedMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getMaterialsDisplayLanguage());
+                return translatedMaterialName;
             }
-        } else {           
-            ItemStack fakeItemStack = new ItemStack(material);
-            String translatedMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getMaterialsDisplayLanguage());
-            return translatedMaterialName;
         }
+        //Couldn't find a translation. Return un-translated material name
+        return materialName;
     }
 }

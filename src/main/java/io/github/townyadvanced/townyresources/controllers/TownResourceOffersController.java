@@ -14,7 +14,7 @@ import java.util.Map;
 public class TownResourceOffersController {
 
     private static List<ResourceOfferCategory> resourceOfferCategoryList = new ArrayList<>();
-    private static Map<Material, ResourceOfferCategory> materialToResourceOfferCategoryMap = new HashMap<>();
+    private static Map<String, ResourceOfferCategory> materialToResourceOfferCategoryMap = new HashMap<>();
 
     public static void loadAllResourceOfferCategories() throws TownyException {
          //Load all categories
@@ -23,7 +23,7 @@ public class TownResourceOffersController {
          materialToResourceOfferCategoryMap.clear();
          //Put each material on the map
          for(ResourceOfferCategory category: resourceOfferCategoryList) {         
-             for(Material material: category.getMaterialsInCategory()) {
+             for(String material: category.getMaterialsInCategory()) {
                  materialToResourceOfferCategoryMap.put(material, category);
              }
          }
@@ -34,7 +34,7 @@ public class TownResourceOffersController {
         return resourceOfferCategoryList;
     }
     
-    public static Map<Material, ResourceOfferCategory> getMaterialToResourceOfferCategoryMap() {
+    public static Map<String, ResourceOfferCategory> getMaterialToResourceOfferCategoryMap() {
         return materialToResourceOfferCategoryMap;
     }
 }

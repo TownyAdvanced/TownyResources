@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.0.7</version>
+  <version>0.0.8</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -50,6 +50,12 @@
       <artifactId>LangUtils</artifactId>
   	  <version>2.5-SNAPSHOT</version>
 	  <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.TheBusyBiscuit</groupId>
+      <artifactId>Slimefun4</artifactId>
+      <version>RC-15</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

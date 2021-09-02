@@ -1,7 +1,10 @@
 package io.github.townyadvanced.townyresources.util;
 
 import com.meowj.langutils.lang.LanguageHelper;
+import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
+import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -75,31 +78,15 @@ public class TownyResourcesMessagingUtil {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {
                 List<String> resourcesAsFormattedList = new ArrayList<>(); 
                 String[] resourcesAsArray = resourcesAsString.replaceAll("\\d+-", "").split(",");
-                Material material;
                 String translatedMaterialName;
                 for(String resourceAsString: resourcesAsArray) {
-                    material = Material.getMaterial(resourceAsString);
-                    translatedMaterialName = getTranslatedMaterialName(material);                    
+                    translatedMaterialName = formatMaterialNameForDisplay(resourceAsString);                    
                     resourcesAsFormattedList.add(translatedMaterialName);                
                 }                       
                 return Arrays.toString(resourcesAsFormattedList.toArray()).replace("[","").replace("]","");                
             } else {
                 return WordUtils.capitalizeFully(resourcesAsString.replaceAll("_", " ").replaceAll("\\d+-", ""));
             }
-        }
-    }
-
-    /**
-     * Format one material for display.
-     * 
-     * @param material the material
-     * @return the formatted material name
-     */
-    public static String formatMaterialForDisplay(Material material) {
-        if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {
-            return getTranslatedMaterialName(material);
-        } else {
-            return WordUtils.capitalizeFully(material.toString().replaceAll("_", " "));
         }
     }
 
@@ -125,8 +112,7 @@ public class TownyResourcesMessagingUtil {
                 amountAndMaterialName = resourceAsString.split("-");
                 amount = amountAndMaterialName[0];
                 materialName = amountAndMaterialName[1];
-                material = Material.getMaterial(materialName);
-                translatedMaterialName = getTranslatedMaterialName(material);                    
+                translatedMaterialName = formatMaterialNameForDisplay(materialName);                    
                 resourcesAsFormattedList.add(amount + " " + translatedMaterialName);                
             }       
             return resourcesAsFormattedList.toArray(new String[0]);                    
@@ -139,10 +125,42 @@ public class TownyResourcesMessagingUtil {
                 .split(",");                
         }
     }
+    
+    public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory) {
+        String categoryName = resourceExtractionCategory.getName();
+        if(TownyResourcesTranslation.hasKey("resource_category_" + categoryName)) {
+            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0];
+        } else {
+            return formatMaterialNameForDisplay(categoryName);
+        }
+    }
+
+    public static String formatOfferCategoryNameForDisplay(ResourceOfferCategory resourceOfferCategory) {
+        String categoryName = resourceOfferCategory.getName();
+        if(TownyResourcesTranslation.hasKey("resource_category_"+ categoryName)) {
+            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1].trim();
+        } else {
+            return formatMaterialNameForDisplay(categoryName);
+        }
+    }
         
-    private static String getTranslatedMaterialName(Material material) {
-        ItemStack fakeItemStack = new ItemStack(material);
-        String translatedMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getMaterialsDisplayLanguage());
-        return translatedMaterialName;                                
+    public static String formatMaterialNameForDisplay(String materialName) {
+        Material material = Material.getMaterial(materialName);
+        if(material == null) {
+            if(TownyResources.getPlugin().isSlimeFunInstalled()) {
+                SlimefunItem slimefunItem = SlimefunItem.getByID(materialName);
+                if(slimefunItem != null) {
+                    return slimefunItem.getItemName().replaceAll("[^\\w\\s]\\w","");
+                }                
+            } 
+        } else {
+            if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           
+                ItemStack fakeItemStack = new ItemStack(material);
+                String translatedMaterialName = LanguageHelper.getItemDisplayName(fakeItemStack, TownyResourcesSettings.getMaterialsDisplayLanguage());
+                return translatedMaterialName;
+            }
+        }
+        //Couldn't find a translation. Return un-translated material name
+        return WordUtils.capitalizeFully(materialName.replaceAll("_", " "));
     }
 }

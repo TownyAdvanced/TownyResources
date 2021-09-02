@@ -29,7 +29,7 @@ public class TownResourceDiscoveryController {
      * @param alreadyDiscoveredMaterials list of the town's already-discovered materials
      * @throws TownyException 
      */
-    public static void discoverNewResource(Resident resident, Town town, List<Material> alreadyDiscoveredMaterials) throws TownyException{
+    public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredMaterials) throws TownyException{
  		/*
  		 * Generate a list of candidate categories
  		 * This list will be comprised of all resource offer categories, except those of already discovered materials
@@ -38,7 +38,7 @@ public class TownResourceDiscoveryController {
         CATEGORY_LOOP:
  		for(ResourceOfferCategory category: TownResourceOffersController.getResourceOfferCategoryList()) { 		    
  		    //Skip category if we have already discovered something in it
- 		    for(Material material: alreadyDiscoveredMaterials) {
+ 		    for(String material: alreadyDiscoveredMaterials) {
  		        if(category.getMaterialsInCategory().contains(material))
     		        continue CATEGORY_LOOP;
             }
@@ -72,10 +72,10 @@ public class TownResourceDiscoveryController {
         
         //Determine the winning material
         winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
-        Material winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
+        String winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
         
         //Discover the resource
-        List<Material> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
+        List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
         discoveredMaterials.add(winningMaterial);
         TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredMaterials);
         town.save();
@@ -94,9 +94,8 @@ public class TownResourceDiscoveryController {
    		int levelOfNewResource = discoveredMaterials.size();
    		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
-   		String categoryName = winningCategory.getName();
-        String translatedCategoryName = TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1].trim(); 
-        String materialName = TownyResourcesMessagingUtil.formatMaterialForDisplay(winningMaterial);
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), translatedCategoryName, town.getName(), preTaxProduction, materialName));
+        String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
+        String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
     }
 }

@@ -98,7 +98,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Check if there are resources left to discover at the town
 		Town town = playerWorldCoord.getTownBlock().getTown();
-		List<Material> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
+		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
 		List<Integer> requiredNumTownblocksPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
 		if(discoveredResources.size() >= costPerResourceLevel.size())
@@ -145,7 +145,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_in_own_town"));
 			
 		//Ensure some resources are available
-		Map<Material, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
+		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
 		if(availableForCollection.isEmpty())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_no_resources_available"));
 		
@@ -175,7 +175,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_in_capital"));
 			
 		//Ensure some resources are available
-		Map<Material, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(nation);
+		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(nation);
 		if(availableForCollection.isEmpty())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_no_resources_available"));
 		

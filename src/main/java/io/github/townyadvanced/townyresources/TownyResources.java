@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources;
 
-import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.util.Version;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
@@ -25,6 +24,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
+	private static boolean slimeFunInstalled;
 	
     @Override
     public void onEnable() {
@@ -57,6 +57,7 @@ public class TownyResources extends JavaPlugin {
 		try {
 			printSickASCIIArt();
 			townyVersionCheck();
+			//Setup integrations with other plugins
 			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages
 			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
@@ -165,9 +166,13 @@ public class TownyResources extends JavaPlugin {
 	public boolean isSiegeWarInstalled() {
 		return siegeWarInstalled;
 	}
-	
+
 	public boolean isLanguageUtilsInstalled() {
 		return languageUtilsInstalled;
+	}
+
+	public boolean isSlimeFunInstalled() {
+		return slimeFunInstalled;
 	}
 	
 	private String getTownyVersion() {
@@ -188,9 +193,30 @@ public class TownyResources extends JavaPlugin {
 		//Determine if other plugins are installed
 		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
 		siegeWarInstalled = siegeWar != null;
+		if(siegeWarInstalled) 
+			info("SiegeWar Integration Enabled");
+		else
+			info("SiegeWar Integration Not Enabled");					
+
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
-		dynmapTownyInstalled = dynmapTowny!= null;
+		dynmapTownyInstalled = dynmapTowny != null;
+		if(dynmapTownyInstalled) 
+			info("DynmapTowny Integration Enabled");
+		else
+			info("DynmapTowny Integration Not Enabled");					
+				
+		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("Slimefun");
+		slimeFunInstalled = slimeFun != null;
+		if(slimeFunInstalled) 
+			info("Slimefun Integration Enabled");
+		else
+			info("Slimefun Integration Not Enabled");
+			
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
-		languageUtilsInstalled = languageUtils!= null;
+		languageUtilsInstalled = languageUtils != null;
+		if(languageUtilsInstalled) 
+			info("LanguageUtils Integration Enabled");
+		else
+			info("LanguageUtils Integration Not Enabled");						
 	}
 }

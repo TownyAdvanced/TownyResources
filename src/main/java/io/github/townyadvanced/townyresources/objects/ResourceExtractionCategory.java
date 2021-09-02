@@ -15,8 +15,7 @@ public class ResourceExtractionCategory {
         this.materialsInCategory = materialsInCategory;
     }
 
-
-    public String getCategoryName() {
+    public String getName() {
         return categoryName;
     }
 

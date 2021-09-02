@@ -212,7 +212,7 @@ public class TownyResources extends JavaPlugin {
 		else
 			info("Slimefun Integration Not Enabled");
 			
-		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LanguageUtils");
+		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;
 		if(languageUtilsInstalled) 
 			info("LanguageUtils Integration Enabled");

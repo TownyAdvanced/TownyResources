@@ -29,7 +29,8 @@ Key Benefits:
 4. If you have the *Dynmap-Towny* plugin installed ([download](https://github.com/TownyAdvanced/Dynmap-Towny/releases)), add this to the 'infowindow' section of your *Dynmap-Towny* config file:
    > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`    
 5. If you have the *Slimefun* plugin installed ([download](https://github.com/Slimefun/Slimefun4/releases)), you can add slimefun items to the **offers** list by using *Slimefun* item ID's. Example:
-   > `...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{TIN_DUST, 100, 1, TIN_DUST}...`
+   > `...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...` 
+   > <br> (*F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun ID, but the second one cannot, unless you add a translation string*)
 5. If you have the *LangUtils* plugin installed ([download](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/)), set your preferred Material language in the *TownyResources* Config.yml file.
 6. Stop your server.
 7. Download the latest *TownyResources* Jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).

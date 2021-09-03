@@ -17,10 +17,10 @@ Key Benefits:
 3. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `false` (*this stops players from discovering resources until your settings are ready*).
 4. Run `/tra reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
-6. If you want to add Slimefun materials to the offers list, first ensure you have the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin installed, then add any required items to the offers list. Example:
+6. If you want to add Slimefun materials to the offers list, first ensure you have the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin installed, then add any required items to the offers list. You can view the vanilla Slimefun item ID's [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java). Example:
     ```
     ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
-    # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun ID, however the second one cannot, unless you add a translation string.
+    # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
     ```
 7. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
 8. Edit your townyperms.yml file, and add the following perms:

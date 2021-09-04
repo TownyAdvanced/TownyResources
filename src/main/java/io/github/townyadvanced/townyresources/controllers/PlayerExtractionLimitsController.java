@@ -140,7 +140,7 @@ public class PlayerExtractionLimitsController {
                                         
                     //If the limit has been reached, send a warning message
                     if(categoryExtractionRecord.isExtractionLimitReached())
-                        sendLimitReachedWarningMessage((Player)event.getEntity(), categoryExtractionRecord);                       
+                        sendLimitReachedWarningMessage((Player)player, categoryExtractionRecord);                       
                 }
             }            
         }               

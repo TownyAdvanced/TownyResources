@@ -51,12 +51,12 @@ public class TownResourceProductionController {
     static void recalculateProductionForOneTown(Town town) {
         try {
             //Get discovered resources
-            List<Material> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
+            List<String> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
     
             //Remove any discovered resources which are no longer on offer
-            Map<Material, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
-            List<Material> resourcesToRemove = new ArrayList<>();
-            for(Material resource: discoveredResources) {
+            Map<String, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
+            List<String> resourcesToRemove = new ArrayList<>();
+            for(String resource: discoveredResources) {
                 if(!allOffers.containsKey(resource)) {
                     resourcesToRemove.add(resource);
                 }
@@ -71,7 +71,7 @@ public class TownResourceProductionController {
             double townCutNormalized = calculateTownCutNormalized(town);
 
             //Build the town production map
-            Map<Material, Integer> townProduction = calculateProduction(town, townCutNormalized);
+            Map<String, Integer> townProduction = calculateProduction(town, townCutNormalized);
     
             //Save data
             TownyResourcesGovernmentMetaDataController.setDailyProduction(town, townProduction);    
@@ -133,15 +133,15 @@ public class TownResourceProductionController {
         
         //Take resources from towns and give to nation
         double nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-        Map<Material,Integer> nationProduction = new HashMap<>();
-        Map<Material,Integer> resourcesTakenFromTown;
-        Material takenResource;
+        Map<String,Integer> nationProduction = new HashMap<>();
+        Map<String,Integer> resourcesTakenFromTown;
+        String takenResource;
         int takenQuantity;
         for(Town town: townsToTakeFrom) {
             //Take resources from town
             resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
             //Add resources to nation
-            for(Map.Entry<Material, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
+            for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
                 takenResource = resourceTakenFromTown.getKey();
                 takenQuantity = resourceTakenFromTown.getValue();
                 if(nationProduction.containsKey(takenResource)) {
@@ -167,19 +167,19 @@ public class TownResourceProductionController {
      * @param cutNormalized the cut of the resource to return
      * @return the production as a map, with each value multiplied by the given cutNormalized value
      */
-    private static Map<Material, Integer> calculateProduction(Town town, double cutNormalized) {        
+    private static Map<String, Integer> calculateProduction(Town town, double cutNormalized) {        
         //Get all offers
-        Map<Material, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
+        Map<String, ResourceOfferCategory> allOffers = TownResourceOffersController.getMaterialToResourceOfferCategoryMap();
         
         //Get discovered resources
-        List<Material> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
+        List<String> discoveredResources = new ArrayList<>(TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town));
 
         //Get configured resource level bonuses
         List<Double> normalizedBonusesPerResourceLevel = TownyResourcesSettings.getNormalizedProductionBonusesPerResourceLevel();
 
         //Calculate the production
-        Map<Material, Integer> production = new HashMap<>();
-        Material material;
+        Map<String, Integer> production = new HashMap<>();
+        String material;
         double baseProducedAmount;
         int finalProducedAmount;
 
@@ -237,23 +237,23 @@ public class TownResourceProductionController {
     private static boolean produceResourcesForOneGovernment(Government government) {
         try {
             //Get daily production
-            Map<Material, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(government);
+            Map<String, Integer> townDailyProduction = TownyResourcesGovernmentMetaDataController.getDailyProductionAsMap(government);
     
             if(townDailyProduction.isEmpty())
                 return false;
                 
             //Get the list of resources which are already available for collection
-            Map<Material,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(government);
+            Map<String,Integer> availableResources = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(government);
     
             //Get storage Limit modifier
             int storageLimitModifier = TownyResourcesSettings.getStorageLimitModifier();
             
             //Produce resources
-            Material resource;
+            String resource;
             int quantityToProduce;
             int currentQuantity;
             int storageLimit;
-            for(Map.Entry<Material, Integer> townProductionEntry: townDailyProduction.entrySet()) {
+            for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
                 quantityToProduce =townProductionEntry.getValue();
                 if(availableResources.containsKey(resource)) {

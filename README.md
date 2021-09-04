@@ -12,8 +12,18 @@ Key Benefits:
 (*details in the FAQ section below*)
 
 # Installation Guide
-1. Ensure you have *Towny* 0.97.1.0 +.
-2. Edit your townyperms.yml file, and add the following perms:
+1. Download the latest *TownyResources* Jar from [here](https://github.com/TownyAdvanced/TownyResources/releases), and drop it into your plugins folder.
+2. Restart your server.
+3. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `false` (*this stops players from discovering resources until your settings are ready*).
+4. Run `/tra reload`.
+5. Edit the *TownyResources* config.yml file, and change any settings you would like.
+6. If you want to add Slimefun materials to the offers list, first ensure you have the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin installed, then add any required items to the offers list. You can view the vanilla Slimefun item ID's [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java). Example:
+    ```
+    ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
+    # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
+    ```
+7. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+8. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```
      - townyresources.command.towncollect
@@ -22,18 +32,16 @@ Key Benefits:
      ```
      - townyresources.command.nationcollect
      ```
-3. Using your permissions plugin, give this to any admins who are not already op:
+9. Using your permissions plugin, give this to any admins who are not already OP:
      ```
      - townyresources.admin.command.*
-     ```                                                                           
-4. If you have the *TownyDynmap* plugin installed, add this to the 'infowindow' section of your Dynmap-Towny config file
-   > `<br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>`    
-5. If you want to translate Material names to a Non-English language, click [here](https://github.com/NyaaCat/LanguageUtils/releases) to download the Jar for the *LanguageUtils* plugin, and drop it into your plugins folder. The language is configured in the *TownyResources* Config.yml file.
-6. Stop your server.
-7. Download the latest TownyResources jar from [here](https://github.com/TownyAdvanced/TownyResources/releases).
-8. Drop the TownyResources jar into your plugins folder.
-9. Start yor server.
-
+     ```                  
+10. If you want to show town production on the *Dynmap*, first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
+    ```
+    <br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>
+    ```
+11. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
+12. Run `/tra reload`, then `/ta reload`.
 # Player Guide
 ### Town Production
 ###### Information

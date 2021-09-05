@@ -26,7 +26,7 @@ Key Benefits:
     # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
     ```
    - Daily Player Limits
-     <br>Due to technical limitations, it is not possible at present to have individual player limits for *Slimefun* resources. **HOWEVER**, a reasonably good extraction control pattern can be achieved by first adding the small few raw resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
+     <br>Due to technical limitations, it is not possible at present to have individual player limits for *Slimefun* resources. **HOWEVER**, a reasonably good extraction control pattern can be achieved by first adding the small few raw resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
 8. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```

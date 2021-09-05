@@ -105,6 +105,7 @@ public enum TownyResourcesConfigNodes {
 			"{gunpowder, 0.25, GUNPOWDER}," +
 			"{string, 0.25, STRING}," +
 			"{spider_eyes, 0.25, SPIDER_EYE}," +
+			"{slime, 0.25, SLIME_BALL, SLIME_BLOCK}," +
 			"{feathers, 0.25, FEATHER}," +
 			"{leather, 0.25, LEATHER}," +
 			"{rabbit_hides, 0.25, RABBIT_HIDE}," +
@@ -241,6 +242,7 @@ public enum TownyResourcesConfigNodes {
 			"{gunpowder, 200, 0.25, GUNPOWDER}," +
 			"{string, 100, 0.25, STRING}," +
 			"{spider_eyes, 100, 0.25, SPIDER_EYE}," +
+			"{slime, 100, SLIME_BALL}," +
 			"{feathers, 100, 0.25, FEATHER}," +
 			"{leather, 100, 0.25, LEATHER}," +
 			"{rabbit_hide, 100, 0.25, RABBIT_HIDE}," +

@@ -20,13 +20,13 @@ Key Benefits:
 6. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
 7. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
    - Town Production:
-     <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's.See [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java) for *Slimefun* item ID's. Example:
+     <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's. See [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java) for *Slimefun* item ID's. Example:
     ```
     ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
     # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
     ```
    - Daily Player Limits
-     <br>Due to technical limitations, it is not possible at present to have individual player limits for *Slimefun* resources. However, a reasonably good extraction-control configuration can be achieved by first adding the small few raw *Slimefun* resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
+     <br>Due to technical limitations, it is currently not possible to have individual player limits for *Slimefun* resources. However, a reasonably good extraction-control configuration can be achieved by first adding the small few raw *Slimefun* resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
 8. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```

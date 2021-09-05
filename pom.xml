@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.0.10</version>
+  <version>0.0.11</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>

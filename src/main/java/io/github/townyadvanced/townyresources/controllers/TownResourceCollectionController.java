@@ -57,6 +57,10 @@ public class TownResourceCollectionController {
             materialName = mapEntry.getKey();            
             amount = mapEntry.getValue();
             
+            //Don't attempt pickup if amount is less than 1
+            if(amount < 1)
+                continue;
+
             //Try creating a regular MC itemstack
             material = Material.getMaterial(materialName);                        
             if(material != null) {

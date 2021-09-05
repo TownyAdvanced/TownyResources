@@ -142,5 +142,5 @@ resource_category_chickens: 'Chicken, a flock of chickens'
 resource_category_eggs: 'Eggs, a flock of hens'
 resource_category_ender_pearls: 'Ender Pearls, a nest of endermen'
 
-#Added in 0.0.3
+#Added in 0.03
 resource_category_slime: 'Slime, a nest of slimes'

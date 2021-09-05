@@ -1,7 +1,7 @@
 name: TownyResources
 version: 0.02
 language: chinese
-author: Goosius
+author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
 description: >
   Language file for all game messages.  Do not alter this file.
@@ -24,7 +24,7 @@ description: >
 # Rose = &c, LightPurple = &d, Yellow = &e, White = &f
 
 plugin_prefix: '&f[&6城镇资源&f] '
-msg_err_command_disable: '&c你没有权限.'
+msg_err_command_disable: '&c你没有权限这么做.'
 
 ### Reloading
 townyresources_reloaded_successfully: "插件重载成功."
@@ -52,7 +52,7 @@ msg_err_survey_too_expensive: "&c你负担不起本次调查. 需要: %s, 余额
 msg_err_not_enough_offers_left: "&c无法调查 - 因为列表里已没有可用的资源."
 
 ### Production
-production.message: "&b有 %s 个城镇产出资源."
+production.message: "&b当前共有 %s 个城镇正在产出资源."
 
 ### Collection
 help_towncollect: '收集你城镇的所有资源.'

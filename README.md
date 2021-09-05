@@ -17,12 +17,16 @@ Key Benefits:
 3. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `false` (*this stops players from discovering resources until your settings are ready*).
 4. Run `/tra reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
-6. If you want to add Slimefun materials to the offers list, first ensure you have the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin installed, then add any required items to the offers list. You can view the vanilla Slimefun item ID's [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java). Example:
+6. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+7. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
+   - Town Production:
+     <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's. A list of *Slimefun* item ID's can be viewed [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java). Example:
     ```
     ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
     # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
     ```
-7. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+   - Daily Player Limits
+     <br>Due to technical limitations, it is not possible at present to have individual player limits for *Slimefun* resources. **HOWEVER**, a reasonably good extraction control pattern can be achieved by first adding the small few raw resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
 8. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```

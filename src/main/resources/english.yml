@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.02
+version: 0.03
 language: english
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -130,7 +130,6 @@ resource_category_fish: 'Fish, a shoal of fish'
 resource_category_gunpowder: 'Gunpowder, Gunpowder'
 resource_category_string: 'String, a nest of spiders'
 resource_category_spider_eyes: 'Spider Eyes, a nest of spiders'
-resource_category_slime: 'Slime, a nest of slimes'
 resource_category_feathers: 'Feathers, a flock of chickens'
 resource_category_leather: 'Leather, a herd of cows'
 resource_category_rabbit_hides: 'Rabbit Hides, a herd of rabbits'
@@ -143,3 +142,5 @@ resource_category_chickens: 'Chicken, a flock of chickens'
 resource_category_eggs: 'Eggs, a flock of hens'
 resource_category_ender_pearls: 'Ender Pearls, a nest of endermen'
 
+#Added in 0.0.3
+resource_category_slime: 'Slime, a nest of slimes'

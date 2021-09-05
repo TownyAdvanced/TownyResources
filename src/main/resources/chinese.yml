@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.02
+version: 0.03
 language: chinese
 author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -142,3 +142,5 @@ resource_category_chickens: '鸡肉, 遗弃的养鸡场'
 resource_category_eggs: '鸡蛋, 遗弃的养鸡场'
 resource_category_ender_pearls: '末影珍珠, 折跃失败的末影人'
 
+#Added in 0.03
+resource_category_slime: 'Slime, a nest of slimes'

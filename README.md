@@ -2,7 +2,7 @@
 *TownyResources* adds value to towns, by giving each one a unique set of automatically-generated resources (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
 
 Key Benefits:
-- ⚔️ Provides a critical part of the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience - **A Good Reason To Start A War**.
+- ⚔️ Provides an essential part of the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience - **A Good Reason To Start A War**.
 - 🏙️ Encourages **Town Building**. 
 - 🇺🇳 Encourages **Nation Building**.
 - 💰 Encourages **Trading**.

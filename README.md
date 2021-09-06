@@ -2,14 +2,14 @@
 *TownyResources* adds value to towns, by giving each one a unique set of automatically-generated resources (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*), and then protecting that economic value with moderate limits to player resource extraction.
 
 Key Benefits:
-1. Provides a critical part of the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience - **A Good Reason To Start A War**.
-2. Assists **Town Building**.
-3. Assists **Nation Building**.
-4. Assists **Trading**.
-5. Reduces **Grind**.
-6. Assists **Roleplaying**.
+- ⚔️ Provides a critical part of the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience - **A Good Reason To Start A War**.
+- 🏙️ Encourages **Town Building**. 
+- 🇺🇳 Encourages **Nation Building**.
+- 💰 Encourages **Trading**.
+- 💤 Reduces **Grind**.
+-  🧚‍♀️ Assists **Roleplaying**.
 
-(*details in the FAQ section below*)
+(*details in the FAQ below*)
 
 # Installation Guide
 1. Download the latest *TownyResources* Jar from [here](https://github.com/TownyAdvanced/TownyResources/releases), and drop it into your plugins folder.

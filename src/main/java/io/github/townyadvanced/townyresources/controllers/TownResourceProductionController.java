@@ -184,12 +184,14 @@ public class TownResourceProductionController {
         int finalProducedAmount;
 
         for(int i = 0; i < discoveredResources.size(); i++) {
-            //Ensure town meets the town level requirement to produce the resource
-            if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) 
-                break;
             material = discoveredResources.get(i);
-            baseProducedAmount = allOffers.get(material).getBaseAmountItems();
-            finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
+            //If town does not meet the min level, produced amt is zero
+            if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
+                finalProducedAmount = 0;
+            } else {
+                baseProducedAmount = allOffers.get(material).getBaseAmountItems();
+                finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
+            }
             production.put(material, finalProducedAmount);
         }
             

@@ -1,8 +1,11 @@
 package io.github.townyadvanced.townyresources.commands;
 
+import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -10,14 +13,13 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
-import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceCollectionController;
+import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -114,18 +116,21 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_not_enough_townblocks", 
 				requiredNumTownblocks, currentNumTownblocks));
 		
-		//Check that the player can afford the survey
+		//Get survey level & cost
+		int surveyLevel = indexOfNextResourceLevel+1;
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
-		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-		if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive", 
-				TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
 
-		//Pay for the survey
-		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
-				
-		//Discover a new resource (notification will be sent from here)
-		TownResourceDiscoveryController.discoverNewResource(resident, town, discoveredResources);
+		//Send confirmation request message
+		TownyMessaging.sendMessage(player, Translation.of("msg_confirm_survey", town.getName(), surveyLevel, TownyEconomyHandler.getFormattedBalance(surveyCost)));
+		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
+		Confirmation.runOnAccept(() -> {
+			try {
+				TownResourceDiscoveryController.discoverNewResource(resident, town, surveyLevel, surveyCost, discoveredResources);
+			} catch (TownyException te) {
+				TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage());
+			}
+		})
+		.sendTo(player);
 	}
 	
 	private static void parseTownCollectCommand(Player player) throws TownyException {

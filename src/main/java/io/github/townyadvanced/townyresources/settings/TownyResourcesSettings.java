@@ -43,6 +43,10 @@ public class TownyResourcesSettings {
 		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_NATION_TAX_PERCENTAGE) / 100;
 	}	
 	
+	public static double getTownResourcesProductionOccupyingNationTaxNormalized() {
+		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_OCCUPYING_NATION_TAX_PERCENTAGE) / 100;
+	}
+
 	public static int getSumOfAllOfferDiscoveryProbabilityWeights() {
 		return sumOfAllOfferDiscoveryProbabilityWeights;
 	}

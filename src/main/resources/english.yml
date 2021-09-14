@@ -146,6 +146,6 @@ resource_category_ender_pearls: 'Ender Pearls, a nest of endermen'
 resource_category_slime: 'Slime, a nest of slimes'
 
 #Added in 0.04
-msg_confirm_survey: "&6You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
+msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
 msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
 msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"

@@ -69,24 +69,14 @@ public class TownyResourcesMessagingUtil {
      *  Format resource string to something we can send to the dynmap
      *
      * @param resourcesAsString resource string
-     * @return a string we can show on the dynmap e.g. "Wheat, Coal, Iron"
+     * @return a string we can show on the dynmap e.g. "64 Wheat, 32 Iron"
      */
     public static String formatProductionStringForDynmapTownyDisplay(String resourcesAsString) {    
         if(resourcesAsString.isEmpty()) {
             return "";
         } else {
-            if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {
-                List<String> resourcesAsFormattedList = new ArrayList<>(); 
-                String[] resourcesAsArray = resourcesAsString.replaceAll("\\d+-", "").split(",");
-                String translatedMaterialName;
-                for(String resourceAsString: resourcesAsArray) {
-                    translatedMaterialName = formatMaterialNameForDisplay(resourceAsString);                    
-                    resourcesAsFormattedList.add(translatedMaterialName);                
-                }                       
-                return Arrays.toString(resourcesAsFormattedList.toArray()).replace("[","").replace("]","");                
-            } else {
-                return WordUtils.capitalizeFully(resourcesAsString.replaceAll("_", " ").replaceAll("\\d+-", ""));
-            }
+            String[] resourcesAsFormattedArray = convertResourceAmountsStringToFormattedArray(resourcesAsString);
+            return Arrays.toString(resourcesAsFormattedArray).replace("[","").replace("]","");
         }
     }
 
@@ -107,7 +97,6 @@ public class TownyResourcesMessagingUtil {
             String amount;
             String materialName;
             String translatedMaterialName;
-            Material material;
             for(String resourceAsString: resourcesAsArray) {
                 amountAndMaterialName = resourceAsString.split("-");
                 amount = amountAndMaterialName[0];

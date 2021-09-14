@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
+import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -26,10 +27,28 @@ public class TownResourceDiscoveryController {
      * 
      * @param resident the resident who did the survey
      * @param town the town
+     * @param surveyLevel the level of the survey
+     * @param surveyCost the cost of the survey
      * @param alreadyDiscoveredMaterials list of the town's already-discovered materials
      * @throws TownyException 
      */
-    public static void discoverNewResource(Resident resident, Town town, List<String> alreadyDiscoveredMaterials) throws TownyException{
+    public static void discoverNewResource(Resident resident,
+                                            Town town,
+                                            int surveyLevel,
+                                            double surveyCost,
+                                            List<String> alreadyDiscoveredMaterials) throws TownyException{
+
+        //Ensure the resource at this level has not already been discovered
+        List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
+        if(surveyLevel <= discoveredResources.size()) {
+            throw new TownyException(TownyResourcesTranslation.of("msg_err_level_x_resource_already_discovered", surveyLevel));
+        }
+
+        //Ensure the player can afford this survey
+        if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
+			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
+                TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
+
  		/*
  		 * Generate a list of candidate categories
  		 * This list will be comprised of all resource offer categories, except those of already discovered materials
@@ -73,7 +92,10 @@ public class TownResourceDiscoveryController {
         //Determine the winning material
         winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
         String winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
-        
+
+		//Pay for the survey
+		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
+
         //Discover the resource
         List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
         discoveredMaterials.add(winningMaterial);

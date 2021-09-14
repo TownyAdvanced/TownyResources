@@ -83,14 +83,14 @@ public class TownResourceProductionController {
     }
 
     private static double calculateTownCutNormalized(Town town) {
-        if(
-            town.hasNation() 
-            || 
-            (TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town))
-        ) 
+        if(TownyResources.getPlugin().isSiegeWarInstalled()
+            && TownOccupationController.isTownOccupied(town)) {
+            return 1 - TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
+        } else if (town.hasNation()) {
             return 1 - TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-        else
+        } else {
             return 1;
+        }
     }
 
     /**
@@ -112,38 +112,57 @@ public class TownResourceProductionController {
      * @param nation the nation to recalculate production for
      */
     static void recalculateProductionForOneNation(Nation nation) {
-        List<Town> townsToTakeFrom = new ArrayList<>();
-        
-        //Build list of towns to take from
-        if(TownyResources.getPlugin().isSiegeWarInstalled()) {
-            //Add all home towns, except those occupied by foreign nations
-            List<Town> occupiedHomeTowns = TownOccupationController.getOccupiedHomeTowns(nation);
-            for(Town town: nation.getTowns()) {
-                if(!occupiedHomeTowns.contains(town) || TownOccupationController.getTownOccupier(town) == nation) {
-                    townsToTakeFrom.add(town);
-                }
-            }
-            //Add all foreign occupied towns
-            List<Town> occupiedForeignTowns = TownOccupationController.getOccupiedForeignTowns(nation);               
-            townsToTakeFrom.addAll(occupiedForeignTowns);
-        } else {
-            //Add all home towns
-            townsToTakeFrom.addAll(nation.getTowns());
-        }
-        
-        //Take resources from towns and give to nation
-        double nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
+        //Setup Variables
         Map<String,Integer> nationProduction = new HashMap<>();
+        double nationCutNormalized;
         Map<String,Integer> resourcesTakenFromTown;
         String takenResource;
         int takenQuantity;
-        for(Town town: townsToTakeFrom) {
+
+        //1. Take resources from natural towns, and give to nation
+        for(Town town: nation.getTowns()) {
+            //Calculate Nation Cut
+            if(TownyResources.getPlugin().isSiegeWarInstalled()
+               && TownOccupationController.isTownOccupied(town)) {
+                if(TownOccupationController.getTownOccupier(town) == nation) {
+                    //Town occupied by nation
+                    nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
+                } else {
+                    //Town occupied by foreign nation
+                    continue;
+                }
+            } else {
+                //Town not occupied
+                nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
+            }
+
             //Take resources from town
             resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
             //Add resources to nation
             for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
                 takenResource = resourceTakenFromTown.getKey();
                 takenQuantity = resourceTakenFromTown.getValue();
+                if(takenQuantity == 0)
+                    continue;
+                if(nationProduction.containsKey(takenResource)) {
+                    nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
+                } else {
+                    nationProduction.put(takenResource, takenQuantity);
+                }
+            }
+        }
+
+        //2. Take resources from occupied towns, and give to nation
+        nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
+        for(Town town: TownOccupationController.getOccupiedForeignTowns(nation)) {
+            //Take resources from town
+            resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
+            //Add resources to nation
+            for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
+                takenResource = resourceTakenFromTown.getKey();
+                takenQuantity = resourceTakenFromTown.getValue();
+                if(takenQuantity == 0)
+                    continue;
                 if(nationProduction.containsKey(takenResource)) {
                     nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
                 } else {
@@ -152,7 +171,7 @@ public class TownResourceProductionController {
             }
         }
         
-        //Set nation production & save
+        //3. Set nation production & save
         TownyResourcesGovernmentMetaDataController.setDailyProduction(nation, nationProduction);
         nation.save();
     }
@@ -184,12 +203,14 @@ public class TownResourceProductionController {
         int finalProducedAmount;
 
         for(int i = 0; i < discoveredResources.size(); i++) {
-            //Ensure town meets the town level requirement to produce the resource
-            if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) 
-                break;
             material = discoveredResources.get(i);
-            baseProducedAmount = allOffers.get(material).getBaseAmountItems();
-            finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
+            //If town does not meet the min level, produced amt is zero
+            if(TownySettings.calcTownLevel(town) <  TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
+                finalProducedAmount = 0;
+            } else {
+                baseProducedAmount = allOffers.get(material).getBaseAmountItems();
+                finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
+            }
             production.put(material, finalProducedAmount);
         }
             

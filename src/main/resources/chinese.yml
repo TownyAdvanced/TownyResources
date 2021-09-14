@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.03
+version: 0.04
 language: chinese
 author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -144,3 +144,8 @@ resource_category_ender_pearls: '末影珍珠, 折跃失败的末影人'
 
 #Added in 0.03
 resource_category_slime: '史莱姆, 异世界的史莱姆'
+
+#Added in 0.04
+msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
+msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
+msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"

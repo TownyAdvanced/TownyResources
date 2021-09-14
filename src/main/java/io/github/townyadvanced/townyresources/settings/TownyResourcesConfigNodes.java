@@ -192,7 +192,13 @@ public enum TownyResourcesConfigNodes {
 			"town_resources.production.nation_tax_percentage",
 			"50",
 			"",
-			"# The owner nation of a town gets this percentage of town production.",
+			"# The nation of a town gets this percentage of town production, as long as the town is not occupied.",
+			"# The town gets the rest."),
+	TOWN_RESOURCES_PRODUCTION_OCCUPYING_NATION_TAX_PERCENTAGE(
+			"town_resources.production.occupying_nation_tax_percentage",
+			"50",
+			"",
+			"# If a town is occupied, the occupying nation gets this percentage of town production.",
 			"# The town gets the rest."),
 	TOWN_RESOURCES_OFFERS(
 			"town_resources.offers",

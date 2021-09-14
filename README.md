@@ -74,7 +74,10 @@ Benefits:
   > Resources:
   <br> > Daily Production: 64 Oak Log, 32 Emerald
   <br> > Available For Collection: 64 Oak Log, 32 Emerald
-- For each resource, a town can store a maximum of 5x the production amount. When stores are full, subsequent production is lost.                                                                                                      
+- If a town is not high enough level to produce a resource, the amount shows as zero. Example:
+  > Resources:
+  <br> > Daily Production: 64 Oak Log, 0 Emerald
+- For each resource, a town can store a maximum of 5x the production amount. When stores are full, subsequent production is lost.                          
 ###### Collecting Town Resources
 - To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/tr towncollect`
 - The available resources will then be dropped at your position.

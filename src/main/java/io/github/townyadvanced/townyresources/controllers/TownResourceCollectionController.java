@@ -81,7 +81,7 @@ public class TownResourceCollectionController {
             }
 
             //Unknown material. Send error message            
-            TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", material));
+            TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", materialName));
         }
         
         //Drop all collected itemstacks near player

@@ -121,7 +121,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 
 		//Send confirmation request message
-		TownyMessaging.sendMessage(player, Translation.of("msg_confirm_survey", town.getName(), surveyLevel, TownyEconomyHandler.getFormattedBalance(surveyCost)));
+		TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey", town.getName(), surveyLevel, TownyEconomyHandler.getFormattedBalance(surveyCost)));
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		Confirmation.runOnAccept(() -> {
 			try {

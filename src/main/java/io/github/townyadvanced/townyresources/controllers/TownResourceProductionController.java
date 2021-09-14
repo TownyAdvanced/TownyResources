@@ -142,6 +142,8 @@ public class TownResourceProductionController {
             for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
                 takenResource = resourceTakenFromTown.getKey();
                 takenQuantity = resourceTakenFromTown.getValue();
+                if(takenQuantity == 0)
+                    continue;
                 if(nationProduction.containsKey(takenResource)) {
                     nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
                 } else {
@@ -159,6 +161,8 @@ public class TownResourceProductionController {
             for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
                 takenResource = resourceTakenFromTown.getKey();
                 takenQuantity = resourceTakenFromTown.getValue();
+                if(takenQuantity == 0)
+                    continue;
                 if(nationProduction.containsKey(takenResource)) {
                     nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
                 } else {

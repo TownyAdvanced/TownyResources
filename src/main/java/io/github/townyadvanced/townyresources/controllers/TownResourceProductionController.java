@@ -277,6 +277,8 @@ public class TownResourceProductionController {
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
                 quantityToProduce =townProductionEntry.getValue();
+                if(quantityToProduce == 0)
+                    continue;
                 if(availableResources.containsKey(resource)) {
                     //Don't go over limit
                     currentQuantity = availableResources.get(resource);

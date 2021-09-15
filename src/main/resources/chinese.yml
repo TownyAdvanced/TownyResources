@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.04
+version: 0.05
 language: chinese
 author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -149,3 +149,6 @@ resource_category_slime: '史莱姆, 异世界的史莱姆'
 msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
 msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
 msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"
+
+#Added in 0.05
+msg_confirm_survey_town_level_warning: "&cWARNING: Although the resource can be discovered, the town does not have a large enough population to produce it. Required Town Level: %d, Actual Town Level %d."

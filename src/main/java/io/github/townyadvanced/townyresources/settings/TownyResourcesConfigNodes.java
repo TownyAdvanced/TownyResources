@@ -72,7 +72,7 @@ public enum TownyResourcesConfigNodes {
 			"{nether_quartz, 1, NETHER_QUARTZ_ORE, QUARTZ}," +
 			"{glowstone, 0.25, GLOWSTONE_DUST, GLOWSTONE}," +
 			"{end_Stone, 4, END_STONE}," +
-			"{ancient_debris, 0.0625, ANCIENT_DEBRIS}," +
+			"{ancient_debris, 0.03125, ANCIENT_DEBRIS}," +
 			"{wood, 3.5, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG," +
 			"CRIMSON_STEM, WARPED_STEM, OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD," +
 			"ACACIA_WOOD, DARK_OAK_WOOD, CRIMSON_HYPHAE, WARPED_HYPHAE}" +
@@ -227,7 +227,7 @@ public enum TownyResourcesConfigNodes {
 			"{emeralds, 200, 0.25, EMERALD}," +
 			"{diamonds, 200, 0.125, DIAMOND}," +
 			"{redstone, 100, 1, REDSTONE}," +
-			"{ancient_debris, 200, 0.0625, ANCIENT_DEBRIS}," +
+			"{ancient_debris, 200, 0.03125, ANCIENT_DEBRIS}," +
 			"{wood, 200, 2, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
 			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
 			"{wheat, 100, 1, WHEAT}," +

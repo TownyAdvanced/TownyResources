@@ -54,7 +54,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler()
 	public void onBlockShearEntityEvent(BlockShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
+		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled() && !event.isCancelled()) {
 			//Dispensers cannot shear entities
 			event.setCancelled(true);
 		}	

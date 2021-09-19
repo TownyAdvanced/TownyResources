@@ -70,10 +70,10 @@ public class TownResourceDiscoveryController {
         } else if (town.hasNation()) {
             TownResourceProductionController.recalculateProductionForOneNation(town.getNation());
         }
-        
+
          //Send global message
-   		int levelOfNewResource = discoveredMaterials.size();
-   		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
+        int levelOfNewResource = discoveredMaterials.size();
+        double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
         String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
         String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
@@ -124,7 +124,7 @@ public class TownResourceDiscoveryController {
         return winningCategory;
     }
 
-    private static String calculateWinningMaterial(ResourceOfferCategory winningCategory) {                
+    private static String calculateWinningMaterial(ResourceOfferCategory winningCategory) {
         //Determine the winning material
         int winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
         String winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
@@ -145,18 +145,18 @@ public class TownResourceDiscoveryController {
                     for(int i = 0; i < numTownResources; i++) {
                         resourceOfferCategory = calculateWinningCategory(discoveredTownResources);
                         resourceOfferMaterial = calculateWinningMaterial(resourceOfferCategory);
-                        discoveredTownResources.add(resourceOfferMaterial);    
+                        discoveredTownResources.add(resourceOfferMaterial);
                     }
                 } catch (Exception ignored) {
                     //An exception may occur if the offers list is too small for a discovery.
                     //But we assume that is intended and do not throw.
-                }                 
+                }
                 //Set the new list of town resources
                 TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredTownResources);
                 //Save town
-                town.save();                
-            } 
-        }            
+                town.save();
+            }
+        }
         //Now recalculate production for all towns & nations
         TownResourceProductionController.recalculateAllProduction();
     }

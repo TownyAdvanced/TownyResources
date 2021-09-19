@@ -1,10 +1,7 @@
 package io.github.townyadvanced.townyresources.commands;
 
 import com.palmergames.bukkit.towny.TownyMessaging;
-import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
-import com.palmergames.bukkit.towny.exceptions.TownyException;
-import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -24,7 +21,7 @@ import java.util.List;
 
 public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter {
 
-	private static final List<String> tabCompletes = Arrays.asList("reload");
+	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources");
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
@@ -83,12 +80,12 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 		}
 		TownyResourcesMessagingUtil.sendErrorMsg(sender, TownyResourcesTranslation.of("townyresources_failed_to_reload"));
 	}
-	
+
 	private void parseReRollCommand(CommandSender sender) {
 		TownyMessaging.sendMessage(sender, TownyResourcesTranslation.of("msg_confirm_reroll"));
 		Confirmation.runOnAccept(() -> {
 			TownResourceDiscoveryController.reRollAllExistingResources();
-			TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("all_resources_rerolled"));			
+			TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("all_resources_rerolled"));
 		})
 		.sendTo(sender);
 	}

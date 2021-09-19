@@ -45,12 +45,15 @@ public class TownResourceDiscoveryController {
         }
 
         //Ensure the player can afford this survey
-        if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
-                TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
+        if (TownyEconomyHandler.isActive()) {
+            if(!resident.getAccount().canPayFromHoldings(surveyCost)) {
+			    throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
+                    TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
+            }
 
-		//Pay for the survey
-		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
+            //Pay for the survey
+            resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
+        }
 
         //Calculate a new category and material for discovery
         List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);

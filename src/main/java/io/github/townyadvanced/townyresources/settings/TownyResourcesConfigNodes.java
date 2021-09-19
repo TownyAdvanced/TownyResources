@@ -115,7 +115,6 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, 0.25, MUTTON, COOKED_MUTTON}," +
 			"{beef, 0.25, BEEF, COOKED_BEEF}," +
 			"{chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
-			"{eggs, 0.25, EGG}," +			
 			"{chorus_fruits, 0.25, CHORUS_FRUIT}," +
 			"{ender_pearls, 0.125, ENDER_PEARL}",
 			"",
@@ -257,8 +256,7 @@ public enum TownyResourcesConfigNodes {
 			"{pork, 100, 0.25, PORKCHOP}," +
 			"{mutton, 100, 0.25, MUTTON}," +
 			"{beef, 100, 0.25, BEEF}," +
-			"{chickens, 100, 0.25, CHICKEN}," +	
-			"{eggs, 100, 0.25, EGG}," +						
+			"{chickens, 100, 0.25, CHICKEN}," +
 			"{ender_pearls, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",

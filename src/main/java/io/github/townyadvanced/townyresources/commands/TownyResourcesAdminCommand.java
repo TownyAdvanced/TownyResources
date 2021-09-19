@@ -1,8 +1,11 @@
 package io.github.townyadvanced.townyresources.commands;
 
+import com.palmergames.bukkit.towny.TownyMessaging;
+import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
@@ -18,7 +21,7 @@ import java.util.List;
 
 public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter {
 
-	private static final List<String> tabCompletes = Arrays.asList("reload");
+	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources");
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
@@ -49,6 +52,9 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 				case "reload":
 					parseReloadCommand(sender);
 				break;
+				case "reroll_all_resources":
+					parseReRollCommand(sender);
+				break;
 				/*
 				 * Show help if no command found.
 				 */
@@ -64,6 +70,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/townyresourcesadmin"));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reload", TownyResourcesTranslation.of("admin_help_reload")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reroll_all_resources", TownyResourcesTranslation.of("admin_help_reroll")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {
@@ -72,6 +79,15 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 			return;
 		}
 		TownyResourcesMessagingUtil.sendErrorMsg(sender, TownyResourcesTranslation.of("townyresources_failed_to_reload"));
+	}
+
+	private void parseReRollCommand(CommandSender sender) {
+		TownyMessaging.sendMessage(sender, TownyResourcesTranslation.of("msg_confirm_reroll"));
+		Confirmation.runOnAccept(() -> {
+			TownResourceDiscoveryController.reRollAllExistingResources();
+			TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("all_resources_rerolled"));
+		})
+		.sendTo(sender);
 	}
 }
 

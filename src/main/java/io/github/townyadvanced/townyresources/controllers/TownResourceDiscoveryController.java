@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -11,7 +12,6 @@ import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,10 +45,45 @@ public class TownResourceDiscoveryController {
         }
 
         //Ensure the player can afford this survey
-        if (TownyEconomyHandler.isActive() && !resident.getAccount().canPayFromHoldings(surveyCost))
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
-                TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
+        if (TownyEconomyHandler.isActive()) {
+            if(!resident.getAccount().canPayFromHoldings(surveyCost)) {
+			    throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
+                    TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
+            }
 
+            //Pay for the survey
+            resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
+        }
+
+        //Calculate a new category and material for discovery
+        List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
+        ResourceOfferCategory winningCategory = calculateWinningCategory(discoveredMaterials);
+        String winningMaterial = calculateWinningMaterial(winningCategory);
+        //Discover the resource
+        discoveredMaterials.add(winningMaterial);
+        TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredMaterials);
+        town.save();
+
+        //Recalculate Town Production
+        TownResourceProductionController.recalculateProductionForOneTown(town);
+
+        //Recalculate Nation Production
+        if(TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town)) {
+            TownResourceProductionController.recalculateProductionForOneNation(TownOccupationController.getTownOccupier(town));
+        } else if (town.hasNation()) {
+            TownResourceProductionController.recalculateProductionForOneNation(town.getNation());
+        }
+
+         //Send global message
+        int levelOfNewResource = discoveredMaterials.size();
+        double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
+        int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
+        String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
+        String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
+		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
+    }
+
+    private static ResourceOfferCategory calculateWinningCategory(List<String> alreadyDiscoveredMaterials) throws TownyException{
  		/*
  		 * Generate a list of candidate categories
  		 * This list will be comprised of all resource offer categories, except those of already discovered materials
@@ -88,36 +123,44 @@ public class TownResourceDiscoveryController {
                 break;
             }
         }
-        
+
+        return winningCategory;
+    }
+
+    private static String calculateWinningMaterial(ResourceOfferCategory winningCategory) {
         //Determine the winning material
-        winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
+        int winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
         String winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
+        return winningMaterial;
+    }
 
-		//Pay for the survey
-		resident.getAccount().withdraw(surveyCost, "Cost of resources survey.");
-
-        //Discover the resource
-        List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
-        discoveredMaterials.add(winningMaterial);
-        TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredMaterials);
-        town.save();
-
-        //Recalculate Town Production
-        TownResourceProductionController.recalculateProductionForOneTown(town);
-
-        //Recalculate Nation Production
-        if(TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town)) {
-            TownResourceProductionController.recalculateProductionForOneNation(TownOccupationController.getTownOccupier(town));
-        } else if (town.hasNation()) {
-            TownResourceProductionController.recalculateProductionForOneNation(town.getNation());
+    public static void reRollAllExistingResources() {
+        int numTownResources;
+        List<String> discoveredTownResources;
+        ResourceOfferCategory resourceOfferCategory;
+        String resourceOfferMaterial;
+        for(Town town: TownyUniverse.getInstance().getTowns()) {
+            numTownResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town).size();
+            discoveredTownResources = new ArrayList<>();
+            if(numTownResources > 0) {
+                try {
+                    //ReRoll all resources of the town
+                    for(int i = 0; i < numTownResources; i++) {
+                        resourceOfferCategory = calculateWinningCategory(discoveredTownResources);
+                        resourceOfferMaterial = calculateWinningMaterial(resourceOfferCategory);
+                        discoveredTownResources.add(resourceOfferMaterial);
+                    }
+                } catch (Exception ignored) {
+                    //An exception may occur if the offers list is too small for a discovery.
+                    //But we assume that is intended and do not throw.
+                }
+                //Set the new list of town resources
+                TownyResourcesGovernmentMetaDataController.setDiscovered(town, discoveredTownResources);
+                //Save town
+                town.save();
+            }
         }
-        
-         //Send global message
-   		int levelOfNewResource = discoveredMaterials.size();
-   		double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
-        int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
-        String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
-        String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
+        //Now recalculate production for all towns & nations
+        TownResourceProductionController.recalculateAllProduction();
     }
 }

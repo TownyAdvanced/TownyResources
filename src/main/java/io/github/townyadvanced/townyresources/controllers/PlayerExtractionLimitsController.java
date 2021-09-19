@@ -244,10 +244,16 @@ public class PlayerExtractionLimitsController {
     /**
      * Process on item spawning event
      * Limits egg creation
-     * 
+     *
      * @param event event
+     *
+     * Method currently returns immediately and does nothing, due to
+     * https://github.com/TownyAdvanced/TownyResources/issues/32
      */
-    public static void processItemSpawnEvent(ItemSpawnEvent event) {    
+    public static void processItemSpawnEvent(ItemSpawnEvent event) {
+        if(true)
+            return;
+
         if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
             return;
 

@@ -85,8 +85,8 @@ public enum TownyResourcesConfigNodes {
 			"TUBE_CORAL_FAN, BRAIN_CORAL_FAN, BUBBLE_CORAL_FAN, FIRE_CORAL_FAN, HORN_CORAL_FAN," +
 			"DEAD_TUBE_CORAL_FAN, DEAD_BRAIN_CORAL_FAN, DEAD_BUBBLE_CORAL_FAN, DEAD_FIRE_CORAL_FAN,DEAD_HORN_CORAL_FAN}," +
 			"{wheat, 1, WHEAT}," +
-			"{carrots, 1, CARROTS}," +
-			"{potatoes, 1, POTATOES}," +
+			"{carrots, 1, CARROT}," +
+			"{potatoes, 1, POTATO}," +
 			"{beetroot, 1, BEETROOT}," +
 			"{melon_slices, 1, MELON_SLICE}," +
 			"{cocoa_beans, 1, COCOA_BEANS}," +
@@ -115,7 +115,6 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, 0.25, MUTTON, COOKED_MUTTON}," +
 			"{beef, 0.25, BEEF, COOKED_BEEF}," +
 			"{chicken, 0.25, CHICKEN, COOKED_CHICKEN}," +
-			"{eggs, 0.25, EGG}," +			
 			"{chorus_fruits, 0.25, CHORUS_FRUIT}," +
 			"{ender_pearls, 0.125, ENDER_PEARL}",
 			"",
@@ -231,8 +230,8 @@ public enum TownyResourcesConfigNodes {
 			"{wood, 200, 2, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
 			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
 			"{wheat, 100, 1, WHEAT}," +
-			"{carrots, 100, 1, CARROTS}," +
-			"{potatoes, 100, 1, POTATOES}," +
+			"{carrots, 100, 1, CARROT}," +
+			"{potatoes, 100, 1, POTATO}," +
 			"{beetroots, 100, 1, BEETROOT}," +
 			"{pumpkins, 100, 1, PUMPKIN_SEEDS}," +
 			"{melon_slices, 100, 1, MELON_SLICE}," +
@@ -257,8 +256,7 @@ public enum TownyResourcesConfigNodes {
 			"{pork, 100, 0.25, PORKCHOP}," +
 			"{mutton, 100, 0.25, MUTTON}," +
 			"{beef, 100, 0.25, BEEF}," +
-			"{chickens, 100, 0.25, CHICKEN}," +	
-			"{eggs, 100, 0.25, EGG}," +						
+			"{chickens, 100, 0.25, CHICKEN}," +
 			"{ender_pearls, 100, 0.125, ENDER_PEARL}",
 		   "",
 			"# This list shows the survey offer categories.",

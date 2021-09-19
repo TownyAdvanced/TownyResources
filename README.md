@@ -17,8 +17,9 @@ Benefits:
 3. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `false` (*this stops players from discovering resources until your settings are ready*).
 4. Run `/tra reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
-6. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-7. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
+   - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the limits list, as these limit types are not yet operational.
+7. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+8. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
    - Town Production:
      <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's. See [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java) for *Slimefun* item ID's. Example:
     ```

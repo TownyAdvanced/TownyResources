@@ -121,8 +121,14 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 
 		//Send confirmation request message
-		TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey", town.getName(), surveyLevel, TownyEconomyHandler.getFormattedBalance(surveyCost)));
-		//Send warning if town level is too low
+		String surveyCostFormatted;
+		if(TownyEconomyHandler.isActive()) {
+			surveyCostFormatted = TownyEconomyHandler.getFormattedBalance(surveyCost);
+		} else {
+			surveyCostFormatted = "0";
+		}
+		TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey", town.getName(), surveyLevel, surveyCostFormatted));
+		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);
 		int actualTownLevel = TownySettings.calcTownLevelId(town);
 		if(actualTownLevel < requiredTownLevel) {

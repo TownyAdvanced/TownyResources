@@ -153,20 +153,22 @@ public class TownResourceProductionController {
         }
 
         //2. Take resources from occupied towns, and give to nation
-        nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
-        for(Town town: TownOccupationController.getOccupiedForeignTowns(nation)) {
-            //Take resources from town
-            resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
-            //Add resources to nation
-            for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
-                takenResource = resourceTakenFromTown.getKey();
-                takenQuantity = resourceTakenFromTown.getValue();
-                if(takenQuantity == 0)
-                    continue;
-                if(nationProduction.containsKey(takenResource)) {
-                    nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
-                } else {
-                    nationProduction.put(takenResource, takenQuantity);
+        if(TownyResources.getPlugin().isSiegeWarInstalled()) {
+            nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
+            for(Town town: TownOccupationController.getOccupiedForeignTowns(nation)) {
+                //Take resources from town
+                resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
+                //Add resources to nation
+                for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
+                    takenResource = resourceTakenFromTown.getKey();
+                    takenQuantity = resourceTakenFromTown.getValue();
+                    if(takenQuantity == 0)
+                        continue;
+                    if(nationProduction.containsKey(takenResource)) {
+                        nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
+                    } else {
+                        nationProduction.put(takenResource, takenQuantity);
+                    }
                 }
             }
         }

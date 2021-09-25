@@ -1,7 +1,7 @@
 # TownyResources
 *TownyResources* adds value to towns, by giving each one a unique set of automatically-produced resources which can be collected by players (*e.g. Emeralds, Coal, Oak Log, Wheat etc.*).
 
-The plugin also ships with an optional feature to protect resource value, via daily player extraction limits. This can be enabled in the config if required.
+The plugin also has an optional feature to protect resource value, via daily player extraction limits. This can be enabled in the config if required.
 
 # Benefits:
 - 🏙️ Encourages **Town Building**. 

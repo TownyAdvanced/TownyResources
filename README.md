@@ -167,7 +167,7 @@ How will *TownyResources* benefit my server ?
      - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
      - PVP: **PARTIAL**. PVP is a fine reason for fighting in games like *Call-of-Duty* or *Battlefield*, however in *Minecraft-Towny*, it often upsets players who are trying to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
      - Victory Rewards: **PARTIAL**. The rewards of victory are limited to a one-time plunder money steal, climbing the `\n list`, coloring the map, and achieving a higher nation claims bonus. This set of rewards has some value, but is often regarded by players as less satifying & less useful than the acquisition of material resources.    
-   - *TownyResources* fixes this problem transforming Resources into a **GOOD, NON-TOXIC** reason to start a war. 
+   - *TownyResources* fixes this problem by turning Resources into a viable, non-toxic, reason to start a war. 
       - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
  <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars" ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5)))***
 

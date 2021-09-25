@@ -133,7 +133,8 @@ The plugin also has an optional feature to protect resource value, via daily pla
 - Daily Extraction Limits
   - Daily Extraction Limits are configured in the *TownyResources* config.yml file.
 ###### Commands
-- `/tra reload` - Reload TownyResouces
+- `/tra reload` - Reload TownyResouces.
+- `/tra reroll_all_resources` - Reroll all already-discovered town resources.
 
 # F.A.Q:
 ###### Question: 

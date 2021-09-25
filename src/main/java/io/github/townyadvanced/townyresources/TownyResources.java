@@ -19,7 +19,6 @@ import java.io.File;
 
 public class TownyResources extends JavaPlugin {
 	
-	private static TownyResources plugin;
 	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
@@ -28,9 +27,7 @@ public class TownyResources extends JavaPlugin {
 	
     @Override
     public void onEnable() {
-    	
-    	plugin = this;
-    	
+
         if (!loadAll())
         	onDisable();
 
@@ -41,11 +38,11 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public static TownyResources getPlugin() {
-		return plugin;
+		return getPlugin(TownyResources.class);
 	}
 
 	public static String getPrefix() {
-		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
+		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + getPlugin().getName() + "]";
 	}
 
 	/**
@@ -109,11 +106,11 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public static void info(String message) {
-		plugin.getLogger().info(message);
+		getPlugin().getLogger().info(message);
 	}
 
 	public static void severe(String message) {
-		plugin.getLogger().severe(message);
+		getPlugin().getLogger().severe(message);
 	}
 
 	private void printSickASCIIArt() {	

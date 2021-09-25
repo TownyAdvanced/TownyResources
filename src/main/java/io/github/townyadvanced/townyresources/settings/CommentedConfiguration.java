@@ -216,11 +216,6 @@ public class CommentedConfiguration extends YamlConfiguration {
 
 		String dump = yaml.dump(getValues(false));
 
-
-		if (dump.equals(BLANK_CONFIG)) {
-			dump = "";
-		}
-
-		return dump;
+		return dump.equals(BLANK_CONFIG) ? "" : dump;
 	}
 }

@@ -48,7 +48,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 				TownyResourcesMessagingUtil.sendErrorMsg(sender, TownyResourcesTranslation.of("msg_err_command_disable"));
 				return;
 			}
-			switch (args[0]) {
+			switch (args[0].toLowerCase()) {
 				case "reload":
 					parseReloadCommand(sender);
 				break;

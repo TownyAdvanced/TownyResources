@@ -77,7 +77,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler()
 	public void onPlayerFishEvent(PlayerFishEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {		
+		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
 			PlayerExtractionLimitsController.processPlayerFishEvent(event);
 		}	
 	}
@@ -85,15 +85,13 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler()
 	public void onPlayerLoginEvent(PlayerLoginEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {		
-			PlayerExtractionLimitsController.processPlayerLoginEvent(event);
-		}			
+		if(!TownyResourcesSettings.isEnabled()) return;
+		PlayerExtractionLimitsController.processPlayerLoginEvent(event);
 	}
 
 	@EventHandler()
 	public void onPlayerQuitEvent(PlayerQuitEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {		
-			PlayerExtractionLimitsController.processPlayerQuitEvent(event);
-		}			
+		if(!TownyResourcesSettings.isEnabled()) return;
+		PlayerExtractionLimitsController.processPlayerQuitEvent(event);
 	}
 }

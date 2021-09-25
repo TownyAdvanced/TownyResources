@@ -111,7 +111,7 @@ public class TownyResourcesSettings {
 			double categoryLimitStacks;
 			int categoryLimitItems;
 			Material material;
-			List<Material> materialsInCategory = new ArrayList<>();
+			List<Material> materialsInCategory;
 			ResourceExtractionCategory resourceExtractionCategory;
 			
 			while (matcher.find()) {

@@ -53,8 +53,7 @@ public class TownyResourcesGovernmentMetaDataController {
             return Collections.emptyList();
         } else {
             String[] discoveredMaterialsArray = discoveredMaterialsString.split(",");
-            List<String> result = new ArrayList<>();
-            result.addAll(Arrays.asList(discoveredMaterialsArray));
+            List<String> result = new ArrayList<>(Arrays.asList(discoveredMaterialsArray));
             return result;
         }
     }

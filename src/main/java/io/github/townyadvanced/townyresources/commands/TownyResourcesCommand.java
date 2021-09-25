@@ -13,6 +13,7 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
+import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.TownResourceCollectionController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
@@ -36,10 +37,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "towncollect", "nationcollect");
 	
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if (args.length == 1)
-			return NameUtil.filterByStart(townyResourcesTabCompletes, args[0]);
-		else
-			return Collections.emptyList();
+		return args.length == 1 ? NameUtil.filterByStart(townyResourcesTabCompletes, args[0]) : Collections.emptyList();
 	}
 
 	private void showTownyResourcesHelp(CommandSender sender) {
@@ -64,7 +62,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 				TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_command_disable"));
 				return;
 			}
-			switch (args[0]) {
+			switch (args[0].toLowerCase()) {
 				case "survey":
 					parseSurveyCommand(player);
 					break;
@@ -122,11 +120,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Send confirmation request message
 		String surveyCostFormatted;
-		if(TownyEconomyHandler.isActive()) {
-			surveyCostFormatted = TownyEconomyHandler.getFormattedBalance(surveyCost);
-		} else {
-			surveyCostFormatted = "0";
-		}
+		surveyCostFormatted = TownyEconomyHandler.isActive() ? TownyEconomyHandler.getFormattedBalance(surveyCost) : "0";
 		TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey", town.getName(), surveyLevel, surveyCostFormatted));
 		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);

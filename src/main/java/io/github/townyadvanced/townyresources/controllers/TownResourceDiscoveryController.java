@@ -130,8 +130,7 @@ public class TownResourceDiscoveryController {
     private static String calculateWinningMaterial(ResourceOfferCategory winningCategory) {
         //Determine the winning material
         int winningNumber = (int)((Math.random() * winningCategory.getMaterialsInCategory().size()));
-        String winningMaterial = winningCategory.getMaterialsInCategory().get(winningNumber);
-        return winningMaterial;
+        return winningCategory.getMaterialsInCategory().get(winningNumber);
     }
 
     public static void reRollAllExistingResources() {

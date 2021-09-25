@@ -30,7 +30,7 @@ public enum TownyResourcesConfigNodes {
 			""),
 	RESOURCE_EXTRACTION_LIMITS_ENABLED(
 			"resource_extraction_limits.enabled",
-			"true",
+			"false",
 			"",
 			"# If true, then daily player resource extraction limits are enabled.",
 			"# If false, then daily player resource extraction limits are disabled."),

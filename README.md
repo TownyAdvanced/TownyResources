@@ -20,17 +20,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 4. Run `/tra reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
    - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the daily-limits list, as these limit types are not yet operational.
-7. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-8. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
-   - Town Production:
-     <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's. See [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java) for *Slimefun* item ID's. Example:
-    ```
-    ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
-    # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
-    ```
-   - Daily Player Limits
-     <br>Due to technical limitations, it is currently not possible to have daily-limits for *Slimefun* resources. However, a reasonably good extraction-control configuration can be achieved by first adding the small few raw *Slimefun* resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
-8. Edit your townyperms.yml file, and add the following perms:
+6. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
      ```
      - townyresources.command.towncollect
@@ -39,14 +29,24 @@ The plugin also has an optional feature to protect resource value, via daily pla
      ```
      - townyresources.command.nationcollect
      ```
-9. Using your permissions plugin, give this to any admins who are not already OP:
+7. Using your permissions plugin, give this to any admins who are not already OP:
      ```
      - townyresources.admin.command.*
      ```                  
-10. If you want to show town production on the *Dynmap*, first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
+8. If you want to show town production on the *Dynmap* (**Recommended**), first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
     ```
     <br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>
     ```
+9. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
+   - Town Production:
+     <br>You can add *Slimefun* items to the offers list, simply by using *Slimefun* item ID's. See [here](https://github.com/Slimefun/Slimefun4/blob/master/src/main/java/io/github/thebusybiscuit/slimefun4/implementation/SlimefunItems.java) for *Slimefun* item ID's. Example:
+    ```
+    ...{BUCKET_OF_OIL, 100, 1 BUCKET_OF_OIL}...{Valuable_Dust, 100, 1, COPPER_DUST, TIN_DUST}...
+    # F.Y.I. the first category name can translate to non-english as it is a vanilla Slimefun item ID, however the second one cannot, unless you add a translation string.
+    ```
+   - Daily Player Limits
+     <br>Due to technical limitations, it is currently not possible to have daily-limits for *Slimefun* resources. However, a reasonably good extraction-control configuration can be achieved by first adding the small few raw *Slimefun* resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
+10. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
 11. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
 12. Run `/tra reload`, then `/ta reload`.
 # Player Guide

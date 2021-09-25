@@ -9,7 +9,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 - 💰 Encourages **Trading**.
 - 💤 Reduces **Grind**.
 -  🧚‍♀️ Assists **Roleplaying**.
-- ⚔️ Provides an essential part of the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience - **A Non-Toxic Reason for War**: Capturing Resources.
+- ⚔️ Improves the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
 
 (*details in the FAQ section below*)
 

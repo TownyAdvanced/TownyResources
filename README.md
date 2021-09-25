@@ -9,7 +9,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 - 💰 Encourages **Trading**.
 - 💤 Reduces **Grind**.
 -  🧚‍♀️ Assists **Roleplaying**.
-- ⚔️ Improves the [*SiegeWar*](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
+- ⚔️ Improves the [***SiegeWar***](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
 
 (*details in the FAQ section below*)
 
@@ -157,7 +157,7 @@ How will *TownyResources* benefit my server ?
     - With *TownyResources*, it is still possible to expend extra effort for a resource advantage over other players, but more varied and interesting activities are required to achieve it e.g. farming multiple varieties of crops, cave explorations, ruins explorations, trading, war. 
 5. Assists **Roleplaying**
     - By giving each town a unique "signature" set of resources, this helps to develop the character of each town.
-6. Provides a critical part of the *SiegeWar* experience - **A Non-Toxic Reason To Start A War**:
+6. Improves the [***SiegeWar***](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
    - There are surprisingly few non-toxic reasons to start a war in *SiegeWar*:
      - Resources: **NO**, because sieging does not provide resources. 
      - Equipment: **NO**, because SiegeWar does not allow soldiers to steal equipment from killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*).

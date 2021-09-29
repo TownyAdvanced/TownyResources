@@ -14,7 +14,6 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation
 import io.github.townyadvanced.townyresources.util.ActionBarUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -397,7 +396,7 @@ public class PlayerExtractionLimitsController {
             String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit);
             //Send temporary action bar message
             try {
-                ActionBarUtil.sendActionBarMessage(player, errorString);
+                ActionBarUtil.sendActionBarErrorMessage(player, errorString);
             } catch (Exception ignored) {
                 //There may be an exception on older servers which cannot load the md5 action bar classes
             }

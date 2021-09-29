@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
  */
 public class ActionBarUtil {
 
-    public static void sendActionBarMessage(Player player, String text) {
+    public static void sendActionBarErrorMessage(Player player, String text) {
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + text));
     }
 }

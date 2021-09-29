@@ -11,11 +11,9 @@ import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.github.townyadvanced.townyresources.util.ActionBarUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -397,7 +395,11 @@ public class PlayerExtractionLimitsController {
             int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
             String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit);
             //Send temporary action bar message
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + errorString));
+            try {
+                ActionBarUtil.sendActionBarErrorMessage(player, errorString);
+            } catch (Exception ignored) {
+                //There may be an exception on older servers which cannot load the md5 action bar classes
+            }
             //Send longer-lasting chat message
             TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);                    
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + cooldownAfterDailyLimitWarningMessageMillis);

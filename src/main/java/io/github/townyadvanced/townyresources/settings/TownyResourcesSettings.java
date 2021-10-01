@@ -6,14 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
@@ -238,7 +237,7 @@ public class TownyResourcesSettings {
 		if(material != null)
 			return true;  	//Known material
 		if(TownyResources.getPlugin().isSlimeFunInstalled()) {
-		   	SlimefunItem slimeFunItem = SlimefunItem.getByID(materialName);
+		   	SlimefunItem slimeFunItem = SlimefunItem.getById(materialName);
 			if(slimeFunItem != null)
 				return true;  //Known material 
 		}

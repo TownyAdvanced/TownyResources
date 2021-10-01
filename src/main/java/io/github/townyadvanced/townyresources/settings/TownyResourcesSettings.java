@@ -237,7 +237,7 @@ public class TownyResourcesSettings {
 		if(material != null)
 			return true;  	//Known material
 		if(TownyResources.getPlugin().isSlimeFunInstalled()) {
-		   	SlimefunItem slimeFunItem = SlimefunItem.getById(materialName);
+			SlimefunItem slimeFunItem = SlimefunItem.getById(materialName);
 			if(slimeFunItem != null)
 				return true;  //Known material 
 		}

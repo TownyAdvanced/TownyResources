@@ -1,10 +1,10 @@
 package io.github.townyadvanced.townyresources.util;
 
 import com.meowj.langutils.lang.LanguageHelper;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -137,7 +137,7 @@ public class TownyResourcesMessagingUtil {
         Material material = Material.getMaterial(materialName);
         if(material == null) {
             if(TownyResources.getPlugin().isSlimeFunInstalled()) {
-                SlimefunItem slimefunItem = SlimefunItem.getByID(materialName);
+                SlimefunItem slimefunItem = SlimefunItem.getById(materialName);
                 if(slimefunItem != null) {
                     return slimefunItem.getItemName().replaceAll("[^\\w\\s]\\w","");
                 }                

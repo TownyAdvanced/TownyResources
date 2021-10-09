@@ -248,7 +248,8 @@ public class PlayerExtractionLimitsController {
      * Method currently returns immediately and does nothing, due to
      * https://github.com/TownyAdvanced/TownyResources/issues/32
      */
-    public static void processItemSpawnEvent(ItemSpawnEvent event) {
+    @SuppressWarnings("unused")
+	public static void processItemSpawnEvent(ItemSpawnEvent event) {
         if(true)
             return;
 

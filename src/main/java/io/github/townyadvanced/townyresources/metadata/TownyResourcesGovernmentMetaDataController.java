@@ -1,14 +1,8 @@
 package io.github.townyadvanced.townyresources.metadata;
 
-import com.gmail.goosius.siegewar.SiegeWar;
 import com.palmergames.bukkit.towny.object.Government;
-import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

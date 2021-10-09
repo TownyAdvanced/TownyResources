@@ -4,8 +4,6 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import org.bukkit.Material;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

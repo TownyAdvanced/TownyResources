@@ -12,8 +12,6 @@ import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import org.bukkit.Material;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +25,6 @@ public class TownResourceProductionController {
     public static void recalculateAllProduction() {
         recalculateProductionForAllTowns();
         recalculateProductionForAllNations();
-        TownyResources.info("All Production Recalculated");
     }
 
     /**

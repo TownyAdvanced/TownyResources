@@ -1,7 +1,5 @@
 package io.github.townyadvanced.townyresources.objects;
 
-import org.bukkit.Material;
-
 /**
  * This class represents a quantity of a resource
  */

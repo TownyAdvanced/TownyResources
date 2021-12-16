@@ -1,9 +1,10 @@
 package io.github.townyadvanced.townyresources.util;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import com.palmergames.adventure.text.Component;
+import com.palmergames.adventure.text.format.NamedTextColor;
+import com.palmergames.bukkit.towny.TownyMessaging;
 
 /**
  * FYI if the MC version is not high enough this class may fail to load with a "java.lang.noClassDefFound" error
@@ -12,6 +13,6 @@ import org.bukkit.entity.Player;
 public class ActionBarUtil {
 
     public static void sendActionBarErrorMessage(Player player, String text) {
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED + text));
+        TownyMessaging.sendActionBarMessageToPlayer(player, Component.text(text).color(NamedTextColor.DARK_RED));
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.Material;
 /**
  * This class represents an extraction record for a single resource
  */
+@SuppressWarnings("unused")
 public class ExtractionRecordForOneBlockType {
     private final Material sourceBlockType;
     private final Material resourceMaterial;

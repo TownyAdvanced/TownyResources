@@ -9,7 +9,6 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
-import io.github.townyadvanced.townyresources.objects.ResourceOffer;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
 import org.bukkit.Material;
@@ -49,45 +48,6 @@ public class TownyResourcesSettings {
 	public static int getSumOfAllOfferDiscoveryProbabilityWeights() {
 		return sumOfAllOfferDiscoveryProbabilityWeights;
 	}
-		
-	public static Map<String, ResourceOffer> getAllResourceOffers() {
-		return getResourceOffers(Collections.emptyList());
-    }
-
-	public static Map<String, ResourceOffer> getResourceOffers(List<String> materialsToExclude) {
-        sumOfAllOfferDiscoveryProbabilityWeights = 0;
-        Map<String, ResourceOffer> resourceOffers = new HashMap<>();
-        //resourceOffers.putAll(getOffersInCategory("ores", getOffersOres(), materialsToExclude));
-        //resourceOffers.putAll(getOffersInCategory("trees", getOffersTrees(), materialsToExclude));
-        //resourceOffers.putAll(getOffersInCategory("crops", getOffersCrops(), materialsToExclude));
-        //resourceOffers.putAll(getOffersInCategory("animals", getOffersAnimals(), materialsToExclude));
-        //resourceOffers.putAll(getOffersInCategory("monsters", getOffersMonsters(), materialsToExclude));   
-        return resourceOffers;
-	}
-
-    private static Map<String, ResourceOffer> getOffersInCategory(String offersCategory, List<String> offersList, List<String> materialsToExclude) {
-        Map<String, ResourceOffer> result = new HashMap<>();
-        String[] offerAsArray;
-        String offerMaterial;
-        int offerBaseAmount;
-        int offerDiscoveryProbabilityWeight;
-        int offerDiscoveryId;
-        ResourceOffer newResourceOffer;
-        
-        for(String offer: offersList) {
-        	offerAsArray = offer.split("-");
-            offerMaterial = offerAsArray[0];
-            if(materialsToExclude.contains(offerMaterial))
-	        	continue;      
-            offerBaseAmount = (int)((Double.parseDouble(offerAsArray[1]) * 64) + 0.5);
-            offerDiscoveryProbabilityWeight = Integer.parseInt(offerAsArray[2]);
-            offerDiscoveryId = sumOfAllOfferDiscoveryProbabilityWeights;
-            newResourceOffer = new ResourceOffer(offersCategory, offerMaterial, offerBaseAmount, offerDiscoveryProbabilityWeight, offerDiscoveryId);
-            result.put(offerMaterial, newResourceOffer);                
-            sumOfAllOfferDiscoveryProbabilityWeights += offerDiscoveryProbabilityWeight; 
-        }
-        return result;
-    }
 
 	/**
 	 * Get all resource extraction categories
@@ -178,8 +138,7 @@ public class TownyResourcesSettings {
 			String categoryName;
 			int categoryDiscoveryWeight;
 			double categoryBaseAmountStacks;
-			int categoryBaseAmountItems;			
-			Material material;
+			int categoryBaseAmountItems;
 			List<String> materialsInCategory;
 			String materialName;
 			ResourceOfferCategory resourceOfferCategory;
@@ -208,11 +167,11 @@ public class TownyResourcesSettings {
 				//Read Materials
 				materialsInCategory = new ArrayList<>();
 				for(int i = 3; i < categoryAsArray.length; i++) {
-					materialName = categoryAsArray[i].trim();				
+					materialName = categoryAsArray[i].trim();
 					if(!isValidMaterial(materialName)) {
 						TownyResources.severe("Unknown material in offer category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
 						problemLoadingCategories = true;
-						continue;						
+						continue;
 					}
 					materialsInCategory.add(materialName);
 				}
@@ -222,7 +181,7 @@ public class TownyResourcesSettings {
 				
 				//Add to result
 				result.add(resourceOfferCategory);
-			}		
+			}
 		}
 
 		if(problemLoadingCategories) {
@@ -255,7 +214,6 @@ public class TownyResourcesSettings {
 
 			setDefaults(version, file);
 			config.save();
-			TownyResources.info("Config Loaded");
 		}
 	}
 

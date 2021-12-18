@@ -392,27 +392,21 @@ public class PlayerExtractionLimitsController {
 
     private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
         if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-            String translatedCategoryName = TownyResourcesMessagingUtil.formatExtractionCategoryNameForDisplay(categoryExtractionRecord.getResourceExtractionCategory());
-            int categoryExtractionLimit = categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems();
-            String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached", translatedCategoryName, categoryExtractionLimit);
+            String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached",
+                    categoryExtractionRecord.getTranslatedCategoryName(), 
+                    categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems());
             //Send temporary action bar message
-            try {
-                ActionBarUtil.sendActionBarErrorMessage(player, errorString);
-            } catch (Exception ignored) {
-                //There may be an exception on older servers which cannot load the md5 action bar classes
-            }
+            ActionBarUtil.sendActionBarErrorMessage(player, errorString);
             //Send longer-lasting chat message
-            TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);                    
+            TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + cooldownAfterDailyLimitWarningMessageMillis);
         }
     }
         
     public static ResourceExtractionCategory getResourceExtractionCategory(String givenCategoryName) {
-        for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories) {
-            if(resourceExtractionCategory.getName().equals(givenCategoryName)) {
+        for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories)
+            if(resourceExtractionCategory.getName().equals(givenCategoryName))
                 return resourceExtractionCategory;
-            }
-        }
         return null;
     }
 
@@ -431,7 +425,7 @@ public class PlayerExtractionLimitsController {
             Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(event.getPlayer());
             if(!playerExtractionRecord.isEmpty()) {
                 allPlayerExtractionRecords.put(event.getPlayer().getUniqueId(), playerExtractionRecord);
-            }            
+            }
         }
     }
 
@@ -446,7 +440,7 @@ public class PlayerExtractionLimitsController {
             return;
 
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
-            Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.get(event.getPlayer().getUniqueId());                       
+            Map<Material, CategoryExtractionRecord> playerExtractionRecord = allPlayerExtractionRecords.get(event.getPlayer().getUniqueId());
             if(playerExtractionRecord != null) {
                 //Save record to db
                 Resident resident = TownyUniverse.getInstance().getResident(event.getPlayer().getUniqueId());
@@ -456,8 +450,8 @@ public class PlayerExtractionLimitsController {
                 }
                 //Remove entry from map
                 allPlayerExtractionRecords.remove(event.getPlayer().getUniqueId());
-            }            
-        }  
+            }
+        }
     }
 
     /**
@@ -469,16 +463,14 @@ public class PlayerExtractionLimitsController {
 
         synchronized (PLAYER_EXTRACTION_RECORD_DATA_LOCK) {
             //Reset records in db
-            for(Resident resident: TownyUniverse.getInstance().getResidents()) {
+            for(Resident resident: TownyUniverse.getInstance().getResidents())
                 TownyResourcesResidentMetaDataController.removePlayerExtractionRecord(resident);
-                resident.save();    
-            }
+
             //Clear any records which are in memory.
             allPlayerExtractionRecords.clear();
             //Send global message            
-            TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("daily_extraction_limits_reset"));        
-
-        }                     
+            TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("daily_extraction_limits_reset"));
+        }
     }
 
     /**
@@ -495,13 +487,11 @@ public class PlayerExtractionLimitsController {
                 playerExtractionRecord = allPlayerExtractionRecords.get(player.getUniqueId());
                 if(playerExtractionRecord != null) {
                     resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-                    if(resident != null) {
+                    if(resident != null)
                         TownyResourcesResidentMetaDataController.setPlayerExtractionRecord(resident, playerExtractionRecord);
-                        resident.save();    
-                    }
                 }
             }
-        }                     
+        }
     }
 
     /**
@@ -519,15 +509,13 @@ public class PlayerExtractionLimitsController {
             //Save extraction records of all online players
             saveExtractionRecordsForOnlinePlayers();
             //Clear the in-memory player extraction records
-            allPlayerExtractionRecords.clear();                        
+            allPlayerExtractionRecords.clear();
             //Reload extraction records of all online players
             Resident resident;
             for(Player player: Bukkit.getOnlinePlayers()) {
                 resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-                if(resident != null) {
-                    Map<Material, CategoryExtractionRecord> playerExtractionRecord = TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(player);
-                    allPlayerExtractionRecords.put(player.getUniqueId(), playerExtractionRecord);
-                }
+                if(resident != null)
+                    allPlayerExtractionRecords.put(player.getUniqueId(), TownyResourcesResidentMetaDataController.getPlayerExtractionRecord(player));
             }
         }    
         TownyResources.info("All extraction records reloaded for logged in players");  

@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
@@ -9,13 +8,6 @@ import org.bukkit.event.Listener;
 import org.dynmap.towny.events.BuildTownMarkerDescriptionEvent;
 
 public class TownyResourcesDynmapTownyListener implements Listener {
-
-    @SuppressWarnings("unused")
-    private final TownyResources plugin;
-
-    public TownyResourcesDynmapTownyListener(TownyResources instance) {
-        plugin = instance;
-    }
 
     /**
      * This method updates the town popup box on Dynmap-Towny

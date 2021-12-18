@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.controllers;
 
-import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
@@ -9,6 +8,8 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class TownResourceCollectionController {
 
@@ -44,16 +47,31 @@ public class TownResourceCollectionController {
      * @param government the government
      * @param availableForCollection the list of currently available resources
      */
-    private static synchronized void collectAvailableGovernmentResources(Player player, Government government, Map<String,Integer> availableForCollection) {        
-        List<ItemStack> itemStackList = new ArrayList<>();
-        
+    private static synchronized void collectAvailableGovernmentResources(Player player, Government government, Map<String,Integer> availableForCollection) {
         //Calculate stuff to give player
+        List<ItemStack> itemStackList = buildItemStackList(player, availableForCollection.entrySet());
+        //Drop all collected itemstacks near player
+        Bukkit.getServer().getScheduler().runTask(TownyResources.getPlugin(), ()-> {
+            Location location = player.getLocation();
+            for(ItemStack itemStack: itemStackList)
+                player.getWorld().dropItemNaturally(location, itemStack);
+        });
+
+        //Clear available list
+        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, Collections.emptyMap());
+
+        //Save government
+        government.save();
+    }
+
+	private static List<ItemStack> buildItemStackList(Player player, Set<Entry<String, Integer>> availableForCollection) {
+        List<ItemStack> itemStackList = new ArrayList<>();
         String materialName;
         Material material;
         int amount;
         ItemStack itemStack;
-        for(Map.Entry<String,Integer> mapEntry: availableForCollection.entrySet()) {
-            materialName = mapEntry.getKey();            
+        for(Map.Entry<String,Integer> mapEntry: availableForCollection) {
+            materialName = mapEntry.getKey();
             amount = mapEntry.getValue();
             
             //Don't attempt pickup if amount is less than 1
@@ -61,11 +79,11 @@ public class TownResourceCollectionController {
                 continue;
 
             //Try creating a regular MC itemstack
-            material = Material.getMaterial(materialName);                        
+            material = Material.getMaterial(materialName);
             if(material != null) {
                 itemStack = new ItemStack(material, amount);
                 itemStackList.add(itemStack); 
-                continue;           
+                continue;
             }
             
             //Try creating a slimefun itemstack
@@ -74,30 +92,15 @@ public class TownResourceCollectionController {
                 if(slimeFunItem != null) {
                     itemStack = slimeFunItem.getRecipeOutput();
                     itemStack.setAmount(amount);
-                    itemStackList.add(itemStack);                                
-                    continue;           
+                    itemStackList.add(itemStack);
+                    continue;
                 }
             }
 
-            //Unknown material. Send error message            
+            //Unknown material. Send error message
             TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", materialName));
         }
-        
-        //Drop all collected itemstacks near player
-        Towny.getPlugin().getServer().getScheduler().runTask(Towny.getPlugin(), new Runnable() {
-            public void run() {
-                Location location = player.getLocation();
-                for(ItemStack itemStack: itemStackList) {
-                    player.getWorld().dropItemNaturally(location, itemStack);                 
-                }
-            }
-        });    
-        
-        //Clear available list
-        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, Collections.emptyMap());
-
-        //Save government
-        government.save();
-    }
+		return itemStackList;
+	}
     
 }

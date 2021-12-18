@@ -80,7 +80,7 @@ public class TownyResources extends JavaPlugin {
             severe("TownyResources failed to load! Disabling!");
             return false;
         }
-		info("TownyResources loaded successfully.");		
+		info("TownyResources loaded successfully.");
 		return true;
 	}
 
@@ -105,7 +105,7 @@ public class TownyResources extends JavaPlugin {
             severe("TownyResources failed to reload!");
             return false;
         }
-		info("TownyResources reloaded successfully.");		
+		info("TownyResources reloaded successfully.");
 		return true;
 	}
 
@@ -128,19 +128,17 @@ public class TownyResources extends JavaPlugin {
 
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
-		pm.registerEvents(new TownyResourcesBukkitEventListener(this), this);
-		pm.registerEvents(new TownyResourcesTownyEventListener(this), this);
-		pm.registerEvents(new TownyResourcesTownEventListener(this), this);
-		pm.registerEvents(new TownyResourcesNationEventListener(this), this);
+		pm.registerEvents(new TownyResourcesBukkitEventListener(), this);
+		pm.registerEvents(new TownyResourcesTownyEventListener(), this);
+		pm.registerEvents(new TownyResourcesTownEventListener(), this);
+		pm.registerEvents(new TownyResourcesNationEventListener(), this);
 		if(isDynmapTownyInstalled())
-			pm.registerEvents(new TownyResourcesDynmapTownyListener(this), this);
-		TownyResources.info("Listeners Loaded");		
+			pm.registerEvents(new TownyResourcesDynmapTownyListener(), this);
 	}
 
 	private void registerCommands() {
 		getCommand("townyresources").setExecutor(new TownyResourcesCommand());
 		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());
-		TownyResources.info("Commands Loaded");		
 	}
 
 	public boolean isDynmapTownyInstalled() {
@@ -171,13 +169,8 @@ public class TownyResources extends JavaPlugin {
     }
     
 	private void townyVersionCheck() throws TownyException{
-		String actualTownyVersion = getTownyVersion();
-        boolean comparisonResult = Version.fromString(actualTownyVersion).compareTo(requiredTownyVersion) >= 0;        
-		if (!comparisonResult) {
+		if (!(Version.fromString(getTownyVersion()).compareTo(requiredTownyVersion) >= 0))
 			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
-		} else {
-			info("Towny version " + actualTownyVersion + " found.");
-		}
     }
     
     private void setupIntegrationsWithOtherPlugins() {
@@ -185,29 +178,21 @@ public class TownyResources extends JavaPlugin {
 		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
 		siegeWarInstalled = siegeWar != null;
 		if(siegeWarInstalled) 
-			info("SiegeWar Integration Enabled");
-		else
-			info("SiegeWar Integration Not Enabled");					
+			info("  SiegeWar Integration Enabled");
 
 		Plugin dynmapTowny = Bukkit.getPluginManager().getPlugin("Dynmap-Towny");
 		dynmapTownyInstalled = dynmapTowny != null;
 		if(dynmapTownyInstalled) 
-			info("DynmapTowny Integration Enabled");
-		else
-			info("DynmapTowny Integration Not Enabled");					
+			info("  DynmapTowny Integration Enabled");
 				
 		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("Slimefun");
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
-			info("Slimefun Integration Enabled");
-		else
-			info("Slimefun Integration Not Enabled");
+			info("  Slimefun Integration Enabled");
 			
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;
 		if(languageUtilsInstalled) 
-			info("LanguageUtils Integration Enabled");
-		else
-			info("LanguageUtils Integration Not Enabled");						
+			info("  LanguageUtils Integration Enabled");
 	}
 }

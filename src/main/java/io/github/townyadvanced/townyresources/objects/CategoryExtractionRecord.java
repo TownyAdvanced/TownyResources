@@ -1,5 +1,7 @@
 package io.github.townyadvanced.townyresources.objects;
 
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
 /**
  * This class represents an extraction record in a particular category, for just one player.
  */
@@ -55,6 +57,10 @@ public class CategoryExtractionRecord {
 
     public ResourceExtractionCategory getResourceExtractionCategory() {
         return resourceExtractionCategory;
+    }
+
+    public String getTranslatedCategoryName() {
+        return TownyResourcesMessagingUtil.formatExtractionCategoryNameForDisplay(getResourceExtractionCategory());
     }
 
     public long getNextLimitWarningTime() {

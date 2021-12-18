@@ -85,6 +85,6 @@ public class TownyResourcesResidentMetaDataController {
     }
     
     public static void removePlayerExtractionRecord(Resident resident) {
-        MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, null);            
+        MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, null);
     }
 }

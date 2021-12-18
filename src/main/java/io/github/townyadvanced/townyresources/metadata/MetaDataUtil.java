@@ -23,7 +23,7 @@ class MetaDataUtil {
     public static void setSdf(TownyObject townyObject, String key, String value) {
         if (townyObject.hasMeta(key)) {
             if (value == null || value.isEmpty())
-                townyObject.removeMetaData(townyObject.getMetadata(key));
+                townyObject.removeMetaData(townyObject.getMetadata(key), true);
             else {
                 CustomDataField<?> cdf = townyObject.getMetadata(key);
                 if (cdf instanceof StringDataField) {
@@ -33,7 +33,7 @@ class MetaDataUtil {
                 return;
             }
         } else if (value != null && !value.isEmpty()) {
-            townyObject.addMetaData(new StringDataField(key, value));
+            townyObject.addMetaData(new StringDataField(key, value), true);
 		}
     }
 }

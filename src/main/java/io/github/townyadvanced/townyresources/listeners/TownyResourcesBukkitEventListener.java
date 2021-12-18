@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.bukkit.event.EventHandler;
@@ -22,16 +21,9 @@ import org.bukkit.event.player.PlayerShearEntityEvent;
  */
 public class TownyResourcesBukkitEventListener implements Listener {
 
-	@SuppressWarnings("unused")
-	private final TownyResources plugin;
-	
-	public TownyResourcesBukkitEventListener(TownyResources instance) {
-		plugin = instance;
-	}
-
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
+		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processEntityDamageByEntityEvent(event);
 		}
 	}
@@ -43,39 +35,39 @@ public class TownyResourcesBukkitEventListener implements Listener {
 		}
 	}
 
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onBlockBreak(BlockBreakEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
+		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processBlockBreakEvent(event);
 		}	
 	}
 	
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onBlockShearEntityEvent(BlockShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled() && !event.isCancelled()) {
+		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled()) {
 			//Dispensers cannot shear entities
 			event.setCancelled(true);
 		}	
 	}
 	
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {
+		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);
 		}	
 	}
 	
 	
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onItemSpawnEvent(ItemSpawnEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {		
+		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processItemSpawnEvent(event);
 		}	
 	}
 	
-	@EventHandler()
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerFishEvent(PlayerFishEvent event) {
-		if(TownyResourcesSettings.isEnabled() && !event.isCancelled()) {		
+		if(TownyResourcesSettings.isEnabled()) {
 			PlayerExtractionLimitsController.processPlayerFishEvent(event);
 		}	
 	}

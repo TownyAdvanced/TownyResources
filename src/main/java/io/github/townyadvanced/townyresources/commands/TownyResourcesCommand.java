@@ -83,7 +83,6 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		} catch (Exception e) {
 			//Unexpected exception
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
-			e.printStackTrace();  //TODO -Remove when done			
 		}
 	}
 
@@ -121,13 +120,12 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 
 		//Send confirmation request message
-		String surveyCostFormatted;
-		if(TownyEconomyHandler.isActive()) {
+		String surveyCostFormatted = "0";
+		if(TownyEconomyHandler.isActive())
 			surveyCostFormatted = TownyEconomyHandler.getFormattedBalance(surveyCost);
-		} else {
-			surveyCostFormatted = "0";
-		}
+
 		TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey", town.getName(), surveyLevel, surveyCostFormatted));
+
 		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);
 		int actualTownLevel = TownySettings.calcTownLevelId(town);
@@ -147,20 +145,16 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 	
 	private static void parseTownCollectCommand(Player player) throws TownyException {
 		//Ensure player a town member
-		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
+		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
 		if(!resident.hasTown()) 
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_a_town_member"));
-					
-		//Ensure player is actually in a town
-		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
-		if(!TownyUniverse.getInstance().hasTownBlock(playerWorldCoord))			
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_in_own_town"));
-			
+		
 		//Ensure player is actually in their own town
-		Town town = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
-		if(town != resident.getTown())
+		Town town = TownyAPI.getInstance().getTown(player.getLocation());
+		if(TownyAPI.getInstance().isWilderness(player.getLocation()) 
+			|| !(town.equals(resident.getTownOrNull())))
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_towncollect_not_in_own_town"));
-			
+		
 		//Ensure some resources are available
 		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(town);
 		if(availableForCollection.isEmpty())
@@ -172,25 +166,22 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 	private static void parseNationCollectCommand(Player player) throws TownyException {
 		//Ensure player a town member
-		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());		
+		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
 		if(!resident.hasTown()) 
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_a_town_member"));
 
-		//Ensure player is a nation member					
-		if(!resident.getTown().hasNation())
+		//Ensure player is a nation member
+		if(!resident.hasNation())
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_a_nation_member"));
 		
-		//Ensure player is actually in a town
-		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
-		if(!TownyUniverse.getInstance().hasTownBlock(playerWorldCoord))			
+		Nation nation = resident.getNationOrNull();
+		
+		//Ensure player is actually in the capital.
+		Town town = TownyAPI.getInstance().getTown(player.getLocation());
+		if(TownyAPI.getInstance().isWilderness(player.getLocation()) 
+			|| !(town.getNationOrNull().equals(nation) && town.isCapital()))
 			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_in_capital"));
-			
-		//Ensure player is actually in the capital
-		Town townHere = TownyUniverse.getInstance().getTownBlock(playerWorldCoord).getTown();
-		Nation nation = resident.getTown().getNation();
-		if(townHere != nation.getCapital())
-			throw new TownyException(TownyResourcesTranslation.of("msg_err_cannot_nationcollect_not_in_capital"));
-			
+		
 		//Ensure some resources are available
 		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(nation);
 		if(availableForCollection.isEmpty())

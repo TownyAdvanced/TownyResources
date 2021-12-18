@@ -2,7 +2,6 @@ package io.github.townyadvanced.townyresources.listeners;
 
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
-import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
@@ -20,14 +19,6 @@ import java.util.List;
  *
  */
 public class TownyResourcesNationEventListener implements Listener {
-
-	@SuppressWarnings("unused")
-	private final TownyResources plugin;
-	
-	public TownyResourcesNationEventListener(TownyResources instance) {
-
-		plugin = instance;
-	}
 
 	/*
 	 * TownyResources will add resource info to the town screen

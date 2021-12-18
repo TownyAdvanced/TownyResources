@@ -20,12 +20,12 @@ public class TownResourceOffersController {
          //Clear the map
          materialToResourceOfferCategoryMap.clear();
          //Put each material on the map
-         for(ResourceOfferCategory category: resourceOfferCategoryList) {         
+         for(ResourceOfferCategory category: resourceOfferCategoryList) {
              for(String material: category.getMaterialsInCategory()) {
                  materialToResourceOfferCategoryMap.put(material, category);
              }
          }
-         TownyResources.info("All Resource Offer Categories Loaded");        
+         TownyResources.info("All Resource Offer Categories Loaded");
     }
     
     public static List<ResourceOfferCategory> getResourceOfferCategoryList() {

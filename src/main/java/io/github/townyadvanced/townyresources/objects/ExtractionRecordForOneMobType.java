@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 /**
  * This class represents an extraction record for a single type of mob
  */
+@SuppressWarnings("unused")
 public class ExtractionRecordForOneMobType {
     private final EntityType sourceMobType;
     private final Material resourceMaterial;

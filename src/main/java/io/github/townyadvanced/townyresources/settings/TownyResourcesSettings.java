@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -208,7 +209,7 @@ public class TownyResourcesSettings {
 			File file = new File(filepath);
 
 			// read the config.yml into memory
-			config = new CommentedConfiguration(file);
+			config = new CommentedConfiguration(file.toPath());
 			if (!config.load())
 				throw new TownyException("Failed to load Config!");
 
@@ -237,7 +238,7 @@ public class TownyResourcesSettings {
 	 * Builds a new config reading old config data.
 	 */
 	private static void setDefaults(String version, File file) {
-		newConfig = new CommentedConfiguration(file);
+		newConfig = new CommentedConfiguration(file.toPath());
 		newConfig.load();
 
 		for (TownyResourcesConfigNodes root : TownyResourcesConfigNodes.values()) {

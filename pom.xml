@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.1.5</version>
+  <version>0.1.6</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -64,6 +64,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>

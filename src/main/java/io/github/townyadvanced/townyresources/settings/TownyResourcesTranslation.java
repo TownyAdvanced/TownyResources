@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources.settings;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 
+import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
@@ -29,9 +30,9 @@ public final class TownyResourcesTranslation {
 		File file = FileMgmt.unpackResourceFile(fullPath, res, defaultRes);
 
 		// read the (language).yml into memory
-		language = new CommentedConfiguration(file);
+		language = new CommentedConfiguration(file.toPath());
 		language.load();
-		CommentedConfiguration newLanguage = new CommentedConfiguration(file);
+		CommentedConfiguration newLanguage = new CommentedConfiguration(file.toPath());
 		
 		try {
 			newLanguage.loadFromString(FileMgmt.convertStreamToString("/" + res));

@@ -30,7 +30,7 @@
       <url>https://mvn.lumine.io/repository/maven-public/</url>
     </repository>
   </repositories>
-
+ 
   <dependencies>
     <dependency>
       <groupId>org.spigotmc</groupId>
@@ -68,8 +68,6 @@
       <version>4.9.1</version>
       <scope>provided</scope>
     </dependency>
-
-
   </dependencies>
 
   <build>
@@ -91,5 +89,5 @@
       </resource>
     </resources>
   </build>
-
+  
 </project>

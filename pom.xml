@@ -24,10 +24,6 @@
       <id>lang-utils-repo</id>
       <url>https://ci.nyaacat.com/maven/</url>
     </repository>
-      <repository>
-          <id>mikeprimm</id>
-          <url>https://repo.mikeprimm.com/</url>
-      </repository>
   </repositories>
   
   <dependencies>

@@ -10,15 +10,16 @@ import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNode
 import io.github.townyadvanced.townyresources.metadata.BypassEntries;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.*;
-import java.util.concurrent.ExecutionException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter {
 
@@ -50,21 +51,15 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 				return;
 			}
 			switch (args[0]) {
-				case "reload":
-					parseReloadCommand(sender);
-				break;
-				case "reroll_all_resources":
-					parseReRollCommand(sender);
-				break;
-				case "bypass":
-					bypassExtractionLimitCommand(sender);
-				break;
+				case "reload" -> parseReloadCommand(sender);
+				case "reroll_all_resources" -> parseReRollCommand(sender);
+				case "bypass" -> bypassExtractionLimitCommand(sender, args);
+
 				/*
 				 * Show help if no command found.
 				 */
-				default:
-					showHelp(sender);
-			}		 	
+				default -> showHelp(sender);
+			}
 		} catch (Exception e) {
 			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage());
 		}
@@ -94,7 +89,10 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 		.sendTo(sender);
 	}
 
-	private void bypassExtractionLimitCommand(CommandSender sender) throws ExecutionException, InterruptedException {
+	private void bypassExtractionLimitCommand(CommandSender sender, String[] args) {
+		if(!sender.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_BYPASS.getNode("townyresources.bypass")))
+			return;
+
 		UUID playerUUID = ((Player) sender).getUniqueId();
 
 		if (BypassEntries.bypassData.contains(playerUUID)) {

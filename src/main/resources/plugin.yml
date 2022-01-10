@@ -28,5 +28,9 @@ permissions:
             townyresources.admin.command.reload: true
 
     townyresources.bypass:
-        description: User bypasses the extraction limits
+        description: User is able to bypass the extraction limits
+        default: false
+
+    townyresources.bypass.always:
+        description: User always bypasses the extraction limits
         default: false

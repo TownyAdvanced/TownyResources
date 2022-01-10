@@ -106,6 +106,7 @@ public class TownResourceCollectionController {
                     itemStack = mythicItem;
                     itemStack.setAmount(amount);
                     itemStackList.add(itemStack);
+                    continue;
                 }
             }
 

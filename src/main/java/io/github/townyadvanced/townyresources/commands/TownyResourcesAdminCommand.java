@@ -89,7 +89,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 		.sendTo(sender);
 	}
 
-	private void bypassExtractionLimitCommand(CommandSender sender, String[] args) {
+	private void bypassExtractionLimitCommand(CommandSender sender) {
 		if(!sender.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_BYPASS.getNode("townyresources.bypass")))
 			return;
 

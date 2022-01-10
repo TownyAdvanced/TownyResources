@@ -6,6 +6,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.metadata.BypassEntries;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesResidentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
@@ -151,7 +152,10 @@ public class PlayerExtractionLimitsController {
      * @param event the event - this event is only called for Players (not entities)
      */
     public static void processBlockBreakEvent(BlockBreakEvent event) {
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled()
+                || BypassEntries.bypassData.contains(event.getPlayer().getUniqueId())
+                || event.getPlayer().hasPermission("townyresources.bypass")
+        )
             return;
 
         //Get the player extraction record
@@ -203,7 +207,10 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled()
+                || BypassEntries.bypassData.contains(event.getPlayer().getUniqueId())
+                || event.getPlayer().hasPermission("townyresources.bypass")
+        )
             return;
 
         // Only limit if sheep  (mooshroom & iron-golem mechanics don't seem worth limiting
@@ -307,7 +314,10 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerFishEvent(PlayerFishEvent event) {
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled()
+                || BypassEntries.bypassData.contains(event.getPlayer().getUniqueId())
+                || event.getPlayer().hasPermission("townyresources.bypass")
+        )
             return;
 
         //Get the player extraction record

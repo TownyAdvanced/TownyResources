@@ -151,7 +151,9 @@ public class TownyResourcesMessagingUtil {
 
                 if(maybeMythicItem.isPresent()) {
                     MythicItem mythicItem = maybeMythicItem.get();
-                    return mythicItem.getDisplayName().replaceAll("[^\\w\\s]\\w","");
+                    String maybeDisplayName = mythicItem.getDisplayName();
+                    if (maybeDisplayName != null)
+                        return maybeDisplayName.replaceAll("[^\\w\\s]\\w","");
                 }
             }
         } else {

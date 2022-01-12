@@ -13,6 +13,7 @@ import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
@@ -200,6 +201,12 @@ public class TownyResourcesSettings {
 			SlimefunItem slimeFunItem = SlimefunItem.getById(materialName);
 			if(slimeFunItem != null)
 				return true;  //Known material 
+		}
+		// mythicmobs integration
+		if (TownyResources.getPlugin().isMythicMobsInstalled()) {
+			ItemStack mythicItem = TownyResources.getPlugin().getMythicItemManager().getItemStack(materialName);
+			if (mythicItem != null)
+				return true;  // Known material
 		}
 		return false; //Unknown material		
 	}

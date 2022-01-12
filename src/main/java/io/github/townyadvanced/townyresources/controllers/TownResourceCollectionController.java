@@ -9,6 +9,7 @@ import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentM
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
+import io.lumine.xikage.mythicmobs.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -91,6 +92,18 @@ public class TownResourceCollectionController {
                 SlimefunItem slimeFunItem = SlimefunItem.getById(materialName);
                 if(slimeFunItem != null) {
                     itemStack = slimeFunItem.getRecipeOutput();
+                    itemStack.setAmount(amount);
+                    itemStackList.add(itemStack);
+                    continue;
+                }
+            }
+
+            // mythicmobs integration
+            if (TownyResources.getPlugin().isMythicMobsInstalled()) {
+                ItemManager mythicItemManager = TownyResources.getPlugin().getMythicItemManager();
+                ItemStack mythicItem = mythicItemManager.getItemStack(materialName);
+                if (mythicItem != null) {
+                    itemStack = mythicItem;
                     itemStack.setAmount(amount);
                     itemStackList.add(itemStack);
                     continue;

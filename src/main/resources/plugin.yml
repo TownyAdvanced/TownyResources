@@ -26,3 +26,8 @@ permissions:
         default: op
         children:
             townyresources.admin.command.reload: true
+            townyresources.admin.command.bypass: true
+
+    townyresources.bypass:
+        description: User always bypasses the extraction limits
+        default: false

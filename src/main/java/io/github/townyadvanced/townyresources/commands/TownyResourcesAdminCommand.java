@@ -7,6 +7,7 @@ import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
+import io.github.townyadvanced.townyresources.metadata.BypassEntries;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.command.Command;
@@ -18,10 +19,11 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter {
 
-	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources");
+	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources", "bypass");
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
@@ -51,10 +53,13 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 			switch (args[0]) {
 				case "reload":
 					parseReloadCommand(sender);
-				break;
+					break;
 				case "reroll_all_resources":
 					parseReRollCommand(sender);
-				break;
+					break;
+				case "bypass":
+					bypassExtractionLimitCommand(sender);
+					break;
 				/*
 				 * Show help if no command found.
 				 */
@@ -70,6 +75,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 		sender.sendMessage(ChatTools.formatTitle("/townyresourcesadmin"));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reload", TownyResourcesTranslation.of("admin_help_reload")));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "reroll_all_resources", TownyResourcesTranslation.of("admin_help_reroll")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/tra", "bypass", TownyResourcesTranslation.of("admin_help_bypass")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {
@@ -87,6 +93,18 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 			TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("all_resources_rerolled"));
 		})
 		.sendTo(sender);
+	}
+
+	private void bypassExtractionLimitCommand(CommandSender sender) {
+		UUID playerUUID = ((Player) sender).getUniqueId();
+
+		if (BypassEntries.bypassData.contains(playerUUID)) {
+			BypassEntries.bypassData.remove(playerUUID);
+			TownyResourcesMessagingUtil.sendMsg(sender, TownyResourcesTranslation.of("bypass_off"));
+		} else {
+			BypassEntries.bypassData.add(playerUUID);
+			TownyResourcesMessagingUtil.sendMsg(sender, TownyResourcesTranslation.of("bypass_on"));
+		}
 	}
 }
 

@@ -59,7 +59,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 					break;
 				case "bypass":
 					bypassExtractionLimitCommand(sender);
-                    break;
+					break;
 				/*
 				 * Show help if no command found.
 				 */

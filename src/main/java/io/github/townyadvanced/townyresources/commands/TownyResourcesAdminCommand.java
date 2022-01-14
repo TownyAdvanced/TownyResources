@@ -51,14 +51,20 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 				return;
 			}
 			switch (args[0]) {
-				case "reload" -> parseReloadCommand(sender);
-				case "reroll_all_resources" -> parseReRollCommand(sender);
-				case "bypass" -> bypassExtractionLimitCommand(sender, args);
-
+				case "reload":
+					parseReloadCommand(sender);
+					break;
+				case "reroll_all_resources":
+					parseReRollCommand(sender);
+					break;
+				case "bypass":
+					bypassExtractionLimitCommand(sender);
+                    break;
 				/*
 				 * Show help if no command found.
 				 */
-				default -> showHelp(sender);
+				default:
+					showHelp(sender);
 			}
 		} catch (Exception e) {
 			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage());
@@ -90,9 +96,6 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	}
 
 	private void bypassExtractionLimitCommand(CommandSender sender) {
-		if(!sender.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_BYPASS.getNode("townyresources.bypass")))
-			return;
-
 		UUID playerUUID = ((Player) sender).getUniqueId();
 
 		if (BypassEntries.bypassData.contains(playerUUID)) {

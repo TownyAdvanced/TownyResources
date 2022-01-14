@@ -13,8 +13,8 @@ public enum TownyResourcesPermissionNodes {
 	TOWNY_RESOURCES_COMMAND_NATION_COLLECT("townyresources.command.nationcollect"), //Collect your nation's share of extracted resources
 	TOWNY_RESOURCES_ADMIN_COMMAND("townyresources.admin.command.*"),
 	TOWNY_RESOURCES_ADMIN_COMMAND_RELOAD("townyresources.admin.command.reload"),
-	TOWNY_RESOURCES_BYPASS("townyresources.bypass"),
-	TOWNY_RESOURCES_BYPASS_ALWAYS("townyresources.bypass.always");
+	TOWNY_RESOURCES_ADMIN_COMMAND_BYPASS("townyresources.admin.command.bypass"),
+	TOWNY_RESOURCES_BYPASS("townyresources.bypass");
 
 	private String value;
 

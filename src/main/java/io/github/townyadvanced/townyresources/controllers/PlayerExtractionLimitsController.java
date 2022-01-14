@@ -529,6 +529,6 @@ public class PlayerExtractionLimitsController {
     private static boolean isPlayerNotExtractLimited(Player player) {
         return (!TownyResourcesSettings.areResourceExtractionLimitsEnabled()
                 || BypassEntries.bypassData.contains(player.getUniqueId())
-                || player.hasPermission("townyresources.bypass.always"));
+                || player.hasPermission("townyresources.bypass"));
     }
 }

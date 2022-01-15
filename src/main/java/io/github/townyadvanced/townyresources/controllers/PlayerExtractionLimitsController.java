@@ -16,7 +16,6 @@ import io.github.townyadvanced.townyresources.util.ActionBarUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -530,7 +529,6 @@ public class PlayerExtractionLimitsController {
     private static boolean isPlayerNotExtractLimited(Player player) {
         return (!TownyResourcesSettings.areResourceExtractionLimitsEnabled()
                 || BypassEntries.bypassData.contains(player.getUniqueId())
-                || player.getGameMode() == GameMode.CREATIVE
                 || player.hasPermission("townyresources.bypass"));
     }
 }

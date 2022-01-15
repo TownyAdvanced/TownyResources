@@ -22,17 +22,12 @@ The plugin also has an optional feature to protect resource value, via daily pla
    - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the daily-limits list, as these limit types are not yet operational.
 6. Edit your townyperms.yml file, and add the following perms:
    - Mayor / Assistant / Treasurer:
-     ```
-     - townyresources.command.towncollect
-     ```
+     `- townyresources.command.towncollect`
    - King / Assistant / Treasurer:
-     ```
-     - townyresources.command.nationcollect
-     ```
+     `- townyresources.command.nationcollect`
 7. Using your permissions plugin, give this to any admins who are not already OP:
-     ```
-     - townyresources.admin.command.*
-     ```                  
+    - `- townyresources.admin.command.*`
+    - Optionally, give your admins `townyresources.bypass` if you would like to never be restricted by extraction limits, without having to use /tra bypass.
 8. If you want to show town production on the *Dynmap* (**Recommended**), first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
     ```
     <br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>
@@ -46,9 +41,25 @@ The plugin also has an optional feature to protect resource value, via daily pla
     ```
    - Daily Player Limits
      <br>Due to technical limitations, it is currently not possible to have daily-limits for *Slimefun* resources. However, a reasonably good extraction-control configuration can be achieved by first adding the small few raw *Slimefun* resources to the Town Production offers (*Sifted Ore, Oil Bucket, Uranium, Salt, Nether Ice*), and then disabling the small few machines which directly extract these (*gold_pan, oil_pump etc.*).
-10. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-11. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
-12. Run `/tra reload`, then `/ta reload`.
+10. If you want to use the [*MythicMobs*](https://git.mythiccraft.io/mythiccraft/MythicMobs/-/wikis/Home) plugin with *TownyResources*:
+    - Town Production:
+    <br>You can add *MythicMobs* items to the offers list, simply by using *MythicMobs* item 'internal_name'. See [here](https://git.mythiccraft.io/mythiccraft/MythicMobs/-/wikis/Items). Example:
+    ```
+    ...{example_category, 100, 1, ExampleItem}...{another_example_category, 100, 1, ExampleItem, ExampleItem2}...
+    
+    Mythic Mobs item config (plugins/MythicMobs/Items/example_items.yml)
+    ExampleItem:
+      Id: stone
+      Data: 0
+      Display: '&3Example Item'
+    ExampleItem2:
+      Id: dirt
+      Data: 0
+      Display: '&3Example Item 2'
+        ```
+11. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+12. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
+13. Run `/tra reload`, then `/ta reload`.
 # Player Guide
 ### Town Production
 ###### Information
@@ -134,6 +145,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
   - Daily Extraction Limits are configured in the *TownyResources* config.yml file.
 ###### Commands
 - `/tra reload` - Reload TownyResouces.
+- `/tra bypass` - Turns on and off bypass limits for your player.
 - `/tra reroll_all_resources` - Reroll all already-discovered town resources.
 
 # F.A.Q:

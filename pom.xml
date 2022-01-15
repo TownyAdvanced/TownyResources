@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.1.6</version>
+  <version>0.1.8</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -23,6 +23,11 @@
     <repository>
       <id>lang-utils-repo</id>
       <url>https://ci.nyaacat.com/maven/</url>
+    </repository>
+    <repository>
+      <id>nexus</id>
+      <name>Lumine Releases</name>
+      <url>https://mvn.lumine.io/repository/maven-public/</url>
     </repository>
   </repositories>
   
@@ -55,6 +60,12 @@
       <groupId>com.github.TheBusyBiscuit</groupId>
       <artifactId>Slimefun4</artifactId>
       <version>RC-27</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.lumine.xikage</groupId>
+      <artifactId>MythicMobs</artifactId>
+      <version>4.9.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

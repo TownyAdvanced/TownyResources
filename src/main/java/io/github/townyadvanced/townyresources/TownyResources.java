@@ -11,6 +11,8 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -26,6 +28,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
 	private static boolean slimeFunInstalled;
+	private static boolean mythicMobsInstalled;
 	
     @Override
     public void onEnable() {
@@ -163,6 +166,12 @@ public class TownyResources extends JavaPlugin {
 	public boolean isSlimeFunInstalled() {
 		return slimeFunInstalled;
 	}
+
+	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
+	public ItemManager getMythicItemManager() {
+		MythicMobs mythicMobs = (MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs");
+		return mythicMobsInstalled ? mythicMobs.getItemManager() : null;
+	}
 	
 	private String getTownyVersion() {
         return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
@@ -189,6 +198,11 @@ public class TownyResources extends JavaPlugin {
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
 			info("  Slimefun Integration Enabled");
+
+		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
+		mythicMobsInstalled = mythicMobs != null;
+		if (mythicMobsInstalled)
+			info("  Mythic Mobs Integration Enabled");
 			
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;

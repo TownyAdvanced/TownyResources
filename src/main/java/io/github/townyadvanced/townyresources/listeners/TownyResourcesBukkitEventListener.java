@@ -52,7 +52,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areShearingExtractionLimitsEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled() && TownyResourcesSettings.areShearingExtractionLimitsEnabled()) {
 			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);
 		}	
 	}

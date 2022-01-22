@@ -261,9 +261,6 @@ public class PlayerExtractionLimitsController {
         if(true)
             return;
 
-        if(!TownyResourcesSettings.areDropsExtractionLimitsEnabled())
-            return;
-
         //Return if item is not an egg
         Material itemMaterial = event.getEntity().getItemStack().getType();        
         if(itemMaterial != Material.EGG)

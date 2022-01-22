@@ -44,7 +44,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onBlockShearEntityEvent(BlockShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled() && TownyResourcesSettings.areShearingExtractionLimitsEnabled()) {
 			//Dispensers cannot shear entities
 			event.setCancelled(true);
 		}	
@@ -52,7 +52,7 @@ public class TownyResourcesBukkitEventListener implements Listener {
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onPlayerShearEntityEvent(PlayerShearEntityEvent event) {
-		if(TownyResourcesSettings.isEnabled()) {
+		if(TownyResourcesSettings.isEnabled() && TownyResourcesSettings.areResourceExtractionLimitsEnabled() && TownyResourcesSettings.areShearingExtractionLimitsEnabled()) {
 			PlayerExtractionLimitsController.processPlayerShearEntityEvent(event);
 		}	
 	}

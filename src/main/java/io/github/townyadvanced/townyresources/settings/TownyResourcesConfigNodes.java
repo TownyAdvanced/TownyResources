@@ -34,6 +34,36 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If true, then daily player resource extraction limits are enabled.",
 			"# If false, then daily player resource extraction limits are disabled."),
+	RESOURCE_EXTRACTION_LIMITS_TOGGLES(
+			"resource_extraction_limits.toggles",
+			"",
+			"",
+			"# Individual toggles for daily resource extraction limits.",
+			"# All of these toggles will disable if the above is set to false."),
+	RESOURCE_EXTRACTION_LIMITS_BLOCKS(
+			"resource_extraction_limits.toggles.blocks",
+			"true",
+			"",
+			"# If true, then daily player resource extraction limits for mining blocks are enabled.",
+			"# If false, then daily player resource extraction limits for mining blocks are disabled."),
+	RESOURCE_EXTRACTION_LIMITS_DROPS(
+			"resource_extraction_limits.toggles.drops",
+			"true",
+			"",
+			"# If true, then daily player resource extraction limits that apply to entity drops are enabled. When enabled, players must interact with an entity on death to receive item drops.",
+			"# If false, then daily player resource extraction limits that apply to entity drops are disabled. When disabled, automatic entity killing farms will function."),
+	RESOURCE_EXTRACTION_LIMITS_SHEARING(
+			"resource_extraction_limits.toggles.shearing",
+			"true",
+			"",
+			"# If true, then daily player resource extraction limits for sheep shearing are enabled.",
+			"# If false, then daily player resource extraction limits for sheep shearing are disabled. When disabled, automatic redstone farms will function."),
+	RESOURCE_EXTRACTION_LIMITS_FISHING(
+			"resource_extraction_limits.toggles.fishing",
+			"true",
+			"",
+			"# If true, then daily player resource extraction limits for fishing are enabled.",
+			"# If false, then daily player resource extraction limits for fishing are disabled."),
 	RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS(
 			"resource_extraction_limits.cooldown_after_daily_limit_warning_message_millis",
 			"5000",

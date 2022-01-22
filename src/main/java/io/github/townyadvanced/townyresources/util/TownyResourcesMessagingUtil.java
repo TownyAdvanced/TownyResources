@@ -91,30 +91,21 @@ public class TownyResourcesMessagingUtil {
      * @return e.g. ["64 Wheat","64 Coal"]
      */
     private static String[] convertResourceAmountsStringToFormattedArray(String resourcesAmountsString) {
-        if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {
-            //Return translated materials array
-            List<String> resourcesAsFormattedList = new ArrayList<>();    
-            String[] resourcesAsArray = resourcesAmountsString.split(",");                
-            String[] amountAndMaterialName;
-            String amount;
-            String materialName;
-            String translatedMaterialName;
-            for(String resourceAsString: resourcesAsArray) {
-                amountAndMaterialName = resourceAsString.split("-");
-                amount = amountAndMaterialName[0];
-                materialName = amountAndMaterialName[1];
-                translatedMaterialName = formatMaterialNameForDisplay(materialName);                    
-                resourcesAsFormattedList.add(amount + " " + translatedMaterialName);                
-            }       
-            return resourcesAsFormattedList.toArray(new String[0]);                    
-        } else {
-            //Return english materials array
-            return WordUtils.capitalizeFully(
-                resourcesAmountsString
-                .replaceAll("_", " ")
-                .replaceAll("-", " "))
-                .split(",");                
+        //Return translated materials array
+        List<String> resourcesAsFormattedList = new ArrayList<>();
+        String[] resourcesAsArray = resourcesAmountsString.split(",");
+        String[] amountAndMaterialName;
+        String amount;
+        String materialName;
+        String translatedMaterialName;
+        for(String resourceAsString: resourcesAsArray) {
+            amountAndMaterialName = resourceAsString.split("-");
+            amount = amountAndMaterialName[0];
+            materialName = amountAndMaterialName[1];
+            translatedMaterialName = formatMaterialNameForDisplay(materialName);
+            resourcesAsFormattedList.add(amount + " " + translatedMaterialName);
         }
+        return resourcesAsFormattedList.toArray(new String[0]);
     }
     
     public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory) {

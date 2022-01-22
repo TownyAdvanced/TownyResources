@@ -84,7 +84,7 @@ public class PlayerExtractionLimitsController {
         //Return if not a mob
         if(!(event.getEntity() instanceof Mob))
             return;
-                
+
         if(event.getDamager() instanceof Player) {
             //Mark the mob as recently hit by the player
             mobsDamagedByPlayersThisShortTick.put(event.getEntity(), event.getDamager());                
@@ -103,6 +103,7 @@ public class PlayerExtractionLimitsController {
     public static void processEntityDeathEvent(EntityDeathEvent event) {
         if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areDropsExtractionLimitsEnabled())
             return;
+
         if(event.getEntity() instanceof Mob) {
             //If the mob was not recently hit by a player, it drops nothing
             if (!mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())

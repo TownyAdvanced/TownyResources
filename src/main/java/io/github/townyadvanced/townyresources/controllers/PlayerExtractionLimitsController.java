@@ -80,7 +80,7 @@ public class PlayerExtractionLimitsController {
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areDropsExtractionLimitsEnabled())
             return;
-
+    
         //Return if not a mob
         if(!(event.getEntity() instanceof Mob))
             return;

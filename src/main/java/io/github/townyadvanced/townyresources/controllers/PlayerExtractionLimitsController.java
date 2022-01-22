@@ -78,9 +78,9 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areDropsExtractionLimitsEnabled())
             return;
-    
+
         //Return if not a mob
         if(!(event.getEntity() instanceof Mob))
             return;
@@ -101,9 +101,8 @@ public class PlayerExtractionLimitsController {
      * @param event the event
      */
     public static void processEntityDeathEvent(EntityDeathEvent event) {
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areDropsExtractionLimitsEnabled())
             return;
-
         if(event.getEntity() instanceof Mob) {
             //If the mob was not recently hit by a player, it drops nothing
             if (!mobsDamagedByPlayersThisShortTick.containsKey(event.getEntity())
@@ -157,6 +156,9 @@ public class PlayerExtractionLimitsController {
      * @param event the event - this event is only called for Players (not entities)
      */
     public static void processBlockBreakEvent(BlockBreakEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areBlocksExtractionLimitsEnabled())
+            return;
+
         if(isPlayerNotExtractLimited(event.getPlayer()))
             return;
 
@@ -259,7 +261,7 @@ public class PlayerExtractionLimitsController {
         if(true)
             return;
 
-        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled())
+        if(!TownyResourcesSettings.areDropsExtractionLimitsEnabled())
             return;
 
         //Return if item is not an egg
@@ -313,6 +315,9 @@ public class PlayerExtractionLimitsController {
      * @param event event
      */
     public static void processPlayerFishEvent(PlayerFishEvent event) {
+        if(!TownyResourcesSettings.areResourceExtractionLimitsEnabled() || !TownyResourcesSettings.areFishingExtractionLimitsEnabled())
+            return;
+
         if(isPlayerNotExtractLimited(event.getPlayer()))
             return;
 

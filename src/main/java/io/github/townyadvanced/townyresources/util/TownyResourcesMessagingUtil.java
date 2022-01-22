@@ -143,8 +143,18 @@ public class TownyResourcesMessagingUtil {
                 if(maybeMythicItem.isPresent()) {
                     MythicItem mythicItem = maybeMythicItem.get();
                     String maybeDisplayName = mythicItem.getDisplayName();
-                    if (maybeDisplayName != null)
-                        return maybeDisplayName.replaceAll("[^\\w\\s]\\w","");
+                    if (maybeDisplayName != null) {
+                        return maybeDisplayName.replaceAll("[^\\w\\s]\\w", "");
+                    } else {
+                        // MythicItem#getDisplayName() will always return null for imported items
+                        // try to extract the name from the raw config data
+                        if (mythicItem.getConfig().isSet("ItemStack")) {
+                            ItemStack is = mythicItem.getConfig().getItemStack("ItemStack", (String) null);
+                            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                                return is.getItemMeta().getDisplayName();
+                            }
+                        }
+                    }
                 }
             }
         } else {

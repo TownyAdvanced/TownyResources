@@ -352,6 +352,22 @@ public class TownyResourcesSettings {
 		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_ENABLED);
 	}
 
+	public static boolean areBlocksExtractionLimitsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_BLOCKS);
+	}
+
+	public static boolean areDropsExtractionLimitsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_DROPS);
+	}
+
+	public static boolean areShearingExtractionLimitsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_SHEARING);
+	}
+
+	public static boolean areFishingExtractionLimitsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_FISHING);
+	}
+
 	public static int getCooldownAfterDailyLimitWarningMessageMillis() {
 		return getInt(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS);
 	}

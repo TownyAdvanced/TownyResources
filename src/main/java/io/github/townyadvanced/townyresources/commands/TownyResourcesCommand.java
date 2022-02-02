@@ -99,6 +99,9 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Check if there are resources left to discover at the town
 		Town town = playerWorldCoord.getTownBlock().getTown();
+		if (!town.hasResident(player))
+			throw new TownyException(TownyResourcesTranslation.of("not_your_town"));
+		
 		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
 		List<Integer> requiredNumTownblocksPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();

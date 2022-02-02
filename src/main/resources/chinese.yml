@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.06
+version: 0.07
 language: chinese
 author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -42,6 +42,7 @@ nation.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
 nation.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
 
 ### Surveys
+not_your_town: 'You do not belong to this town.'
 help_survey: '对你脚下的城镇发起调查, 以发现新的资源.'
 discovery.success: "&b%s 发现了资源 %s, 位于城镇 %s! 每日产出: %d %s."
 

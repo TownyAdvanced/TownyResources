@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.06
+version: 0.07
 language: english
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -42,6 +42,7 @@ nation.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
 ### Surveys 
+not_your_town: 'You do not belong to this town.'
 help_survey: 'Survey the town at your current location, to discover new resources.'
 discovery.success: "&b%s has discovered %s at %s!. Daily Production: %d %s."
 

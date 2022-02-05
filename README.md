@@ -170,17 +170,10 @@ How will *TownyResources* benefit my server ?
 5. Assists **Roleplaying**
     - By giving each town a unique "signature" set of resources, this helps to develop the character of each town.
 6. Improves the [***SiegeWar***](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
-   - There are surprisingly few non-toxic reasons to start a war in *SiegeWar*:
-     - Resources: **NO**, because sieging does not provide resources. 
-     - Equipment: **NO**, because SiegeWar does not allow soldiers to steal equipment from killed enemy soldiers (*for muliple important reasons as explained [here](https://github.com/TownyAdvanced/SiegeWar/wiki/Siege-War-FAQ)*).
-     - Full Territorial Control: **NO**, because sieging does not provide full territorial control of occupied towns (*i.e. block breaking/placing etc.*). 
-     - Roleplaying: **NO**, because most players are not roleplaying to any reasonable standard (*making new characters, adopting new personalities while in game, separating in-game & out-of-game conversations, following character-driven story arcs within the gameworld etc.)*.  
-     - Personal: **NO**, because although wars can and do start for this reason, it is generally not good, because it can create toxicity.
-     - Automatically-Assigned Military Objectives: **NO**, because SiegeWar does not have this type of feature.
-     - PVP: **PARTIAL**. PVP is a fine reason for fighting in games like *Call-of-Duty* or *Battlefield*, however in *Minecraft-Towny*, it often upsets players who are trying to treat the game as strategy and/or roleplay-lite, as it "breaks their bubble".
-     - Victory Rewards: **PARTIAL**. The rewards of victory are limited to a one-time plunder money steal, climbing the `\n list`, coloring the map, and achieving a higher nation claims bonus. This set of rewards has some value, but is often regarded by players as less satifying & less useful than the acquisition of material resources.    
-   - *TownyResources* fixes this problem by turning Resources into a viable, non-toxic, reason to start a war. 
-      - The wisdom of this is demonstrated by the success of the *Civilization* series of games, which also use generated-terrain & sandbox geopolitical strategy, and in which: 
+   - Vanilla SiegeWar provides relatively few rewards for victorious attackers - a one-time plunder money steal, climbing the `\n list`, coloring the map, and achieving a higher nation claims bonus
+   - Some attacking players may feel that this is not quite enough, that wars 'pointless'; and yet giving them more spoils (e.g. money, sets) would usually result in more punishment for the defender. Although players may selfishly seek to take everything from defeated opponents, clever server owners recognize that this is not a sustainable pattern for the server.
+   - *TownyResources* addresses this issue by giving victorious nations a reward which is useful but which defenders will not miss as much as money or sets.
+   - The general importance of geo-resources in strategy games is illustrated by this this quote from the *Civilization* series of games:
  <br> "***Resources are special commodities found in limited quantities on the map....are extremely important in the game, and the main reason for expansion and territorial wars" ([Civ V Wiki](https://civilization.fandom.com/wiki/Resources_(Civ5)))***
 
 -----------

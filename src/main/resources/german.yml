@@ -44,7 +44,7 @@ nation.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2
 ### Surveys 
 not_your_town: 'Du gehörst nicht zu dieser Stadt.'
 help_survey: 'Untersuche die Stadt an deinem aktuellen Standort, um neue Ressourcen zu entdecken.'
-discovery.success: "&b%s hat %s at %s entdeckt!. Tägliche Produktion: %d %s."
+discovery.success: "&b%s hat %s in %s entdeckt!. Tägliche Produktion: %d %s."
 
 msg_err_survey_no_town: "&cHier ist keine Stadt zum untersuchen."
 msg_err_survey_all_resources_already_discovered: "&cAlle Ressourcen dieser Stadt wurden schon entdeckt."

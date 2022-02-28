@@ -1,0 +1,164 @@
+name: TownyResources
+version: 0.07
+language: german
+author: ConfusedAlex
+website: 'https://github.com/TownyAdvanced/TownyResources'
+description: >
+    Sprachdatei für alle Nachrichten. Verändere diese Datei nicht.
+    Wenn du irgendwelche Änderungen vornehmen möchtest, erstelle eine Kopie dieser Datei und benenne sie um.
+    Andere Sprachdateien können aktiviert werden in dem man den
+    [language] Eintrag in der config.yml ändert.
+#
+#
+#         You MUST retain spacing in the texts.
+#  If a text begins or ends with a space, it must remain that way.
+#
+#
+#       %s = data to be supplied by the plugin.
+
+# Text colouring
+# --------------
+# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
+# DarkPurple = &9, LightGreen = &a, LightBlue = &b
+# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+
+plugin_prefix: '&f[&6Towny Resources&f] '
+msg_err_command_disable: '&cDu bist nicht berechtigt diesen Befehl auzuführen.'
+
+### Reloading
+townyresources_reloaded_successfully: "TownyResources erfolgreich neugeladen."
+townyresources_failed_to_reload: "TownyResources konnte nicht neugeladen werden."
+admin_help_reload: 'TownyResources neuladen.'
+
+### Town Screen
+town.screen.header: "&2Ressourcen:"
+town.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+town.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+
+### Nation Screen
+nation.screen.header: "&2Ressourcen:"
+nation.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+nation.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+
+### Surveys 
+not_your_town: 'Du gehörst nicht zu dieser Stadt.'
+help_survey: 'Untersuche die Stadt an deinem aktuellen Standort, um neue Ressourcen zu entdecken.'
+discovery.success: "&b%s hat %s at %s entdeckt!. Tägliche Produktion: %d %s."
+
+msg_err_survey_no_town: "&cHier ist keine Stadt zum untersuchen."
+msg_err_survey_all_resources_already_discovered: "&cAlle Ressourcen dieser Stadt wurden schon entdeckt."
+msg_err_survey_not_enough_townblocks: "&cDie Stadt besitzt nicht genug Stadtblöcke um eine Untersuchung durchzuführen. Benötigt: %d, Derzeit: %d"
+msg_err_survey_too_expensive: "&cDu kannst dir diese Untersuchen nicht leisten. Benötigt: %s, Kontostand: %s"
+msg_err_not_enough_offers_left: "&cUntersuchung nicht möglich, da keine Angebote mehr in der konfigurierten Angebotsliste vorhanden sind."
+
+### Production
+production.message: "&b%s städtisch produzierten Ressourcen."
+
+### Collection
+help_towncollect: 'Sammel alle verfügbaren Ressourcen deiner Stadt ein.'
+help_nationcollect: 'Sammel alle verfügbaren Ressourcen deiner Nation ein.'
+
+resource.towncollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Stadt eingesammelt."
+resource.nationcollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Nation eingesammelt."
+
+msg_err_cannot_towncollect_not_a_town_member: "&cDu musst Mitglied der Stadt sein, um ihre Stadtressourcen zu sammeln."
+msg_err_cannot_towncollect_not_in_own_town: "&cDu musst dich in deiner Stadt befinden, um ihre Stadtressourcen einzusammeln."
+msg_err_cannot_towncollect_no_resources_available: '&cEs gibt keine Stadtressourcen, die eingesammelt werden können.'
+
+msg_err_cannot_nationcollect_not_a_town_member: "&cDu musst Mitglied einer Stadt sein, um Ressourcen der Nation einzusammeln."
+msg_err_cannot_nationcollect_not_a_nation_member: "&cDu musst Mitglied einer Nation sein, um Ressourcen der Nation einzusammeln."
+msg_err_cannot_nationcollect_not_in_capital: "&cDu musst in der Hauptstadt sein, um die Ressourcen der Nation einzusammeln."
+msg_err_cannot_nationcollect_no_resources_available: '&cEs sind keine nationalen Ressourcen zum Einsammeln verfügbar.'
+
+msg_err_cannot_collect_uknown_material: "&cUnbekanntes Material: %s. Diese Ressource kann nicht eingesammelt werden."
+
+# Player Extraction Limits
+msg_error_daily_extraction_limit_reached: "&cTägliches Entnahmegrenze erreicht für %s (%d)"
+daily_extraction_limits_reset: "&bAlle täglichen Entnahmegrenzen wurden zurückgesetzt."
+
+# Resource Categories
+# The format of each of these is:  'extraction name, discovery name'
+resource_category_common_dirt: 'gewöhnliche Erde, gewöhnliche Erde'
+resource_category_uncommon_dirt: 'ungewöhnliche Erde, ungewöhnliche Erde'
+resource_category_rare_dirt: 'seltene Erde, seltene Erde'
+resource_category_gravel: 'Kies, Kies'
+resource_category_sand: 'Sand, Sand'
+resource_category_wood: 'Holz, Holz'
+resource_category_common_rocks: 'gewöhnlicher rocks, gewöhnlicher rocks'
+resource_category_uncommon_rocks: 'ungewöhnlicher rocks, ungewöhnlicher rocks'
+resource_category_terracotta: 'Keramik, Keramik'
+resource_category_quartz: 'Quartz, Quartz'
+resource_category_prismarine: 'Prismarin, Prismarin'
+resource_category_obsidian: 'Obsidian, Obsidian'
+resource_category_clay: 'Lehm, Lehm'
+resource_category_ice: 'Eis, Eis'
+resource_category_snow: 'Schnee, Schnee'
+resource_category_coal: 'Kohle, Kohle'
+resource_category_iron: 'Iron, Iron'
+resource_category_gold: 'Gold, Gold'
+resource_category_gold_nugget: 'Goldklumpen, Gold'
+resource_category_copper: 'Kupfer, Kupfer'
+resource_category_emeralds: 'Smaragde, Smaragde'
+resource_category_lapis_lazuli: 'Lapis Lazuli, Lapis Lazuli'
+resource_category_diamonds: 'Diamanten, Diamanten'
+resource_category_netherrack: 'Netherrack, Netherrack'
+resource_category_nether_quartz: 'Nether Quartz, Nether Quartz'
+resource_category_glowstone: 'Glowstone, Glowstone'
+resource_category_end_stone: 'Endstein, Endstein'
+resource_category_ancient_debris: 'Antiker Schrott, Antiker Schrott'
+resource_category_wool: 'Wolle, eine Schafsherde'
+resource_category_coral: 'Koralle, Koralle'
+resource_category_wheat: 'Weizen, fruchtbarer Boden'
+resource_category_carrots: 'Karotten, fruchtbarer Boden'
+resource_category_potatoes: 'Kartoffeln, fruchtbarer Boden'
+resource_category_beetroot: 'Rote Beete, fruchtbarer Boden'
+resource_category_pumpkin_seeds: 'Kürbissamen, fruchtbarer Boden'
+resource_category_melon_slice: 'Melonenscheiben, fruchtbarer Boden'
+resource_category_cocoa_beans: 'Kakaobohnen, fruchtbarer Boden'
+resource_category_pumpkin_blocks: 'Kürbisse, fruchtbarer Boden'
+resource_category_melon_blocks: 'Melonen, fruchtbarer Boden'
+resource_category_cocoa_pods: 'Kakao, fruchtbarer Boden'
+resource_category_kelp: 'Seetang, Seetang'
+resource_category_bamboo: 'Bambus, fruchtbarer Boden'
+resource_category_cactus: 'Kaktus, fruchtbarer Boden'
+resource_category_mushrooms: 'Pilze, Pilze'
+resource_category_apples: 'Äpfel, ein Obstgarten'
+resource_category_vines: 'Ranken, Ranken'
+resource_category_nether_wart: 'Netherwarze, Netherwarze'
+resource_category_chorus_fruit: 'Chorusfrucht, Chorusfrucht'
+resource_category_fish: 'Fisch, ein Fischschwarm'
+resource_category_gunpowder: 'Schießpulver, Schießpulver'
+resource_category_string: 'Fäden, ein Spinnenest'
+resource_category_spider_eyes: 'Spinnenaugen, ein Spinnenest'
+resource_category_feathers: 'Federn, eine Hühnerherde'
+resource_category_leather: 'Leder, eine Kuhherde'
+resource_category_rabbit_hides: 'Kaninchenfelle, eine Kaninchenherde'
+resource_category_rotten_flesh: 'verrottetes Fleisch, ein Zombienest'
+resource_category_bones: 'Knochen, ein Skelettnest'
+resource_category_pork: 'Schweinefleisch, eine Schweineherde'
+resource_category_mutton: 'Schaffleisch, eine Schafsherde'
+resource_category_beef: 'Rindfleisch, eine Kuhherde'
+resource_category_chickens: 'Hühnerfleisch, eine Hühnerherde'
+resource_category_eggs: 'Eier, eine Hühnerherde'
+resource_category_ender_pearls: 'Enderperlen, ein Endermannest'
+
+#Added in 0.03
+resource_category_slime: 'Schleim, ein Schleimnest'
+
+#Added in 0.04
+msg_confirm_survey: "Du bist dabei, die Stadt %s nach der Ressource des Levels %d zu untersuchen. Dies wird %s kosten. Möchtest du fortfahren?"
+msg_err_level_x_resource_already_discovered: "Die Level %d Ressource wurde bereits endteckt."
+msg_err_cannot_collect_unknown_material: "Kann die folgenden unbekannten Materialen nicht einsammeln: %s"
+
+#Added in 0.05
+msg_confirm_survey_town_level_warning: "&cWARNUNG: Obwohl die Ressource entdeckt werden kann, ist die Bevölkerung der Stadt nicht groß genug, um sie zu produzieren. Benötigtest Stadtlevel: %d, Aktuelles Stadtlevel: %d."
+
+#Added in 0.06
+admin_help_reroll: "Alle bisher entdeckten Ressourcen neu würfeln."
+msg_confirm_reroll: "&cWARNUNG: Du bist dabei, alle entdeckten Stadtressourcen neu zu würfeln. Dies betrifft alle Städte, die bereits Ressourcen entdeckt haben."
+all_resources_rerolled: "Alle entdeckten Ressourcen sind neu gewürfelt worden."
+
+admin_help_bypass: "Umgeht die Entnahmegrenze."
+bypass_on: "Entnahmegrenze wird nun umgangen."
+bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."

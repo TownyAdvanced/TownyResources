@@ -169,8 +169,8 @@ public class TownyResources extends JavaPlugin {
 
 	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
 	public ItemManager getMythicItemManager() {
-		MythicMobs mythicMobs = (MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs");
-		return mythicMobsInstalled ? mythicMobs.getItemManager() : null;
+		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
+		return mythicMobsInstalled ? ((MythicMobs) mythicMobs).getItemManager() : null;
 	}
 	
 	private String getTownyVersion() {

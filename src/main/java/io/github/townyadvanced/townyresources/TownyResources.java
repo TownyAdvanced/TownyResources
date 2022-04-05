@@ -168,7 +168,7 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
-	
+
 	public ItemManager getMythicItemManager() {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
 		return mythicMobsInstalled ? ((MythicMobs) mythicMobs).getItemManager() : null;
@@ -210,7 +210,7 @@ public class TownyResources extends JavaPlugin {
 				e.printStackTrace();
 				severe( "Problem enabling mythic mobs");
 			}
-		} 
+		}
 
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;

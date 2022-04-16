@@ -207,6 +207,7 @@ public class TownyResources extends JavaPlugin {
 				mythicMobsInstalled = true;
 				info("  Mythic Mobs Integration Enabled");
 			} catch (Throwable t) {
+                                mythicMobsInstalled = false;
 			        t.printStackTrace();
 				severe( "Problem enabling mythic mobs");
 			}

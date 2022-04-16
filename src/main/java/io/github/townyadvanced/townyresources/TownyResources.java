@@ -168,6 +168,7 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
+
 	public ItemManager getMythicItemManager() {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
 		return mythicMobsInstalled ? ((MythicMobs) mythicMobs).getItemManager() : null;
@@ -200,10 +201,18 @@ public class TownyResources extends JavaPlugin {
 			info("  Slimefun Integration Enabled");
 
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
-		mythicMobsInstalled = mythicMobs != null;
-		if (mythicMobsInstalled)
-			info("  Mythic Mobs Integration Enabled");
-			
+		if(mythicMobs != null) {
+			try {
+				((MythicMobs) mythicMobs).getItemManager();
+				mythicMobsInstalled = true;
+				info("  Mythic Mobs Integration Enabled");
+			} catch (Throwable t) {
+                                mythicMobsInstalled = false;
+			        t.printStackTrace();
+				severe( "Problem enabling mythic mobs");
+			}
+		}
+
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;
 		if(languageUtilsInstalled) 

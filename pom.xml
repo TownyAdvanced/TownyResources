@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.2.2</version>
+  <version>0.2.2.1</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.18.1-R0.1-SNAPSHOT</version>
+      <version>1.18.2-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 	<dependency>
@@ -49,7 +49,17 @@
 	  <artifactId>SiegeWar</artifactId>
 	  <version>0.5.0</version>
 	  <scope>provided</scope>
-	</dependency>
+    </dependency>
+    <dependency>
+           <groupId>net.Indyuce</groupId>
+           <artifactId>MMOItems</artifactId>
+           <version>6.6.4</version>
+    </dependency>
+    <dependency>
+           <groupId>io.lumine</groupId>
+           <artifactId>MythicLib-dist</artifactId>
+           <version>1.2</version>
+    </dependency>
     <dependency>
       <groupId>com.meowj</groupId>
       <artifactId>LangUtils</artifactId>
@@ -69,7 +79,13 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Axolottl Towny Resources Packages</name>
+      <url>https://maven.pkg.github.com/Axolottl/TownyResources</url>
+    </repository>
+  </distributionManagement>
   <build>
     <plugins>
       <plugin>

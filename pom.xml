@@ -86,6 +86,13 @@
       <url>https://maven.pkg.github.com/Axolottl/TownyResources</url>
     </repository>
   </distributionManagement>
+  <scm>
+      <connection>scm:git:git://github.com/Axolottl/TownyResources.git</connection>
+      <developerConnection>scm:git:https://github.com/Axolottl/TownyResources.git
+      </developerConnection>
+      <url>https://github.com/Axolottl/TownyResources.git</url>
+      <tag>TownyResources</tag>
+  </scm>	
   <build>
     <plugins>
       <plugin>

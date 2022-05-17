@@ -3,7 +3,7 @@
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
   <version>0.2.2.1</version>
-  <name>townyresources</name> <!-- Leave lower-cased -->
+  <name>townyresources</name>
 
   <properties>
     <java.version>1.8</java.version>

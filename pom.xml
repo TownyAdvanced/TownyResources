@@ -86,6 +86,13 @@
       <url>https://maven.pkg.github.com/Axolottl/TownyResources</url>
     </repository>
   </distributionManagement>
+  <servers>
+    <server>
+      <id>github</id>
+      <username>Axolottl</username>
+      <password>AAAAC3NzaC1lZDI1NTE5AAAAID17mM79zA9wQMTDqnE9XQpEVrw3q4+/RWXJiLORpnjX</password>
+    </server>
+  </servers>
   <build>
     <plugins>
       <plugin>

@@ -11,8 +11,9 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.items.ItemManager;
+import io.lumine.mythic.api.items.ItemManager;
+import io.lumine.mythic.bukkit.MythicBukkit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -172,7 +173,7 @@ public class TownyResources extends JavaPlugin {
 
 	public ItemManager getMythicItemManager() {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
-		return mythicMobsInstalled ? ((MythicMobs) mythicMobs).getItemManager() : null;
+		return mythicMobsInstalled ? (MythicBukkit.inst().getItemManager()) : null;
 	}
 	
 	public boolean isMMOItemsInstalled() {
@@ -208,13 +209,13 @@ public class TownyResources extends JavaPlugin {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
 		if(mythicMobs != null) {
 			try {
-				((MythicMobs) mythicMobs).getItemManager();
+				MythicBukkit.inst().getItemManager().getItems();
 				mythicMobsInstalled = true;
 				info("  Mythic Mobs Integration Enabled");
 			} catch (Throwable t) {
                                 mythicMobsInstalled = false;
 			        t.printStackTrace();
-				severe( "Problem enabling mythic mobs");
+			        severe( "Problem enabling mythic mobs");
 			}
 		}
 

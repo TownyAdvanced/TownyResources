@@ -12,6 +12,8 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
+import io.lumine.mythic.bukkit.MythicBukkit;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -204,7 +206,8 @@ public class TownyResourcesSettings {
 		}
 		// mythicmobs integration
 		if (TownyResources.getPlugin().isMythicMobsInstalled()) {
-			ItemStack mythicItem = TownyResources.getPlugin().getMythicItemManager().getItemStack(materialName);
+			ItemStack mythicItem = MythicBukkit.inst().getItemManager().getItemStack(materialName);
+;
 			if (mythicItem != null)
 				return true;  // Known material
 		}

@@ -9,7 +9,9 @@ import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentM
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import io.lumine.xikage.mythicmobs.items.ItemManager;
+import io.lumine.mythic.api.items.ItemManager;
+import io.lumine.mythic.bukkit.MythicBukkit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -100,8 +102,7 @@ public class TownResourceCollectionController {
 
             // mythicmobs integration
             if (TownyResources.getPlugin().isMythicMobsInstalled()) {
-                ItemManager mythicItemManager = TownyResources.getPlugin().getMythicItemManager();
-                ItemStack mythicItem = mythicItemManager.getItemStack(materialName);
+                ItemStack mythicItem = MythicBukkit.inst().getItemManager().getItemStack(materialName);
                 if (mythicItem != null) {
                     itemStack = mythicItem;
                     itemStack.setAmount(amount);

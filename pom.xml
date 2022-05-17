@@ -51,16 +51,6 @@
 	  <scope>provided</scope>
     </dependency>
     <dependency>
-           <groupId>net.Indyuce</groupId>
-           <artifactId>MMOItems</artifactId>
-           <version>6.6.4</version>
-    </dependency>
-    <dependency>
-           <groupId>io.lumine</groupId>
-           <artifactId>MythicLib-dist</artifactId>
-           <version>1.2</version>
-    </dependency>
-    <dependency>
       <groupId>com.meowj</groupId>
       <artifactId>LangUtils</artifactId>
   	  <version>2.5-SNAPSHOT</version>
@@ -79,13 +69,7 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Axolottl Towny Resources Packages</name>
-      <url>https://maven.pkg.github.com/Axolottl/TownyResources</url>
-    </repository>
-  </distributionManagement>	
+  	
   <build>
     <plugins>
       <plugin>

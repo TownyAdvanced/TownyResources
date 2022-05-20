@@ -5,7 +5,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.lumine.mythic.core.items.MythicItem;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -18,6 +17,7 @@ import com.palmergames.bukkit.util.Colors;
 
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -138,25 +138,54 @@ public class TownyResourcesMessagingUtil {
             }
 
             // mythicmobs integration
-            if(TownyResources.getPlugin().isMythicMobsInstalled()) {
-                Optional<MythicItem> maybeMythicItem = TownyResources.getPlugin().getMythicItemManager().getItem(materialName);
-
-                if(maybeMythicItem.isPresent()) {
-                    MythicItem mythicItem = maybeMythicItem.get();
-                    String maybeDisplayName = mythicItem.getDisplayName();
-                    if (maybeDisplayName != null) {
-                        return maybeDisplayName.replaceAll("[^\\w\\s]\\w", "");
-                    } else {
-                        // MythicItem#getDisplayName() will always return null for imported items
-                        // try to extract the name from the raw config data
-                        if (mythicItem.getConfig().isSet("ItemStack")) {
-                            ItemStack is = mythicItem.getConfig().getItemStack("ItemStack", (String) null);
-                            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                                return is.getItemMeta().getDisplayName();
+            if(TownyResources.getPlugin().isMythicMobsItemPre5Installed() || TownyResources.getPlugin().isMythicMobsItemPost5Installed()) {
+                
+            	if (TownyResources.getPlugin().isMythicMobsItemPre5Installed()) {
+                	Optional<io.lumine.xikage.mythicmobs.items.MythicItem> maybeMythicItem = null;
+            		maybeMythicItem = ((io.lumine.xikage.mythicmobs.items.ItemManager) TownyResources.getPlugin().getMythicItemPre5Manager()).getItem(materialName);
+                	
+    				if(maybeMythicItem.isPresent()) {
+    					io.lumine.xikage.mythicmobs.items.MythicItem mythicItem = maybeMythicItem.get();
+                        String maybeDisplayName = mythicItem.getDisplayName();
+                        if (maybeDisplayName != null) {
+                            return maybeDisplayName.replaceAll("[^\\w\\s]\\w", "");
+                        } else {
+                            // MythicItem#getDisplayName() will always return null for imported items
+                            // try to extract the name from the raw config data
+                            if (mythicItem.getConfig().isSet("ItemStack")) {
+                                ItemStack is = mythicItem.getConfig().getItemStack("ItemStack", (String) null);
+                                if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                                    return is.getItemMeta().getDisplayName();
+                                }
                             }
                         }
                     }
-                }
+            	}
+            	
+            	if (TownyResources.getPlugin().isMythicMobsItemPost5Installed()) {
+                	Optional<io.lumine.mythic.core.items.MythicItem> maybeMythicItem = null;
+            		maybeMythicItem = ((io.lumine.mythic.api.items.ItemManager) TownyResources.getPlugin().getMythicItemPost5Manager()).getItem(materialName);
+
+    				if(maybeMythicItem.isPresent()) {
+    					io.lumine.mythic.core.items.MythicItem mythicItem = maybeMythicItem.get();
+                        String maybeDisplayName = mythicItem.getDisplayName();
+                        if (maybeDisplayName != null) {
+                            return maybeDisplayName.replaceAll("[^\\w\\s]\\w", "");
+                        } else {
+                            // MythicItem#getDisplayName() will always return null for imported items
+                            // try to extract the name from the raw config data
+                            if (mythicItem.getConfig().isSet("ItemStack")) {
+                                ItemStack is = mythicItem.getConfig().getItemStack("ItemStack", (String) null);
+                                if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                                    return is.getItemMeta().getDisplayName();
+                                }
+                            }
+                        }
+                    }
+            	
+            	
+            	
+            	}
             }
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           

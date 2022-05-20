@@ -9,9 +9,6 @@ import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentM
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import io.lumine.mythic.api.items.ItemManager;
-import io.lumine.mythic.bukkit.MythicBukkit;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 public class TownResourceCollectionController {
@@ -99,10 +97,12 @@ public class TownResourceCollectionController {
                     continue;
                 }
             }
-
-            // mythicmobs integration
-            if (TownyResources.getPlugin().isMythicMobsInstalled()) {
-                ItemStack mythicItem = MythicBukkit.inst().getItemManager().getItemStack(materialName);
+            
+            // mythicmobs pre 5.0.0 integration
+            if (TownyResources.getPlugin().isMythicMobsItemPre5Installed()) {
+	       Bukkit.getLogger().info("pre 5");
+	       io.lumine.xikage.mythicmobs.items.ItemManager mythicItemManager = TownyResources.getPlugin().getMythicItemPre5Manager();
+                ItemStack mythicItem = mythicItemManager.getItemStack(materialName);
                 if (mythicItem != null) {
                     itemStack = mythicItem;
                     itemStack.setAmount(amount);
@@ -110,6 +110,38 @@ public class TownResourceCollectionController {
                     continue;
                 }
             }
+
+            // mythicmobs post 5.0.0 integration
+            if (TownyResources.getPlugin().isMythicMobsItemPost5Installed()) {
+	        Bukkit.getLogger().info("post 5");
+            	Optional<io.lumine.mythic.core.items.MythicItem> mythicItem = ((io.lumine.mythic.api.items.ItemManager) TownyResources.getPlugin().getMythicItemPost5Manager()).getItem(materialName);
+                if (mythicItem.isPresent()) {
+                    itemStack = io.lumine.mythic.bukkit.BukkitAdapter.adapt(mythicItem.get().generateItemStack(amount));
+                    itemStackList.add(itemStack);
+                    continue;
+                }
+            }
+            
+//            // mythicmobs pre 5.0.0 integration
+//            if (TownyResources.getPlugin().isMythicMobsItemPre5Installed()) {
+//                ItemStack mythicItem = ((io.lumine.xikage.mythicmobs.items.ItemManager) TownyResources.getPlugin().getMythicItemPre5Manager()).getItemStack(materialName);
+//                if (mythicItem != null) {
+//                    itemStack = mythicItem;
+//                    itemStack.setAmount(amount);
+//                    itemStackList.add(itemStack);
+//                    continue;
+//                }
+//            }
+//
+//            // mythicmobs post 5.0.0 integration
+//            if (TownyResources.getPlugin().isMythicMobsItemPost5Installed()) {
+//            	ItemStack mythicItem = (ItemStack) ((io.lumine.xikage.mythicmobs.items.ItemManager) TownyResources.getPlugin().getMythicItemPost5Manager()).getItem(materialName).get().generateItemStack(amount);
+//                if (mythicItem != null) {
+//                    itemStack = mythicItem;
+//                    itemStackList.add(itemStack);
+//                    continue;
+//                }
+//            }
 
             //Unknown material. Send error message
             TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", materialName));

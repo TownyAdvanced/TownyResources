@@ -62,6 +62,14 @@
       <version>RC-27</version>
       <scope>provided</scope>
     </dependency>
+    <!-- Pre 5.0.0 Mythic Mobs API -->
+    <dependency>
+      <groupId>io.lumine.xikage</groupId>
+      <artifactId>MythicMobs</artifactId>
+      <version>4.9.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Post 5.0.0 Mythic Mobs API -->
     <dependency>
       <groupId>io.lumine</groupId>
       <artifactId>Mythic-Dist</artifactId>

@@ -11,8 +11,6 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import io.lumine.mythic.api.items.ItemManager;
-import io.lumine.mythic.bukkit.MythicBukkit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -29,7 +27,8 @@ public class TownyResources extends JavaPlugin {
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
 	private static boolean slimeFunInstalled;
-	private static boolean mythicMobsInstalled;
+	private static boolean mythicMobsPost5Installed;
+	private static boolean mythicMobsPre5Installed;
 	
     @Override
     public void onEnable() {
@@ -168,11 +167,19 @@ public class TownyResources extends JavaPlugin {
 		return slimeFunInstalled;
 	}
 
-	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
-
-	public ItemManager getMythicItemManager() {
+	public boolean isMythicMobsItemPre5Installed() { return ( mythicMobsPre5Installed ); }
+	
+	public boolean isMythicMobsItemPost5Installed() { return (mythicMobsPost5Installed ); }
+	
+	// Mythic Mobs pre 5.0.0 API update
+	public io.lumine.xikage.mythicmobs.items.ItemManager getMythicItemPre5Manager() {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
-		return mythicMobsInstalled ? (MythicBukkit.inst().getItemManager()) : null;
+		return mythicMobsPre5Installed ? ((io.lumine.xikage.mythicmobs.MythicMobs) mythicMobs).getItemManager() : null;
+	}
+	
+	// Mythic Mobs post 5.0.0 API update
+	public Object getMythicItemPost5Manager() {
+		return mythicMobsPost5Installed ? io.lumine.mythic.bukkit.MythicBukkit.inst().getItemManager() : null;
 	}
 	
 	private String getTownyVersion() {
@@ -200,17 +207,37 @@ public class TownyResources extends JavaPlugin {
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
 			info("  Slimefun Integration Enabled");
-
+		
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
+		Throwable mythicmobsErrorStack = new Throwable();
 		if(mythicMobs != null) {
 			try {
-				MythicBukkit.inst().getItemManager().getItems();
-				mythicMobsInstalled = true;
-				info("  Mythic Mobs Integration Enabled");
-			} catch (Throwable t) {
-                                 mythicMobsInstalled = false;
-			        t.printStackTrace();
-			        severe("  Unable to enable Mythic Mobs");
+				try {
+					io.lumine.mythic.bukkit.MythicBukkit.inst().getItemManager();
+					mythicMobsPost5Installed = true;
+				}catch (Throwable t) {
+					mythicmobsErrorStack = t;
+					mythicMobsPost5Installed = false;
+					t.fillInStackTrace();
+				}
+				try {
+					((io.lumine.xikage.mythicmobs.MythicMobs) mythicMobs).getItemManager();
+					mythicMobsPre5Installed = true;
+				} catch (Throwable t) {
+					mythicmobsErrorStack = t;
+					mythicMobsPre5Installed = false;
+					t.fillInStackTrace();
+				}
+			}
+			finally {
+				if((mythicMobsPost5Installed || mythicMobsPre5Installed) == true) {
+					info("  Mythic Mobs Integration Enabled");
+					info(mythicMobsPre5Installed + ": - + :" + mythicMobsPost5Installed);
+				}
+				else {
+					mythicmobsErrorStack.printStackTrace();
+				    severe("  Unable to enable Mythic Mobs");
+				}
 			}
 		}
 

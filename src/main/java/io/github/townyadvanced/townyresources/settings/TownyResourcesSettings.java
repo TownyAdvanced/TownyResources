@@ -12,10 +12,8 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
-import io.lumine.mythic.bukkit.MythicBukkit;
 
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
@@ -205,9 +203,16 @@ public class TownyResourcesSettings {
 				return true;  //Known material 
 		}
 		// mythicmobs integration
-		if (TownyResources.getPlugin().isMythicMobsInstalled()) {
-			ItemStack mythicItem = MythicBukkit.inst().getItemManager().getItemStack(materialName);
-;
+		if (TownyResources.getPlugin().isMythicMobsItemPost5Installed()) {
+			Optional<io.lumine.mythic.core.items.MythicItem> mythicItem = ((io.lumine.mythic.api.items.ItemManager) TownyResources.getPlugin().getMythicItemPost5Manager()).getItem(materialName);
+			
+			if (mythicItem != null)
+				return true;  // Known material
+		}
+		
+		if (TownyResources.getPlugin().isMythicMobsItemPre5Installed()) {
+			Optional<io.lumine.xikage.mythicmobs.items.MythicItem> mythicItem = TownyResources.getPlugin().getMythicItemPre5Manager().getItem(materialName);
+
 			if (mythicItem != null)
 				return true;  // Known material
 		}

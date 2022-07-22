@@ -5,7 +5,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.lumine.xikage.mythicmobs.items.MythicItem;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,7 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class TownyResourcesMessagingUtil {
 
@@ -138,24 +136,10 @@ public class TownyResourcesMessagingUtil {
 
             // mythicmobs integration
             if(TownyResources.getPlugin().isMythicMobsInstalled()) {
-                Optional<MythicItem> maybeMythicItem = TownyResources.getPlugin().getMythicItemManager().getItem(materialName);
-
-                if(maybeMythicItem.isPresent()) {
-                    MythicItem mythicItem = maybeMythicItem.get();
-                    String maybeDisplayName = mythicItem.getDisplayName();
-                    if (maybeDisplayName != null) {
-                        return maybeDisplayName.replaceAll("[^\\w\\s]\\w", "");
-                    } else {
-                        // MythicItem#getDisplayName() will always return null for imported items
-                        // try to extract the name from the raw config data
-                        if (mythicItem.getConfig().isSet("ItemStack")) {
-                            ItemStack is = mythicItem.getConfig().getItemStack("ItemStack", (String) null);
-                            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                                return is.getItemMeta().getDisplayName();
-                            }
-                        }
-                    }
-                }
+            	String mmName = MythicMobsUtil.getMaterialNameForDisplay(materialName); 
+            	if (mmName != null) {
+            		return mmName;
+            	}
             }
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           

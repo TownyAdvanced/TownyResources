@@ -7,9 +7,9 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import io.lumine.xikage.mythicmobs.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -100,8 +100,7 @@ public class TownResourceCollectionController {
 
             // mythicmobs integration
             if (TownyResources.getPlugin().isMythicMobsInstalled()) {
-                ItemManager mythicItemManager = TownyResources.getPlugin().getMythicItemManager();
-                ItemStack mythicItem = mythicItemManager.getItemStack(materialName);
+                ItemStack mythicItem = MythicMobsUtil.getMythicItemStack(materialName);
                 if (mythicItem != null) {
                     itemStack = mythicItem;
                     itemStack.setAmount(amount);

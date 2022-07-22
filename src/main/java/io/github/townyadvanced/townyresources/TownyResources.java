@@ -11,8 +11,6 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -28,6 +26,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
 	private static boolean slimeFunInstalled;
+	private static boolean legacyMythicMobsInstalled;
 	private static boolean mythicMobsInstalled;
 	
     @Override
@@ -168,12 +167,15 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
-
-	public ItemManager getMythicItemManager() {
-		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
-		return mythicMobsInstalled ? ((MythicMobs) mythicMobs).getItemManager() : null;
+	
+	public boolean isMythicMobsLegacy() {
+		return legacyMythicMobsInstalled;
 	}
 	
+	public boolean isMythicMobsV5() {
+		return mythicMobsInstalled;
+	}
+
 	private String getTownyVersion() {
         return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
     }
@@ -202,14 +204,16 @@ public class TownyResources extends JavaPlugin {
 
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
 		if(mythicMobs != null) {
-			try {
-				((MythicMobs) mythicMobs).getItemManager();
+			String className = Bukkit.getServer().getPluginManager().getPlugin("MythicMobs").getClass().getName();
+			if (className.equals("io.lumine.xikage.mythicmobs.MythicMobs")) {
+				legacyMythicMobsInstalled = true;
+				info("  Legacy Mythic Mobs Integration Enabled");
+			} else if (className.equals("io.lumine.mythic.bukkit.MythicBukkit")) {
 				mythicMobsInstalled = true;
 				info("  Mythic Mobs Integration Enabled");
-			} catch (Throwable t) {
-                                mythicMobsInstalled = false;
-			        t.printStackTrace();
-				severe( "Problem enabling mythic mobs");
+			} else {
+				mythicMobsInstalled = false;
+				severe("Problem enabling mythic mobs");
 			}
 		}
 

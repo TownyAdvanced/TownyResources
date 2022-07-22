@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.2.2</version>
+  <version>0.2.3-SNAPSHOT</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -66,6 +66,12 @@
       <groupId>io.lumine.xikage</groupId>
       <artifactId>MythicMobs</artifactId>
       <version>4.9.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.lumine</groupId>
+      <artifactId>Mythic-Dist</artifactId>
+      <version>5.0.3-SNAPSHOT</version>  
       <scope>provided</scope>
     </dependency>
   </dependencies>

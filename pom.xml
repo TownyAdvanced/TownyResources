@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.2.2</version>
+  <version>0.2.3</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -15,6 +15,10 @@
     <repository>
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <id>glaremasters repo</id>
+      <url>https://repo.glaremasters.me/repository/towny/</url>
     </repository>
 	<repository>
 	  <id>jitpack.io</id>
@@ -35,14 +39,14 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.18.1-R0.1-SNAPSHOT</version>
+      <version>1.19.2-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 	<dependency>
-	  <groupId>com.github.TownyAdvanced</groupId>
-	  <artifactId>Towny</artifactId>
-	  <version>0.97.5.0</version>
-	  <scope>provided</scope>
+      <groupId>com.github.TownyAdvanced</groupId>
+      <artifactId>Towny</artifactId>
+      <version>0.98.3.5</version>
+      <scope>provided</scope>
 	</dependency>
     <dependency>
 	  <groupId>com.github.TownyAdvanced</groupId>

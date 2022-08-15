@@ -1,17 +1,15 @@
 package io.github.townyadvanced.townyresources.listeners;
 
+import com.palmergames.adventure.text.Component;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.utils.TownyComponents;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
-import io.github.townyadvanced.townyresources.util.ChatTools;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -33,19 +31,17 @@ public class TownyResourcesTownEventListener implements Listener {
 			if(productionAsString.isEmpty() && availableAsString.isEmpty())
 				return;
 
-			//Resources:	
-			List<String> textLines = new ArrayList<>();
-			textLines.add(TownyResourcesTranslation.of("town.screen.header"));
-				
+			//Resources:
+			Component component = Component.empty();
+			component = component.append(Component.newline());
+			component = component.append(TownyComponents.legacy(TownyResourcesTranslation.of("town.screen.header"))).append(Component.newline());
+
 			// > Daily Productivity [2]: 32 oak Log, 32 sugar cane
-			String[] resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForGovernmentScreenDisplay(productionAsString); 
-			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.daily.production", resourcesAsFormattedArray.length)));
+			component = component.append(TownyResourcesMessagingUtil.getSubComponentForGovernmentScreens(productionAsString, "town.screen.daily.production")).append(Component.newline());
 
 			// > Available For Collection [2]: 64 oak log, 64 sugar cane
-			resourcesAsFormattedArray = TownyResourcesMessagingUtil.formatResourcesStringForGovernmentScreenDisplay(availableAsString); 
-			textLines.addAll(ChatTools.listArr(resourcesAsFormattedArray, TownyResourcesTranslation.of("town.screen.available.for.collection", resourcesAsFormattedArray.length)));
-			
-			event.addLines(textLines);
+			component = component.append(TownyResourcesMessagingUtil.getSubComponentForGovernmentScreens(availableAsString, "town.screen.available.for.collection")).append(Component.newline());
+			event.getStatusScreen().addComponentOf("TownyResources", component);
 		}
 	}
 }

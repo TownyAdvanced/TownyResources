@@ -4,7 +4,6 @@ import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Nation;
@@ -131,7 +130,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 
 		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);
-		int actualTownLevel = TownySettings.calcTownLevelId(town);
+		int actualTownLevel = town.getLevel();
 		if(actualTownLevel < requiredTownLevel) {
 			TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey_town_level_warning", requiredTownLevel, actualTownLevel));
 		}

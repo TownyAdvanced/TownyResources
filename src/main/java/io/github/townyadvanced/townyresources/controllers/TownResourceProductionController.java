@@ -1,7 +1,6 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
-import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
@@ -204,7 +203,7 @@ public class TownResourceProductionController {
         for(int i = 0; i < discoveredResources.size(); i++) {
             material = discoveredResources.get(i);
             //If town does not meet the min level, produced amt is zero
-            if(TownySettings.calcTownLevelId(town) < TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
+            if(town.getLevel() < TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
                 finalProducedAmount = 0;
             } else {
                 baseProducedAmount = allOffers.get(material).getBaseAmountItems();

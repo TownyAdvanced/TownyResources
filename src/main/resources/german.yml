@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.07
+version: 0.08
 language: german
 author: ConfusedAlex
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -162,3 +162,6 @@ all_resources_rerolled: "Alle entdeckten Ressourcen sind neu gewürfelt worden."
 admin_help_bypass: "Umgeht die Entnahmegrenze."
 bypass_on: "Entnahmegrenze wird nun umgangen."
 bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."
+
+#Added in 0.08
+resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'

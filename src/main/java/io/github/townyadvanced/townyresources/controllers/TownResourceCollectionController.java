@@ -10,14 +10,14 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -27,14 +27,16 @@ public class TownResourceCollectionController {
 
     public static synchronized void collectAvailableTownResources(Player player, Town town, Map<String,Integer> availableForCollection) {
         //Collect resources
-        collectAvailableGovernmentResources(player, town, availableForCollection);
+        if (!collectAvailableGovernmentResources(player, town, availableForCollection))
+            return;
         //Notify Player
         TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.towncollect.success"));        
     }
     
     public static synchronized void collectAvailableNationResources(Player player, Nation nation, Map<String,Integer> availableForCollection) {
         //Collect resources
-        collectAvailableGovernmentResources(player, nation, availableForCollection);
+        if (!collectAvailableGovernmentResources(player, nation, availableForCollection))
+            return;
         //Notify Player
         TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.nationcollect.success"));        
     }
@@ -48,21 +50,38 @@ public class TownResourceCollectionController {
      * @param government the government
      * @param availableForCollection the list of currently available resources
      */
-    private static synchronized void collectAvailableGovernmentResources(Player player, Government government, Map<String,Integer> availableForCollection) {
+    private static synchronized boolean collectAvailableGovernmentResources(Player player, Government government, Map<String,Integer> availableForCollection) {
         //Calculate stuff to give player
         List<ItemStack> itemStackList = buildItemStackList(player, availableForCollection.entrySet());
-        //Drop all collected itemstacks near player
-        Bukkit.getServer().getScheduler().runTask(TownyResources.getPlugin(), ()-> {
-            Location location = player.getLocation();
-            for(ItemStack itemStack: itemStackList)
-                player.getWorld().dropItemNaturally(location, itemStack);
-        });
 
-        //Clear available list
-        TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, Collections.emptyMap());
+        //See if player can hold any items at all.
+        PlayerInventory inv = player.getInventory();
+        if (inv.firstEmpty() == -1) {
+            TownyResourcesMessagingUtil.sendMsg(player, TownyResourcesTranslation.of("resource.you_have_no_room_in_your_inventory"));
+            return false;
+        }
+
+        final Map<Integer, ItemStack> itemsThatDontFit = inv.addItem(itemStackList.toArray(new ItemStack[0]));
+        /* If map is not empty, some items were not added.... */
+        if (!itemsThatDontFit.isEmpty()) {
+            Map<String,Integer> remainder = new HashMap<>();
+            for (ItemStack stack : itemsThatDontFit.values()) {
+                if (remainder.containsKey(stack.getType().name())) {
+                    int amount = remainder.get(stack.getType().name()) + stack.getAmount();
+                    remainder.put(stack.getType().name(), amount);
+                } else {
+                	remainder.put(stack.getType().name(), stack.getAmount());
+                }
+            }
+            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, remainder);
+        } else {
+            //Clear available list
+            TownyResourcesGovernmentMetaDataController.setAvailableForCollection(government, Collections.emptyMap());
+        }
 
         //Save government
         government.save();
+        return true;
     }
 
 	private static List<ItemStack> buildItemStackList(Player player, Set<Entry<String, Integer>> availableForCollection) {

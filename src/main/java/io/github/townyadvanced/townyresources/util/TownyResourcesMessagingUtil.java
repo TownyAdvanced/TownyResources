@@ -102,6 +102,8 @@ public class TownyResourcesMessagingUtil {
         String materialName;
         String translatedMaterialName;
         for(String resourceAsString: resourcesAsArray) {
+            if (resourceAsString.isEmpty())
+                continue;
             amountAndMaterialName = resourceAsString.split("-");
             amount = amountAndMaterialName[0];
             materialName = amountAndMaterialName[1];

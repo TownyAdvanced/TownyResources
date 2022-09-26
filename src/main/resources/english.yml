@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.07
+version: 0.08
 language: english
 author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -162,3 +162,6 @@ all_resources_rerolled: "All discovered town resources have been rerolled"
 admin_help_bypass: "Bypasses extraction limit."
 bypass_on: "Now bypassing extraction limit."
 bypass_off: "No longer bypassing extraction limit."
+
+#Added in 0.08
+resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'

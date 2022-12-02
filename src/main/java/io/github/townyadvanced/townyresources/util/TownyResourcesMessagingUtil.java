@@ -166,6 +166,13 @@ public class TownyResourcesMessagingUtil {
             		return mmName;
             	}
             }
+
+            // MMOItems integration
+            if (TownyResources.getPlugin().isMMOItemsInstalled()) {
+            	String miName = MMOItemsUtil.getMaterialNameForDisplay(materialName);
+            	if (miName != null)
+            		return miName;
+            }
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           
                 ItemStack fakeItemStack = new ItemStack(material);

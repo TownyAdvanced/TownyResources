@@ -168,7 +168,7 @@ public class TownyResourcesMessagingUtil {
             }
 
             // MMOItems integration
-            if (TownyResources.getPlugin().isMMOItemsInstalled()) {
+            if (TownyResources.getPlugin().isMMOItemsInstalled() && materialName.contains(":")) {
             	String miName = MMOItemsUtil.getMaterialNameForDisplay(materialName);
             	if (miName != null)
             		return miName;

@@ -6,7 +6,7 @@ author: Goosius
 website: 'https://github.com/TownyAdvanced/TownyResources'
 prefix: ${project.artifactId}
 depend: [Towny]
-softdepend: [SiegeWar,Dynmap-Towny,LangUtils,Slimefun,MythicMobs]
+softdepend: [SiegeWar,Dynmap-Towny,LangUtils,Slimefun,MythicMobs,MMOItems]
 loadbefore: [SiegeWar]
 
 description: This is an add-on plugin for Towny, which gives each town a unique set of automatically-extracted resources, and then protects the economic value of those resources with moderate limits to player resource extraction.

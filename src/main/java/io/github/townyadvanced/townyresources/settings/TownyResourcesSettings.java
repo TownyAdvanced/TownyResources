@@ -211,6 +211,7 @@ public class TownyResourcesSettings {
 		
 		// MMOItems integration
 		if (TownyResources.getPlugin().isMMOItemsInstalled()
+		&& materialName.contains(":")
 		&& MMOItemsUtil.isValidItem(materialName))
 			return true;
 

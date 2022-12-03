@@ -130,7 +130,7 @@ public class TownResourceCollectionController {
             }
 
             // MMOItems integration
-            if (TownyResources.getPlugin().isMMOItemsInstalled()) {
+            if (TownyResources.getPlugin().isMMOItemsInstalled() && materialName.contains(":")) {
             	ItemStack mmoItem = MMOItemsUtil.getMMOItemsItemStack(materialName);
             	if (mmoItem != null) {
             		itemStack = mmoItem;

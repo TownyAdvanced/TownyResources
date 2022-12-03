@@ -382,4 +382,8 @@ public class TownyResourcesSettings {
 	public static String getMaterialsDisplayLanguage() {
 		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_LANGUAGE_MATERIALS_DISPLAY_LANGUAGE);
 	}
+
+	public static boolean areMMOItemsGivenLeveledTowardsThePlayer() {
+		return false; //getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MMOITEMS_PLAYER_LEVELED_ITEMS);
+	}
 }

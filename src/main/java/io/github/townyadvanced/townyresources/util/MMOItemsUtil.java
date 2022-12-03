@@ -5,11 +5,14 @@ import java.util.concurrent.Future;
 import java.util.function.Function;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.api.Type;
+import net.Indyuce.mmoitems.api.player.PlayerData;
 
 public class MMOItemsUtil {
 
@@ -22,6 +25,12 @@ public class MMOItemsUtil {
 
 	public static boolean isValidItem(String materialName) {
 		return MMOItems.plugin.getMMOItem(getType(materialName), getID(materialName)) != null;
+	}
+
+	public static ItemStack getMMOItemsItemStack(String materialName, Player player) {
+		if (!TownyResourcesSettings.areMMOItemsGivenLeveledTowardsThePlayer())
+			return getMMOItemsItemStack(materialName);
+		return MMOItems.plugin.getItem(getType(materialName), getID(materialName), PlayerData.get(player));
 	}
 
 	public static ItemStack getMMOItemsItemStack(String materialName) {

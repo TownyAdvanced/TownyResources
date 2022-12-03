@@ -131,7 +131,7 @@ public class TownResourceCollectionController {
 
             // MMOItems integration
             if (TownyResources.getPlugin().isMMOItemsInstalled() && materialName.contains(":")) {
-            	ItemStack mmoItem = MMOItemsUtil.getMMOItemsItemStack(materialName);
+            	ItemStack mmoItem = MMOItemsUtil.getMMOItemsItemStack(materialName, player);
             	if (mmoItem != null) {
             		itemStack = mmoItem;
             		itemStack.setAmount(amount);

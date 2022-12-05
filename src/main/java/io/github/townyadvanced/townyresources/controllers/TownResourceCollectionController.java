@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
+import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
@@ -128,6 +129,16 @@ public class TownResourceCollectionController {
                 }
             }
 
+            // MMOItems integration
+            if (TownyResources.getPlugin().isMMOItemsInstalled() && materialName.contains(":")) {
+            	ItemStack mmoItem = MMOItemsUtil.getMMOItemsItemStack(materialName, player);
+            	if (mmoItem != null) {
+            		itemStack = mmoItem;
+            		itemStack.setAmount(amount);
+            		itemStackList.add(itemStack);
+            		continue;
+            	}
+            }
             //Unknown material. Send error message
             TownyResourcesMessagingUtil.sendErrorMsg(player, TownyResourcesTranslation.of("msg_err_cannot_collect_unknown_material", materialName));
         }

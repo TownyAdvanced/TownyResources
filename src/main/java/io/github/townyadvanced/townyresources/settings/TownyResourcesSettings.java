@@ -12,6 +12,7 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.FileMgmt;
+import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
 
 import org.bukkit.Material;
@@ -207,6 +208,12 @@ public class TownyResourcesSettings {
 		if (TownyResources.getPlugin().isMythicMobsInstalled() 
 		&& MythicMobsUtil.isValidItem(materialName))
 			return true;
+		
+		// MMOItems integration
+		if (TownyResources.getPlugin().isMMOItemsInstalled()
+		&& materialName.contains(":")
+		&& MMOItemsUtil.isValidItem(materialName))
+			return true;
 
 		return false; //Unknown material		
 	}
@@ -374,5 +381,9 @@ public class TownyResourcesSettings {
 
 	public static String getMaterialsDisplayLanguage() {
 		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_LANGUAGE_MATERIALS_DISPLAY_LANGUAGE);
+	}
+
+	public static boolean areMMOItemsGivenLeveledTowardsThePlayer() {
+		return false; //getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MMOITEMS_PLAYER_LEVELED_ITEMS);
 	}
 }

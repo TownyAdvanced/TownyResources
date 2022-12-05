@@ -57,9 +57,16 @@ The plugin also has an optional feature to protect resource value, via daily pla
       Data: 0
       Display: '&3Example Item 2'
         ```
-11. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-12. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
-13. Run `/tra reload`, then `/ta reload`.
+11. If you want to use [*MMOItems*](https://www.spigotmc.org/resources/mmoitems-premium.39267/) plugin with *TownyResources*:
+    - Town Production:
+    <br>You can add *MMOItems* items to the offers list, simply by using the following format: TYPE:ID. Example:
+    ```
+    categories: '{mmo_items, 100, 0.015625, SWORD:CUTLASS}'
+    ```
+    The above example gives one cutlass per day to a town.
+12. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+13. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
+14. Run `/tra reload`, then `/ta reload`.
 # Player Guide
 ### Town Production
 ###### Information

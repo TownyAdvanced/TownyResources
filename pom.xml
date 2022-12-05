@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.2.3</version>
+  <version>0.2.4</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -33,6 +33,10 @@
       <name>Lumine Releases</name>
       <url>https://mvn.lumine.io/repository/maven-public/</url>
     </repository>
+    <repository>
+      <id>phoenix</id>
+      <url>https://nexus.phoenixdvpt.fr/repository/maven-public/</url>
+    </repository>
   </repositories>
   
   <dependencies>
@@ -51,7 +55,7 @@
     <dependency>
 	  <groupId>com.github.TownyAdvanced</groupId>
 	  <artifactId>SiegeWar</artifactId>
-	  <version>0.5.0</version>
+	  <version>0.9.0</version>
 	  <scope>provided</scope>
 	</dependency>
     <dependency>
@@ -76,6 +80,12 @@
       <groupId>io.lumine</groupId>
       <artifactId>Mythic-Dist</artifactId>
       <version>5.0.3-SNAPSHOT</version>  
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.Indyuce</groupId>
+      <artifactId>MMOItems-API</artifactId>
+      <version>6.7.5-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

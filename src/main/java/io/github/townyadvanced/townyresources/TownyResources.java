@@ -28,6 +28,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean slimeFunInstalled;
 	private static boolean legacyMythicMobsInstalled;
 	private static boolean mythicMobsInstalled;
+	private static boolean mmmoItemsInstalled;
 	
     @Override
     public void onEnable() {
@@ -176,6 +177,10 @@ public class TownyResources extends JavaPlugin {
 		return mythicMobsInstalled;
 	}
 
+	public boolean isMMOItemsInstalled() {
+		return mmmoItemsInstalled;
+	}
+
 	private String getTownyVersion() {
         return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
     }
@@ -216,6 +221,11 @@ public class TownyResources extends JavaPlugin {
 				severe("Problem enabling mythic mobs");
 			}
 		}
+
+		Plugin mmmoItems = Bukkit.getPluginManager().getPlugin("MMOItems");
+		mmmoItemsInstalled = mmmoItems != null;
+		if (mmmoItemsInstalled)
+			info("  MMOItems Integration Enabled");
 
 		Plugin languageUtils = Bukkit.getPluginManager().getPlugin("LangUtils");
 		languageUtilsInstalled = languageUtils != null;

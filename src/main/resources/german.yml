@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.08
+version: 0.09
 language: german
 author: ConfusedAlex
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -165,3 +165,7 @@ bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."
 
 #Added in 0.08
 resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+
+#Added in 0.09
+msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

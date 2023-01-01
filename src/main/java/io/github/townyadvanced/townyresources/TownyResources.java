@@ -121,12 +121,12 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	private void printSickASCIIArt() {
-			Bukkit.getLogger().info("");
-			Bukkit.getLogger().info(              "        --------------- Goosius' --------------  ");
-			Bukkit.getLogger().info(Colors.Gold + "     ╔╦╗┌─┐┬ ┬┌┐┌┬ ┬  ╦═╗┌─┐┌─┐┌─┐┬ ┬┬─┐┌─┐┌─┐┌─┐");
-			Bukkit.getLogger().info(Colors.Gold + "      ║ │ │││││││└┬┘  ╠╦╝├┤ └─┐│ ││ │├┬┘│  ├┤ └─┐");
-			Bukkit.getLogger().info(Colors.Gold + "      ╩ └─┘└┴┘┘└┘ ┴   ╩╚═└─┘└─┘└─┘└─┘┴└─└─┘└─┘└─┘");
-			Bukkit.getLogger().info("");	
+		Bukkit.getConsoleSender().sendMessage("");
+		Bukkit.getConsoleSender().sendMessage(              "        --------------- Goosius' --------------  ");
+		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "     ╔╦╗┌─┐┬ ┬┌┐┌┬ ┬  ╦═╗┌─┐┌─┐┌─┐┬ ┬┬─┐┌─┐┌─┐┌─┐");
+		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "      ║ │ │││││││└┬┘  ╠╦╝├┤ └─┐│ ││ │├┬┘│  ├┤ └─┐");
+		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "      ╩ └─┘└┴┘┘└┘ ┴   ╩╚═└─┘└─┘└─┘└─┘┴└─└─┘└─┘└─┘");
+		Bukkit.getConsoleSender().sendMessage("");	
 	}
 
 	private void registerListeners() {

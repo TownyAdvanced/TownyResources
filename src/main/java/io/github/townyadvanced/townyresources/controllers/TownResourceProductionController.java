@@ -1,6 +1,7 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
+import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
@@ -271,10 +272,12 @@ public class TownResourceProductionController {
             String resource;
             int quantityToProduce;
             int currentQuantity;
+            double townLevelModifier;
             int storageLimit;
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
-                quantityToProduce =townProductionEntry.getValue();
+                townLevelModifier = government instanceof Town town ? TownySettings.getTownLevel(town).resourceProductionModifier() : 1.0;
+                quantityToProduce = (int) (townProductionEntry.getValue() * townLevelModifier);
                 if(quantityToProduce == 0)
                     continue;
                 if(availableResources.containsKey(resource)) {

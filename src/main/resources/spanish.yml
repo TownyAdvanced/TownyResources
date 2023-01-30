@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.09
+version: 0.10
 language: spanish
 author: ElMoha943
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -35,6 +35,7 @@ admin_help_reload: 'Recargar TownyResources.'
 town.screen.header: "&2Recursos:"
 town.screen.daily.production: '&2 > Produccion Diaria &a[%s]&2: &f'
 town.screen.available.for.collection: '&2 > Disponible para recoleccion &a[%s]&2: &f'
+town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
 nation.screen.header: "&2Recursos:"

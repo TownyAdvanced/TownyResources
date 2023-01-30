@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.09
+version: 0.10
 language: german
 author: ConfusedAlex
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -35,6 +35,7 @@ admin_help_reload: 'TownyResources neuladen.'
 town.screen.header: "&2Ressourcen:"
 town.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
 town.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
 nation.screen.header: "&2Ressourcen:"

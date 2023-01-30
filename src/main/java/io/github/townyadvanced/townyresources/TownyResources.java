@@ -21,7 +21,7 @@ import java.io.File;
 public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
-	private static Version requiredTownyVersion = Version.fromString("0.98.5.0");
+	private static Version requiredTownyVersion = Version.fromString("0.98.6.3");
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;

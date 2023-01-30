@@ -1,5 +1,5 @@
 name: TownyResources
-version: 0.09
+version: 0.10
 language: chinese
 author: Nailm
 website: 'https://github.com/TownyAdvanced/TownyResources'
@@ -35,6 +35,7 @@ admin_help_reload: '重载插件配置文件.'
 town.screen.header: "&2城镇资源:"
 town.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
 town.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
+town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
 nation.screen.header: "&2国家资源:"

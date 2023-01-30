@@ -15,6 +15,8 @@ import com.palmergames.adventure.text.Component;
 import com.palmergames.adventure.text.event.HoverEvent;
 import com.palmergames.adventure.text.format.NamedTextColor;
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownySettings;
+import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.TownyComponents;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
@@ -183,4 +185,21 @@ public class TownyResourcesMessagingUtil {
         //Couldn't find a translation. Return un-translated material name
         return WordUtils.capitalizeFully(materialName.replaceAll("_", " "));
     }
+
+	public static String adjustAmountsForTownLevelModifier(Town town, String productionAsString) {
+        List<String> resourcesAsFormattedList = new ArrayList<>();
+        String[] resourcesAsArray = productionAsString.split(",");
+        String[] amountAndMaterialName;
+        String amount;
+        String materialName;
+        for(String resourceAsString: resourcesAsArray) {
+            if (resourceAsString.isEmpty())
+                continue;
+            amountAndMaterialName = resourceAsString.split("-");
+            amount = String.valueOf((int) (Integer.valueOf(amountAndMaterialName[0]) * TownySettings.getTownLevel(town).resourceProductionModifier()));
+            materialName = amountAndMaterialName[1];
+            resourcesAsFormattedList.add(amount + "-" + materialName);
+        }
+        return StringMgmt.join(resourcesAsFormattedList,",");
+	}
 }

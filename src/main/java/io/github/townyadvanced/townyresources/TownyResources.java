@@ -15,6 +15,8 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceOffersCont
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -71,6 +73,8 @@ public class TownyResources extends JavaPlugin {
 			//Load settings and languages
 			TownyResourcesSettings.loadConfig();
 			loadLocalization(false);
+			new TownyResourcesMessagingUtil(this);
+
 			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			//WARNING: Do not try to recalculate production here, because unless SW has been loaded first, the results will be incorrect.
@@ -102,6 +106,7 @@ public class TownyResources extends JavaPlugin {
 			//Load settings and languages
 			TownyResourcesSettings.loadConfig();
 			loadLocalization(true);
+			new TownyResourcesMessagingUtil(this);
 			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();

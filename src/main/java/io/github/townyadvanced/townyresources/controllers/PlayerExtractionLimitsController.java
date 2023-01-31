@@ -15,7 +15,6 @@ import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.ActionBarUtil;
-import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
@@ -404,12 +403,12 @@ public class PlayerExtractionLimitsController {
     private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
         if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
             String errorString = Translatable.of("townyresources.msg_error_daily_extraction_limit_reached",
-                    categoryExtractionRecord.getTranslatedCategoryName(), 
+                    categoryExtractionRecord.getTranslatedCategoryName(player), 
                     categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems()).forLocale(player);
             //Send temporary action bar message
             ActionBarUtil.sendActionBarErrorMessage(player, errorString);
             //Send longer-lasting chat message
-            TownyResourcesMessagingUtil.sendErrorMsg(player, errorString);
+            TownyMessaging.sendErrorMsg(player, errorString);
             categoryExtractionRecord.setNextLimitWarningTime(System.currentTimeMillis() + cooldownAfterDailyLimitWarningMessageMillis);
         }
     }

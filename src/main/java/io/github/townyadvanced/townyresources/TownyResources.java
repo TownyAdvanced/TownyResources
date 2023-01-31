@@ -7,7 +7,6 @@ import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.TranslationLoader;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.bukkit.util.Version;
-
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -16,7 +15,6 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceProduction
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -122,7 +120,7 @@ public class TownyResources extends JavaPlugin {
 		return true;
 	}
 
-	private boolean loadLocalization(boolean reload) {
+	private void loadLocalization(boolean reload) throws TownyException {
 		try {
 			Plugin plugin = getPlugin(); 
 			Path langFolderPath = Paths.get(plugin.getDataFolder().getPath()).resolve("lang");
@@ -130,14 +128,11 @@ public class TownyResources extends JavaPlugin {
 			loader.load();
 			TownyAPI.getInstance().addTranslations(plugin, loader.getTranslations());
 		} catch (TownyInitException e) {
-			e.printStackTrace();
-			severe("Locale files failed to load! Disabling!");
-			return false;
+			throw new TownyException("Locale files failed to load! Disabling!");
 		}
 		if (reload) {
 			info(Translatable.of("msg_reloaded_lang").defaultLocale());
 		}
-		return true;
 	}
 
 	public static void info(String message) {

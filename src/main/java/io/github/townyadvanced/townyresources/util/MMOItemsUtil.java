@@ -12,6 +12,7 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.api.Type;
+import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import net.Indyuce.mmoitems.api.player.PlayerData;
 
 public class MMOItemsUtil {
@@ -24,7 +25,11 @@ public class MMOItemsUtil {
 	}
 
 	public static boolean isValidItem(String materialName) {
-		return MMOItems.plugin.getMMOItem(getType(materialName), getID(materialName)) != null;
+		return getMMOItemsMMOItem(materialName) != null;
+	}
+
+	private static MMOItem getMMOItemsMMOItem(String materialName) {
+		return MMOItems.plugin.getMMOItem(getType(materialName), getID(materialName));
 	}
 
 	public static ItemStack getMMOItemsItemStack(String materialName, Player player) {
@@ -38,9 +43,10 @@ public class MMOItemsUtil {
 	}
 
 	public static ItemStack getMMOItemsItemStackSync(String materialName) {
-		if (!isValidItem(materialName))
+		MMOItem mmoItem = getMMOItemsMMOItem(materialName);
+		if (mmoItem == null)
 			return null;
-		Future<ItemStack> future = Bukkit.getScheduler().callSyncMethod(TownyResources.getPlugin(), new MMOItemGetter(materialName));
+		Future<ItemStack> future = Bukkit.getScheduler().callSyncMethod(TownyResources.getPlugin(), new MMOItemGetter(mmoItem));
 		ItemStack item = null;
 		try {
 			item = future.get();

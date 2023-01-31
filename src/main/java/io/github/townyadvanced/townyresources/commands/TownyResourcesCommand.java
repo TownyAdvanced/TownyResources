@@ -135,7 +135,7 @@ public class TownyResourcesCommand implements CommandExecutor, TabCompleter {
 			TownyMessaging.sendMessage(player, TownyResourcesTranslation.of("msg_confirm_survey_town_level_warning", requiredTownLevel, actualTownLevel));
 		}
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-		Confirmation.runOnAccept(() -> {
+		Confirmation.runOnAcceptAsync(() -> {
 			try {
 				TownResourceDiscoveryController.discoverNewResource(resident, town, surveyLevel, surveyCost, discoveredResources);
 			} catch (TownyException te) {

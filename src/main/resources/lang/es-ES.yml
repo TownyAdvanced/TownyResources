@@ -45,59 +45,59 @@ description: >
 #
 #
 
-plugin_prefix: '&f[&6Towny Resources&f] '
+townyresources.plugin_prefix: '&f[&6Towny Resources&f] '
 
 ### Reloading
-townyresources_reloaded_successfully: "TownyResources recargado exitosamente."
-townyresources_failed_to_reload: "TownyResources falló al recargar."
-admin_help_reload: 'Recargar TownyResources.'
+townyresources.townyresources_reloaded_successfully: "TownyResources recargado exitosamente."
+townyresources.townyresources_failed_to_reload: "TownyResources falló al recargar."
+townyresources.admin_help_reload: 'Recargar TownyResources.'
 
 ### Town Screen
-town.screen.header: "&2Recursos:"
-town.screen.daily.production: '&2 > Produccion Diaria &a[%s]&2: &f'
-town.screen.available.for.collection: '&2 > Disponible para recoleccion &a[%s]&2: &f'
-town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
+townyresources.town.screen.header: "&2Recursos:"
+townyresources.town.screen.daily.production: '&2 > Produccion Diaria &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > Disponible para recoleccion &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
-nation.screen.header: "&2Recursos:"
-nation.screen.daily.production: '&2 > Produccion Diaria &a[%s]&2: &f'
-nation.screen.available.for.collection: '&2 > Disponible para recoleccion &a[%s]&2: &f'
+townyresources.nation.screen.header: "&2Recursos:"
+townyresources.nation.screen.daily.production: '&2 > Produccion Diaria &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > Disponible para recoleccion &a[%s]&2: &f'
 
 ### Surveys 
-not_your_town: 'No perteneces a esta ciudad.'
-help_survey: 'Inspecciona la ciudad donde estas para descubrir nuevos recursos.'
-discovery.success: "&b%s descubrio %s en %s!. Produccion diaria: %d %s."
+townyresources.not_your_town: 'No perteneces a esta ciudad.'
+townyresources.help_survey: 'Inspecciona la ciudad donde estas para descubrir nuevos recursos.'
+townyresources.discovery.success: "&b%s descubrio %s en %s!. Produccion diaria: %d %s."
 
-msg_err_survey_no_town: "&cNo hay ninguna ciudad para inspeccionar aqui."
-msg_err_survey_all_resources_already_discovered: "&cTodos los recursos de esta ciudad ya fuero descubiertos."
-msg_err_survey_not_enough_townblocks: "&cTu ciudad no tiene suficiente terreno para inspeccionar. Requeridos: %d, Actual: %d"
-msg_err_survey_too_expensive: "&cNo puedes pagar la inspeccion. Requiere: %s, Balance: %s"
-msg_err_not_enough_offers_left: "&cNo es posible inspeccionar, no hay mas ofertas configuradas."
+townyresources.msg_err_survey_no_town: "&cNo hay ninguna ciudad para inspeccionar aqui."
+townyresources.msg_err_survey_all_resources_already_discovered: "&cTodos los recursos de esta ciudad ya fuero descubiertos."
+townyresources.msg_err_survey_not_enough_townblocks: "&cTu ciudad no tiene suficiente terreno para inspeccionar. Requeridos: %d, Actual: %d"
+townyresources.msg_err_survey_too_expensive: "&cNo puedes pagar la inspeccion. Requiere: %s, Balance: %s"
+townyresources.msg_err_not_enough_offers_left: "&cNo es posible inspeccionar, no hay mas ofertas configuradas."
 
 ### Production
-production.message: "&b%s ciudades produjeron recursos."
+townyresources.production.message: "&b%s ciudades produjeron recursos."
 
 ### Collection
-help_towncollect: 'Recolecta todos los recursos disponibles de tu ciudad.'
-help_nationcollect: 'Recolecta todos los recursos disponibles de tu nacion.'
+townyresources.help_towncollect: 'Recolecta todos los recursos disponibles de tu ciudad.'
+townyresources.help_nationcollect: 'Recolecta todos los recursos disponibles de tu nacion.'
 
-resource.towncollect.success: "&2Recolectaste exitosamente los recursos de tu ciudad."
-resource.nationcollect.success: "&2Recolectaste exitosamente los recursos de tu nacion."
+townyresources.resource.towncollect.success: "&2Recolectaste exitosamente los recursos de tu ciudad."
+townyresources.resource.nationcollect.success: "&2Recolectaste exitosamente los recursos de tu nacion."
 
-msg_err_cannot_towncollect_not_a_town_member: "&cDebes ser un miembro de una ciudad para recolectar recursos."
-msg_err_cannot_towncollect_not_in_own_town: "&cDebes estar dentro de tu ciudad para recolectar recursos."
-msg_err_cannot_towncollect_no_resources_available: '&cNo hay recursos disponibles para recolectar.'
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&cDebes ser un miembro de una ciudad para recolectar recursos."
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&cDebes estar dentro de tu ciudad para recolectar recursos."
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&cNo hay recursos disponibles para recolectar.'
 
-msg_err_cannot_nationcollect_not_a_town_member: "&cDebes ser un miembro de una ciudad para recolectar recursos."
-msg_err_cannot_nationcollect_not_a_nation_member: "&cDebes ser un miembro de una nacion para recolectar recursos."
-msg_err_cannot_nationcollect_not_in_capital: "&cDebes estar en la capital para recolectar recursos."
-msg_err_cannot_nationcollect_no_resources_available: '&cNo hay recursos disponibles para recolectar.'
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&cDebes ser un miembro de una ciudad para recolectar recursos."
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&cDebes ser un miembro de una nacion para recolectar recursos."
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&cDebes estar en la capital para recolectar recursos."
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&cNo hay recursos disponibles para recolectar.'
 
-msg_err_cannot_collect_uknown_material: "&cMaterial Desconocido: %s. No se puede recolectar esto."
+townyresources.msg_err_cannot_collect_uknown_material: "&cMaterial Desconocido: %s. No se puede recolectar esto."
 
 # Player Extraction Limits
-msg_error_daily_extraction_limit_reached: "&cSe alcanso el limite de recoleccion para %s (%d)"
-daily_extraction_limits_reset: "&bTodos los limites de extraccion diarios fueron restablecidos."
+townyresources.msg_error_daily_extraction_limit_reached: "&cSe alcanso el limite de recoleccion para %s (%d)"
+townyresources.daily_extraction_limits_reset: "&bTodos los limites de extraccion diarios fueron restablecidos."
 
 # Resource Categories
 # The format of each of these is:  'extraction name, discovery name'
@@ -169,25 +169,25 @@ resource_category_ender_pearls: 'Perlas de Ender, un nido de endermen'
 resource_category_slime: 'Slime, un nido de slimes'
 
 #Added in 0.04
-msg_confirm_survey: "Estas a punto de inspeccionar la ciudad %s por su recurso nivel %d. Esto costara %s. Desea proceder ?"
-msg_err_level_x_resource_already_discovered: "El recurso nivel %d ya fue descubierto."
-msg_err_cannot_collect_unknown_material: "No puedes recolectar el siguiente material desconocido: %s"
+townyresources.msg_confirm_survey: "Estas a punto de inspeccionar la ciudad %s por su recurso nivel %d. Esto costara %s. Desea proceder ?"
+townyresources.msg_err_level_x_resource_already_discovered: "El recurso nivel %d ya fue descubierto."
+townyresources.msg_err_cannot_collect_unknown_material: "No puedes recolectar el siguiente material desconocido: %s"
 
 #Added in 0.05
-msg_confirm_survey_town_level_warning: "&cADVERTENCIA: A pesar de que el recurso puede ser descubierto, la ciudad no tiene suficientes miembros para producirlo. Nivel requerido: %d, Nivel Actual: %d."
+townyresources.msg_confirm_survey_town_level_warning: "&cADVERTENCIA: A pesar de que el recurso puede ser descubierto, la ciudad no tiene suficientes miembros para producirlo. Nivel requerido: %d, Nivel Actual: %d."
 
 #Added in 0.06
-admin_help_reroll: "Regenera todos los recursos descubiertos."
-msg_confirm_reroll: "&cADVERTENCIA: Estas a punto de regenerar. Esto afectara a todas las ciudades que hayan descubierto recursos."
-all_resources_rerolled: "Todos los recursos descubiertos fueron regenerados"
+townyresources.admin_help_reroll: "Regenera todos los recursos descubiertos."
+townyresources.msg_confirm_reroll: "&cADVERTENCIA: Estas a punto de regenerar. Esto afectara a todas las ciudades que hayan descubierto recursos."
+townyresources.all_resources_rerolled: "Todos los recursos descubiertos fueron regenerados"
 
-admin_help_bypass: "Ignora el limite de extraccion."
-bypass_on: "Ignorando el limite de extraccion."
-bypass_off: "Ya no estas ignorando el limite de extraccion."
+townyresources.admin_help_bypass: "Ignora el limite de extraccion."
+townyresources.bypass_on: "Ignorando el limite de extraccion."
+townyresources.bypass_off: "Ya no estas ignorando el limite de extraccion."
 
 #Added in 0.08
-resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
 
 #Added in 0.09
-msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
-admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
+townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

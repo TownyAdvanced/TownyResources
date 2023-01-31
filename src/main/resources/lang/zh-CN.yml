@@ -45,59 +45,59 @@ description: >
 #
 #
 
-plugin_prefix: '&f[&6城镇资源&f] '
+townyresources.plugin_prefix: '&f[&6城镇资源&f] '
 
 ### Reloading
-townyresources_reloaded_successfully: "插件重载成功."
-townyresources_failed_to_reload: "插件重载失败."
-admin_help_reload: '重载插件配置文件.'
+townyresources.townyresources_reloaded_successfully: "插件重载成功."
+townyresources.townyresources_failed_to_reload: "插件重载失败."
+townyresources.admin_help_reload: '重载插件配置文件.'
 
 ### Town Screen
-town.screen.header: "&2城镇资源:"
-town.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
-town.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
-town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
+townyresources.town.screen.header: "&2城镇资源:"
+townyresources.town.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
-nation.screen.header: "&2国家资源:"
-nation.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
-nation.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
+townyresources.nation.screen.header: "&2国家资源:"
+townyresources.nation.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
 
 ### Surveys
-not_your_town: 'You do not belong to this town.'
-help_survey: '对你脚下的城镇发起调查, 以发现新的资源.'
-discovery.success: "&b%s 发现了资源 %s, 位于城镇 %s! 每日产出: %d %s."
+townyresources.not_your_town: 'You do not belong to this town.'
+townyresources.help_survey: '对你脚下的城镇发起调查, 以发现新的资源.'
+townyresources.discovery.success: "&b%s 发现了资源 %s, 位于城镇 %s! 每日产出: %d %s."
 
-msg_err_survey_no_town: "&c脚下没有可以调查的城镇."
-msg_err_survey_all_resources_already_discovered: "&c这个城镇的所有资源都已调查完毕."
-msg_err_survey_not_enough_townblocks: "&c这个城镇没有足够的领地用来调查. 需要: %d, 实际: %d"
-msg_err_survey_too_expensive: "&c你负担不起本次调查. 需要: %s, 余额: %s"
-msg_err_not_enough_offers_left: "&c无法调查 - 因为列表里已没有可用的资源."
+townyresources.msg_err_survey_no_town: "&c脚下没有可以调查的城镇."
+townyresources.msg_err_survey_all_resources_already_discovered: "&c这个城镇的所有资源都已调查完毕."
+townyresources.msg_err_survey_not_enough_townblocks: "&c这个城镇没有足够的领地用来调查. 需要: %d, 实际: %d"
+townyresources.msg_err_survey_too_expensive: "&c你负担不起本次调查. 需要: %s, 余额: %s"
+townyresources.msg_err_not_enough_offers_left: "&c无法调查 - 因为列表里已没有可用的资源."
 
 ### Production
-production.message: "&b当前共有 %s 个城镇正在产出资源."
+townyresources.production.message: "&b当前共有 %s 个城镇正在产出资源."
 
 ### Collection
-help_towncollect: '收集你城镇的所有资源.'
-help_nationcollect: '收集你国家的所有资源.'
+townyresources.help_towncollect: '收集你城镇的所有资源.'
+townyresources.help_nationcollect: '收集你国家的所有资源.'
 
-resource.towncollect.success: "&2已成功收集你城镇的所有可用资源."
-resource.nationcollect.success: "&2已成功收集你国家的所有可用资源."
+townyresources.resource.towncollect.success: "&2已成功收集你城镇的所有可用资源."
+townyresources.resource.nationcollect.success: "&2已成功收集你国家的所有可用资源."
 
-msg_err_cannot_towncollect_not_a_town_member: "&c你必须是城镇的一员才可以收集资源."
-msg_err_cannot_towncollect_not_in_own_town: "&c你必须在城镇里面才能收集资源."
-msg_err_cannot_towncollect_no_resources_available: '&c城镇当前没有可以收集的资源.'
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&c你必须是城镇的一员才可以收集资源."
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&c你必须在城镇里面才能收集资源."
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&c城镇当前没有可以收集的资源.'
 
-msg_err_cannot_nationcollect_not_a_town_member: "&c你必须是城镇的一员才可以收集国家资源."
-msg_err_cannot_nationcollect_not_a_nation_member: "&c你必须是国家的资源才可以收集国家资源."
-msg_err_cannot_nationcollect_not_in_capital: "&c你必须处在首都里面才可以收集国家资源."
-msg_err_cannot_nationcollect_no_resources_available: '&c当前国家没有可以收集的资源.'
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&c你必须是城镇的一员才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&c你必须是国家的资源才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&c你必须处在首都里面才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&c当前国家没有可以收集的资源.'
 
-msg_err_cannot_collect_uknown_material: "&c未知物品类型: %s. 无法收集该资源."
+townyresources.msg_err_cannot_collect_uknown_material: "&c未知物品类型: %s. 无法收集该资源."
 
 # Player Extraction Limits
-msg_error_daily_extraction_limit_reached: "&c资源 %s 已达到每日采集上限 (%d)"
-daily_extraction_limits_reset: "&b所有每日采集上限已重置."
+townyresources.msg_error_daily_extraction_limit_reached: "&c资源 %s 已达到每日采集上限 (%d)"
+townyresources.daily_extraction_limits_reset: "&b所有每日采集上限已重置."
 
 # Resource Categories
 # The format of each of these is:  'extraction name, discovery name'
@@ -169,25 +169,25 @@ resource_category_ender_pearls: '末影珍珠, 折跃失败的末影人'
 resource_category_slime: '史莱姆, 异世界的史莱姆'
 
 #Added in 0.04
-msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
-msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
-msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"
+townyresources.msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
+townyresources.msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
+townyresources.msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"
 
 #Added in 0.05
-msg_confirm_survey_town_level_warning: "&cWARNING: Although the resource can be discovered, the town does not have a large enough population to produce it. Required Town Level: %d, Actual Town Level %d."
+townyresources.msg_confirm_survey_town_level_warning: "&cWARNING: Although the resource can be discovered, the town does not have a large enough population to produce it. Required Town Level: %d, Actual Town Level %d."
 
 #Added in 0.06
-admin_help_reroll: "Reroll all currently discovered resources."
-msg_confirm_reroll: "&cWARNING: You are about to re-roll all discovered town resources. This will affect all towns which have already discovered resources."
-all_resources_rerolled: "All discovered town resources have been rerolled"
+townyresources.admin_help_reroll: "Reroll all currently discovered resources."
+townyresources.msg_confirm_reroll: "&cWARNING: You are about to re-roll all discovered town resources. This will affect all towns which have already discovered resources."
+townyresources.all_resources_rerolled: "All discovered town resources have been rerolled"
 
-admin_help_bypass: "Bypasses extraction limit."
-bypass_on: "Now bypassing extraction limit."
-bypass_off: "No longer bypassing extraction limit."
+townyresources.admin_help_bypass: "Bypasses extraction limit."
+townyresources.bypass_on: "Now bypassing extraction limit."
+townyresources.bypass_off: "No longer bypassing extraction limit."
 
 #Added in 0.08
-resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
 
 #Added in 0.09
-msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
-admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
+townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

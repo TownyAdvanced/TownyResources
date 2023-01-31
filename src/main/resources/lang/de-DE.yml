@@ -45,59 +45,58 @@ description: >
 #
 #
 
-plugin_prefix: '&f[&6Towny Resources&f] '
+townyresources.plugin_prefix: '&f[&6Towny Resources&f] '
 
 ### Reloading
-townyresources_reloaded_successfully: "TownyResources erfolgreich neugeladen."
-townyresources_failed_to_reload: "TownyResources konnte nicht neugeladen werden."
-admin_help_reload: 'TownyResources neuladen.'
+townyresources.townyresources_reloaded_successfully: "TownyResources erfolgreich neugeladen."
+townyresources.townyresources_failed_to_reload: "TownyResources konnte nicht neugeladen werden."
+townyresources.admin_help_reload: 'TownyResources neuladen.'
 
 ### Town Screen
-town.screen.header: "&2Ressourcen:"
-town.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
-town.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
-town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
+townyresources.town.screen.header: "&2Ressourcen:"
+townyresources.town.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
 
 ### Nation Screen
-nation.screen.header: "&2Ressourcen:"
-nation.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
-nation.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+townyresources.nation.screen.header: "&2Ressourcen:"
+townyresources.nation.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
 
 ### Surveys 
-not_your_town: 'Du gehörst nicht zu dieser Stadt.'
-help_survey: 'Untersuche die Stadt an deinem aktuellen Standort, um neue Ressourcen zu entdecken.'
-discovery.success: "&b%s hat %s in %s entdeckt!. Tägliche Produktion: %d %s."
+townyresources.not_your_town: 'Du gehörst nicht zu dieser Stadt.'
+townyresources.help_survey: 'Untersuche die Stadt an deinem aktuellen Standort, um neue Ressourcen zu entdecken.'
+townyresources.discovery.success: "&b%s hat %s in %s entdeckt!. Tägliche Produktion: %d %s."
 
-msg_err_survey_no_town: "&cHier ist keine Stadt zum untersuchen."
-msg_err_survey_all_resources_already_discovered: "&cAlle Ressourcen dieser Stadt wurden schon entdeckt."
-msg_err_survey_not_enough_townblocks: "&cDie Stadt besitzt nicht genug Stadtblöcke um eine Untersuchung durchzuführen. Benötigt: %d, Derzeit: %d"
-msg_err_survey_too_expensive: "&cDu kannst dir diese Untersuchen nicht leisten. Benötigt: %s, Kontostand: %s"
-msg_err_not_enough_offers_left: "&cUntersuchung nicht möglich, da keine Angebote mehr in der konfigurierten Angebotsliste vorhanden sind."
+townyresources.msg_err_survey_no_town: "&cHier ist keine Stadt zum untersuchen."
+townyresources.msg_err_survey_all_resources_already_discovered: "&cAlle Ressourcen dieser Stadt wurden schon entdeckt."
+townyresources.msg_err_survey_not_enough_townblocks: "&cDie Stadt besitzt nicht genug Stadtblöcke um eine Untersuchung durchzuführen. Benötigt: %d, Derzeit: %d"
+townyresources.msg_err_survey_too_expensive: "&cDu kannst dir diese Untersuchen nicht leisten. Benötigt: %s, Kontostand: %s"
+townyresources.msg_err_not_enough_offers_left: "&cUntersuchung nicht möglich, da keine Angebote mehr in der konfigurierten Angebotsliste vorhanden sind."
 
 ### Production
-production.message: "&b%s städtisch produzierten Ressourcen."
+townyresources.production.message: "&b%s städtisch produzierten Ressourcen."
 
 ### Collection
-help_towncollect: 'Sammel alle verfügbaren Ressourcen deiner Stadt ein.'
-help_nationcollect: 'Sammel alle verfügbaren Ressourcen deiner Nation ein.'
+townyresources.help_towncollect: 'Sammel alle verfügbaren Ressourcen deiner Stadt ein.'
+townyresources.help_nationcollect: 'Sammel alle verfügbaren Ressourcen deiner Nation ein.'
+townyresources.resource.towncollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Stadt eingesammelt."
+townyresources.resource.nationcollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Nation eingesammelt."
 
-resource.towncollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Stadt eingesammelt."
-resource.nationcollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Nation eingesammelt."
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&cDu musst Mitglied der Stadt sein, um ihre Stadtressourcen zu sammeln."
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&cDu musst dich in deiner Stadt befinden, um ihre Stadtressourcen einzusammeln."
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&cEs gibt keine Stadtressourcen, die eingesammelt werden können.'
 
-msg_err_cannot_towncollect_not_a_town_member: "&cDu musst Mitglied der Stadt sein, um ihre Stadtressourcen zu sammeln."
-msg_err_cannot_towncollect_not_in_own_town: "&cDu musst dich in deiner Stadt befinden, um ihre Stadtressourcen einzusammeln."
-msg_err_cannot_towncollect_no_resources_available: '&cEs gibt keine Stadtressourcen, die eingesammelt werden können.'
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&cDu musst Mitglied einer Stadt sein, um Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&cDu musst Mitglied einer Nation sein, um Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&cDu musst in der Hauptstadt sein, um die Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&cEs sind keine nationalen Ressourcen zum Einsammeln verfügbar.'
 
-msg_err_cannot_nationcollect_not_a_town_member: "&cDu musst Mitglied einer Stadt sein, um Ressourcen der Nation einzusammeln."
-msg_err_cannot_nationcollect_not_a_nation_member: "&cDu musst Mitglied einer Nation sein, um Ressourcen der Nation einzusammeln."
-msg_err_cannot_nationcollect_not_in_capital: "&cDu musst in der Hauptstadt sein, um die Ressourcen der Nation einzusammeln."
-msg_err_cannot_nationcollect_no_resources_available: '&cEs sind keine nationalen Ressourcen zum Einsammeln verfügbar.'
-
-msg_err_cannot_collect_uknown_material: "&cUnbekanntes Material: %s. Diese Ressource kann nicht eingesammelt werden."
+townyresources.msg_err_cannot_collect_uknown_material: "&cUnbekanntes Material: %s. Diese Ressource kann nicht eingesammelt werden."
 
 # Player Extraction Limits
-msg_error_daily_extraction_limit_reached: "&cTägliches Entnahmegrenze erreicht für %s (%d)"
-daily_extraction_limits_reset: "&bAlle täglichen Entnahmegrenzen wurden zurückgesetzt."
+townyresources.msg_error_daily_extraction_limit_reached: "&cTägliches Entnahmegrenze erreicht für %s (%d)"
+townyresources.daily_extraction_limits_reset: "&bAlle täglichen Entnahmegrenzen wurden zurückgesetzt."
 
 # Resource Categories
 # The format of each of these is:  'extraction name, discovery name'
@@ -169,25 +168,25 @@ resource_category_ender_pearls: 'Enderperlen, ein Endermannest'
 resource_category_slime: 'Schleim, ein Schleimnest'
 
 #Added in 0.04
-msg_confirm_survey: "Du bist dabei, die Stadt %s nach der Ressource des Levels %d zu untersuchen. Dies wird %s kosten. Möchtest du fortfahren?"
-msg_err_level_x_resource_already_discovered: "Die Level %d Ressource wurde bereits endteckt."
-msg_err_cannot_collect_unknown_material: "Kann die folgenden unbekannten Materialen nicht einsammeln: %s"
+townyresources.msg_confirm_survey: "Du bist dabei, die Stadt %s nach der Ressource des Levels %d zu untersuchen. Dies wird %s kosten. Möchtest du fortfahren?"
+townyresources.msg_err_level_x_resource_already_discovered: "Die Level %d Ressource wurde bereits endteckt."
+townyresources.msg_err_cannot_collect_unknown_material: "Kann die folgenden unbekannten Materialen nicht einsammeln: %s"
 
 #Added in 0.05
-msg_confirm_survey_town_level_warning: "&cWARNUNG: Obwohl die Ressource entdeckt werden kann, ist die Bevölkerung der Stadt nicht groß genug, um sie zu produzieren. Benötigtest Stadtlevel: %d, Aktuelles Stadtlevel: %d."
+townyresources.msg_confirm_survey_town_level_warning: "&cWARNUNG: Obwohl die Ressource entdeckt werden kann, ist die Bevölkerung der Stadt nicht groß genug, um sie zu produzieren. Benötigtest Stadtlevel: %d, Aktuelles Stadtlevel: %d."
 
 #Added in 0.06
-admin_help_reroll: "Alle bisher entdeckten Ressourcen neu würfeln."
-msg_confirm_reroll: "&cWARNUNG: Du bist dabei, alle entdeckten Stadtressourcen neu zu würfeln. Dies betrifft alle Städte, die bereits Ressourcen entdeckt haben."
-all_resources_rerolled: "Alle entdeckten Ressourcen sind neu gewürfelt worden."
+townyresources.admin_help_reroll: "Alle bisher entdeckten Ressourcen neu würfeln."
+townyresources.msg_confirm_reroll: "&cWARNUNG: Du bist dabei, alle entdeckten Stadtressourcen neu zu würfeln. Dies betrifft alle Städte, die bereits Ressourcen entdeckt haben."
+townyresources.all_resources_rerolled: "Alle entdeckten Ressourcen sind neu gewürfelt worden."
 
-admin_help_bypass: "Umgeht die Entnahmegrenze."
-bypass_on: "Entnahmegrenze wird nun umgangen."
-bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."
+townyresources.admin_help_bypass: "Umgeht die Entnahmegrenze."
+townyresources.bypass_on: "Entnahmegrenze wird nun umgangen."
+townyresources.bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."
 
 #Added in 0.08
-resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
 
 #Added in 0.09
-msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
-admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
+townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

@@ -2,13 +2,11 @@ package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
-
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
@@ -82,7 +80,7 @@ public class TownResourceDiscoveryController {
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
         String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
         String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
-		TownyMessaging.sendGlobalMessage(Translatable.of("townyresources.discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
+        TownyResourcesMessagingUtil.sendGlobalMessage(Translatable.of("townyresources.discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
     }
 
     private static ResourceOfferCategory calculateWinningCategory(List<String> alreadyDiscoveredMaterials) throws TownyException{

@@ -1,7 +1,6 @@
 package io.github.townyadvanced.townyresources.objects;
 
 import org.bukkit.entity.Player;
-
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 /**

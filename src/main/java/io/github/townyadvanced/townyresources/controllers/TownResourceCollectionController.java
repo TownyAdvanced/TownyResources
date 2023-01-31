@@ -1,16 +1,16 @@
 package io.github.townyadvanced.townyresources.controllers;
 
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
-
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +31,7 @@ public class TownResourceCollectionController {
         if (!collectAvailableGovernmentResources(player, town, availableForCollection))
             return;
         //Notify Player
-        TownyMessaging.sendMsg(player, Translatable.of("townyresources.resource.towncollect.success"));
+        TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.resource.towncollect.success"));
     }
     
     public static synchronized void collectAvailableNationResources(Player player, Nation nation, Map<String,Integer> availableForCollection) {
@@ -39,7 +39,7 @@ public class TownResourceCollectionController {
         if (!collectAvailableGovernmentResources(player, nation, availableForCollection))
             return;
         //Notify Player
-        TownyMessaging.sendMsg(player, Translatable.of("townyresources.resource.nationcollect.success"));
+        TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.resource.nationcollect.success"));
     }
     
     /**
@@ -58,7 +58,7 @@ public class TownResourceCollectionController {
         //See if player can hold any items at all.
         PlayerInventory inv = player.getInventory();
         if (inv.firstEmpty() == -1) {
-        	TownyMessaging.sendMsg(player, Translatable.of("townyresources.resource.you_have_no_room_in_your_inventory"));
+        	TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.resource.you_have_no_room_in_your_inventory"));
             return false;
         }
 
@@ -140,7 +140,7 @@ public class TownResourceCollectionController {
             	}
             }
             //Unknown material. Send error message
-            TownyMessaging.sendErrorMsg(player, Translatable.of("townyresources.msg_err_cannot_collect_unknown_material", materialName));
+            TownyResourcesMessagingUtil.sendErrorMsg(player, Translatable.of("townyresources.msg_err_cannot_collect_unknown_material", materialName));
         }
 		return itemStackList;
 	}

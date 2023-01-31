@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;

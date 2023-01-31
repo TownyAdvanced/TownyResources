@@ -6,12 +6,16 @@ import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.palmergames.adventure.text.Component;
 import com.palmergames.adventure.text.event.HoverEvent;
 import com.palmergames.adventure.text.format.NamedTextColor;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
@@ -48,6 +52,32 @@ public class TownyResourcesMessagingUtil {
 		}
 		TownyResourcesMessagingUtil.categoryNames = categoryNames;
 	}
+
+	public static void sendErrorMsg(CommandSender sender, String message) {
+        //Ensure the sender is not null (i.e. is an online player who is not an npc)
+        if(sender != null)
+            TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.RED)).append(message));
+	}
+
+    public static void sendErrorMsg(CommandSender sender, Translatable message) {
+        //Ensure the sender is not null (i.e. is an online player who is not an npc)
+        if(sender != null)
+            TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.RED)).append(message));
+    }
+
+    public static void sendMsg(CommandSender sender, Translatable message) {
+        //Ensure the sender is not null (i.e. is an online player who is not an npc)
+        if(sender != null)
+        	TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.WHITE)).append(message));
+    }
+
+    public static void sendGlobalMessage(Translatable message) {
+        TownyResources.info(message.defaultLocale());
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player != null && TownyAPI.getInstance().isTownyWorld(player.getWorld()))
+                sendMsg(player, message);
+        }
+    }
 
     /**
      *  Format resource string to something we can send to chat utils
@@ -199,4 +229,5 @@ public class TownyResourcesMessagingUtil {
         }
         return StringMgmt.join(resourcesAsFormattedList,",");
 	}
+
 }

@@ -1,18 +1,18 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.gmail.goosius.siegewar.TownOccupationController;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
-
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -236,7 +236,7 @@ public class TownResourceProductionController {
             if(produceResourcesForOneGovernment(town))
                 numProducingTowns++;
         }
-        TownyMessaging.sendGlobalMessage(Translatable.of("townyresources.production.message", numProducingTowns));        
+        TownyResourcesMessagingUtil.sendGlobalMessage(Translatable.of("townyresources.production.message", numProducingTowns));        
     }
 
     /**

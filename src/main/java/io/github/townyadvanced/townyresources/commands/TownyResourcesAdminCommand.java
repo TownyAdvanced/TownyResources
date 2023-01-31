@@ -16,7 +16,7 @@ import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.BypassEntries;
-//import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -60,7 +60,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 	 	try {
 			//This permission check handles all the perms checks
 			if (sender instanceof Player && !sender.hasPermission(TownyResourcesPermissionNodes.TOWNY_RESOURCES_ADMIN_COMMAND.getNode(args[0]))) {
-				TownyMessaging.sendErrorMsg(sender, Translatable.of("msg_err_command_disable"));
+				TownyResourcesMessagingUtil.sendErrorMsg(sender, Translatable.of("msg_err_command_disable"));
 				return;
 			}
 			switch (args[0]) {
@@ -80,7 +80,7 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 					showHelp(sender);
 			}		 	
 		} catch (TownyException e) {
-			TownyMessaging.sendErrorMsg(sender, e.getMessage(sender));
+			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage(sender));
 		}
 	}
 	
@@ -95,19 +95,20 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 
 	private void parseReloadCommand(CommandSender sender) {
 		if (TownyResources.getPlugin().reloadAll()) {
-			TownyMessaging.sendMsg(sender, Translatable.of("townyresources.townyresources_reloaded_successfully"));
+			TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.townyresources_reloaded_successfully"));
 			return;
 		}
-		TownyMessaging.sendErrorMsg(sender, Translatable.of("townyresources.townyresources_failed_to_reload"));
+		TownyResourcesMessagingUtil.sendErrorMsg(sender, Translatable.of("townyresources.townyresources_failed_to_reload"));
 	}
 
 	private void parseReRollCommand(CommandSender sender, String[] args) throws TownyException {
 		if (args.length == 0) {
-			TownyMessaging.sendMessage(sender, Translatable.of("townyresources.msg_confirm_reroll"));
-			Confirmation.runOnAccept(() -> {
+			Confirmation.runOnAcceptAsync(() -> {
 				TownResourceDiscoveryController.reRollAllExistingResources();
-				TownyMessaging.sendGlobalMessage(Translatable.of("townyresources.all_resources_rerolled"));
-			}).sendTo(sender);
+				TownyResourcesMessagingUtil.sendGlobalMessage(Translatable.of("townyresources.all_resources_rerolled"));
+			})
+			.setTitle(Translatable.of("townyresources.msg_confirm_reroll"))
+			.sendTo(sender);
 			return;
 		}
 		
@@ -115,12 +116,13 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 		if (town == null)
 			throw new TownyException(Translatable.of("msg_err_not_registered_1", args[0]));
 		
-		TownyMessaging.sendMessage(sender, Translatable.of("townyresources.msg_confirm_reroll_town"));
-		Confirmation.runOnAccept(() -> {
+		Confirmation.runOnAcceptAsync(() -> {
 			TownResourceDiscoveryController.reRollExistingResources(town, false);
 			TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("townyresources.all_resources_rerolled"));
-			TownyMessaging.sendMsg(sender, Translatable.of("townyresources.all_resources_rerolled"));
-		}).sendTo(sender);
+			TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.all_resources_rerolled"));
+		})
+		.setTitle(Translatable.of("townyresources.msg_confirm_reroll_town"))
+		.sendTo(sender);
 	}
 
 	private void bypassExtractionLimitCommand(CommandSender sender) {
@@ -128,10 +130,10 @@ public class TownyResourcesAdminCommand implements CommandExecutor, TabCompleter
 
 		if (BypassEntries.bypassData.contains(playerUUID)) {
 			BypassEntries.bypassData.remove(playerUUID);
-			TownyMessaging.sendMsg(sender, Translatable.of("townyresources.bypass_off"));
+			TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.bypass_off"));
 		} else {
 			BypassEntries.bypassData.add(playerUUID);
-			TownyMessaging.sendMsg(sender, Translatable.of("townyresources.bypass_on"));
+			TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.bypass_on"));
 		}
 	}
 }

@@ -2,7 +2,6 @@ package io.github.townyadvanced.townyresources.commands;
 
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
@@ -20,6 +19,8 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryC
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -79,10 +80,10 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 			}		
 		} catch (TownyException te) {
 			//Expected type of exception (e.g. not enough money)
-			TownyMessaging.sendErrorMsg(player, te.getMessage(player));
+			TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage(player));
 		} catch (Exception e) {
 			//Unexpected exception
-			TownyMessaging.sendErrorMsg(player, e.getMessage());
+			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
 	}
 
@@ -127,20 +128,20 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 		if(TownyEconomyHandler.isActive())
 			surveyCostFormatted = TownyEconomyHandler.getFormattedBalance(surveyCost);
 
-		TownyMessaging.sendMessage(player, Translatable.of("townyresources.msg_confirm_survey", town.getName(), surveyLevel, surveyCostFormatted));
+		TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.msg_confirm_survey", town.getName(), surveyLevel, surveyCostFormatted));
 
 		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);
 		int actualTownLevel = town.getLevel();
 		if(actualTownLevel < requiredTownLevel) {
-			TownyMessaging.sendMessage(player, Translatable.of("townyresources.msg_confirm_survey_town_level_warning", requiredTownLevel, actualTownLevel));
+			TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.msg_confirm_survey_town_level_warning", requiredTownLevel, actualTownLevel));
 		}
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		Confirmation.runOnAccept(() -> {
 			try {
 				TownResourceDiscoveryController.discoverNewResource(resident, town, surveyLevel, surveyCost, discoveredResources);
 			} catch (TownyException te) {
-				TownyMessaging.sendErrorMsg(player, te.getMessage(player));
+				TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage(player));
 			}
 		})
 		.sendTo(player);

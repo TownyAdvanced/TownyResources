@@ -1,8 +1,13 @@
 package io.github.townyadvanced.townyresources;
 
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
+import com.palmergames.bukkit.towny.object.Translatable;
+import com.palmergames.bukkit.towny.object.TranslationLoader;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.bukkit.util.Version;
+
 import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
 import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
@@ -10,13 +15,13 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceOffersCont
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class TownyResources extends JavaPlugin {
 	
@@ -49,7 +54,7 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	public static String getPrefix() {
-		return TownyResourcesTranslation.language != null ? TownyResourcesTranslation.of("plugin_prefix") : "[" + plugin.getName() + "]";
+		return "[" + plugin.getName() + "]";
 	}
 
 	/**
@@ -64,8 +69,8 @@ public class TownyResources extends JavaPlugin {
 			//Setup integrations with other plugins
 			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages
-			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
-			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			TownyResourcesSettings.loadConfig();
+			loadLocalization(false);
 			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			//WARNING: Do not try to recalculate production here, because unless SW has been loaded first, the results will be incorrect.
@@ -95,8 +100,8 @@ public class TownyResources extends JavaPlugin {
 	public boolean reloadAll() {
 		try {
 			//Load settings and languages
-			TownyResourcesSettings.loadConfig(this.getDataFolder().getPath() + File.separator + "config.yml", getVersion());
-			TownyResourcesTranslation.loadLanguage(this.getDataFolder().getPath() + File.separator , "english.yml");
+			TownyResourcesSettings.loadConfig();
+			loadLocalization(true);
 			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
 			TownResourceProductionController.recalculateAllProduction();
@@ -109,6 +114,24 @@ public class TownyResources extends JavaPlugin {
             return false;
         }
 		info("TownyResources reloaded successfully.");
+		return true;
+	}
+
+	private boolean loadLocalization(boolean reload) {
+		try {
+			Plugin plugin = getPlugin(); 
+			Path langFolderPath = Paths.get(plugin.getDataFolder().getPath()).resolve("lang");
+			TranslationLoader loader = new TranslationLoader(langFolderPath, plugin, TownyResources.class);
+			loader.load();
+			TownyAPI.getInstance().addTranslations(plugin, loader.getTranslations());
+		} catch (TownyInitException e) {
+			e.printStackTrace();
+			severe("Locale files failed to load! Disabling!");
+			return false;
+		}
+		if (reload) {
+			info(Translatable.of("msg_reloaded_lang").defaultLocale());
+		}
 		return true;
 	}
 

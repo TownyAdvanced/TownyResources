@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * A convenience object to facilitate translation. 
  */
+@Deprecated
 public final class TownyResourcesTranslation {
 	
 	public static CommentedConfiguration language;

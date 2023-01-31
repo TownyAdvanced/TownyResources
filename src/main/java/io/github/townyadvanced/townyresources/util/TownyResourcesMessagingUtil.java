@@ -17,6 +17,10 @@ import com.palmergames.adventure.text.format.NamedTextColor;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
+import com.palmergames.bukkit.towny.object.Translation;
+import com.palmergames.bukkit.towny.object.TranslationLoader;
+import com.palmergames.bukkit.towny.object.Translator;
 import com.palmergames.bukkit.towny.utils.TownyComponents;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
@@ -31,7 +35,7 @@ import java.util.List;
 
 public class TownyResourcesMessagingUtil {
 
-    final static String prefix = TownyResourcesTranslation.of("plugin_prefix");
+    final static String prefix = Translatable.of("townyresources.plugin_prefix").defaultLocale();
     
     public static void sendErrorMsg(CommandSender sender, String message) {
         //Ensure the sender is not null (i.e. is an online player who is not an npc)
@@ -119,15 +123,16 @@ public class TownyResourcesMessagingUtil {
     /**
      * Used in the Government StatusScreen events to make the production/available components.
      * 
+     * @param translator Translator used for localization
      * @param resourcesAsString String representing the Resources due.
      * @param langString The language string which will be applied to the Component.
      * @return Component to be used in the StatusScreen
      */
-    public static Component getSubComponentForGovernmentScreens(String resourcesAsString, String langString) {
+    public static Component getSubComponentForGovernmentScreens(Translator translator, String resourcesAsString, String langString) {
 		String[] resourcesAsFormattedArray = convertResourceAmountsStringToFormattedArray(resourcesAsString);
 		String[] resourcesForDisplay = formatResourcesStringForGovernmentScreenDisplay(resourcesAsString);
 		Component component = Component.empty();
-		component = component.append(TownyComponents.legacy(TownyResourcesTranslation.of(langString , resourcesAsFormattedArray.length)))
+		component = component.append(TownyComponents.legacy(translator.of(langString , resourcesAsFormattedArray.length)))
 			.append(Component.text(StringMgmt.join(resourcesForDisplay, ", "), NamedTextColor.WHITE));
 		component = component.hoverEvent(HoverEvent.showText(Component.text(StringMgmt.join(resourcesAsFormattedArray, ", "))));
 		return component;

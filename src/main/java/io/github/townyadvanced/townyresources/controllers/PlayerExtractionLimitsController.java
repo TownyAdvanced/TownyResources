@@ -1,17 +1,19 @@
 package io.github.townyadvanced.townyresources.controllers;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.Translatable;
+
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.BypassEntries;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesResidentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.ActionBarUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Bukkit;
@@ -401,9 +403,9 @@ public class PlayerExtractionLimitsController {
 
     private static void sendLimitReachedWarningMessage(Player player, CategoryExtractionRecord categoryExtractionRecord) {
         if(System.currentTimeMillis() > categoryExtractionRecord.getNextLimitWarningTime()) {
-            String errorString = TownyResourcesTranslation.of("msg_error_daily_extraction_limit_reached",
+            String errorString = Translatable.of("townyresources.msg_error_daily_extraction_limit_reached",
                     categoryExtractionRecord.getTranslatedCategoryName(), 
-                    categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems());
+                    categoryExtractionRecord.getResourceExtractionCategory().getCategoryExtractionLimitItems()).forLocale(player);
             //Send temporary action bar message
             ActionBarUtil.sendActionBarErrorMessage(player, errorString);
             //Send longer-lasting chat message
@@ -478,7 +480,7 @@ public class PlayerExtractionLimitsController {
             //Clear any records which are in memory.
             allPlayerExtractionRecords.clear();
             //Send global message            
-            TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("daily_extraction_limits_reset"));
+            TownyMessaging.sendGlobalMessage(Translatable.of("townyresources.daily_extraction_limits_reset"));
         }
     }
 

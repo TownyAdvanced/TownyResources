@@ -219,12 +219,14 @@ public class TownyResourcesMessagingUtil {
         String[] amountAndMaterialName;
         String amount;
         String materialName;
+        double multiplier;
         for(String resourceAsString: resourcesAsArray) {
             if (resourceAsString.isEmpty())
                 continue;
             amountAndMaterialName = resourceAsString.split("-");
-            amount = String.valueOf((int) (Integer.valueOf(amountAndMaterialName[0]) * TownySettings.getTownLevel(town).resourceProductionModifier()));
             materialName = amountAndMaterialName[1];
+            multiplier = TownyResourcesSettings.isNonDynamicAmountMaterial(materialName) ? 1.0 : TownySettings.getTownLevel(town).resourceProductionModifier(); 
+            amount = String.valueOf((int) (Integer.valueOf(amountAndMaterialName[0]) * multiplier));
             resourcesAsFormattedList.add(amount + "-" + materialName);
         }
         return StringMgmt.join(resourcesAsFormattedList,",");

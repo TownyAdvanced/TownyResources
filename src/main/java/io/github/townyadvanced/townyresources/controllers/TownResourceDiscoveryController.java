@@ -76,7 +76,11 @@ public class TownResourceDiscoveryController {
 
          //Send global message
         int levelOfNewResource = discoveredMaterials.size();
-        double productivityModifierNormalized = (double)TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource-1) / 100;
+        double productivityModifierNormalized;
+		if (TownyResourcesSettings.isNonDynamicAmountMaterial(winningMaterial))
+			productivityModifierNormalized = 1.0;
+		else
+			productivityModifierNormalized = (double) TownyResourcesSettings.getProductionPercentagesPerResourceLevel().get(levelOfNewResource - 1) / 100;
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
         String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
         String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);

@@ -1,0 +1,193 @@
+name: TownyResources
+version: 0.10
+language: chinese
+author: Nailm
+website: 'https://github.com/TownyAdvanced/TownyResources'
+description: >
+    Language file for all game messages for this Locale.
+
+# A note on editing this file.
+# ----------------------------
+#
+# Do not alter this file if it is in the reference folder.
+# Before you edit this file, read about how Towny handles 
+# language files:
+# https://github.com/TownyAdvanced/Towny/wiki/How-Towny-Works#multi-language.
+#
+#
+# A note on text formatting (how Towny inserts words.)
+# ----------------------------------------------------
+#
+# You MUST retain spacing in the texts.
+# If a text begins or ends with a space, it must remain that
+# way.
+#
+#      %s = data to be supplied by the plugin.
+#
+# If you find that a line has multiple %s variables which would
+# be in a different order in your language, you can change them
+# to %1$s, %2$s, %4$s, %3$s to change their order. ie: %4$s
+# will always use the 4th variable, no matter where it is
+# placed on the line.
+#
+#
+# A note on text colouring and formatting.
+# ----------------------------------------
+#
+# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
+# DarkPurple = &9, LightGreen = &a, LightBlue = &b
+# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+#
+# This language file also supports using MiniMessage for colours
+# and formatting. Learn about MiniMessage formatting here:
+# https://docs.adventure.kyori.net/minimessage/format.html
+#
+#
+
+townyresources.plugin_prefix: '&f[&6城镇资源&f] '
+
+### Reloading
+townyresources.townyresources_reloaded_successfully: "插件重载成功."
+townyresources.townyresources_failed_to_reload: "插件重载失败."
+townyresources.admin_help_reload: '重载插件配置文件.'
+
+### Town Screen
+townyresources.town.screen.header: "&2城镇资源:"
+townyresources.town.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
+
+### Nation Screen
+townyresources.nation.screen.header: "&2国家资源:"
+townyresources.nation.screen.daily.production: '&2 > 每日产出 &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > 可收集 &a[%s]&2: &f'
+
+### Surveys
+townyresources.not_your_town: 'You do not belong to this town.'
+townyresources.help_survey: '对你脚下的城镇发起调查, 以发现新的资源.'
+townyresources.discovery.success: "&b%s 发现了资源 %s, 位于城镇 %s! 每日产出: %d %s."
+
+townyresources.msg_err_survey_no_town: "&c脚下没有可以调查的城镇."
+townyresources.msg_err_survey_all_resources_already_discovered: "&c这个城镇的所有资源都已调查完毕."
+townyresources.msg_err_survey_not_enough_townblocks: "&c这个城镇没有足够的领地用来调查. 需要: %d, 实际: %d"
+townyresources.msg_err_survey_too_expensive: "&c你负担不起本次调查. 需要: %s, 余额: %s"
+townyresources.msg_err_not_enough_offers_left: "&c无法调查 - 因为列表里已没有可用的资源."
+
+### Production
+townyresources.production.message: "&b当前共有 %s 个城镇正在产出资源."
+
+### Collection
+townyresources.help_towncollect: '收集你城镇的所有资源.'
+townyresources.help_nationcollect: '收集你国家的所有资源.'
+
+townyresources.resource.towncollect.success: "&2已成功收集你城镇的所有可用资源."
+townyresources.resource.nationcollect.success: "&2已成功收集你国家的所有可用资源."
+
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&c你必须是城镇的一员才可以收集资源."
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&c你必须在城镇里面才能收集资源."
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&c城镇当前没有可以收集的资源.'
+
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&c你必须是城镇的一员才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&c你必须是国家的资源才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&c你必须处在首都里面才可以收集国家资源."
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&c当前国家没有可以收集的资源.'
+
+townyresources.msg_err_cannot_collect_uknown_material: "&c未知物品类型: %s. 无法收集该资源."
+
+# Player Extraction Limits
+townyresources.msg_error_daily_extraction_limit_reached: "&c资源 %s 已达到每日采集上限 (%d)"
+townyresources.daily_extraction_limits_reset: "&b所有每日采集上限已重置."
+
+# Resource Categories
+# The format of each of these is:  'extraction name, discovery name'
+resource_category_common_dirt: '普通的泥土, 普通的泥土'
+resource_category_uncommon_dirt: '不同寻常的泥土, 不同寻常的泥土'
+resource_category_rare_dirt: '稀有的泥土, 稀有的泥土'
+resource_category_gravel: '沙砾, 沙砾'
+resource_category_sand: '沙子, 沙子'
+resource_category_wood: '木头, 木头'
+resource_category_common_rocks: '普通的岩石, 普通的岩石'
+resource_category_uncommon_rocks: '不同寻常的岩石, 不同寻常的岩石'
+resource_category_terracotta: '陶瓦, 陶瓦'
+resource_category_quartz: '石英, 石英'
+resource_category_prismarine: '海晶石, 海晶石'
+resource_category_obsidian: '黑曜石, 黑曜石'
+resource_category_clay: '黏土块, 黏土块'
+resource_category_ice: '冰, 冰'
+resource_category_snow: '雪, 雪'
+resource_category_coal: '煤, 煤'
+resource_category_iron: '铁, 铁'
+resource_category_gold: '金, 金'
+resource_category_gold_nugget: '金粒, 金子'
+resource_category_copper: '铜, 铜'
+resource_category_emeralds: '绿宝石, 绿宝石'
+resource_category_lapis_lazuli: '青金石, 青金石'
+resource_category_diamonds: '钻石, 钻石'
+resource_category_netherrack: '地狱岩, 地狱岩'
+resource_category_nether_quartz: '下届石英, 下届石英'
+resource_category_glowstone: '萤石, 萤石'
+resource_category_end_stone: '末地石, 末地石'
+resource_category_ancient_debris: '远古残骸, 远古残骸'
+resource_category_wool: '羊毛, 羊群'
+resource_category_coral: '珊瑚, 珊瑚'
+resource_category_wheat: '小麦, 肥沃的土壤'
+resource_category_carrots: '胡萝卜, 肥沃的土壤'
+resource_category_potatoes: '土豆, 肥沃的土壤'
+resource_category_beetroot: '甜菜, 肥沃的土壤'
+resource_category_pumpkin_seeds: '南瓜种子, 肥沃的土壤'
+resource_category_melon_slice: '西瓜片, 肥沃的土壤'
+resource_category_cocoa_beans: '可可豆, 肥沃的土壤'
+resource_category_pumpkin_blocks: '南瓜块, 肥沃的土壤'
+resource_category_melon_blocks: '西瓜块, 肥沃的土壤'
+resource_category_cocoa_pods: '可可豆荚, 肥沃的土壤'
+resource_category_kelp: '海藻, 海藻'
+resource_category_bamboo: '竹子, 肥沃的土壤'
+resource_category_cactus: '仙人掌, 肥沃的土壤'
+resource_category_mushrooms: '蘑菇, 蘑菇'
+resource_category_apples: '苹果, 苹果园'
+resource_category_vines: '藤蔓, 藤蔓'
+resource_category_nether_wart: '地狱疣, 地狱疣'
+resource_category_chorus_fruit: '紫颂果, 紫颂果'
+resource_category_fish: '鱼, 鱼群'
+resource_category_gunpowder: '火药, 遗弃的军火库'
+resource_category_string: '线, 盘丝洞'
+resource_category_spider_eyes: '蜘蛛眼, 蜘蛛巢'
+resource_category_feathers: '羽毛, 遗弃的养鸡场'
+resource_category_leather: '皮革, 一大群牛'
+resource_category_rabbit_hides: '兔子皮, 兔子洞'
+resource_category_rotten_flesh: '新鲜的腐肉, 尸潮'
+resource_category_bones: '骨头, 奇怪的骨骸'
+resource_category_pork: '猪肉, '
+resource_category_mutton: '羊肉, 羊群'
+resource_category_beef: '牛肉, 牛群'
+resource_category_chickens: '鸡肉, 遗弃的养鸡场'
+resource_category_eggs: '鸡蛋, 遗弃的养鸡场'
+resource_category_ender_pearls: '末影珍珠, 折跃失败的末影人'
+
+#Added in 0.03
+resource_category_slime: '史莱姆, 异世界的史莱姆'
+
+#Added in 0.04
+townyresources.msg_confirm_survey: "You are about to survey the town of %s for its level %d resource. This will cost %s. Do you wish to proceed ?"
+townyresources.msg_err_level_x_resource_already_discovered: "The level %d resource has already been discovered."
+townyresources.msg_err_cannot_collect_unknown_material: "Cannot collect the following unknown material: %s"
+
+#Added in 0.05
+townyresources.msg_confirm_survey_town_level_warning: "&cWARNING: Although the resource can be discovered, the town does not have a large enough population to produce it. Required Town Level: %d, Actual Town Level %d."
+
+#Added in 0.06
+townyresources.admin_help_reroll: "Reroll all currently discovered resources."
+townyresources.msg_confirm_reroll: "&cWARNING: You are about to re-roll all discovered town resources. This will affect all towns which have already discovered resources."
+townyresources.all_resources_rerolled: "All discovered town resources have been rerolled"
+
+townyresources.admin_help_bypass: "Bypasses extraction limit."
+townyresources.bypass_on: "Now bypassing extraction limit."
+townyresources.bypass_off: "No longer bypassing extraction limit."
+
+#Added in 0.08
+townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+
+#Added in 0.09
+townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

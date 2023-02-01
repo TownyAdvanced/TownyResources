@@ -1,5 +1,6 @@
 package io.github.townyadvanced.townyresources.objects;
 
+import org.bukkit.entity.Player;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 /**
@@ -59,8 +60,8 @@ public class CategoryExtractionRecord {
         return resourceExtractionCategory;
     }
 
-    public String getTranslatedCategoryName() {
-        return TownyResourcesMessagingUtil.formatExtractionCategoryNameForDisplay(getResourceExtractionCategory());
+    public String getTranslatedCategoryName(Player player) {
+        return TownyResourcesMessagingUtil.formatExtractionCategoryNameForDisplay(getResourceExtractionCategory(), player);
     }
 
     public long getNextLimitWarningTime() {

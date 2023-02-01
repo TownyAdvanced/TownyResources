@@ -15,38 +15,64 @@ import com.palmergames.adventure.text.Component;
 import com.palmergames.adventure.text.event.HoverEvent;
 import com.palmergames.adventure.text.format.NamedTextColor;
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
+import com.palmergames.bukkit.towny.object.Translator;
 import com.palmergames.bukkit.towny.utils.TownyComponents;
-import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
 import io.github.townyadvanced.townyresources.TownyResources;
-import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import org.bukkit.inventory.ItemStack;
+import org.yaml.snakeyaml.LoaderOptions;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class TownyResourcesMessagingUtil {
+	private static List<String> categoryNames;
 
-    final static String prefix = TownyResourcesTranslation.of("plugin_prefix");
-    
-    public static void sendErrorMsg(CommandSender sender, String message) {
+	public TownyResourcesMessagingUtil(TownyResources plugin) {
+		List<String> categoryNames = new ArrayList<>();
+		try (InputStream is = plugin.getClass().getResourceAsStream("/lang/en-US.yml")) {
+			Map<String, Object> values = new Yaml(new SafeConstructor(new LoaderOptions())).load(is);
+			for (String key : values.keySet()) {
+				if (key.startsWith("resource_category_"))
+					categoryNames.add(key);
+			}
+			is.close();
+		} catch (IOException ignored) {
+		}
+		TownyResourcesMessagingUtil.categoryNames = categoryNames;
+	}
+
+	public static void sendErrorMsg(CommandSender sender, String message) {
         //Ensure the sender is not null (i.e. is an online player who is not an npc)
         if(sender != null)
-            sender.sendMessage(prefix + Colors.Red + message);
-    }
+            TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.RED)).append(message));
+	}
 
-    public static void sendMsg(CommandSender sender, String message) {
+    public static void sendErrorMsg(CommandSender sender, Translatable message) {
         //Ensure the sender is not null (i.e. is an online player who is not an npc)
         if(sender != null)
-            sender.sendMessage(prefix + Colors.White + message);
+            TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.RED)).append(message));
     }
-    
-    public static void sendGlobalMessage(String message) {
-        TownyResources.info(message);
+
+    public static void sendMsg(CommandSender sender, Translatable message) {
+        //Ensure the sender is not null (i.e. is an online player who is not an npc)
+        if(sender != null)
+        	TownyMessaging.sendMessage(sender, Translatable.of("townyresources.plugin_prefix").append(Component.text("", NamedTextColor.WHITE)).append(message));
+    }
+
+    public static void sendGlobalMessage(Translatable message) {
+        TownyResources.info(message.defaultLocale());
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player != null && TownyAPI.getInstance().isTownyWorld(player.getWorld()))
                 sendMsg(player, message);
@@ -119,24 +145,25 @@ public class TownyResourcesMessagingUtil {
     /**
      * Used in the Government StatusScreen events to make the production/available components.
      * 
+     * @param translator Translator used for localization
      * @param resourcesAsString String representing the Resources due.
      * @param langString The language string which will be applied to the Component.
      * @return Component to be used in the StatusScreen
      */
-    public static Component getSubComponentForGovernmentScreens(String resourcesAsString, String langString) {
+    public static Component getSubComponentForGovernmentScreens(Translator translator, String resourcesAsString, String langString) {
 		String[] resourcesAsFormattedArray = convertResourceAmountsStringToFormattedArray(resourcesAsString);
 		String[] resourcesForDisplay = formatResourcesStringForGovernmentScreenDisplay(resourcesAsString);
 		Component component = Component.empty();
-		component = component.append(TownyComponents.legacy(TownyResourcesTranslation.of(langString , resourcesAsFormattedArray.length)))
+		component = component.append(TownyComponents.legacy(translator.of(langString , resourcesAsFormattedArray.length)))
 			.append(Component.text(StringMgmt.join(resourcesForDisplay, ", "), NamedTextColor.WHITE));
 		component = component.hoverEvent(HoverEvent.showText(Component.text(StringMgmt.join(resourcesAsFormattedArray, ", "))));
 		return component;
 	}
     
-    public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory) {
+    public static String formatExtractionCategoryNameForDisplay(ResourceExtractionCategory resourceExtractionCategory, CommandSender sender) {
         String categoryName = resourceExtractionCategory.getName();
-        if(TownyResourcesTranslation.hasKey("resource_category_" + categoryName)) {
-            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[0];
+        if (categoryNames.contains("resource_category_" + categoryName)) {
+            return Translatable.of("resource_category_" + categoryName).forLocale(sender).split(",")[0];
         } else {
             return formatMaterialNameForDisplay(categoryName);
         }
@@ -144,13 +171,13 @@ public class TownyResourcesMessagingUtil {
 
     public static String formatOfferCategoryNameForDisplay(ResourceOfferCategory resourceOfferCategory) {
         String categoryName = resourceOfferCategory.getName();
-        if(TownyResourcesTranslation.hasKey("resource_category_"+ categoryName)) {
-            return TownyResourcesTranslation.of("resource_category_" + categoryName).split(",")[1].trim();
+        if (categoryNames.contains("resource_category_" + categoryName)) {
+            return Translatable.of("resource_category_" + categoryName).defaultLocale().split(",")[1].trim();
         } else {
             return formatMaterialNameForDisplay(categoryName);
         }
     }
-        
+
     public static String formatMaterialNameForDisplay(String materialName) {
         Material material = Material.getMaterial(materialName);
         if(material == null) {
@@ -202,4 +229,5 @@ public class TownyResourcesMessagingUtil {
         }
         return StringMgmt.join(resourcesAsFormattedList,",");
 	}
+
 }

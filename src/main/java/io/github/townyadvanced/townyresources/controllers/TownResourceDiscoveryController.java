@@ -6,11 +6,11 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.github.townyadvanced.townyresources.settings.TownyResourcesTranslation;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 import java.util.ArrayList;
@@ -41,13 +41,13 @@ public class TownResourceDiscoveryController {
         //Ensure the resource at this level has not already been discovered
         List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
         if(surveyLevel <= discoveredResources.size()) {
-            throw new TownyException(TownyResourcesTranslation.of("msg_err_level_x_resource_already_discovered", surveyLevel));
+            throw new TownyException(Translatable.of("townyresources.msg_err_level_x_resource_already_discovered", surveyLevel));
         }
 
         //Ensure the player can afford this survey
         if (TownyEconomyHandler.isActive()) {
             if(!resident.getAccount().canPayFromHoldings(surveyCost)) {
-			    throw new TownyException(TownyResourcesTranslation.of("msg_err_survey_too_expensive",
+			    throw new TownyException(Translatable.of("townyresources.msg_err_survey_too_expensive",
                     TownyEconomyHandler.getFormattedBalance(surveyCost), resident.getAccount().getHoldingFormattedBalance()));
             }
 
@@ -80,7 +80,7 @@ public class TownResourceDiscoveryController {
         int preTaxProduction = (int)((winningCategory.getBaseAmountItems() * productivityModifierNormalized) + 0.5); 
         String categoryName = TownyResourcesMessagingUtil.formatOfferCategoryNameForDisplay(winningCategory);
         String materialName = TownyResourcesMessagingUtil.formatMaterialNameForDisplay(winningMaterial);
-		TownyResourcesMessagingUtil.sendGlobalMessage(TownyResourcesTranslation.of("discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
+        TownyResourcesMessagingUtil.sendGlobalMessage(Translatable.of("townyresources.discovery.success", resident.getName(), categoryName, town.getName(), preTaxProduction, materialName));
     }
 
     private static ResourceOfferCategory calculateWinningCategory(List<String> alreadyDiscoveredMaterials) throws TownyException{
@@ -101,7 +101,7 @@ public class TownResourceDiscoveryController {
         }
  		//Ensure there are enough candidates left for a new discovery
         if(candidateCategories.size() < 1)
-            throw new TownyException(TownyResourcesTranslation.of("msg_err_not_enough_offers_left"));
+            throw new TownyException(Translatable.of("townyresources.msg_err_not_enough_offers_left"));
 
         /*
          * Generate a discovery map which will allow us to pick a winning offer

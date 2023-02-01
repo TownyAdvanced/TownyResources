@@ -1,0 +1,192 @@
+name: TownyResources
+version: 0.10
+language: german
+author: ConfusedAlex
+website: 'https://github.com/TownyAdvanced/TownyResources'
+description: >
+    Language file for all game messages for this Locale.
+
+# A note on editing this file.
+# ----------------------------
+#
+# Do not alter this file if it is in the reference folder.
+# Before you edit this file, read about how Towny handles 
+# language files:
+# https://github.com/TownyAdvanced/Towny/wiki/How-Towny-Works#multi-language.
+#
+#
+# A note on text formatting (how Towny inserts words.)
+# ----------------------------------------------------
+#
+# You MUST retain spacing in the texts.
+# If a text begins or ends with a space, it must remain that
+# way.
+#
+#      %s = data to be supplied by the plugin.
+#
+# If you find that a line has multiple %s variables which would
+# be in a different order in your language, you can change them
+# to %1$s, %2$s, %4$s, %3$s to change their order. ie: %4$s
+# will always use the 4th variable, no matter where it is
+# placed on the line.
+#
+#
+# A note on text colouring and formatting.
+# ----------------------------------------
+#
+# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
+# DarkPurple = &9, LightGreen = &a, LightBlue = &b
+# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+#
+# This language file also supports using MiniMessage for colours
+# and formatting. Learn about MiniMessage formatting here:
+# https://docs.adventure.kyori.net/minimessage/format.html
+#
+#
+
+townyresources.plugin_prefix: '&f[&6Towny Resources&f] '
+
+### Reloading
+townyresources.townyresources_reloaded_successfully: "TownyResources erfolgreich neugeladen."
+townyresources.townyresources_failed_to_reload: "TownyResources konnte nicht neugeladen werden."
+townyresources.admin_help_reload: 'TownyResources neuladen.'
+
+### Town Screen
+townyresources.town.screen.header: "&2Ressourcen:"
+townyresources.town.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Town Level Modifier: &f %s'
+
+### Nation Screen
+townyresources.nation.screen.header: "&2Ressourcen:"
+townyresources.nation.screen.daily.production: '&2 > Tägliche Produktion &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > Verfügbar zum einsammeln &a[%s]&2: &f'
+
+### Surveys 
+townyresources.not_your_town: 'Du gehörst nicht zu dieser Stadt.'
+townyresources.help_survey: 'Untersuche die Stadt an deinem aktuellen Standort, um neue Ressourcen zu entdecken.'
+townyresources.discovery.success: "&b%s hat %s in %s entdeckt!. Tägliche Produktion: %d %s."
+
+townyresources.msg_err_survey_no_town: "&cHier ist keine Stadt zum untersuchen."
+townyresources.msg_err_survey_all_resources_already_discovered: "&cAlle Ressourcen dieser Stadt wurden schon entdeckt."
+townyresources.msg_err_survey_not_enough_townblocks: "&cDie Stadt besitzt nicht genug Stadtblöcke um eine Untersuchung durchzuführen. Benötigt: %d, Derzeit: %d"
+townyresources.msg_err_survey_too_expensive: "&cDu kannst dir diese Untersuchen nicht leisten. Benötigt: %s, Kontostand: %s"
+townyresources.msg_err_not_enough_offers_left: "&cUntersuchung nicht möglich, da keine Angebote mehr in der konfigurierten Angebotsliste vorhanden sind."
+
+### Production
+townyresources.production.message: "&b%s städtisch produzierten Ressourcen."
+
+### Collection
+townyresources.help_towncollect: 'Sammel alle verfügbaren Ressourcen deiner Stadt ein.'
+townyresources.help_nationcollect: 'Sammel alle verfügbaren Ressourcen deiner Nation ein.'
+townyresources.resource.towncollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Stadt eingesammelt."
+townyresources.resource.nationcollect.success: "&2Du hast erfolgreich alle verfügbaren Ressourcen der Nation eingesammelt."
+
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&cDu musst Mitglied der Stadt sein, um ihre Stadtressourcen zu sammeln."
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&cDu musst dich in deiner Stadt befinden, um ihre Stadtressourcen einzusammeln."
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&cEs gibt keine Stadtressourcen, die eingesammelt werden können.'
+
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&cDu musst Mitglied einer Stadt sein, um Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&cDu musst Mitglied einer Nation sein, um Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&cDu musst in der Hauptstadt sein, um die Ressourcen der Nation einzusammeln."
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&cEs sind keine nationalen Ressourcen zum Einsammeln verfügbar.'
+
+townyresources.msg_err_cannot_collect_uknown_material: "&cUnbekanntes Material: %s. Diese Ressource kann nicht eingesammelt werden."
+
+# Player Extraction Limits
+townyresources.msg_error_daily_extraction_limit_reached: "&cTägliches Entnahmegrenze erreicht für %s (%d)"
+townyresources.daily_extraction_limits_reset: "&bAlle täglichen Entnahmegrenzen wurden zurückgesetzt."
+
+# Resource Categories
+# The format of each of these is:  'extraction name, discovery name'
+resource_category_common_dirt: 'gewöhnliche Erde, gewöhnliche Erde'
+resource_category_uncommon_dirt: 'ungewöhnliche Erde, ungewöhnliche Erde'
+resource_category_rare_dirt: 'seltene Erde, seltene Erde'
+resource_category_gravel: 'Kies, Kies'
+resource_category_sand: 'Sand, Sand'
+resource_category_wood: 'Holz, Holz'
+resource_category_common_rocks: 'gewöhnlicher rocks, gewöhnlicher rocks'
+resource_category_uncommon_rocks: 'ungewöhnlicher rocks, ungewöhnlicher rocks'
+resource_category_terracotta: 'Keramik, Keramik'
+resource_category_quartz: 'Quartz, Quartz'
+resource_category_prismarine: 'Prismarin, Prismarin'
+resource_category_obsidian: 'Obsidian, Obsidian'
+resource_category_clay: 'Lehm, Lehm'
+resource_category_ice: 'Eis, Eis'
+resource_category_snow: 'Schnee, Schnee'
+resource_category_coal: 'Kohle, Kohle'
+resource_category_iron: 'Iron, Iron'
+resource_category_gold: 'Gold, Gold'
+resource_category_gold_nugget: 'Goldklumpen, Gold'
+resource_category_copper: 'Kupfer, Kupfer'
+resource_category_emeralds: 'Smaragde, Smaragde'
+resource_category_lapis_lazuli: 'Lapis Lazuli, Lapis Lazuli'
+resource_category_diamonds: 'Diamanten, Diamanten'
+resource_category_netherrack: 'Netherrack, Netherrack'
+resource_category_nether_quartz: 'Nether Quartz, Nether Quartz'
+resource_category_glowstone: 'Glowstone, Glowstone'
+resource_category_end_stone: 'Endstein, Endstein'
+resource_category_ancient_debris: 'Antiker Schrott, Antiker Schrott'
+resource_category_wool: 'Wolle, eine Schafsherde'
+resource_category_coral: 'Koralle, Koralle'
+resource_category_wheat: 'Weizen, fruchtbarer Boden'
+resource_category_carrots: 'Karotten, fruchtbarer Boden'
+resource_category_potatoes: 'Kartoffeln, fruchtbarer Boden'
+resource_category_beetroot: 'Rote Beete, fruchtbarer Boden'
+resource_category_pumpkin_seeds: 'Kürbissamen, fruchtbarer Boden'
+resource_category_melon_slice: 'Melonenscheiben, fruchtbarer Boden'
+resource_category_cocoa_beans: 'Kakaobohnen, fruchtbarer Boden'
+resource_category_pumpkin_blocks: 'Kürbisse, fruchtbarer Boden'
+resource_category_melon_blocks: 'Melonen, fruchtbarer Boden'
+resource_category_cocoa_pods: 'Kakao, fruchtbarer Boden'
+resource_category_kelp: 'Seetang, Seetang'
+resource_category_bamboo: 'Bambus, fruchtbarer Boden'
+resource_category_cactus: 'Kaktus, fruchtbarer Boden'
+resource_category_mushrooms: 'Pilze, Pilze'
+resource_category_apples: 'Äpfel, ein Obstgarten'
+resource_category_vines: 'Ranken, Ranken'
+resource_category_nether_wart: 'Netherwarze, Netherwarze'
+resource_category_chorus_fruit: 'Chorusfrucht, Chorusfrucht'
+resource_category_fish: 'Fisch, ein Fischschwarm'
+resource_category_gunpowder: 'Schießpulver, Schießpulver'
+resource_category_string: 'Fäden, ein Spinnenest'
+resource_category_spider_eyes: 'Spinnenaugen, ein Spinnenest'
+resource_category_feathers: 'Federn, eine Hühnerherde'
+resource_category_leather: 'Leder, eine Kuhherde'
+resource_category_rabbit_hides: 'Kaninchenfelle, eine Kaninchenherde'
+resource_category_rotten_flesh: 'verrottetes Fleisch, ein Zombienest'
+resource_category_bones: 'Knochen, ein Skelettnest'
+resource_category_pork: 'Schweinefleisch, eine Schweineherde'
+resource_category_mutton: 'Schaffleisch, eine Schafsherde'
+resource_category_beef: 'Rindfleisch, eine Kuhherde'
+resource_category_chickens: 'Hühnerfleisch, eine Hühnerherde'
+resource_category_eggs: 'Eier, eine Hühnerherde'
+resource_category_ender_pearls: 'Enderperlen, ein Endermannest'
+
+#Added in 0.03
+resource_category_slime: 'Schleim, ein Schleimnest'
+
+#Added in 0.04
+townyresources.msg_confirm_survey: "Du bist dabei, die Stadt %s nach der Ressource des Levels %d zu untersuchen. Dies wird %s kosten. Möchtest du fortfahren?"
+townyresources.msg_err_level_x_resource_already_discovered: "Die Level %d Ressource wurde bereits endteckt."
+townyresources.msg_err_cannot_collect_unknown_material: "Kann die folgenden unbekannten Materialen nicht einsammeln: %s"
+
+#Added in 0.05
+townyresources.msg_confirm_survey_town_level_warning: "&cWARNUNG: Obwohl die Ressource entdeckt werden kann, ist die Bevölkerung der Stadt nicht groß genug, um sie zu produzieren. Benötigtest Stadtlevel: %d, Aktuelles Stadtlevel: %d."
+
+#Added in 0.06
+townyresources.admin_help_reroll: "Alle bisher entdeckten Ressourcen neu würfeln."
+townyresources.msg_confirm_reroll: "&cWARNUNG: Du bist dabei, alle entdeckten Stadtressourcen neu zu würfeln. Dies betrifft alle Städte, die bereits Ressourcen entdeckt haben."
+townyresources.all_resources_rerolled: "Alle entdeckten Ressourcen sind neu gewürfelt worden."
+
+townyresources.admin_help_bypass: "Umgeht die Entnahmegrenze."
+townyresources.bypass_on: "Entnahmegrenze wird nun umgangen."
+townyresources.bypass_off: "Entnahmegrenze wird nun nicht mehr umgangen."
+
+#Added in 0.08
+townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any free slots in your inventory. Make some room before collecting.'
+
+#Added in 0.09
+townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
+townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."

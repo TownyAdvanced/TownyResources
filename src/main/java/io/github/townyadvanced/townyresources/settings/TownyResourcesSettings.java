@@ -1,7 +1,10 @@
 package io.github.townyadvanced.townyresources.settings;
 
-import java.io.File;
-import java.util.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +23,8 @@ import org.bukkit.Material;
 public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
 	private static int sumOfAllOfferDiscoveryProbabilityWeights = 0;  //Used when getting the resource offers
-	    
+	private static Path configPath = TownyResources.getPlugin().getDataFolder().toPath().resolve("config.yml");
+
 	public static boolean isEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.ENABLED);
 	}
@@ -218,18 +222,17 @@ public class TownyResourcesSettings {
 		return false; //Unknown material		
 	}
 	
-	public static void loadConfig(String filepath, String version) throws TownyException{
-		if (FileMgmt.checkOrCreateFile(filepath)) {
-			File file = new File(filepath);
-
-			// read the config.yml into memory
-			config = new CommentedConfiguration(file.toPath());
-			if (!config.load())
-				throw new TownyException("Failed to load Config!");
-
-			setDefaults(version, file);
-			config.save();
+	public static void loadConfig() throws TownyException {
+		if (!FileMgmt.checkOrCreateFile(configPath.toString())) {
+			throw new TownyException("Failed to create config file!");
 		}
+		
+		config = new CommentedConfiguration(configPath);
+		if (!config.load())
+			throw new TownyException("Failed to load Config!");
+
+		setDefaults(TownyResources.getPlugin().getVersion(), configPath);
+		config.save();
 	}
 
 	public static void addComment(String root, String... comments) {
@@ -251,8 +254,8 @@ public class TownyResourcesSettings {
 	/**
 	 * Builds a new config reading old config data.
 	 */
-	private static void setDefaults(String version, File file) {
-		newConfig = new CommentedConfiguration(file.toPath());
+	private static void setDefaults(String version, Path configPath) {
+		newConfig = new CommentedConfiguration(configPath);
 		newConfig.load();
 
 		for (TownyResourcesConfigNodes root : TownyResourcesConfigNodes.values()) {

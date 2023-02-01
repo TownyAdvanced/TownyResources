@@ -200,6 +200,7 @@ public class TownResourceProductionController {
         Map<String, Integer> production = new HashMap<>();
         String material;
         double baseProducedAmount;
+        double bonusesPerResourceLevel;
         int finalProducedAmount;
 
         for(int i = 0; i < discoveredResources.size(); i++) {
@@ -209,7 +210,8 @@ public class TownResourceProductionController {
                 finalProducedAmount = 0;
             } else {
                 baseProducedAmount = allOffers.get(material).getBaseAmountItems();
-                finalProducedAmount = (int)((baseProducedAmount * normalizedBonusesPerResourceLevel.get(i) * cutNormalized) + 0.5);
+                bonusesPerResourceLevel = TownyResourcesSettings.isNonDynamicAmountMaterial(material) ? 1.0 : normalizedBonusesPerResourceLevel.get(i);
+                finalProducedAmount = (int)((baseProducedAmount * bonusesPerResourceLevel * cutNormalized) + 0.5);
             }
             production.put(material, finalProducedAmount);
         }
@@ -278,6 +280,8 @@ public class TownResourceProductionController {
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
                 townLevelModifier = government instanceof Town town ? TownySettings.getTownLevel(town).resourceProductionModifier() : 1.0;
+				if (TownyResourcesSettings.isNonDynamicAmountMaterial(resource))
+					townLevelModifier = 1.0;
                 quantityToProduce = (int) (townProductionEntry.getValue() * townLevelModifier);
                 if(quantityToProduce == 0)
                     continue;

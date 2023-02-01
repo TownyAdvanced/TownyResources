@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -310,6 +311,10 @@ public class TownyResourcesSettings {
 		return config.getString(node.getRoot().toLowerCase(), node.getDefault());
 	}
 
+	private static List<String> getStrArr(TownyResourcesConfigNodes node) {
+		return Arrays.stream(getString(node).split(",")).collect(Collectors.toList());
+	}
+	
 	/**
      * Return an IMMUTABLE list of integers
 	 */
@@ -382,6 +387,10 @@ public class TownyResourcesSettings {
 		return getInt(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS);
 	}
 
+	public static boolean isNonDynamicAmountMaterial(String material) {
+		return getStrArr(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMMOUNTS).contains(material);
+	}
+	
 	public static String getMaterialsDisplayLanguage() {
 		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_LANGUAGE_MATERIALS_DISPLAY_LANGUAGE);
 	}

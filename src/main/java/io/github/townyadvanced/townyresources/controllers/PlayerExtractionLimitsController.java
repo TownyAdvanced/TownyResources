@@ -177,12 +177,12 @@ public class PlayerExtractionLimitsController {
             CategoryExtractionRecord categoryExtractionRecord = getCategoryExtractionRecord(playerExtractionRecord, drop.getType());                                            
                  
             /* 
-             * If player is at the limit, cancel the drop (except if ANCIENT_DEBRIS, then cancel the whole break).
+             * If player is at the limit, cancel the drop (except if ANCIENT_DEBRIS or other blocks that are considered unbreakable, then cancel the whole break).
              *
              * If player is not at the limit, add extracted amount to record.                    
              */
             if(categoryExtractionRecord.isExtractionLimitReached()) {
-                if(drop.getType() == Material.ANCIENT_DEBRIS) {
+                if (TownyResourcesSettings.isUnbreakableWhenExtractionLimitHit(drop.getType().name())) {
                     event.setCancelled(true);                    
                 } else {
                     event.setDropItems(false);                    

@@ -150,6 +150,12 @@ public enum TownyResourcesConfigNodes {
 			"# 1 - The name of the category (used for messaging)",
 			"# 2-  The daily limit per player (in stacks)",
 			"# 3-  The list of materials in the category"),
+	RESOURCE_EXTRACTION_LIMITS_UNBREAKABLES(
+			"resource_extraction_limits.unbreakables",
+			"ANCIENT_DEBRIS",
+			"",
+			"# A list of blocks which cannot be broken when the player hits the extraction limit for this type.",
+			"# Ex: unbreakables: ANCIENT_DEBRIS,DIAMOND_BLOCK"),
 	TOWN_RESOURCES(
 			"town_resources",
 			"",

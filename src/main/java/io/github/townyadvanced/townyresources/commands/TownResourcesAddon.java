@@ -1,17 +1,18 @@
 package io.github.townyadvanced.townyresources.commands;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
 import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyCommandAddonAPI.CommandType;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
-import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.AddonCommand;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.Translator;
-import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import io.github.townyadvanced.townyresources.controllers.TownResourceCollectionController;
@@ -22,9 +23,8 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -33,10 +33,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class TownyResourcesCommand extends BaseCommand implements CommandExecutor, TabCompleter {
+public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 	
-	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "towncollect", "nationcollect");
-	
+	public TownResourcesAddon() {
+		AddonCommand townResourcesCommand = new AddonCommand(CommandType.TOWN, "resources", this);
+		TownyCommandAddonAPI.addSubCommand(townResourcesCommand);
+	}
+
+	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "collect");
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
 			return NameUtil.filterByStart(townyResourcesTabCompletes, args[0]);
@@ -44,40 +48,30 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 			return Collections.emptyList();
 	}
 
-	private void showTownyResourcesHelp(CommandSender sender) {
+	private void showTownResourcesHelp(CommandSender sender) {
 		Translator translator = Translator.locale(sender);
-		sender.sendMessage(ChatTools.formatTitle("/townyresources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "survey", translator.of("townyresources.help_survey")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "towncollect", translator.of("townyresources.help_towncollect")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/tr", "nationcollect", translator.of("townyresources.help_nationcollect")));
+		sender.sendMessage(ChatTools.formatTitle("/town resources"));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/t resources", "survey", translator.of("townyresources.help_survey")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/t resources", "collect", translator.of("townyresources.help_towncollect")));
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (sender instanceof Player && args.length > 0)
-			parseTownyResourcesCommand((Player) sender, args);
+		if (sender instanceof Player player && args.length > 0)
+			parseTownResourcesCommand(player, args);
 		else 
-			showTownyResourcesHelp(sender);
+			showTownResourcesHelp(sender);
 		return true;
 	}
 
-	private void parseTownyResourcesCommand(Player player, String[] args) {
+	private void parseTownResourcesCommand(Player player, String[] args) {
 		try {
-			//This permission check handles all the perms checks
-			checkPermOrThrow(player, TownyResourcesPermissionNodes.TOWNY_RESOURCES_COMMAND.getNode(args[0]));
 
 			switch (args[0].toLowerCase(Locale.ROOT)) {
-				case "survey":
-					parseSurveyCommand(player);
-					break;
-				case "towncollect":
-					parseTownCollectCommand(player);
-					break;
-				case "nationcollect":
-					parseNationCollectCommand(player);
-					break;
-				default:
-					showTownyResourcesHelp(player);
-			}		
+			case "survey" -> parseSurveyCommand(player);
+			case "collect" -> parseTownCollectCommand(player);
+			default -> showTownResourcesHelp(player);
+			}
+
 		} catch (TownyException te) {
 			//Expected type of exception (e.g. not enough money)
 			TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage(player));
@@ -88,21 +82,21 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 	}
 
 	private void parseSurveyCommand(Player player) throws TownyException{
-		WorldCoord playerWorldCoord = WorldCoord.parseWorldCoord(player);
-			
+		checkPermOrThrow(player, TownyResourcesPermissionNodes.TOWNY_RESOURCES_COMMAND_SURVEY.getNode());
+
 		//Check if surveys are enabled
 		if(!TownyResourcesSettings.areSurveysEnabled())
 			throw new TownyException(Translatable.of("msg_err_command_disable"));
-			
+
+		Town town = TownyAPI.getInstance().getTown(player.getLocation());
 		//Check if there is a town here
-		if(!playerWorldCoord.hasTownBlock())
+		if(town == null)
 			throw new TownyException(Translatable.of("townyresources.msg_err_survey_no_town"));
 
-		//Check if there are resources left to discover at the town
-		Town town = playerWorldCoord.getTownBlock().getTown();
 		if (!town.hasResident(player))
 			throw new TownyException(Translatable.of("townyresources.not_your_town"));
-		
+
+		//Check if there are resources left to discover at the town
 		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
 		List<Integer> costPerResourceLevel = TownyResourcesSettings.getSurveyCostsPerResourceLevel();
 		List<Integer> requiredNumTownblocksPerResourceLevel = TownyResourcesSettings.getSurveyNumTownblocksRequirementsPerResourceLevel();
@@ -148,6 +142,8 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 	}
 	
 	private static void parseTownCollectCommand(Player player) throws TownyException {
+		checkPermOrThrow(player, TownyResourcesPermissionNodes.TOWNY_RESOURCES_COMMAND_TOWN_COLLECT.getNode());
+
 		//Ensure player a town member
 		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
 		if(!resident.hasTown()) 
@@ -155,8 +151,7 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 		
 		//Ensure player is actually in their own town
 		Town town = TownyAPI.getInstance().getTown(player.getLocation());
-		if(TownyAPI.getInstance().isWilderness(player.getLocation()) 
-			|| !(town.equals(resident.getTownOrNull())))
+		if(town == null || !town.hasResident(resident))
 			throw new TownyException(Translatable.of("townyresources.msg_err_cannot_towncollect_not_in_own_town"));
 		
 		//Ensure some resources are available
@@ -166,33 +161,4 @@ public class TownyResourcesCommand extends BaseCommand implements CommandExecuto
 		
 		//Collect resources
 		TownResourceCollectionController.collectAvailableTownResources(player, town, availableForCollection);
-	}
-
-	private static void parseNationCollectCommand(Player player) throws TownyException {
-		//Ensure player a town member
-		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
-		if(!resident.hasTown()) 
-			throw new TownyException(Translatable.of("townyresources.msg_err_cannot_nationcollect_not_a_town_member"));
-
-		//Ensure player is a nation member
-		if(!resident.hasNation())
-			throw new TownyException(Translatable.of("townyresources.msg_err_cannot_nationcollect_not_a_nation_member"));
-		
-		Nation nation = resident.getNationOrNull();
-		
-		//Ensure player is actually in the capital.
-		Town town = TownyAPI.getInstance().getTown(player.getLocation());
-		if(TownyAPI.getInstance().isWilderness(player.getLocation()) 
-			|| !(town.getNationOrNull().equals(nation) && town.isCapital()))
-			throw new TownyException(Translatable.of("townyresources.msg_err_cannot_nationcollect_not_in_capital"));
-		
-		//Ensure some resources are available
-		Map<String, Integer> availableForCollection = TownyResourcesGovernmentMetaDataController.getAvailableForCollectionAsMap(nation);
-		if(availableForCollection.isEmpty())
-			throw new TownyException(Translatable.of("townyresources.msg_err_cannot_nationcollect_no_resources_available"));
-		
-		//Collect resources
-		TownResourceCollectionController.collectAvailableNationResources(player, nation, availableForCollection);
-	}
-
-}
+	}}

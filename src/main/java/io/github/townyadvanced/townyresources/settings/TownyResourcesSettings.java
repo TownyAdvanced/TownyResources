@@ -388,6 +388,10 @@ public class TownyResourcesSettings {
 		return getInt(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_COOLDOWN_AFTER_DAILY_LIMIT_WARNING_MESSAGE_MILLIS);
 	}
 
+	public static boolean isUnbreakableWhenExtractionLimitHit(String material) {
+		return getStrArr(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_UNBREAKABLES).contains(material);
+	}
+
 	public static boolean isNonDynamicAmountMaterial(String material) {
 		return getStrArr(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMMOUNTS).contains(material);
 	}

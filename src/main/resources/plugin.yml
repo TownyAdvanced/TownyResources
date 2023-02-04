@@ -2,7 +2,7 @@ name: TownyResources
 main: io.github.townyadvanced.townyresources.TownyResources
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
-author: Goosius
+author: 'Goosius, LlmDL'
 website: 'https://github.com/TownyAdvanced/TownyResources'
 prefix: ${project.artifactId}
 depend: [Towny]

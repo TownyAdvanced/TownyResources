@@ -147,11 +147,14 @@ public class TownyResources extends JavaPlugin {
 
 	private void printSickASCIIArt() {
 		Bukkit.getConsoleSender().sendMessage("");
-		Bukkit.getConsoleSender().sendMessage(              "        --------------- Goosius' --------------  ");
+		Bukkit.getConsoleSender().sendMessage(              "       --------------- Goosius' ---------------  ");
 		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "     ╔╦╗┌─┐┬ ┬┌┐┌┬ ┬  ╦═╗┌─┐┌─┐┌─┐┬ ┬┬─┐┌─┐┌─┐┌─┐");
 		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "      ║ │ │││││││└┬┘  ╠╦╝├┤ └─┐│ ││ │├┬┘│  ├┤ └─┐");
 		Bukkit.getConsoleSender().sendMessage(Colors.Gold + "      ╩ └─┘└┴┘┘└┘ ┴   ╩╚═└─┘└─┘└─┘└─┘┴└─└─┘└─┘└─┘");
-		Bukkit.getConsoleSender().sendMessage("");	
+		Bukkit.getConsoleSender().sendMessage("");
+		Bukkit.getConsoleSender().sendMessage(              "       ---------- Maintained by LlmDl ---------  ");
+		Bukkit.getConsoleSender().sendMessage(              "       -- https://github.com/sponsors/LlmDl  --  ");
+		Bukkit.getConsoleSender().sendMessage("");
 	}
 
 	private void registerListeners() {

@@ -7,8 +7,10 @@ import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.TranslationLoader;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.bukkit.util.Version;
-import io.github.townyadvanced.townyresources.commands.TownyResourcesAdminCommand;
-import io.github.townyadvanced.townyresources.commands.TownyResourcesCommand;
+
+import io.github.townyadvanced.townyresources.commands.NationCollectAddon;
+import io.github.townyadvanced.townyresources.commands.TownResourcesAddon;
+import io.github.townyadvanced.townyresources.commands.TownyAdminResourcesAddon;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceOffersController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
@@ -163,8 +165,9 @@ public class TownyResources extends JavaPlugin {
 	}
 
 	private void registerCommands() {
-		getCommand("townyresources").setExecutor(new TownyResourcesCommand());
-		getCommand("townyresourcesadmin").setExecutor(new TownyResourcesAdminCommand());
+		new TownResourcesAddon();
+		new NationCollectAddon();
+		new TownyAdminResourcesAddon();
 	}
 
 	public boolean isDynmapTownyInstalled() {

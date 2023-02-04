@@ -2,6 +2,9 @@ package io.github.townyadvanced.townyresources.metadata;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.metadata.StringDataField;
+import com.palmergames.bukkit.towny.utils.MetaDataUtil;
+
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.objects.CategoryExtractionRecord;
@@ -28,6 +31,7 @@ public class TownyResourcesResidentMetaDataController {
 
     private final static String
         extractionRecordMetadataKey = "townyresources_extractionRecord";  //e.g.   "25-common_rocks, 64-wheat"
+    private final static StringDataField extractionRecordSDF = new StringDataField(extractionRecordMetadataKey, ""); 
 
 
     public static Map<Material, CategoryExtractionRecord> getPlayerExtractionRecord(Player player) {
@@ -36,7 +40,7 @@ public class TownyResourcesResidentMetaDataController {
         if(resident == null)
             return new HashMap<>();
         //Read player extraction record
-        String recordAsString = MetaDataUtil.getSdf(resident, extractionRecordMetadataKey); 
+        String recordAsString = MetaDataUtil.getString(resident, extractionRecordSDF); 
         if(recordAsString.isEmpty())
             return new HashMap<>();       
         Map<Material, CategoryExtractionRecord> result = new HashMap<>();
@@ -80,11 +84,11 @@ public class TownyResourcesResidentMetaDataController {
         }
         if(!recordAsString.toString().isEmpty()) {
             //Set the string into metadata
-            MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, recordAsString.toString());     
+            MetaDataUtil.setString(resident, extractionRecordSDF, recordAsString.toString(), false);
         }
     }
     
     public static void removePlayerExtractionRecord(Resident resident) {
-        MetaDataUtil.setSdf(resident, extractionRecordMetadataKey, null);
+        resident.removeMetaData(extractionRecordSDF);
     }
 }

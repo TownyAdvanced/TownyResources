@@ -2,6 +2,9 @@ package io.github.townyadvanced.townyresources.metadata;
 
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.metadata.StringDataField;
+import com.palmergames.bukkit.towny.utils.MetaDataUtil;
+
 import io.github.townyadvanced.townyresources.TownyResources;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,9 +27,12 @@ public class TownyResourcesGovernmentMetaDataController {
         discoveredMetadataKey = "townyresources_discovered",  //e.g.   OAK_LOG, SUGAR
         dailyProductionMetadataKey = "townyresources_dailyproduction",  //e.g.   32-OAK_LOG, 32-SUGAR
         availableForCollectionMetadataKey = "townyresources_availableforcollection";  //e.g.  64-OAK_LOG, 64-SUGAR
+	private static StringDataField discoveredSDF = new StringDataField(discoveredMetadataKey, "");
+	private static StringDataField dailyProductionSDF = new StringDataField(dailyProductionMetadataKey, "");
+	private static StringDataField availableForCollectionSDF = new StringDataField(availableForCollectionMetadataKey, "");
 
     public static String getDiscovered(Government government) {
-        return MetaDataUtil.getSdf(government, discoveredMetadataKey).replaceAll(" ","");
+        return MetaDataUtil.getString(government, discoveredSDF).replaceAll(" ","");
     }
     
     
@@ -100,15 +106,15 @@ public class TownyResourcesGovernmentMetaDataController {
     }
 
     public static void setDiscovered(Government government, String discovered) {
-        MetaDataUtil.setSdf(government, discoveredMetadataKey, discovered);
+        MetaDataUtil.setString(government, discoveredSDF, discovered, false);
     }
     
     public static String getDailyProduction(Government government) {
-        return MetaDataUtil.getSdf(government, dailyProductionMetadataKey).replaceAll(" ","");
+        return MetaDataUtil.getString(government, dailyProductionSDF).replaceAll(" ","");
     }
     
     public static String getAvailableForCollection(Government government) {
-        return MetaDataUtil.getSdf(government, availableForCollectionMetadataKey).replaceAll(" ","");
+        return MetaDataUtil.getString(government, availableForCollectionSDF).replaceAll(" ","");
     }
 
     public static Map<String, Integer> getDailyProductionAsMap(Government town) {
@@ -176,6 +182,7 @@ public class TownyResourcesGovernmentMetaDataController {
             resourceQuantitiesAsStringBuilder.append(resourceQuantity);
         }
         //Set the string into metadata
-        MetaDataUtil.setSdf(government, metadataKey, resourceQuantitiesAsStringBuilder.toString());        
+        StringDataField meta = metadataKey.equals(availableForCollectionMetadataKey) ? availableForCollectionSDF : dailyProductionSDF;
+        MetaDataUtil.setString(government, meta, resourceQuantitiesAsStringBuilder.toString(), false);
     }
 }

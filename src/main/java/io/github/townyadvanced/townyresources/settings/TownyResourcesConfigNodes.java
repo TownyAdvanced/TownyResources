@@ -7,10 +7,6 @@ public enum TownyResourcesConfigNodes {
 			"version.version",
 			"",
 			"# This is the current version.  Please do not edit."),
-	LANGUAGE(
-			"language",
-			"english.yml",
-			"# The language file you wish to use"),
 	ENABLED(
 			"enabled",
 			"true",

@@ -17,7 +17,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 1. Download the latest *TownyResources* Jar from [here](https://github.com/TownyAdvanced/TownyResources/releases), and drop it into your plugins folder.
 2. Restart your server.
 3. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `false` (*this stops players from discovering resources until your settings are ready*).
-4. Run `/tra reload`.
+4. Run `/ta resources reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
    - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the daily-limits list, as these limit types are not yet operational.
 6. Edit your townyperms.yml file, and add the following perms:
@@ -66,7 +66,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
     The above example gives one cutlass per day to a town.
 12. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
 13. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
-14. Run `/tra reload`, then `/ta reload`.
+14. Run `/ta resources reload`, then `/ta reload`.
 # Player Guide
 ### Town Production
 ###### Information
@@ -81,7 +81,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
   - Survey **2**: Reveals Level **2** Resource. Cost **1000**. Minimum num townblocks **50**.
   - Survey **3**: Reveals Level **3** Resource. Cost **5000**. Minumum num townblocks **100**.
   - Survey **4**: Reveals Level **4** Resource. Cost **20000**. Minimum num townblocks **200**.  
-- To do a Survey, enter the target town and run: `/tr survey`.
+- To do a Survey, enter the target town and run: `/t resources survey`.
 - If the Survey succeeds, a global success message will be generated. Example:
   > Goosius1 has discovered coal deposits at Rome!. Daily Production: 64 Coal.
 ###### Daily Production
@@ -100,7 +100,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
   <br> > Daily Production: 64 Oak Log, 0 Emerald
 - For each resource, a town can store a maximum of 5x the production amount. When stores are full, subsequent production is lost.                          
 ###### Collecting Town Resources
-- To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/tr towncollect`
+- To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/t resources collect`
 - The available resources will then be dropped at your position.
 ### Nation Production
 ###### Information
@@ -111,7 +111,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 ###### Daily Production
 - If a town belongs to, or is occupied by, a nation, then 50% of the town production is diverted to the nation.
 ###### Collecting Nation Resources
-- To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/tr nationcollect`
+- To collect nation resources, as a king/assistant/treasurer, enter your capital and run `/n collectresources`
 - The available resources will then be dropped at your position.
 ### Daily Extraction Limits
 ###### Resource Categories
@@ -151,9 +151,9 @@ The plugin also has an optional feature to protect resource value, via daily pla
 - Daily Extraction Limits
   - Daily Extraction Limits are configured in the *TownyResources* config.yml file.
 ###### Commands
-- `/tra reload` - Reload TownyResouces.
-- `/tra bypass` - Turns on and off bypass limits for your player.
-- `/tra reroll_all_resources` - Reroll all already-discovered town resources.
+- `/ta resources reload` - Reload TownyResouces.
+- `/ta resources bypass` - Turns on and off bypass limits for your player.
+- `/ta resources reroll_all_resources` - Reroll all already-discovered town resources.
 
 # F.A.Q:
 ###### Question: 

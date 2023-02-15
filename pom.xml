@@ -80,7 +80,13 @@
     <dependency>
       <groupId>io.lumine</groupId>
       <artifactId>Mythic-Dist</artifactId>
-      <version>5.0.3-SNAPSHOT</version>  
+      <version>5.1.2</version>  
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.lumine</groupId>
+      <artifactId>MythicLib-dist</artifactId>
+      <version>1.5.1-SNAPSHOT</version>  
       <scope>provided</scope>
     </dependency>
     <dependency>

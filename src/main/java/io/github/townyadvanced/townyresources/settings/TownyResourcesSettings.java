@@ -404,6 +404,10 @@ public class TownyResourcesSettings {
 		return false; //getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MMOITEMS_PLAYER_LEVELED_ITEMS);
 	}
 
+	public static boolean areSurveyPlotsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_ENABLED);
+	}
+
 	public static String getSurveyPlotASCIIMapKey() {
 		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY);
 	}

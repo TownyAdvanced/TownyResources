@@ -176,7 +176,8 @@ public class TownyResources extends JavaPlugin {
 		pm.registerEvents(new TownyResourcesTownyEventListener(), this);
 		pm.registerEvents(new TownyResourcesTownEventListener(), this);
 		pm.registerEvents(new TownyResourcesNationEventListener(), this);
-		pm.registerEvents(new TownBlockListener(), this);
+		if (TownyResourcesSettings.areSurveyPlotsEnabled())
+			pm.registerEvents(new TownBlockListener(), this);
 		if(isDynmapTownyInstalled())
 			pm.registerEvents(new TownyResourcesDynmapTownyListener(), this);
 	}

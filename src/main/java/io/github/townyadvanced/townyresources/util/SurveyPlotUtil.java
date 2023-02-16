@@ -18,7 +18,8 @@ public class SurveyPlotUtil {
 	private static BooleanDataField surveyPlotUsed = new BooleanDataField("townyResources_SurveyPlotUsed", false);
 
 	public static void registerSurveyPlot() {
-		if (TownBlockTypeHandler.exists(SURVEYPLOT_NAME)) {
+		if (!TownyResourcesSettings.areSurveyPlotsEnabled()
+			|| TownBlockTypeHandler.exists(SURVEYPLOT_NAME)) {
 			return;
 		}
 
@@ -41,6 +42,8 @@ public class SurveyPlotUtil {
 	}
 
 	public static void verifyPlayerInUnusedSurveyPlot(TownBlock townBlock) throws TownyException {
+		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
+			return;
 		if (isSurveyPlot(townBlock.getType()))
 			throw new TownyException(Translatable.of("townyresources.msg_err_youre_not_in_survey_plot"));
 		if (isSurveyPlotAlreadyUsed(townBlock))
@@ -48,14 +51,16 @@ public class SurveyPlotUtil {
 	}
 
 	public static boolean isSurveyPlot(TownBlockType type) {
-		return type.equals(TownBlockTypeHandler.getTypeInternal(SURVEYPLOT_NAME));
+		return !TownyResourcesSettings.areSurveyPlotsEnabled() || type.equals(TownBlockTypeHandler.getTypeInternal(SURVEYPLOT_NAME));
 	}
 
 	public static boolean isSurveyPlotAlreadyUsed(TownBlock tb) {
-		return MetaDataUtil.getBoolean(tb, surveyPlotUsed);
+		return !TownyResourcesSettings.areSurveyPlotsEnabled() || MetaDataUtil.getBoolean(tb, surveyPlotUsed);
 	}
 
 	public static void setSurveyPlotUsed(TownBlock tb) {
+		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
+			return;
 		MetaDataUtil.setBoolean(tb, surveyPlotUsed, true, true);
 	}
 

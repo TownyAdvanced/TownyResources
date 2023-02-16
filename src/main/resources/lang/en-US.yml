@@ -191,3 +191,12 @@ townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any
 #Added in 0.09
 townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
 townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
+
+townyresources.msg_err_you_cannot_unclaim_survey_plot: "You must be stood in a Survey plot in order to start a new survey."
+
+townyresources.msg_err_youre_not_in_survey_plot: "You must be stood in a Survey plot in order to start a new survey."
+
+townyresources.msg_err_survey_plot_already_used: "This survey plot has already been surveyed."
+
+townyresources.notification.surveyed: " (Surveyed)"
+townyresources.notification.unsurveyed: " (Unsurveyed)"

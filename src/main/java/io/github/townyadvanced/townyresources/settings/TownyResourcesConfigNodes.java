@@ -322,7 +322,28 @@ public enum TownyResourcesConfigNodes {
 			"town_resources.language.materials_display_language",
 			"zh_cn",
 			"",
-			"# If you have the LanguageUtils plugin installed, materials will be automatically translated into this locale/language.");
+			"# If you have the LanguageUtils plugin installed, materials will be automatically translated into this locale/language."),
+
+	TOWN_RESOURCES_SURVEY_PLOTS_ROOT("survey_plots", "", "", "",
+			"############################################################",
+			"# +------------------------------------------------------+ #",
+			"# |                     Survey Plots                     | #",
+			"# +------------------------------------------------------+ #",
+			"############################################################",
+			""),
+	TOWN_RESOURCES_SURVEY_PLOTS_COST("survey_plots.plot_cost",
+			"1000.00",
+			"",
+			"# The cost to use /plot set surveyplot"),
+	TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY("survey_plots.ascii_map_key",
+			"S",
+			"",
+			"# The Character used to denote a survey plot on the ascii map, /towny map"),
+	TOWN_RESOURCES_SURVEY_PLOTS_LIMIT("survey_plots.plot_limit",
+			"5",
+			"",
+			"# The maximum number of survey plots a town can have.");
+
 	private final String Root;
 	private final String Default;
 	private String[] comments;

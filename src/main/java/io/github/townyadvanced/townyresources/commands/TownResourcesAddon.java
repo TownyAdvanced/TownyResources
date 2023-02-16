@@ -20,6 +20,7 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryC
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.SurveyPlotUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 import org.bukkit.command.Command;
@@ -117,6 +118,9 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 		int surveyLevel = indexOfNextResourceLevel+1;
 		double surveyCost = costPerResourceLevel.get(indexOfNextResourceLevel);
 
+		//Check if the player is in an unused survey plot, or throw TownyException.
+		SurveyPlotUtil.verifyPlayerInUnusedSurveyPlot(TownyAPI.getInstance().getTownBlock(player));
+		
 		//Send confirmation request message
 		String surveyCostFormatted = "0";
 		if(TownyEconomyHandler.isActive())
@@ -133,7 +137,12 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		Confirmation.runOnAcceptAsync(() -> {
 			try {
+				//Recheck if the player is still in an unused survey plot, or throw TownyException.
+				SurveyPlotUtil.verifyPlayerInUnusedSurveyPlot(TownyAPI.getInstance().getTownBlock(player));
+
 				TownResourceDiscoveryController.discoverNewResource(resident, town, surveyLevel, surveyCost, discoveredResources);
+
+				SurveyPlotUtil.setSurveyPlotUsed(TownyAPI.getInstance().getTownBlock(player));
 			} catch (TownyException te) {
 				TownyResourcesMessagingUtil.sendErrorMsg(player, te.getMessage(player));
 			}

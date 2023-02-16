@@ -403,4 +403,12 @@ public class TownyResourcesSettings {
 	public static boolean areMMOItemsGivenLeveledTowardsThePlayer() {
 		return false; //getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MMOITEMS_PLAYER_LEVELED_ITEMS);
 	}
+
+	public static String getSurveyPlotASCIIMapKey() {
+		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY);
+	}
+
+	public static double getSurveyPlotCost() {
+		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_COST);
+	}
 }

@@ -43,14 +43,14 @@ public class NationCollectAddon extends BaseCommand implements TabExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (sender instanceof Player player && args.length > 0)
-			parseNationCollectResourcesCommand(player, args);
+		if (sender instanceof Player player)
+			parseNationCollectResourcesCommand(player);
 		else 
 			showTownyResourcesHelp(sender);
 		return true;
 	}
 
-	private void parseNationCollectResourcesCommand(Player player, String[] args) {
+	private void parseNationCollectResourcesCommand(Player player) {
 		try {
 
 			checkPermOrThrow(player, "townyresources.command.nationcollect");

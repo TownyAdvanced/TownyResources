@@ -21,6 +21,7 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.Translator;
 import com.palmergames.bukkit.towny.utils.TownyComponents;
+import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
 import io.github.townyadvanced.townyresources.TownyResources;
@@ -209,6 +210,8 @@ public class TownyResourcesMessagingUtil {
                 return translatedMaterialName;
             }
         }
+        
+        materialName = Colors.strip(materialName);
         //Couldn't find a translation. Return un-translated material name
         return WordUtils.capitalizeFully(materialName.replaceAll("_", " "));
     }

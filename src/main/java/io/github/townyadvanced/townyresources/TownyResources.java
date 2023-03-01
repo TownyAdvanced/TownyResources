@@ -1,5 +1,6 @@
 package io.github.townyadvanced.townyresources;
 
+import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
@@ -26,6 +27,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -42,9 +44,30 @@ public class TownyResources extends JavaPlugin {
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
 	
+
 	public TownyResources() {
 		plugin = this;
 		this.scheduler = isFoliaClassPresent() ? new FoliaTaskScheduler(this) : new BukkitTaskScheduler(this);
+	}
+
+	@Override
+	public void onLoad() {
+		String mapKey = "S";
+		double cost = 1000.00;
+		File file = new File(this.getDataFolder().getPath() + File.separator + "config.yml");
+		if (!file.exists()) {
+			// Survey plots are off by default and there's no config yet.
+			return;
+		}
+		CommentedConfiguration config = new CommentedConfiguration(file);
+		config.load();
+		boolean usingSurveyPlots = Boolean.valueOf((String) config.get("survey_plots.enabled"));
+		if (!usingSurveyPlots) {
+			return;
+		}
+		mapKey = config.getString("survey_plots.ascii_map_key");
+		cost = Double.valueOf((String)config.get("survey_plots.plot_cost"));
+		SurveyPlotUtil.registerSurveyPlotOnLoad(mapKey, cost);
 	}
 	
     @Override
@@ -105,7 +128,6 @@ public class TownyResources extends JavaPlugin {
 		info("TownyResources loaded successfully.");
 		return true;
 	}
-
 
 	/**
 	 * Re-Load towny resources

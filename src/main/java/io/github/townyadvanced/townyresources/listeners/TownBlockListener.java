@@ -4,10 +4,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.palmergames.bukkit.towny.event.ChunkNotificationEvent;
+import com.palmergames.bukkit.towny.event.plot.PlayerChangePlotTypeEvent;
 import com.palmergames.bukkit.towny.event.TownBlockTypeRegisterEvent;
+import com.palmergames.bukkit.towny.event.statusscreen.TownBlockStatusScreenEvent;
 import com.palmergames.bukkit.towny.event.town.TownPreUnclaimEvent;
 import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.Translatable;
+import com.palmergames.bukkit.towny.object.Translator;
+
 import io.github.townyadvanced.townyresources.util.SurveyPlotUtil;
 
 public class TownBlockListener implements Listener {
@@ -23,9 +28,10 @@ public class TownBlockListener implements Listener {
 	public void onTownTriesUnclaim(TownPreUnclaimEvent event) {
 		if (!SurveyPlotUtil.isSurveyPlot(event.getTownBlock().getType()))
 			return;
-		event.setCancelled(true);
-		event.setCancelMessage(
-				Translatable.of("townyresources.msg_err_you_cannot_unclaim_survey_plot").defaultLocale());
+		if (SurveyPlotUtil.isSurveyPlotAlreadyUsed(event.getTownBlock())) {
+			event.setCancelled(true);
+			event.setCancelMessage(Translatable.of("townyresources.msg_err_you_cannot_unclaim_survey_plot").defaultLocale());
+		}
 	}
 
 	/* Adds Blurb to chunk notification showing whether a survey plot is unclaimed. */
@@ -38,6 +44,29 @@ public class TownBlockListener implements Listener {
 		String message = event.getMessage();
 		message += Translatable.of(SurveyPlotUtil.isSurveyPlotAlreadyUsed(tb) ? "townyresources.notification.surveyed"
 				: "townyresources.notification.unsurveyed").forLocale(event.getPlayer());
+		if (SurveyPlotUtil.isSurveyPlotAlreadyUsed(tb))
+			message += Translatable.of("townyresources.notification.surveyed_resource", SurveyPlotUtil.getProductionResource(tb));
 		event.setMessage(message);
 	}
+
+	/* Initializes a SurveyPlot on changing TownBlockType. */
+	@EventHandler
+	public void onTownBlockSetToSurveyPlot(PlayerChangePlotTypeEvent event) {
+		TownBlockType type = event.getNewType();
+		if (!SurveyPlotUtil.isSurveyPlot(type)) // Not becoming a SurveyPlot
+			return;
+		if (SurveyPlotUtil.isSurveyPlot(event.getOldType())) // Already was a SurveyPlot, probably shouldn't ever happen.
+			return;
+		SurveyPlotUtil.initializeSurveyPlot(event.getTownBlock(), event.getResident());
+	}
+
+	/* Adds survey plot details to SurveyPlots */
+	@EventHandler
+	public void onTownBlockStatusEvent(TownBlockStatusScreenEvent event) {
+		if (!SurveyPlotUtil.isSurveyPlot(event.getTownBlock().getType()))
+			return;
+		Translator translator = Translator.locale(event.getCommandSender());
+		event.getStatusScreen().addComponentOf("surveyComp", SurveyPlotUtil.getStatusScreenComponent(event.getTownBlock(), translator));
+	}
+	
 }

@@ -4,7 +4,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -138,8 +141,10 @@ public class TownyResourcesSettings {
 		List<ResourceOfferCategory> result = new ArrayList<>();
 		boolean problemLoadingCategories = false;
 
+		// The map that store categoryname:allowedbiomes.
+		Map<String, List<String>> categoryToBiomeMap = getCategoryToBiomeMap();
+
 		String categoriesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES);
-		
 		if(!categoriesAsString.isEmpty()) {		
 			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
 			Matcher matcher = pattern.matcher(categoriesAsString);
@@ -150,6 +155,7 @@ public class TownyResourcesSettings {
 			double categoryBaseAmountStacks;
 			int categoryBaseAmountItems;
 			List<String> materialsInCategory;
+			List<String> allowedBiomesInCategory = Arrays.asList("ALL");
 			String materialName;
 			ResourceOfferCategory resourceOfferCategory;
 			
@@ -185,9 +191,12 @@ public class TownyResourcesSettings {
 					}
 					materialsInCategory.add(materialName);
 				}
-				
+
+				// Grab our list of allowed biomes for this category, or default to ALL.
+				allowedBiomesInCategory = categoryToBiomeMap.getOrDefault(categoryName, Arrays.asList("ALL"));
+
 				//Construct ResourceExtractionCategory object
-				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory);
+				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory, allowedBiomesInCategory);
 				
 				//Add to result
 				result.add(resourceOfferCategory);
@@ -201,6 +210,43 @@ public class TownyResourcesSettings {
 		}
 	}
 	
+	private static Map<String, List<String>> getCategoryToBiomeMap() {
+		Map<String, List<String>> categoryToBiomeMap = new HashMap<>();
+		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
+			return categoryToBiomeMap;
+
+		String categoriesAndBiomesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES_BIOMES);
+
+		if (!categoriesAndBiomesAsString.isEmpty()) {
+			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
+			Matcher matcher = pattern.matcher(categoriesAndBiomesAsString);
+			String categoryAsString;
+			String[] categoryAsArray;
+			String categoryName;
+			List<String> allowedBiomesInCategory;
+			String biomeName;
+			while (matcher.find()) {
+				categoryAsString = matcher.group(1);
+
+				categoryAsArray = categoryAsString.split(",");
+				if(categoryAsArray.length < 2) {
+					TownyResources.severe("Bad configuration for offer category with biome: " + categoryAsString);
+					continue;
+				}
+				
+				categoryName = categoryAsArray[0].trim();
+				allowedBiomesInCategory = new ArrayList<>();
+				for(int i = 1; i < categoryAsArray.length; i++) {
+					biomeName = categoryAsArray[i].trim().toLowerCase(Locale.ROOT);
+					allowedBiomesInCategory.add(biomeName);
+				}
+				categoryToBiomeMap.put(categoryName, allowedBiomesInCategory);
+			}
+		}
+
+		return categoryToBiomeMap;
+	}
+
 	private static boolean isValidMaterial(String materialName) {
 		Material material = Material.getMaterial(materialName);
 		if(material != null)

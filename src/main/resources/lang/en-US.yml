@@ -63,10 +63,19 @@ townyresources.nation.screen.header: "&2Resources:"
 townyresources.nation.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f'
 townyresources.nation.screen.available.for.collection: '&2 > Available For Collection &a[%s]&2: &f'
 
+### TownBlock Screen
+townyresources.townblock.screen.header: "&2Resources:"
+townyresources.townblock.screen.plot_status: "&2 > Survey Plot Status: "
+townyresources.townblock.screen.plot_status_used: "Used"
+townyresources.townblock.screen.plot_status_unused: "Unused"
+townyresources.townblock.screen.biome: "&2 > Biome: %s"
+townyresources.townblock.screen.daily.production: '&2 > Daily Production &a[%s]&2: &f%s'
+townyresources.townblock.screen.amount_disclaimer: '&2 > * Amount shown represents a base amount which may be affected by other modifiers.'
+
 ### Surveys 
 townyresources.not_your_town: 'You do not belong to this town.'
 townyresources.help_survey: 'Survey the town at your current location, to discover new resources.'
-townyresources.discovery.success: "&b%s has discovered %s at %s!. Daily Production: %d %s."
+townyresources.discovery.success: "&b%s has discovered %s at %s! Daily Production: %d %s."
 
 townyresources.msg_err_survey_no_town: "&cThere is no town here to survey."
 townyresources.msg_err_survey_all_resources_already_discovered: "&cAll the resources of this town have already been discovered."
@@ -106,7 +115,13 @@ resource_category_uncommon_dirt: 'uncommon dirt, uncommon dirt'
 resource_category_rare_dirt: 'rare dirt, rare dirt'
 resource_category_gravel: 'Gravel, Gravel'
 resource_category_sand: 'Sand, Sand'
-resource_category_wood: 'Wood, "wood'
+resource_category_wood: 'Wood, wood'
+resource_category_oak_wood: 'Oak Wood, oak wood'
+resource_category_spruce_wood: 'Spruce Wood, spruce wood'
+resource_category_birch_wood: 'Birch Wood, birch wood'
+resource_category_jungle_wood: 'Jungle Wood, jungle wood'
+resource_category_acacia_wood: 'Acacia Wood, acacia wood'
+resource_category_dark_oak_wood: 'Dark Oak Wood, dark oak wood'
 resource_category_common_rocks: 'common rocks, common rocks'
 resource_category_uncommon_rocks: 'uncommon rocks, uncommon rocks'
 resource_category_terracotta: 'Terracotta, terracotta'
@@ -200,3 +215,6 @@ townyresources.msg_err_survey_plot_already_used: "This survey plot has already b
 
 townyresources.notification.surveyed: " (Surveyed)"
 townyresources.notification.unsurveyed: " (Unsurveyed)"
+townyresources.notification.surveyed_resource: " [%s]"
+
+townyresources.dominantbiome: "A survey plot with the dominant biome of %s has been made."

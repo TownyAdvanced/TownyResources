@@ -259,6 +259,12 @@ public enum TownyResourcesConfigNodes {
 			"{diamonds, 200, 0.125, DIAMOND}," +
 			"{redstone, 100, 1, REDSTONE}," +
 			"{ancient_debris, 200, 0.03125, ANCIENT_DEBRIS}," +
+			"{oak_wood, 200, 2, OAK_LOG, OAK_WOOD}," +
+			"{spruce_wood, 200, 2, SPRUCE_LOG, SPRUCE_WOOD}," +
+			"{birch_wood, 200, 2, BIRCH_LOG, BIRCH_WOOD}," +
+			"{jungle_wood, 200, 2, JUNGLE_LOG, JUNGLE_WOOD}," +
+			"{acacia_wood, 200, 2, ACACIA_LOG, ACACIA_WOOD}," +
+			"{dark_oak_wood, 200, 2, DARK_OAK_LOG, DARK_OAK_WOOD}," +
 			"{wood, 200, 2, OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, " +
 			"OAK_WOOD, SPRUCE_WOOD, BIRCH_WOOD, JUNGLE_WOOD, ACACIA_WOOD, DARK_OAK_WOOD}," +
 			"{wheat, 100, 1, WHEAT}," +
@@ -290,6 +296,7 @@ public enum TownyResourcesConfigNodes {
 			"{beef, 100, 0.25, BEEF}," +
 			"{chickens, 100, 0.25, CHICKEN}," +
 			"{ender_pearls, 100, 0.125, ENDER_PEARL}",
+			"{chorus_fruit, 100, 0.125, CHORUS_FRUIT}",
 		   "",
 			"# This list shows the survey offer categories.",
 			"# ",
@@ -304,6 +311,78 @@ public enum TownyResourcesConfigNodes {
 			"# ",
 			"# This list supports Slimefun, MythicMobs and MMOItems items as well. When entering an MMOItem use the TYPE:ID format,",
 			"# ie: SWORD:CUTLASS where TownyResources expects a material."),
+	TOWN_RESOURCES_OFFERS_CATEGORIES_BIOMES(
+			"town_resources.offers.categories_biomes",
+			"" +
+			"{common_dirt, OVERWORLD}," +
+			"{gravel, ALL}," +
+			"{sand, BEACH, DESERT}," +
+			"{common_rocks, OVERWORLD}," +
+			"{uncommon_rocks, OVERWORLD}," +
+			"{terracotta, BADLANDS, WOODED_BADLANDS, ERODED_BADLANDS}," +
+			"{quartz, NETHER}," +
+			"{prismarine, OCEAN}," +
+			"{obsidian, ALL}," +
+			"{clay, BEACH, RIVER}," +
+			"{ice, FROZEN_OCEAN, ICE_SPIKES, COLD}," +
+			"{snow, SNOWY}," +
+			"{coal, ALL}," +
+			"{iron, ALL}," +
+			"{gold, ALL}," +
+			"{copper, OVERWORLD}," +
+			"{emeralds, OVERWORLD}," +
+			"{diamonds, OVERWORLD}," +
+			"{redstone, ALL}," +
+			"{ancient_debris, NETHER}," +
+			"{oak_wood, FOREST, PLAINS}," +
+			"{spruce_wood, TAIGA, SNOWY_TAIGA, OLD_GROWTH_SPRUCE_TAIGA, OLD_GROWTH_PINE_TAIGA}," +
+			"{birch_wood, BIRCH_FOREST, OLD_GROWTH_BIRCH_FOREST}," +
+			"{jungle_wood, SPARSE_JUNGLE, JUNGLE}," +
+			"{acacia_wood, SAVANNA, SAVANNA_PLATEAU, WINDSWEPT_SAVANNA}," +
+			"{dark_oak_wood, DARK_FOREST, DARK_OAK_WOOD}," +
+			"{wood, FOREST, TAIGA, SNOWY_TAIGA, OLD_GROWTH_SPRUCE_TAIGA, OLD_GROWTH_PINE_TAIGA, BIRCH_FOREST, OLD_GROWTH_BIRCH_FOREST, " + 
+			"SPARSE_JUNGLE, JUNGLE, SAVANNA, SAVANNA_PLATEAU, WINDSWEPT_SAVANNA, DARK_FOREST, DARK_OAK_WOOD}," +
+			"{wheat, TEMPERATE}," +
+			"{carrots, TEMPERATE}," +
+			"{potatoes, TEMPERATE}," +
+			"{beetroots, TEMPERATE}," +
+			"{pumpkins, TEMPERATE}," +
+			"{melon_slices, TEMPERATE}," +
+			"{cocoa_plants, JUNGLE, SPARSE_JUNGLE}," +
+			"{kelp, OCEANBIOMES}," +
+			"{bamboo, BAMBOO_JUNGLE}," +
+			"{cactus, DESERT}," +
+			"{mushrooms, MUSHROOM_FIELDS}," +
+			"{apple_trees, TEMPERATE}," +
+			"{vines, JUNGLE, SPARSE_JUNGLE}," +
+			"{fish, AQUATIC}," +
+			"{wool, TEMPERATE}," +			
+			"{gunpowder, OVERWORLD}," +
+			"{string, OVERWORLD}," +
+			"{spider_eyes, ALL}," +
+			"{slime, SWAMP}," +
+			"{feathers, OVERWORLD}," +
+			"{leather, OVERWORLD}," +
+			"{rabbit_hide, OVERWORLD}," +
+			"{rotten_flesh, OVERWORLD}" +
+			"{bones, OVERWORLD}," +
+			"{pork, OVERWORLD}," +
+			"{mutton, OVERWORLD}," +
+			"{beef, OVERWORLD}," +
+			"{chickens, OVERWORLD}," +
+			"{ender_pearls, OVERWORLD}",
+			"{chorus_fruit, END}",
+		   "",
+			"# This list shows the survey offer categories and their allowed biomes.",
+			"# This section is only applied when Survey Plots are enabled!",
+			"# ",
+			"# Each category is enclosed in curly brackets, and has 2 parts:",
+			"# 1 - The name of the category (used for messaging and matching up with the above config section's weights)",
+			"# 2 - The list of biomes which allow this category to get picked.",
+			"# ",
+			"# On top of the available biomes mentioned here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html,",
+			"# you may choose catch-all words like ALL, OVERWORLD, NETHER, END, SNOWY, COLD, TEMPERATE, WARM, OCEANBIOMES, AQUATIC"),
+	
 	TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMMOUNTS(
 			"town_resources.offers.categories_with_fixed_amounts",
 			"somematerial,someitem",

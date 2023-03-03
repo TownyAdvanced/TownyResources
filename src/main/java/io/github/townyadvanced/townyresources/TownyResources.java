@@ -61,12 +61,12 @@ public class TownyResources extends JavaPlugin {
 		}
 		CommentedConfiguration config = new CommentedConfiguration(file);
 		config.load();
-		boolean usingSurveyPlots = Boolean.valueOf((String) config.get("survey_plots.enabled"));
+		boolean usingSurveyPlots = Boolean.valueOf((String) config.get("surveysite_plots.enabled"));
 		if (!usingSurveyPlots) {
 			return;
 		}
-		mapKey = config.getString("survey_plots.ascii_map_key");
-		cost = Double.valueOf((String)config.get("survey_plots.plot_cost"));
+		mapKey = config.getString("surveysite_plots.ascii_map_key");
+		cost = Double.valueOf((String)config.get("surveysite_plots.plot_cost"));
 		SurveyPlotUtil.registerSurveyPlotOnLoad(mapKey, cost);
 	}
 	

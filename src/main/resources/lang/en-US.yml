@@ -65,7 +65,7 @@ townyresources.nation.screen.available.for.collection: '&2 > Available For Colle
 
 ### TownBlock Screen
 townyresources.townblock.screen.header: "&2Resources:"
-townyresources.townblock.screen.plot_status: "&2 > Survey Plot Status: "
+townyresources.townblock.screen.plot_status: "&2 > SurveySite Plot Status: "
 townyresources.townblock.screen.plot_status_used: "Used"
 townyresources.townblock.screen.plot_status_unused: "Unused"
 townyresources.townblock.screen.biome: "&2 > Biome: %s"
@@ -207,14 +207,14 @@ townyresources.resource.you_have_no_room_in_your_inventory: 'You do not have any
 townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this town's resources?"
 townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
 
-townyresources.msg_err_you_cannot_unclaim_survey_plot: "You must be stood in a Survey plot in order to start a new survey."
+townyresources.msg_err_you_cannot_unclaim_survey_plot: "You must be stood in a SurveySite plot in order to start a new survey."
 
-townyresources.msg_err_youre_not_in_survey_plot: "You must be stood in a Survey plot in order to start a new survey."
+townyresources.msg_err_youre_not_in_survey_plot: "You must be stood in a SurveySite plot in order to start a new survey."
 
-townyresources.msg_err_survey_plot_already_used: "This survey plot has already been surveyed."
+townyresources.msg_err_survey_plot_already_used: "This SurveySite plot has already been surveyed."
 
 townyresources.notification.surveyed: " (Surveyed)"
 townyresources.notification.unsurveyed: " (Unsurveyed)"
 townyresources.notification.surveyed_resource: " [%s]"
 
-townyresources.dominantbiome: "A survey plot with the dominant biome of %s has been made."
+townyresources.dominantbiome: "A SurveySite plot with the dominant biome of %s has been made."

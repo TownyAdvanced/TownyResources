@@ -406,26 +406,22 @@ public enum TownyResourcesConfigNodes {
 	TOWN_RESOURCES_SURVEY_PLOTS_ROOT("survey_plots", "", "", "",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
-			"# |                     Survey Plots                     | #",
+			"# |                   SurveySite Plots                   | #",
 			"# +------------------------------------------------------+ #",
 			"############################################################",
 			""),
-	TOWN_RESOURCES_SURVEY_PLOTS_ENABLED("survey_plots.enabled",
+	TOWN_RESOURCES_SURVEY_PLOTS_ENABLED("surveysite_plots.enabled",
 			"false",
 			"",
-			"# Wether the survey plots will be used."),
-	TOWN_RESOURCES_SURVEY_PLOTS_COST("survey_plots.plot_cost",
+			"# Wether the surveysite plots will be used."),
+	TOWN_RESOURCES_SURVEY_PLOTS_COST("surveysite_plots.plot_cost",
 			"1000.00",
 			"",
-			"# The cost to use /plot set surveyplot."),
-	TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY("survey_plots.ascii_map_key",
+			"# The cost to use /plot set surveysite."),
+	TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY("surveysite_plots.ascii_map_key",
 			"S",
 			"",
-			"# The Character used to denote a survey plot on the ascii map, /towny map"),
-	TOWN_RESOURCES_SURVEY_PLOTS_LIMIT("survey_plots.plot_limit",
-			"5",
-			"",
-			"# The maximum number of survey plots a town can have.");
+			"# The Character used to denote a surveysite plot on the ascii map, /towny map");
 
 	private final String Root;
 	private final String Default;

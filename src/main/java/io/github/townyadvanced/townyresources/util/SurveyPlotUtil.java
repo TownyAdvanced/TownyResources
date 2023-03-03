@@ -30,7 +30,7 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 
 public class SurveyPlotUtil {
 	
-	private static final String SURVEYPLOT_NAME = "surveyplot";
+	private static final String SURVEYPLOT_NAME = "surveysite";
 	private static BooleanDataField surveyPlotUsed = new BooleanDataField("townyResources_SurveyPlotUsed", false);
 	private static StringDataField surveyPlotBiome= new StringDataField("townyResources_SurveyPlotBiome");
 

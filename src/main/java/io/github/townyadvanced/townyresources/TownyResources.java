@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources;
 
-import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
@@ -52,22 +51,7 @@ public class TownyResources extends JavaPlugin {
 
 	@Override
 	public void onLoad() {
-		String mapKey = "S";
-		double cost = 1000.00;
-		File file = new File(this.getDataFolder().getPath() + File.separator + "config.yml");
-		if (!file.exists()) {
-			// Survey plots are off by default and there's no config yet.
-			return;
-		}
-		CommentedConfiguration config = new CommentedConfiguration(file);
-		config.load();
-		boolean usingSurveyPlots = Boolean.valueOf((String) config.get("surveysite_plots.enabled"));
-		if (!usingSurveyPlots) {
-			return;
-		}
-		mapKey = config.getString("surveysite_plots.ascii_map_key");
-		cost = Double.valueOf((String)config.get("surveysite_plots.plot_cost"));
-		SurveyPlotUtil.registerSurveyPlotOnLoad(mapKey, cost);
+		SurveyPlotUtil.registerSurveyPlotOnLoad(plugin.getDataFolder().getPath() + File.separator + "config.yml");
 	}
 	
     @Override

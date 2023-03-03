@@ -1,5 +1,6 @@
 package io.github.townyadvanced.townyresources.util;
 
+import java.io.File;
 import java.util.Locale;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.bukkit.block.Biome;
 import org.jetbrains.annotations.Nullable;
 
 import com.palmergames.adventure.text.Component;
+import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -34,7 +36,21 @@ public class SurveyPlotUtil {
 	private static BooleanDataField surveyPlotUsed = new BooleanDataField("townyResources_SurveyPlotUsed", false);
 	private static StringDataField surveyPlotBiome= new StringDataField("townyResources_SurveyPlotBiome");
 
-	public static void registerSurveyPlotOnLoad(String mapKey, double cost) {
+	public static void registerSurveyPlotOnLoad(String path) {
+		File file = new File(path);
+		if (!file.exists()) {
+			// Survey plots are off by default and there's no config yet.
+			return;
+		}
+		CommentedConfiguration config = new CommentedConfiguration(file);
+		config.load();
+		boolean usingSurveyPlots = Boolean.valueOf((String) config.get("surveysite_plots.enabled"));
+		if (!usingSurveyPlots) {
+			return;
+		}
+		String mapKey = config.getString("surveysite_plots.ascii_map_key");
+		double cost = Double.valueOf((String)config.get("surveysite_plots.plot_cost"));
+
 		TownBlockType surveyPlot = new TownBlockType(SURVEYPLOT_NAME, new TownBlockData() {
 			@Override
 			public String getMapKey() {

@@ -295,7 +295,7 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, 100, 0.25, MUTTON}," +
 			"{beef, 100, 0.25, BEEF}," +
 			"{chickens, 100, 0.25, CHICKEN}," +
-			"{ender_pearls, 100, 0.125, ENDER_PEARL}",
+			"{ender_pearls, 100, 0.125, ENDER_PEARL},",
 			"{chorus_fruit, 100, 0.125, CHORUS_FRUIT}",
 		   "",
 			"# This list shows the survey offer categories.",
@@ -370,7 +370,7 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, OVERWORLD}," +
 			"{beef, OVERWORLD}," +
 			"{chickens, OVERWORLD}," +
-			"{ender_pearls, OVERWORLD}",
+			"{ender_pearls, OVERWORLD},",
 			"{chorus_fruit, END}",
 		   "",
 			"# This list shows the survey offer categories and their allowed biomes.",

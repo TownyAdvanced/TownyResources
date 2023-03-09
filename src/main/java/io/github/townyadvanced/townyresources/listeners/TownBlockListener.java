@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.palmergames.bukkit.towny.event.ChunkNotificationEvent;
+import com.palmergames.bukkit.towny.event.PlotPreChangeTypeEvent;
 import com.palmergames.bukkit.towny.event.plot.PlayerChangePlotTypeEvent;
 import com.palmergames.bukkit.towny.event.TownBlockTypeRegisterEvent;
 import com.palmergames.bukkit.towny.event.statusscreen.TownBlockStatusScreenEvent;
@@ -58,6 +59,19 @@ public class TownBlockListener implements Listener {
 		if (SurveyPlotUtil.isSurveyPlot(event.getOldType())) // Already was a SurveyPlot, probably shouldn't ever happen.
 			return;
 		SurveyPlotUtil.initializeSurveyPlot(event.getTownBlock(), event.getResident());
+	}
+	
+	@EventHandler
+	public void onTownBlockUnsetFromSurveyPlot(PlotPreChangeTypeEvent event) {
+		if (SurveyPlotUtil.isSurveyPlot(event.getOldType()) && !event.getResident().isAdmin()) {
+			event.setCancelled(true);
+			event.setCancelMessage(Translatable.of("townyresources.msg_err_you_cannot_unset_survey_plot").forLocale(event.getResident()));
+			return;
+		}
+		if (SurveyPlotUtil.isSurveyPlot(event.getNewType()))
+			return;
+
+		SurveyPlotUtil.removeSurveyPlot(event.getTownBlock(), event.getResident());
 	}
 
 	/* Adds survey plot details to SurveyPlots */

@@ -208,6 +208,8 @@ townyresources.msg_confirm_reroll_town: "Are you certain you want to reroll this
 townyresources.admin_help_reroll_one_town: "Reroll all currently discovered resources for the given town."
 
 townyresources.msg_err_you_cannot_unclaim_survey_plot: "You must be stood in a SurveySite plot in order to start a new survey."
+townyresources.msg_err_you_cannot_unset_survey_plot: "This plot cannot be changed from a SurveySite plot. Only an admin can do this."
+townyresources.msg_survey_plot_meta_removed: "This SurveySite's metadata has been removed."
 
 townyresources.msg_err_youre_not_in_survey_plot: "You must be stood in a SurveySite plot in order to start a new survey."
 

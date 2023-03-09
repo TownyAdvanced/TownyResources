@@ -18,9 +18,6 @@ import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.TownBlockTypeHandler;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.Translator;
-import com.palmergames.bukkit.towny.object.metadata.BooleanDataField;
-import com.palmergames.bukkit.towny.object.metadata.StringDataField;
-import com.palmergames.bukkit.towny.utils.MetaDataUtil;
 import com.palmergames.bukkit.towny.utils.TownyComponents;
 import com.palmergames.util.StringMgmt;
 
@@ -33,8 +30,6 @@ import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 public class SurveyPlotUtil {
 	
 	private static final String SURVEYPLOT_NAME = "surveysite";
-	private static BooleanDataField surveyPlotUsed = new BooleanDataField("townyResources_SurveyPlotUsed", false);
-	private static StringDataField surveyPlotBiome= new StringDataField("townyResources_SurveyPlotBiome");
 
 	public static void registerSurveyPlotOnLoad(String path) {
 		File file = new File(path);
@@ -101,27 +96,26 @@ public class SurveyPlotUtil {
 	}
 
 	public static boolean isSurveyPlot(TownBlockType type) {
-		return !TownyResourcesSettings.areSurveyPlotsEnabled() || type.equals(TownBlockTypeHandler.getTypeInternal(SURVEYPLOT_NAME));
+		return !TownyResourcesSettings.areSurveyPlotsEnabled() || type.equals(TownBlockTypeHandler.getType(SURVEYPLOT_NAME));
 	}
 
 	public static boolean isSurveyPlotAlreadyUsed(TownBlock tb) {
-		return !TownyResourcesSettings.areSurveyPlotsEnabled() || MetaDataUtil.getBoolean(tb, surveyPlotUsed);
+		return !TownyResourcesSettings.areSurveyPlotsEnabled() || SurveyPlotMetaDataController.isSurveyPlotUsed(tb);
 	}
 
 	public static void setSurveyPlotUsed(TownBlock tb) {
 		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
 			return;
-		MetaDataUtil.setBoolean(tb, surveyPlotUsed, true, true);
+		SurveyPlotMetaDataController.setSurveyPlotUsed(tb);
 	}
 
 	public static void setSurveyPlotBiome(TownBlock townBlock, Biome biome) {
-		MetaDataUtil.setString(townBlock, surveyPlotBiome, biome.name(), true);
+		SurveyPlotMetaDataController.setBiome(townBlock, biome.name());
 	}
 
 	@Nullable
 	public static Biome getSurveyPlotBiome(TownBlock townBlock) {
-		String biomeName = MetaDataUtil.getString(townBlock, surveyPlotBiome);
-		return biomeName.isEmpty() ? null : Biome.valueOf(biomeName);
+		return SurveyPlotMetaDataController.getBiome(townBlock);
 	}
 	
 	public static String getSurveyPlotBiomeFormatted(TownBlock townBlock) {
@@ -168,5 +162,10 @@ public class SurveyPlotUtil {
 		setSurveyPlotBiome(townBlock, biome);
 		String biomeName = getSurveyPlotBiomeFormatted(townBlock);
 		TownyMessaging.sendMsg(resident, Translatable.of("townyresources.dominantbiome", biomeName));
+	}
+
+	public static void removeSurveyPlot(TownBlock townBlock, Resident resident) {
+		SurveyPlotMetaDataController.removeSurveyMetaData(townBlock);
+		TownyMessaging.sendMsg(resident, Translatable.of("townyresources.msg_survey_plot_meta_removed"));
 	}
 }

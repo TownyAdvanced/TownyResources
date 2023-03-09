@@ -51,7 +51,7 @@ public class TownyResources extends JavaPlugin {
 
 	@Override
 	public void onLoad() {
-		SurveyPlotUtil.registerSurveyPlotOnLoad(plugin.getDataFolder().getPath() + File.separator + "config.yml");
+		SurveyPlotUtil.registerSurveyPlotOnLoad(this.getDataFolder().getPath() + File.separator + "config.yml");
 	}
 	
     @Override

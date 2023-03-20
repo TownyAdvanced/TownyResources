@@ -300,7 +300,7 @@ public enum TownyResourcesConfigNodes {
 			"# 4-  The list of materials in the category",
 			"# ",
 			"# The default values give a weight of 200 to strategic resources (coal, iron etc.), and 100 to most non-strategic resources. (wheat, quartz etc.)",
-			"# This gives each survey approx. 30% chance to discover a strategic resources, and a 70% to discover a non-strategic resource.",
+			"# This gives each survey approx. 70% chance to discover a strategic resources, and a 30% to discover a non-strategic resource.",
 			"# ",
 			"# This list supports Slimefun, MythicMobs and MMOItems items as well. When entering an MMOItem use the TYPE:ID format,",
 			"# ie: SWORD:CUTLASS where TownyResources expects a material."),

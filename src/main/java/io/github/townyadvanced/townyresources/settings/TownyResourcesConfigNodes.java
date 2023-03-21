@@ -403,7 +403,7 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If you have the LanguageUtils plugin installed, materials will be automatically translated into this locale/language."),
 
-	TOWN_RESOURCES_SURVEY_PLOTS_ROOT("survey_plots", "", "", "",
+	TOWN_RESOURCES_SURVEY_PLOTS_ROOT("surveysite_plots", "", "", "",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
 			"# |                   SurveySite Plots                   | #",

@@ -220,6 +220,7 @@ public class TownResourceDiscoveryController {
 		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
 		if (discoveredResources.size() == 1 && discoveredResources.get(0).equalsIgnoreCase(resource)) {
 			TownyResourcesGovernmentMetaDataController.removeDiscovered(town);
+			TownResourceProductionController.recalculateProductionForOneTown(town);
 			return;
 		}
 
@@ -229,9 +230,12 @@ public class TownResourceDiscoveryController {
 				continue;
 			resources.add(discoveredResource);
 		}
+
 		if (resources.isEmpty())
 			TownyResourcesGovernmentMetaDataController.removeDiscovered(town);
 		else
 			TownyResourcesGovernmentMetaDataController.setDiscovered(town, resources);
+
+		TownResourceProductionController.recalculateProductionForOneTown(town);
 	}
 }

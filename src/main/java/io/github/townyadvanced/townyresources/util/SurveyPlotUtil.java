@@ -166,7 +166,8 @@ public class SurveyPlotUtil {
 	}
 
 	public static void removeSurveyPlot(TownBlock townBlock, Resident resident) {
-		TownResourceDiscoveryController.removeResourceFromTown(townBlock.getTownOrNull(), SurveyPlotMetaDataController.getDiscovered(townBlock));
+		if (isSurveyPlotAlreadyUsed(townBlock))
+			TownResourceDiscoveryController.removeResourceFromTown(townBlock.getTownOrNull(), SurveyPlotMetaDataController.getDiscovered(townBlock));
 		SurveyPlotMetaDataController.removeSurveyMetaData(townBlock);
 		TownyMessaging.sendMsg(resident, Translatable.of("townyresources.msg_survey_plot_meta_removed"));
 	}

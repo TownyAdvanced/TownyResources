@@ -8,11 +8,12 @@ import com.palmergames.bukkit.towny.event.PlotPreChangeTypeEvent;
 import com.palmergames.bukkit.towny.event.plot.PlayerChangePlotTypeEvent;
 import com.palmergames.bukkit.towny.event.TownBlockTypeRegisterEvent;
 import com.palmergames.bukkit.towny.event.statusscreen.TownBlockStatusScreenEvent;
-import com.palmergames.bukkit.towny.event.town.TownPreUnclaimEvent;
+import com.palmergames.bukkit.towny.event.town.TownPreUnclaimCmdEvent;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.Translator;
+import com.palmergames.bukkit.towny.object.WorldCoord;
 
 import io.github.townyadvanced.townyresources.util.SurveyPlotUtil;
 
@@ -26,13 +27,22 @@ public class TownBlockListener implements Listener {
 
 	/* Prevents unclaiming of survey plots. */
 	@EventHandler
-	public void onTownTriesUnclaim(TownPreUnclaimEvent event) {
-		if (!SurveyPlotUtil.isSurveyPlot(event.getTownBlock().getType()))
-			return;
-		if (SurveyPlotUtil.isSurveyPlotAlreadyUsed(event.getTownBlock())) {
+	public void onTownTriesUnclaim(TownPreUnclaimCmdEvent event) {
+		boolean containsSurveyPlot = event.getUnclaimSelection().stream()
+			.map(WorldCoord::getTownBlockOrNull)
+			.filter(tb -> SurveyPlotUtil.isSurveyPlot(tb.getType()))
+			.anyMatch(tb -> SurveyPlotUtil.isSurveyPlotAlreadyUsed(tb));
+		if (containsSurveyPlot && !event.getResident().isAdmin()) {
 			event.setCancelled(true);
 			event.setCancelMessage(Translatable.of("townyresources.msg_err_you_cannot_unclaim_survey_plot").defaultLocale());
+			return;
 		}
+
+		// An admin has caused the unclaiming, we should remove the SurveyPlot from the town properly.
+		event.getUnclaimSelection().stream()
+			.map(WorldCoord::getTownBlockOrNull)
+			.filter(tb -> SurveyPlotUtil.isSurveyPlot(tb.getType()))
+			.forEach(tb -> SurveyPlotUtil.removeSurveyPlot(tb, event.getResident()));
 	}
 
 	/* Adds Blurb to chunk notification showing whether a survey plot is unclaimed. */

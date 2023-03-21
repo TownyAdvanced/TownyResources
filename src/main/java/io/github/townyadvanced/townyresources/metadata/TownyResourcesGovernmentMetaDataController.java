@@ -108,8 +108,12 @@ public class TownyResourcesGovernmentMetaDataController {
     public static void setDiscovered(Government government, String discovered) {
         MetaDataUtil.setString(government, discoveredSDF, discovered, false);
     }
-    
-    public static String getDailyProduction(Government government) {
+
+    public static void removeDiscovered(Town town) {
+		town.removeMetaData(discoveredMetadataKey, true);
+	}
+
+	public static String getDailyProduction(Government government) {
         return MetaDataUtil.getString(government, dailyProductionSDF).replaceAll(" ","");
     }
     

@@ -64,6 +64,7 @@ public class TownResourceDiscoveryController {
 
         //Calculate a new category and material for discovery
         List<String> discoveredMaterials = new ArrayList<>(alreadyDiscoveredMaterials);
+        //The survey command can only be run from within a town, townBlock should not be null.
         TownBlock townBlock = TownyAPI.getInstance().getTownBlock(resident.getPlayer());
         ResourceOfferCategory winningCategory = calculateWinningCategory(discoveredMaterials, townBlock);
         String winningMaterial = calculateWinningMaterial(winningCategory);
@@ -208,5 +209,29 @@ public class TownResourceDiscoveryController {
 					TownResourceProductionController.recalculateProductionForOneNation(town.getNationOrNull());
 			}
 		}
+	}
+
+	/**
+	 * Attempt to remove a single resource from a Town's discovered resources list.
+	 * @param town Town which is going to lose a discovered resource.
+	 * @param resource String which represents a resource being removed.
+	 */
+	public static void removeResourceFromTown(Town town, String resource) {
+		List<String> discoveredResources = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(town);
+		if (discoveredResources.size() == 1 && discoveredResources.get(0).equalsIgnoreCase(resource)) {
+			TownyResourcesGovernmentMetaDataController.removeDiscovered(town);
+			return;
+		}
+
+		List<String> resources = new ArrayList<>();
+		for (String discoveredResource: discoveredResources) {
+			if (discoveredResource.equalsIgnoreCase(resource))
+				continue;
+			resources.add(discoveredResource);
+		}
+		if (resources.isEmpty())
+			TownyResourcesGovernmentMetaDataController.removeDiscovered(town);
+		else
+			TownyResourcesGovernmentMetaDataController.setDiscovered(town, resources);
 	}
 }

@@ -22,6 +22,7 @@ import com.palmergames.bukkit.towny.utils.TownyComponents;
 import com.palmergames.util.StringMgmt;
 
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceOffersController;
 import io.github.townyadvanced.townyresources.metadata.SurveyPlotMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
@@ -165,6 +166,7 @@ public class SurveyPlotUtil {
 	}
 
 	public static void removeSurveyPlot(TownBlock townBlock, Resident resident) {
+		TownResourceDiscoveryController.removeResourceFromTown(townBlock.getTownOrNull(), SurveyPlotMetaDataController.getDiscovered(townBlock));
 		SurveyPlotMetaDataController.removeSurveyMetaData(townBlock);
 		TownyMessaging.sendMsg(resident, Translatable.of("townyresources.msg_survey_plot_meta_removed"));
 	}

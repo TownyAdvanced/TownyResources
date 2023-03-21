@@ -229,7 +229,7 @@ public class TownyResourcesSettings {
 			throw new TownyException("Failed to create config file!");
 		}
 		
-		config = new CommentedConfiguration(configPath);
+		config = new CommentedConfiguration(configPath, TownyResources.getPlugin());
 		if (!config.load())
 			throw new TownyException("Failed to load Config!");
 
@@ -257,7 +257,7 @@ public class TownyResourcesSettings {
 	 * Builds a new config reading old config data.
 	 */
 	private static void setDefaults(String version, Path configPath) {
-		newConfig = new CommentedConfiguration(configPath);
+		newConfig = new CommentedConfiguration(configPath, TownyResources.getPlugin());
 		newConfig.load();
 
 		for (TownyResourcesConfigNodes root : TownyResourcesConfigNodes.values()) {

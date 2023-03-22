@@ -29,7 +29,8 @@ public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
 	private static int sumOfAllOfferDiscoveryProbabilityWeights = 0;  //Used when getting the resource offers
 	private static Path configPath = TownyResources.getPlugin().getDataFolder().toPath().resolve("config.yml");
-
+	private final static Pattern PATTERN = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
+	
 	public static boolean isEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.ENABLED);
 	}
@@ -75,8 +76,7 @@ public class TownyResourcesSettings {
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 		
 		if(!categoriesAsString.isEmpty()) {		
-			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(categoriesAsString);
+			Matcher matcher = PATTERN.matcher(categoriesAsString);
 			String categoryAsString;
 			String[] categoryAsArray;
 			String categoryName;
@@ -141,13 +141,11 @@ public class TownyResourcesSettings {
 		List<ResourceOfferCategory> result = new ArrayList<>();
 		boolean problemLoadingCategories = false;
 
-		// The map that store categoryname:allowedbiomes.
+		// The map that stores categoryname:allowedbiomes.
 		Map<String, List<String>> categoryToBiomeMap = getCategoryToBiomeMap();
-
 		String categoriesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES);
 		if(!categoriesAsString.isEmpty()) {		
-			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(categoriesAsString);
+			Matcher matcher = PATTERN.matcher(categoriesAsString);
 			String categoryAsString;
 			String[] categoryAsArray;
 			String categoryName;
@@ -209,7 +207,7 @@ public class TownyResourcesSettings {
 			return result;
 		}
 	}
-	
+
 	private static Map<String, List<String>> getCategoryToBiomeMap() {
 		Map<String, List<String>> categoryToBiomeMap = new HashMap<>();
 		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
@@ -218,19 +216,18 @@ public class TownyResourcesSettings {
 		String categoriesAndBiomesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES_BIOMES);
 
 		if (!categoriesAndBiomesAsString.isEmpty()) {
-			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(categoriesAndBiomesAsString);
-			String categoryAsString;
+			Matcher matcher = PATTERN.matcher(categoriesAndBiomesAsString);
+			String categoryAndBiomesString;
 			String[] categoryAsArray;
 			String categoryName;
 			List<String> allowedBiomesInCategory;
 			String biomeName;
 			while (matcher.find()) {
-				categoryAsString = matcher.group(1);
+				categoryAndBiomesString = matcher.group(1);
 
-				categoryAsArray = categoryAsString.split(",");
+				categoryAsArray = categoryAndBiomesString.split(",");
 				if(categoryAsArray.length < 2) {
-					TownyResources.severe("Bad configuration for offer category with biome: " + categoryAsString);
+					TownyResources.severe("Bad configuration for offer category with biome: " + categoryAndBiomesString);
 					continue;
 				}
 				

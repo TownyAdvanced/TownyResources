@@ -20,14 +20,19 @@ The plugin also has an optional feature to protect resource value, via daily pla
 4. Run `/ta resources reload`.
 5. Edit the *TownyResources* config.yml file, and change any settings you would like.
    - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the daily-limits list, as these limit types are not yet operational.
-6. Edit your townyperms.yml file, and add the following perms:
-   - Mayor / Assistant / Treasurer:
-     `- townyresources.command.towncollect`
-   - King / Assistant / Treasurer:
-     `- townyresources.command.nationcollect`
+6. Give the permission nodes required to use the plugin using the following commands: 
+    ```
+    /ta townyperms group towns.mayor addperm townyresources.command.towncollect
+    
+    /ta townyperms group towns.ranks.assistant addperm townyresources.command.towncollect
+    
+    /ta townyperms group nations.king addperm townyresources.command.nationcollect
+    
+    /ta townyperms group nations.ranks.assistant addperm townyresources.command.nationcollect
+    ```
 7. Using your permissions plugin, give this to any admins who are not already OP:
     - `- townyresources.admin.command.*`
-    - Optionally, give your admins `townyresources.bypass` if you would like to never be restricted by extraction limits, without having to use /tra bypass.
+    - Optionally, give your admins `townyresources.bypass` if you would like to never be restricted by extraction limits, without having to use /ta resources bypass.
 8. If you want to show town production on the *Dynmap* (**Recommended**), first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
     ```
     <br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>

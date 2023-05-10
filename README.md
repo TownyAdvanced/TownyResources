@@ -8,7 +8,7 @@ The plugin also has an optional feature to protect resource value, via daily pla
 - 🇺🇳 Encourages **Nation Building**.
 - 💰 Encourages **Trading**.
 - 💤 Reduces **Grind**.
--  🧚‍♀️ Assists **Roleplaying**.
+- 🧚‍♀️ Assists **Roleplaying**.
 - ⚔️ Improves the [***SiegeWar***](https://github.com/TownyAdvanced/SiegeWar) experience, by adding **a new non-toxic reason for war**: Capturing Resources.
 
 (*details in the FAQ section below*)
@@ -72,6 +72,17 @@ The plugin also has an optional feature to protect resource value, via daily pla
 12. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
 13. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
 14. Run `/ta resources reload`, then `/ta reload`.
+
+## (Optional Installation Step) SurveySite Plots & Biome-dependent resources.
+- An (Optional) feature in TownyResources is a new Towny plot type, called the SurveySite.
+  - This Plot is set using `/plot set surveysite`. When a surveysite is created, the townblock will have a dominant biome calculated.
+  - SurveySite plots start out unused, and in order to activate it, `/t resources survey` is used.
+  - Once used, the plot selects a resource based on what categories that are allowed to be gotten in the plot's dominant biome.
+  - Only admins can unclaim a surveysite plot, normal playrs cannot unclaim the plot, or reset the plot type to any other type of plot type.
+- SurveySite plots have to be enabled in the config at `surveysite_plots.enabled`.
+- SurveySite plots are how TownyResources *can limit resource gain to become biome-dependent.*
+- The resource categories have their biomes set in the config in the `town_resources.offers.categories_biomes` section. The config comments explain how to use this section.
+
 # Player Guide
 ### Town Production
 ###### Information

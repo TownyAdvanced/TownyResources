@@ -46,7 +46,11 @@ public class MMOItemsUtil {
 		MMOItem mmoItem = getMMOItemsMMOItem(materialName);
 		if (mmoItem == null)
 			return null;
-		Future<ItemStack> future = Bukkit.getScheduler().callSyncMethod(TownyResources.getPlugin(), new MMOItemGetter(mmoItem));
+
+		if (Bukkit.isPrimaryThread())
+			return mmoItem.newBuilder().build();
+
+		Future<ItemStack> future = Bukkit.getScheduler().callSyncMethod(TownyResources.getPlugin(), () -> mmoItem.newBuilder().build());
 		ItemStack item = null;
 		try {
 			item = future.get();

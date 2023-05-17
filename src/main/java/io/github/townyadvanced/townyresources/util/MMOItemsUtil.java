@@ -1,10 +1,12 @@
 package io.github.townyadvanced.townyresources.util;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.Executor;
 import java.util.function.Function;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,7 +21,9 @@ public class MMOItemsUtil {
 
 	static Function<String, ItemStack> itemFunction = (str) -> getMMOItemsItemStackSync(str);
 	static Function<ItemStack, String> displayNameFunction = (item) -> item.getItemMeta().getDisplayName();
-
+	static Function<MMOItem, ItemStack> mmoItemFunction = (item) -> item.newBuilder().build();
+	private static final Executor MAIN_THREAD_EXECUTOR = runnable -> TownyResources.getPlugin().getScheduler().run(runnable);
+	
 	public static String getMaterialNameForDisplay(String materialName) {
 		return displayNameFunction.apply(itemFunction.apply(materialName));
 	}
@@ -48,18 +52,26 @@ public class MMOItemsUtil {
 			return null;
 
 		if (Bukkit.isPrimaryThread())
-			return mmoItem.newBuilder().build();
+			return mmoItemFunction.apply(mmoItem);
 
-		Future<ItemStack> future = Bukkit.getScheduler().callSyncMethod(TownyResources.getPlugin(), () -> mmoItem.newBuilder().build());
+		CompletableFuture<ItemStack> future = null;
+		try {
+			future = CompletableFuture.supplyAsync(() -> mmoItemFunction.apply(mmoItem), MAIN_THREAD_EXECUTOR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return new ItemStack(Material.AIR);
+		}
+
 		ItemStack item = null;
 		try {
 			item = future.get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
+			return new ItemStack(Material.AIR);
 		}
 		return item;
 	}
-	
+
 	public static Type getType(String name) {
 		return Type.get(name.split(":")[0]);
 	}

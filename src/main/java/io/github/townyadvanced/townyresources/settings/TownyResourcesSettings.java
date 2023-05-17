@@ -4,7 +4,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -26,7 +29,8 @@ public class TownyResourcesSettings {
 	private static CommentedConfiguration config, newConfig;
 	private static int sumOfAllOfferDiscoveryProbabilityWeights = 0;  //Used when getting the resource offers
 	private static Path configPath = TownyResources.getPlugin().getDataFolder().toPath().resolve("config.yml");
-
+	private final static Pattern PATTERN = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
+	
 	public static boolean isEnabled() {
 		return getBoolean(TownyResourcesConfigNodes.ENABLED);
 	}
@@ -72,8 +76,7 @@ public class TownyResourcesSettings {
 		String categoriesAsString = getString(TownyResourcesConfigNodes.RESOURCE_EXTRACTION_LIMITS_CATEGORIES);
 		
 		if(!categoriesAsString.isEmpty()) {		
-			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(categoriesAsString);
+			Matcher matcher = PATTERN.matcher(categoriesAsString);
 			String categoryAsString;
 			String[] categoryAsArray;
 			String categoryName;
@@ -138,11 +141,11 @@ public class TownyResourcesSettings {
 		List<ResourceOfferCategory> result = new ArrayList<>();
 		boolean problemLoadingCategories = false;
 
+		// The map that stores categoryname:allowedbiomes.
+		Map<String, List<String>> categoryToBiomeMap = getCategoryToBiomeMap();
 		String categoriesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES);
-		
 		if(!categoriesAsString.isEmpty()) {		
-			Pattern pattern = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(categoriesAsString);
+			Matcher matcher = PATTERN.matcher(categoriesAsString);
 			String categoryAsString;
 			String[] categoryAsArray;
 			String categoryName;
@@ -150,6 +153,7 @@ public class TownyResourcesSettings {
 			double categoryBaseAmountStacks;
 			int categoryBaseAmountItems;
 			List<String> materialsInCategory;
+			List<String> allowedBiomesInCategory = Arrays.asList("ALL");
 			String materialName;
 			ResourceOfferCategory resourceOfferCategory;
 			
@@ -185,9 +189,12 @@ public class TownyResourcesSettings {
 					}
 					materialsInCategory.add(materialName);
 				}
-				
+
+				// Grab our list of allowed biomes for this category, or default to ALL.
+				allowedBiomesInCategory = categoryToBiomeMap.getOrDefault(categoryName, Arrays.asList("ALL"));
+
 				//Construct ResourceExtractionCategory object
-				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory);
+				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory, allowedBiomesInCategory);
 				
 				//Add to result
 				result.add(resourceOfferCategory);
@@ -200,7 +207,43 @@ public class TownyResourcesSettings {
 			return result;
 		}
 	}
-	
+
+	private static Map<String, List<String>> getCategoryToBiomeMap() {
+		Map<String, List<String>> categoryToBiomeMap = new HashMap<>();
+		if (!TownyResourcesSettings.areSurveyPlotsEnabled())
+			return categoryToBiomeMap;
+
+		String categoriesAndBiomesAsString = getString(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_CATEGORIES_BIOMES);
+
+		if (!categoriesAndBiomesAsString.isEmpty()) {
+			Matcher matcher = PATTERN.matcher(categoriesAndBiomesAsString);
+			String categoryAndBiomesString;
+			String[] categoryAsArray;
+			String categoryName;
+			List<String> allowedBiomesInCategory;
+			String biomeName;
+			while (matcher.find()) {
+				categoryAndBiomesString = matcher.group(1);
+
+				categoryAsArray = categoryAndBiomesString.split(",");
+				if(categoryAsArray.length < 2) {
+					TownyResources.severe("Bad configuration for offer category with biome: " + categoryAndBiomesString);
+					continue;
+				}
+				
+				categoryName = categoryAsArray[0].trim();
+				allowedBiomesInCategory = new ArrayList<>();
+				for(int i = 1; i < categoryAsArray.length; i++) {
+					biomeName = categoryAsArray[i].trim().toLowerCase(Locale.ROOT);
+					allowedBiomesInCategory.add(biomeName);
+				}
+				categoryToBiomeMap.put(categoryName, allowedBiomesInCategory);
+			}
+		}
+
+		return categoryToBiomeMap;
+	}
+
 	private static boolean isValidMaterial(String materialName) {
 		Material material = Material.getMaterial(materialName);
 		if(material != null)
@@ -402,5 +445,17 @@ public class TownyResourcesSettings {
 
 	public static boolean areMMOItemsGivenLeveledTowardsThePlayer() {
 		return false; //getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MMOITEMS_PLAYER_LEVELED_ITEMS);
+	}
+
+	public static boolean areSurveyPlotsEnabled() {
+		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_ENABLED);
+	}
+
+	public static String getSurveyPlotASCIIMapKey() {
+		return getString(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_ASCIIMAPKEY);
+	}
+
+	public static double getSurveyPlotCost() {
+		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEY_PLOTS_COST);
 	}
 }

@@ -19,12 +19,14 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceOffersCont
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.*;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import io.github.townyadvanced.townyresources.util.SurveyPlotUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -41,9 +43,15 @@ public class TownyResources extends JavaPlugin {
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
 	
+
 	public TownyResources() {
 		plugin = this;
 		this.scheduler = isFoliaClassPresent() ? new FoliaTaskScheduler(this) : new BukkitTaskScheduler(this);
+	}
+
+	@Override
+	public void onLoad() {
+		SurveyPlotUtil.registerSurveyPlotOnLoad(this.getDataFolder().getPath() + File.separator + "config.yml");
 	}
 	
     @Override
@@ -88,6 +96,9 @@ public class TownyResources extends JavaPlugin {
 			//Load commands and listeners
 			registerCommands();
 			registerListeners();
+
+			SurveyPlotUtil.registerSurveyPlot();
+
 		} catch (TownyException te) {
 			severe(te.getMessage());
             severe("TownyResources failed to load! Disabling!");
@@ -118,6 +129,8 @@ public class TownyResources extends JavaPlugin {
 			TownResourceProductionController.recalculateAllProduction();
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 			PlayerExtractionLimitsController.reloadAllExtractionRecordsForLoggedInPlayers();
+
+			SurveyPlotUtil.registerSurveyPlot();
 		} catch (Exception e) {
             e.printStackTrace();
 			severe(e.getMessage());
@@ -169,6 +182,8 @@ public class TownyResources extends JavaPlugin {
 		pm.registerEvents(new TownyResourcesTownyEventListener(), this);
 		pm.registerEvents(new TownyResourcesTownEventListener(), this);
 		pm.registerEvents(new TownyResourcesNationEventListener(), this);
+		if (TownyResourcesSettings.areSurveyPlotsEnabled())
+			pm.registerEvents(new TownBlockListener(), this);
 		if(isDynmapTownyInstalled())
 			pm.registerEvents(new TownyResourcesDynmapTownyListener(), this);
 	}

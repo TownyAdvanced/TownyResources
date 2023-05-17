@@ -5,6 +5,9 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.TranslationLoader;
+import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
+import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
+import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.bukkit.util.Version;
 
@@ -28,7 +31,8 @@ import java.nio.file.Paths;
 public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
-	private static Version requiredTownyVersion = Version.fromString("0.98.6.3");
+	private final TaskScheduler scheduler;
+	private static Version requiredTownyVersion = Version.fromString("0.99.0.6");
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
@@ -37,11 +41,13 @@ public class TownyResources extends JavaPlugin {
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
 	
+	public TownyResources() {
+		plugin = this;
+		this.scheduler = isFoliaClassPresent() ? new FoliaTaskScheduler(this) : new BukkitTaskScheduler(this);
+	}
+	
     @Override
     public void onEnable() {
-    	
-    	plugin = this;
-    	
         if (!loadAll())
         	onDisable();
 
@@ -260,5 +266,18 @@ public class TownyResources extends JavaPlugin {
 		languageUtilsInstalled = languageUtils != null;
 		if(languageUtilsInstalled) 
 			info("  LanguageUtils Integration Enabled");
+	}
+
+	public TaskScheduler getScheduler() {
+		return this.scheduler;
+	}
+
+	private static boolean isFoliaClassPresent() {
+		try {
+			Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+			return true;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
 	}
 }

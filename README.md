@@ -23,8 +23,12 @@ The plugin also has an optional feature to protect resource value, via daily pla
 6. Give the permission nodes required to use the plugin using the following commands: 
     ```
     /ta townyperms group towns.mayor addperm townyresources.command.towncollect
+
+    /ta townyperms group towns.mayor addperm townyresources.command.survey
     
     /ta townyperms group towns.ranks.assistant addperm townyresources.command.towncollect
+
+    /ta townyperms group towns.ranks.assistant addperm townyresources.command.survey
     
     /ta townyperms group nations.king addperm townyresources.command.nationcollect
     

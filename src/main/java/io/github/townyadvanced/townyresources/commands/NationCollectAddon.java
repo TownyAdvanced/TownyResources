@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.commands;
 
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI.CommandType;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -38,8 +39,8 @@ public class NationCollectAddon extends BaseCommand implements TabExecutor {
 
 	private void showTownyResourcesHelp(CommandSender sender) {
 		Translator translator = Translator.locale(sender);
-		sender.sendMessage(ChatTools.formatTitle("/nation collectresources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/nation", "collectresources", translator.of("townyresources.help_nationcollect")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/nation collectresources"));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/nation", "collectresources", translator.of("townyresources.help_nationcollect")));
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

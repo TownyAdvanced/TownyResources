@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources.commands;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
 import com.palmergames.bukkit.towny.TownyEconomyHandler;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI.CommandType;
 import com.palmergames.bukkit.towny.command.BaseCommand;
@@ -51,9 +52,9 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 
 	private void showTownResourcesHelp(CommandSender sender) {
 		Translator translator = Translator.locale(sender);
-		sender.sendMessage(ChatTools.formatTitle("/town resources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/t resources", "survey", translator.of("townyresources.help_survey")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/t resources", "collect", translator.of("townyresources.help_towncollect")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/town resources"));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t resources", "survey", translator.of("townyresources.help_survey")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t resources", "collect", translator.of("townyresources.help_towncollect")));
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

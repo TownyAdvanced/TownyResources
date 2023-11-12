@@ -85,11 +85,11 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 	
 	private void showHelp(CommandSender sender) {
 		Translator translator = Translator.locale(sender);
-		sender.sendMessage(ChatTools.formatTitle("/townyadmin resources"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta resources", "reload", translator.of("townyresources.admin_help_reload")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources", translator.of("townyresources.admin_help_reroll")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources [townname]", translator.of("townyresources.admin_help_reroll_one_town")));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta resources", "bypass", translator.of("townyresources.admin_help_bypass")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/townyadmin resources"));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "reload", translator.of("townyresources.admin_help_reload")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources", translator.of("townyresources.admin_help_reroll")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources [townname]", translator.of("townyresources.admin_help_reroll_one_town")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "bypass", translator.of("townyresources.admin_help_bypass")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {

@@ -9,7 +9,7 @@
     <java.version>17</java.version>
     <project.bukkitAPIVersion>1.15</project.bukkitAPIVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <towny.version>0.99.0.6</towny.version>
+    <towny.version>0.100.1.0</towny.version>
   </properties>
 
   <repositories>
@@ -50,7 +50,7 @@
 	<dependency>
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
-      <version>0.99.6.0</version>
+      <version>0.100.1.0</version>
       <scope>provided</scope>
 	</dependency>
     <dependency>

@@ -131,7 +131,7 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 
 		//Send warning message if town level is too low
 		int requiredTownLevel = TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(indexOfNextResourceLevel);
-		int actualTownLevel = town.getLevel();
+		int actualTownLevel = town.getLevelNumber();
 		if(actualTownLevel < requiredTownLevel) {
 			TownyResourcesMessagingUtil.sendMsg(player, Translatable.of("townyresources.msg_confirm_survey_town_level_warning", requiredTownLevel, actualTownLevel));
 		}

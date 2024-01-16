@@ -206,7 +206,7 @@ public class TownResourceProductionController {
         for(int i = 0; i < discoveredResources.size(); i++) {
             material = discoveredResources.get(i);
             //If town does not meet the min level, produced amt is zero
-            if(town.getLevel() < TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
+            if(town.getLevelNumber() < TownyResourcesSettings.getProductionTownLevelRequirementPerResourceLevel().get(i)) {
                 finalProducedAmount = 0;
             } else {
                 baseProducedAmount = allOffers.get(material).getBaseAmountItems();

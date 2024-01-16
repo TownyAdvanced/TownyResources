@@ -72,21 +72,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.lumine.xikage</groupId>
-      <artifactId>MythicMobs</artifactId>
-      <version>4.9.1</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>io.lumine</groupId>
       <artifactId>Mythic-Dist</artifactId>
-      <version>5.2.1</version>  
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.lumine</groupId>
-      <artifactId>MythicLib-dist</artifactId>
-      <version>1.4</version>  
+      <version>5.3.5</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

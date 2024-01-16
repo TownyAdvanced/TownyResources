@@ -39,7 +39,6 @@ public class TownyResources extends JavaPlugin {
 	private static boolean dynmapTownyInstalled; 
 	private static boolean languageUtilsInstalled;
 	private static boolean slimeFunInstalled;
-	private static boolean legacyMythicMobsInstalled;
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
 	
@@ -219,10 +218,6 @@ public class TownyResources extends JavaPlugin {
 
 	public boolean isMythicMobsInstalled() { return mythicMobsInstalled; }
 	
-	public boolean isMythicMobsLegacy() {
-		return legacyMythicMobsInstalled;
-	}
-	
 	public boolean isMythicMobsV5() {
 		return mythicMobsInstalled;
 	}
@@ -260,10 +255,7 @@ public class TownyResources extends JavaPlugin {
 		Plugin mythicMobs = Bukkit.getPluginManager().getPlugin("MythicMobs");
 		if(mythicMobs != null) {
 			String className = Bukkit.getServer().getPluginManager().getPlugin("MythicMobs").getClass().getName();
-			if (className.equals("io.lumine.xikage.mythicmobs.MythicMobs")) {
-				legacyMythicMobsInstalled = true;
-				info("  Legacy Mythic Mobs Integration Enabled");
-			} else if (className.equals("io.lumine.mythic.bukkit.MythicBukkit")) {
+			if (className.equals("io.lumine.mythic.bukkit.MythicBukkit")) {
 				mythicMobsInstalled = true;
 				info("  Mythic Mobs Integration Enabled");
 			} else {

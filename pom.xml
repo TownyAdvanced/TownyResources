@@ -78,6 +78,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>io.lumine</groupId>
+      <artifactId>MythicLib-dist</artifactId>
+      <version>1.4</version>  
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>net.Indyuce</groupId>
       <artifactId>MMOItems-API</artifactId>
       <version>6.9.2-SNAPSHOT</version>

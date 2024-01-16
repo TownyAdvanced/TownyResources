@@ -120,19 +120,9 @@ public class TownResourceProductionController {
         //1. Take resources from natural towns, and give to nation
         for(Town town: nation.getTowns()) {
             //Calculate Nation Cut
-            if(TownyResources.getPlugin().isSiegeWarInstalled()
-               && TownOccupationController.isTownOccupied(town)) {
-                if(TownOccupationController.getTownOccupier(town) == nation) {
-                    //Town occupied by nation
-                    nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
-                } else {
-                    //Town occupied by foreign nation
-                    continue;
-                }
-            } else {
-                //Town not occupied
-                nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();
-            }
+            nationCutNormalized = TownyResources.getPlugin().isSiegeWarInstalled() && TownOccupationController.isTownOccupied(town)
+                ? TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized() // Town occupied by their nation.
+                : TownyResourcesSettings.getTownResourcesProductionNationTaxNormalized();         // Town not occupied.
 
             //Take resources from town
             resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
@@ -150,28 +140,7 @@ public class TownResourceProductionController {
             }
         }
 
-        //2. Take resources from occupied towns, and give to nation
-        if(TownyResources.getPlugin().isSiegeWarInstalled()) {
-            nationCutNormalized = TownyResourcesSettings.getTownResourcesProductionOccupyingNationTaxNormalized();
-            for(Town town: TownOccupationController.getOccupiedForeignTowns(nation)) {
-                //Take resources from town
-                resourcesTakenFromTown = calculateProduction(town, nationCutNormalized);
-                //Add resources to nation
-                for(Map.Entry<String, Integer> resourceTakenFromTown: resourcesTakenFromTown.entrySet()) {
-                    takenResource = resourceTakenFromTown.getKey();
-                    takenQuantity = resourceTakenFromTown.getValue();
-                    if(takenQuantity == 0)
-                        continue;
-                    if(nationProduction.containsKey(takenResource)) {
-                        nationProduction.put(takenResource, nationProduction.get(takenResource) + takenQuantity);
-                    } else {
-                        nationProduction.put(takenResource, takenQuantity);
-                    }
-                }
-            }
-        }
-        
-        //3. Set nation production & save
+        //2. Set nation production & save
         TownyResourcesGovernmentMetaDataController.setDailyProduction(nation, nationProduction);
         nation.save();
     }

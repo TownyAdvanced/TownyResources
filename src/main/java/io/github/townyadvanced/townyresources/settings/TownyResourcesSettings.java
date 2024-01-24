@@ -20,6 +20,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.objects.ResourceExtractionCategory;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
+import io.github.townyadvanced.townyresources.util.ItemsAdderUtil;
 import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
 
@@ -262,6 +263,11 @@ public class TownyResourcesSettings {
 		if (TownyResources.getPlugin().isMMOItemsInstalled()
 		&& materialName.contains(":")
 		&& MMOItemsUtil.isValidItem(materialName))
+			return true;
+
+		// ItemsAdder integration
+		if (TownyResources.getPlugin().isItemsAdderInstalled() 
+		&& ItemsAdderUtil.isValidItem(materialName))
 			return true;
 
 		return false; //Unknown material		

@@ -203,6 +203,14 @@ public class TownyResourcesMessagingUtil {
             	if (miName != null)
             		return miName;
             }
+
+            // ItemsAdder integration
+            if(TownyResources.getPlugin().isItemsAdderInstalled()) {
+                String mmName = ItemsAdderUtil.getMaterialNameForDisplay(materialName); 
+                if (mmName != null) {
+                    return mmName;
+                }
+            }
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           
                 ItemStack fakeItemStack = new ItemStack(material);

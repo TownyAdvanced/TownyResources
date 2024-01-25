@@ -89,7 +89,7 @@ public class TownyResources extends JavaPlugin {
 			new TownyResourcesMessagingUtil(this);
 
 			// Run later to give items plugins a chance to load their items (ItemsAdder specifically.)
-			getScheduler().runLater(() -> loadOffersAndCategories(), 2L);
+			getScheduler().runLater(() -> loadOffersAndExtractionLimitCategories(), 2L);
 
 			//Load commands and listeners
 			registerCommands();
@@ -111,23 +111,21 @@ public class TownyResources extends JavaPlugin {
 		return true;
 	}
 
-	private void loadOffersAndCategories() {
+	private void loadOffersAndExtractionLimitCategories() {
 		try {
-			//Load controllers
 			TownResourceOffersController.loadAllResourceOfferCategories();
-			//WARNING: Do not try to recalculate production here, because unless SW has been loaded first, the results will be incorrect.
 			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
 		} catch (TownyException te) {
 			severe(te.getMessage());
-		    severe("TownyResources failed to load! Disabling!");
-		    onDisable();
-		    return;
+			severe("TownyResources failed to load offers and extraction categories!");
+			onDisable();
+			return;
 		} catch (Exception e) {
 			severe(e.getMessage());
-		    e.printStackTrace();
-		    severe("TownyResources failed to load! Disabling!");
-		    onDisable();
-		    return;
+			e.printStackTrace();
+			severe("TownyResources failed to load offers and extraction categories!");
+			onDisable();
+			return;
 		}
 	}
 

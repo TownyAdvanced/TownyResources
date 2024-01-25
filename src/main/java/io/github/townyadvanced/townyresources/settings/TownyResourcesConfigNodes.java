@@ -309,7 +309,7 @@ public enum TownyResourcesConfigNodes {
 			"# The default values give a weight of 200 to strategic resources (coal, iron etc.), and 100 to most non-strategic resources. (wheat, quartz etc.)",
 			"# This gives each survey approx. 70% chance to discover a strategic resources, and a 30% to discover a non-strategic resource.",
 			"# ",
-			"# This list supports Slimefun, MythicMobs and MMOItems items as well. When entering an MMOItem use the TYPE:ID format,",
+			"# This list supports Slimefun, MythicMobs, ItemsAdder and MMOItems items as well. When entering an MMOItem use the TYPE:ID format,",
 			"# ie: SWORD:CUTLASS where TownyResources expects a material."),
 	TOWN_RESOURCES_OFFERS_CATEGORIES_BIOMES(
 			"town_resources.offers.categories_biomes",
@@ -391,7 +391,7 @@ public enum TownyResourcesConfigNodes {
 			"# Ie: the amounts that are set in the above offers.categories sections are exactly how many each town will receive, every time.",
 			"# Materials put into this list, will not have their amounts modified by the Town's Town_Level resourceProductionModifier (in the Towny config,)",
 			"# or by the productivity_percentage_per_resource_level settings in this config.",
-			"# You may find it useful for controlling very valuable materials or custom items from Slimefun, MythicMobs or MMOItems."),
+			"# You may find it useful for controlling very valuable materials or custom items from Slimefun, MythicMobs, ItemsAdder or MMOItems."),
 	TOWN_RESOURCES_LANGUAGE(
 			"town_resources.language",
 			"",

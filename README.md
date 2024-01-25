@@ -73,9 +73,21 @@ The plugin also has an optional feature to protect resource value, via daily pla
     categories: '{mmo_items, 100, 0.015625, SWORD:CUTLASS}'
     ```
     The above example gives one cutlass per day to a town.
-12. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-13. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
-14. Run `/ta resources reload`, then `/ta reload`.
+12. If you want to use the [*ItemsAdder*](https://www.spigotmc.org/resources/73355/) plugin with *TownyResources*:
+    - Town Production:
+    <br>You can add *ItemsAdder* items to the offers list, simply by using *ItemsAdder* item names. Example:
+    ```
+    {crystal_category_name, 100, 1, crystal_block}
+    
+    ItemsAdder item config (plugins/ItemsAdder/contents/iasurvival/configs/blocks/items/minerals/crystal_block.yml)
+        items:
+          crystal_block:
+            enabled: true
+    ```
+    The above example gives one stack of Crystal blocks.
+13. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+14. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
+15. Run `/ta resources reload`, then `/ta reload`.
 
 ## (Optional Installation Step) SurveySite Plots & Biome-dependent resources.
 - An (Optional) feature in TownyResources is a new Towny plot type, called the SurveySite.

@@ -77,11 +77,12 @@ The plugin also has an optional feature to protect resource value, via daily pla
     - Town Production:
     <br>You can add *ItemsAdder* items to the offers list, simply by using *ItemsAdder* item names. Example:
     ```
-    {crystal_category_name, 100, 1, crystal_block}
+    In the TownyResources config, use the item name from the ItemsAdder config as shown below:
+    categories: {crystal_category_name, 100, 1, crystal_block}
     
-    ItemsAdder item config (plugins/ItemsAdder/contents/iasurvival/configs/blocks/items/minerals/crystal_block.yml)
+    In ItemsAdder item config (plugins/ItemsAdder/contents/iasurvival/configs/blocks/items/minerals/crystal_block.yml)
         items:
-          crystal_block:
+          crystal_block:              <---- this is the name you use in TownyResources.
             enabled: true
     ```
     The above example gives one stack of Crystal blocks.

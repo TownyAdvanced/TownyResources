@@ -43,7 +43,11 @@ public class TownyResourcesSettings {
     public static List<Integer> getSurveyNumTownblocksRequirementsPerResourceLevel() {
     	return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_NUM_TOWNBLOCKS_REQUIREMENT_PER_RESOURCE_LEVEL);
 	}
-		
+
+	public static double getRerollCost() {
+		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_REROLL_COST);
+	}
+
 	public static List<Integer> getProductionPercentagesPerResourceLevel() {
 		return getIntegerList(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_PRODUCTIVITY_PERCENTAGE_PER_RESOURCE_LEVEL);
 	}

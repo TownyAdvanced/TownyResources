@@ -9,6 +9,7 @@ public enum TownyResourcesPermissionNodes {
 
 	TOWNY_RESOURCES_COMMAND("townyresources.command.*"),
 	TOWNY_RESOURCES_COMMAND_SURVEY("townyresources.command.survey"),  //Do a resource survey in a town
+	TOWNY_RESOURCES_COMMAND_TOWN_REROLL("townyresources.command.town.reroll"),  //Re roll a town's resources for a fee.
 	TOWNY_RESOURCES_COMMAND_TOWN_COLLECT("townyresources.command.towncollect"),  //Collect your town's share of extracted resources
 	TOWNY_RESOURCES_COMMAND_NATION_COLLECT("townyresources.command.nationcollect"), //Collect your nation's share of extracted resources
 	TOWNY_RESOURCES_ADMIN_COMMAND("townyresources.admin.command.*"),

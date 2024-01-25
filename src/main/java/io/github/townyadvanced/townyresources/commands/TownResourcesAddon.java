@@ -8,6 +8,7 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI.CommandType;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.confirmations.Confirmation;
+import com.palmergames.bukkit.towny.confirmations.ConfirmationTransaction;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.AddonCommand;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -42,7 +43,7 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 		TownyCommandAddonAPI.addSubCommand(townResourcesCommand);
 	}
 
-	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "collect");
+	private static final List<String> townyResourcesTabCompletes = Arrays.asList("survey", "collect", "reroll");
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
 			return NameUtil.filterByStart(townyResourcesTabCompletes, args[0]);
@@ -55,6 +56,7 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/town resources"));
 		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t resources", "survey", translator.of("townyresources.help_survey")));
 		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t resources", "collect", translator.of("townyresources.help_towncollect")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t resources", "reroll", translator.of("townyresources.help_townreroll")));
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -71,6 +73,7 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 			switch (args[0].toLowerCase(Locale.ROOT)) {
 			case "survey" -> parseSurveyCommand(player);
 			case "collect" -> parseTownCollectCommand(player);
+			case "reroll" -> parseRerollCommand(player);
 			default -> showTownResourcesHelp(player);
 			}
 
@@ -81,6 +84,30 @@ public class TownResourcesAddon extends BaseCommand implements TabExecutor {
 			//Unexpected exception
 			TownyResourcesMessagingUtil.sendErrorMsg(player, e.getMessage());
 		}
+	}
+
+	private void parseRerollCommand(Player player) throws TownyException {
+		checkPermOrThrow(player, TownyResourcesPermissionNodes.TOWNY_RESOURCES_COMMAND_TOWN_REROLL.getNode());
+
+		if (!TownyEconomyHandler.isActive())
+			throw new TownyException(Translatable.of("msg_err_no_economy"));
+
+		double cost = TownyResourcesSettings.getRerollCost();
+		if (cost < 0)
+			throw new TownyException(Translatable.of("townyresources.reroll_disabled"));
+
+		Resident resident = getResidentOrThrow(player);
+		Town town = getTownFromResidentOrThrow(resident);
+		if (!resident.getAccount().canPayFromHoldings(cost))
+			throw new TownyException(Translatable.of("townyresources.cannot_afford_to_reroll", prettyMoney(cost)));
+
+		Confirmation.runOnAccept(() -> {
+			TownResourceDiscoveryController.reRollExistingResources(town, false);
+			TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("townyresources.all_resources_rerolled"));
+		})
+		.setTitle(Translatable.of("townyresources.reroll_confirmation_title", cost))
+		.setCost(new ConfirmationTransaction(()-> cost, resident, "Cost to reroll town resources for " + town.getName() + "."))
+		.sendTo(player);
 	}
 
 	private void parseSurveyCommand(Player player) throws TownyException{

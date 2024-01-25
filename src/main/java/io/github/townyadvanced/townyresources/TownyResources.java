@@ -41,7 +41,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean slimeFunInstalled;
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
-	
+	private static boolean itemsAdderInstalled;
 
 	public TownyResources() {
 		plugin = this;
@@ -88,10 +88,9 @@ public class TownyResources extends JavaPlugin {
 			loadLocalization(false);
 			new TownyResourcesMessagingUtil(this);
 
-			//Load controllers
-			TownResourceOffersController.loadAllResourceOfferCategories();
-			//WARNING: Do not try to recalculate production here, because unless SW has been loaded first, the results will be incorrect.
-			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+			// Run later to give items plugins a chance to load their items (ItemsAdder specifically.)
+			getScheduler().runLater(() -> loadOffersAndExtractionLimitCategories(), 2L);
+
 			//Load commands and listeners
 			registerCommands();
 			registerListeners();
@@ -110,6 +109,24 @@ public class TownyResources extends JavaPlugin {
         }
 		info("TownyResources loaded successfully.");
 		return true;
+	}
+
+	private void loadOffersAndExtractionLimitCategories() {
+		try {
+			TownResourceOffersController.loadAllResourceOfferCategories();
+			PlayerExtractionLimitsController.loadAllResourceExtractionCategories();
+		} catch (TownyException te) {
+			severe(te.getMessage());
+			severe("TownyResources failed to load offers and extraction categories!");
+			onDisable();
+			return;
+		} catch (Exception e) {
+			severe(e.getMessage());
+			e.printStackTrace();
+			severe("TownyResources failed to load offers and extraction categories!");
+			onDisable();
+			return;
+		}
 	}
 
 	/**
@@ -222,6 +239,10 @@ public class TownyResources extends JavaPlugin {
 		return mythicMobsInstalled;
 	}
 
+	public boolean isItemsAdderInstalled() {
+		return itemsAdderInstalled;
+	}
+
 	public boolean isMMOItemsInstalled() {
 		return mmmoItemsInstalled;
 	}
@@ -264,6 +285,11 @@ public class TownyResources extends JavaPlugin {
 			}
 		}
 
+		Plugin itemsAdder = Bukkit.getPluginManager().getPlugin("ItemsAdder");
+		itemsAdderInstalled = itemsAdder != null;
+		if (itemsAdderInstalled)
+			info("  ItemsAdder Integration Enabled");
+		
 		Plugin mmmoItems = Bukkit.getPluginManager().getPlugin("MMOItems");
 		mmmoItemsInstalled = mmmoItems != null;
 		if (mmmoItemsInstalled)

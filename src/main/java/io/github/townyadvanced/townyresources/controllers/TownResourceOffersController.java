@@ -29,10 +29,26 @@ public class TownResourceOffersController {
     }
     
     public static List<ResourceOfferCategory> getResourceOfferCategoryList() {
+		// Realistically this shouldn't happen, the list is populated 2 ticks after server load. This is only here as a failsafe.
+		if (resourceOfferCategoryList.isEmpty())
+			try {
+				loadAllResourceOfferCategories();
+			} catch (TownyException e) {
+				TownyResources.severe(e.getMessage());
+				TownyResources.severe("TownyResources failed to load offer category list!");
+			}
         return resourceOfferCategoryList;
     }
     
     public static Map<String, ResourceOfferCategory> getMaterialToResourceOfferCategoryMap() {
+		// Realistically this shouldn't happen, the map is populated 2 ticks after server load. This is only here as a failsafe.
+		if (materialToResourceOfferCategoryMap.isEmpty())
+			try {
+				loadAllResourceOfferCategories();
+			} catch (TownyException e) {
+				TownyResources.severe(e.getMessage());
+				TownyResources.severe("TownyResources failed to load resource offer category map!");
+			}
         return materialToResourceOfferCategoryMap;
     }
 }

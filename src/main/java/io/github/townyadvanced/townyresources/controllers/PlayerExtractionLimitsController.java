@@ -413,6 +413,14 @@ public class PlayerExtractionLimitsController {
     }
         
     public static ResourceExtractionCategory getResourceExtractionCategory(String givenCategoryName) {
+		// This should not be able to happen outside of a 2 tick window at startup and is here only as a failsafe.
+		if (resourceExtractionCategories.isEmpty())
+			try {
+				loadAllResourceExtractionCategories();
+			} catch (Exception e) {
+				e.printStackTrace();
+				TownyResources.severe("Failed to load the Resource Extraction Categories!");
+			}
         for(ResourceExtractionCategory resourceExtractionCategory: resourceExtractionCategories)
             if(resourceExtractionCategory.getName().equals(givenCategoryName))
                 return resourceExtractionCategory;

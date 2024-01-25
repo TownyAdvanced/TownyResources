@@ -14,7 +14,7 @@ description: This is an add-on plugin for Towny, which gives each town a unique 
 permissions:
     townyresources.command.survey:
         description: User is able to do a survey.
-        default: true
+        default: false
 
     townyresources.command.town.reroll:
         description: User is able to reroll their town's resources for a fee.

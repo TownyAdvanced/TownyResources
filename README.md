@@ -22,6 +22,8 @@ The plugin also has an optional feature to protect resource value, via daily pla
    - Note: Do not add Eggs, Honeycomb, or Honey Bottle to the daily-limits list, as these limit types are not yet operational.
 6. Give the permission nodes required to use the plugin using the following commands: 
     ```
+    /ta townyperms group towns.mayor addperm townyresources.command.town.reroll   <-- only required if you have enabled town's ability to re-roll resources.
+
     /ta townyperms group towns.mayor addperm townyresources.command.towncollect
 
     /ta townyperms group towns.mayor addperm townyresources.command.survey
@@ -135,6 +137,9 @@ The plugin also has an optional feature to protect resource value, via daily pla
 ###### Collecting Town Resources
 - To collect town resources, as a mayor/assistant/treasurer, enter your town and run `/t resources collect`
 - The available resources will then be dropped at your position.
+###### Re-rolling Town Resources
+- If your server has enabled re-rolling, you will be able to use /t resources reroll, for a fee.
+- This will cause your town's resources to be re-discovered.
 ### Nation Production
 ###### Information
 - Nation production & collection information is shown on the nation screen. Example:

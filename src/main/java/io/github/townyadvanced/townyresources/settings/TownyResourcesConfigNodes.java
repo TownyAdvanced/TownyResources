@@ -201,6 +201,13 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If true, towns produce resources.",
 			"# if false, towns do not produce resource."),
+	TOWN_RESOURCES_PRODUCTION_REROLL_COST(
+			"town_resources.production.reroll_cost",
+			"-1.0",
+			"",
+			"# When above 0, a town can pay to reroll their resources.",
+			"# This is disabled by default to prevent rich towns being able to spam rerolls. Use cautiously."),
+	
 	TOWN_RESOURCES_PRODUCTION_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL(
 			"town_resources.production.town_level_requirement_per_resource_level",
 			"2, 4, 6, 8",

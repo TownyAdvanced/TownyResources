@@ -16,6 +16,10 @@ permissions:
         description: User is able to do a survey.
         default: true
 
+    townyresources.command.town.reroll:
+        description: User is able to reroll their town's resources for a fee.
+        default: false
+
     townyresources.admin.command.*:
         description: User is able to do all townyresouces admin commands.
         default: op

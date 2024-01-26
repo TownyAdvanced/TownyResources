@@ -211,6 +211,14 @@ public class TownyResourcesMessagingUtil {
                     return mmName;
                 }
             }
+
+            // Oraxen integration
+            if(TownyResources.getPlugin().isOraxenInstalled()) {
+                String oName = OraxenUtil.getMaterialNameForDisplay(materialName); 
+                if (oName != null) {
+                    return oName;
+                }
+            }
         } else {
             if(TownyResources.getPlugin().isLanguageUtilsInstalled()) {           
                 ItemStack fakeItemStack = new ItemStack(material);

@@ -23,6 +23,7 @@ import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.util.ItemsAdderUtil;
 import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
+import io.github.townyadvanced.townyresources.util.OraxenUtil;
 
 import org.bukkit.Material;
 
@@ -272,6 +273,11 @@ public class TownyResourcesSettings {
 		// ItemsAdder integration
 		if (TownyResources.getPlugin().isItemsAdderInstalled() 
 		&& ItemsAdderUtil.isValidItem(materialName))
+			return true;
+
+		// Oraxen integration
+		if (TownyResources.getPlugin().isOraxenInstalled() 
+		&& OraxenUtil.isValidItem(materialName))
 			return true;
 
 		return false; //Unknown material		

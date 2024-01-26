@@ -42,6 +42,7 @@ public class TownyResources extends JavaPlugin {
 	private static boolean mythicMobsInstalled;
 	private static boolean mmmoItemsInstalled;
 	private static boolean itemsAdderInstalled;
+	private static boolean oraxenInstalled;
 
 	public TownyResources() {
 		plugin = this;
@@ -243,6 +244,10 @@ public class TownyResources extends JavaPlugin {
 		return itemsAdderInstalled;
 	}
 
+	public boolean isOraxenInstalled() {
+		return oraxenInstalled;
+	}
+
 	public boolean isMMOItemsInstalled() {
 		return mmmoItemsInstalled;
 	}
@@ -289,7 +294,12 @@ public class TownyResources extends JavaPlugin {
 		itemsAdderInstalled = itemsAdder != null;
 		if (itemsAdderInstalled)
 			info("  ItemsAdder Integration Enabled");
-		
+
+		Plugin oraxen = Bukkit.getPluginManager().getPlugin("Oraxen");
+		oraxenInstalled = oraxen != null;
+		if (oraxenInstalled)
+			info("  Oraxen Integration Enabled");
+
 		Plugin mmmoItems = Bukkit.getPluginManager().getPlugin("MMOItems");
 		mmmoItemsInstalled = mmmoItems != null;
 		if (mmmoItemsInstalled)

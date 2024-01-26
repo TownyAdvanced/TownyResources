@@ -87,7 +87,7 @@ townyresources.msg_err_not_enough_offers_left: "&cSurvey not possible, because t
 townyresources.production.message: "&b%s towns produced resources."
 
 ### Rerolling
-townyresources.help_townreroll: 'For a price, reroll your town's resources.'
+townyresources.help_townreroll: "For a price, reroll your town's resources."
 townyresources.reroll_disabled: 'Re-rolling resources is disabled.'
 townyresources.cannot_afford_to_reroll: 'You cannot afford the cost to re-roll: %s'
 townyresources.reroll_confirmation_title: 'Re-rolling your town''s resources will cost %s. Do you want to continue?'

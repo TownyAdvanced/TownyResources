@@ -88,9 +88,21 @@ The plugin also has an optional feature to protect resource value, via daily pla
             enabled: true
     ```
     The above example gives one stack of Crystal blocks.
-13. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
-14. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
-15. Run `/ta resources reload`, then `/ta reload`.
+13. If you want to use the [*Oraxen*](https://www.spigotmc.org/resources/72448/) plugin with *TownyResources*:
+    - Town Production:
+    <br>You can add *Oraxen* items to the offers list, simply by using *ItemsAdder* item names. Example:
+    ```
+    In the TownyResources config, use the item name from the Oraxen config as shown below:
+    categories: {caveblock_category_name, 100, 1, caveblock}
+    
+    In Oraxen item config (plugins/Oraxen/items/blocks.yml)
+      caveblock:              <---- this is the name you use in TownyResources.
+        displayname: <#D5D6D8>Cave Block
+        material: PAPER
+    ```
+14. If you want to translate material names into a non-english language, first ensure you have the [*LangUtils*](https://ci.nyaacat.com/job/LanguageUtils/job/1.17/) plugin installed, then set your preferred language in the *TownyResources* Config.yml file.
+15. Edit the *TownyResources* config.yml file, and set `surveys > enabled` to `true`.
+16. Run `/ta resources reload`, then `/ta reload`.
 
 ## (Optional Installation Step) SurveySite Plots & Biome-dependent resources.
 - An (Optional) feature in TownyResources is a new Towny plot type, called the SurveySite.

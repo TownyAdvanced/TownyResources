@@ -10,6 +10,7 @@ import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentM
 import io.github.townyadvanced.townyresources.util.ItemsAdderUtil;
 import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
+import io.github.townyadvanced.townyresources.util.OraxenUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 
 import org.bukkit.Material;
@@ -144,6 +145,16 @@ public class TownResourceCollectionController {
             //  ItemsAdder integration
             if (TownyResources.getPlugin().isItemsAdderInstalled()) {
                 ItemStack itemsAdderItem = ItemsAdderUtil.getItemStack(materialName, amount);
+                if (itemsAdderItem != null) {
+                    itemStack = itemsAdderItem;
+                    itemStackList.add(itemStack);
+                    continue;
+                }
+            }
+
+            //  Oraxen integration
+            if (TownyResources.getPlugin().isOraxenInstalled()) {
+                ItemStack itemsAdderItem = OraxenUtil.getItemStack(materialName, amount);
                 if (itemsAdderItem != null) {
                     itemStack = itemsAdderItem;
                     itemStackList.add(itemStack);

@@ -253,14 +253,8 @@ public class PlayerExtractionLimitsController {
      * Limits egg creation
      *
      * @param event event
-     *
-     * Method currently returns immediately and does nothing, due to
-     * https://github.com/TownyAdvanced/TownyResources/issues/32
      */
-    @SuppressWarnings("unused")
 	public static void processItemSpawnEvent(ItemSpawnEvent event) {
-        if(true)
-            return;
 
         //Return if item is not an egg
         Material itemMaterial = event.getEntity().getItemStack().getType();        

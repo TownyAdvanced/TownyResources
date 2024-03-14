@@ -120,6 +120,7 @@ public enum TownyResourcesConfigNodes {
 			"{melon_blocks, 0.125, MELON}," +
 			"{cocoa_pods, 0.125, COCOA}," +
 			"{kelp, 1, KELP}," +
+			"{eggs, 0.25, EGG}," +
 			"{bamboo, 1, BAMBOO}," +
 			"{cactus, 1, CACTUS}," +
 			"{mushrooms, 1, BROWN_MUSHROOM, RED_MUSHROOM}," +
@@ -302,6 +303,7 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, 100, 0.25, MUTTON}," +
 			"{beef, 100, 0.25, BEEF}," +
 			"{chickens, 100, 0.25, CHICKEN}," +
+			"{eggs, 0.25, EGG}," +
 			"{ender_pearls, 100, 0.125, ENDER_PEARL}," +
 			"{chorus_fruit, 100, 0.125, CHORUS_FRUIT}",
 		   "",
@@ -377,6 +379,7 @@ public enum TownyResourcesConfigNodes {
 			"{mutton, OVERWORLD}," +
 			"{beef, OVERWORLD}," +
 			"{chickens, OVERWORLD}," +
+			"{eggs, OVERWORLD}," +
 			"{ender_pearls, OVERWORLD}," +
 			"{chorus_fruit, END}",
 		   "",

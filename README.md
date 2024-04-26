@@ -40,8 +40,14 @@ The plugin also has an optional feature to protect resource value, via daily pla
     - `- townyresources.admin.command.*`
     - Optionally, give your admins `townyresources.bypass` if you would like to never be restricted by extraction limits, without having to use /ta resources bypass.
 8. If you want to show town production on the *Dynmap* (**Recommended**), first ensure you have the [*Dynmap-Towny*](https://github.com/TownyAdvanced/Dynmap-Towny/releases) plugin installed, then add the following to the 'infowindow' section of your *Dynmap-Towny* config file:
-    ```
+    ```html
     <br/><span style="font-weight:bold;">Resources&colon; %town_resources%</span>
+    ```
+    or if you have the [*MapTowny*](https://github.com/TownyAdvanced/MapTowny/releases) plugin installed instead, then add the following to the `infowindow` section of your *MapTown* `click_tooltip.html`:
+    ```html
+    <br/>
+    Resources:
+    <span style="font-weight:bold;">%town_resources%</span>
     ```
 9. If you want to use the [*Slimefun*](https://github.com/Slimefun/Slimefun4/releases) plugin with *TownyResources*:
    - Town Production:

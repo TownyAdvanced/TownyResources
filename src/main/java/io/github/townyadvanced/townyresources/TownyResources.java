@@ -3,6 +3,7 @@ package io.github.townyadvanced.townyresources;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
+import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.TranslationLoader;
 import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
@@ -18,9 +19,13 @@ import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimits
 import io.github.townyadvanced.townyresources.controllers.TownResourceOffersController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.listeners.*;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.SurveyPlotUtil;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+import me.silverwolfg11.maptowny.MapTownyPlugin;
+import me.silverwolfg11.maptowny.managers.LayerManager;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -36,7 +41,9 @@ public class TownyResources extends JavaPlugin {
 	private final TaskScheduler scheduler;
 	private static Version requiredTownyVersion = Version.fromString("0.99.0.6");
 	private static boolean siegeWarInstalled;
-	private static boolean dynmapTownyInstalled; 
+	private static boolean dynmapTownyInstalled;
+	private static boolean mapTownyInstalled;
+	private static MapTownyPlugin mapTownyPlugin;
 	private static boolean languageUtilsInstalled;
 	private static boolean slimeFunInstalled;
 	private static boolean mythicMobsInstalled;
@@ -203,6 +210,8 @@ public class TownyResources extends JavaPlugin {
 			pm.registerEvents(new TownBlockListener(), this);
 		if(isDynmapTownyInstalled())
 			pm.registerEvents(new TownyResourcesDynmapTownyListener(), this);
+		if(isMapTownyInstalled())
+			pm.registerEvents(new TownyResourceMapTownyListener(), this);
 	}
 
 	private void registerCommands() {
@@ -213,6 +222,19 @@ public class TownyResources extends JavaPlugin {
 
 	public boolean isDynmapTownyInstalled() {
 		return dynmapTownyInstalled;
+	}
+
+	public boolean isMapTownyInstalled() {
+		return mapTownyInstalled;
+	}
+
+	public MapTownyPlugin getMapTownyPlugin() {
+		return mapTownyPlugin;
+	}
+
+	public void registerMapTownyReplacements(MapTownyPlugin mapTownyPlugin) {
+		LayerManager layerManager = mapTownyPlugin.getLayerManager();
+		layerManager.registerReplacement("%town_resources%", this::getResourcesString);
 	}
 
 	/**
@@ -260,7 +282,7 @@ public class TownyResources extends JavaPlugin {
 		if (!(Version.fromString(getTownyVersion()).compareTo(requiredTownyVersion) >= 0))
 			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
     }
-    
+
     private void setupIntegrationsWithOtherPlugins() {
 		//Determine if other plugins are installed
 		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");
@@ -273,6 +295,13 @@ public class TownyResources extends JavaPlugin {
 		if(dynmapTownyInstalled) 
 			info("  DynmapTowny Integration Enabled");
 				
+		mapTownyPlugin = (MapTownyPlugin) Bukkit.getPluginManager().getPlugin("MapTowny");
+		mapTownyInstalled = mapTownyPlugin != null;
+		if (mapTownyInstalled) {
+			registerMapTownyReplacements(mapTownyPlugin);
+			info("  MapTowny Integration Enabled");
+		}
+
 		Plugin slimeFun = Bukkit.getPluginManager().getPlugin("Slimefun");
 		slimeFunInstalled = slimeFun != null;
 		if(slimeFunInstalled) 
@@ -313,6 +342,13 @@ public class TownyResources extends JavaPlugin {
 
 	public TaskScheduler getScheduler() {
 		return this.scheduler;
+	}
+
+	public String getResourcesString(Town town) {
+		String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(town);
+		productionAsString = TownyResourcesMessagingUtil.adjustAmountsForTownLevelModifier(town, productionAsString);
+		String finalDescription = TownyResourcesMessagingUtil.formatProductionStringForDynmapTownyDisplay(productionAsString);
+		return finalDescription.isEmpty() ? "None" : finalDescription;
 	}
 
 	private static boolean isFoliaClassPresent() {

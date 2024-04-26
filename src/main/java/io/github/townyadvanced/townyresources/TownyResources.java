@@ -282,7 +282,7 @@ public class TownyResources extends JavaPlugin {
 		if (!(Version.fromString(getTownyVersion()).compareTo(requiredTownyVersion) >= 0))
 			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
     }
-
+    
     private void setupIntegrationsWithOtherPlugins() {
 		//Determine if other plugins are installed
 		Plugin siegeWar = Bukkit.getPluginManager().getPlugin("SiegeWar");

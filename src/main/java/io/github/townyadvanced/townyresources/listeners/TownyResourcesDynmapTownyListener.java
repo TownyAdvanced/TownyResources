@@ -1,8 +1,7 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
+import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
-import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.dynmap.towny.events.BuildTownMarkerDescriptionEvent;
@@ -19,11 +18,7 @@ public class TownyResourcesDynmapTownyListener implements Listener {
     public void on(BuildTownMarkerDescriptionEvent event) {
         if (TownyResourcesSettings.isEnabled()) {
             if (event.getDescription().contains("%town_resources%")) {
-                String productionAsString = TownyResourcesGovernmentMetaDataController.getDailyProduction(event.getTown());
-                productionAsString = TownyResourcesMessagingUtil.adjustAmountsForTownLevelModifier(event.getTown(), productionAsString);
-                String formattedProductionAsString = TownyResourcesMessagingUtil.formatProductionStringForDynmapTownyDisplay(productionAsString);
-                String finalDescription = event.getDescription().replace("%town_resources%", formattedProductionAsString);
-                event.setDescription(finalDescription);
+                event.setDescription(event.getDescription().replace("%town_resource%", TownyResources.getPlugin().getResourcesString(event.getTown())));
             }
         }
     }

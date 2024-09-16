@@ -245,13 +245,17 @@ public class TownResourceProductionController {
             int quantityToProduce;
             int currentQuantity;
             double townLevelModifier;
+            double townMultiplier;
             int storageLimit;
             for(Map.Entry<String, Integer> townProductionEntry: townDailyProduction.entrySet()) {
                 resource = townProductionEntry.getKey();
                 townLevelModifier = government instanceof Town town ? TownySettings.getTownLevel(town).resourceProductionModifier() : 1.0;
-				if (TownyResourcesSettings.isNonDynamicAmountMaterial(resource))
+                townMultiplier = government instanceof Town town ? (TownyResourcesGovernmentMetaDataController.getTownMultiplier(town) / 100.0) : 1.0;
+				if (TownyResourcesSettings.isNonDynamicAmountMaterial(resource)) {
 					townLevelModifier = 1.0;
-                quantityToProduce = (int) (townProductionEntry.getValue() * townLevelModifier);
+					townMultiplier = 1.0;
+				}
+                quantityToProduce = (int) (townProductionEntry.getValue() * townLevelModifier * townMultiplier);
                 if(quantityToProduce == 0)
                     continue;
                 if(availableResources.containsKey(resource)) {

@@ -2,6 +2,7 @@ package io.github.townyadvanced.townyresources.metadata;
 
 import com.palmergames.bukkit.towny.object.Government;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.metadata.IntegerDataField;
 import com.palmergames.bukkit.towny.object.metadata.StringDataField;
 import com.palmergames.bukkit.towny.utils.MetaDataUtil;
 
@@ -30,6 +31,7 @@ public class TownyResourcesGovernmentMetaDataController {
 	private static StringDataField discoveredSDF = new StringDataField(discoveredMetadataKey, "");
 	private static StringDataField dailyProductionSDF = new StringDataField(dailyProductionMetadataKey, "");
 	private static StringDataField availableForCollectionSDF = new StringDataField(availableForCollectionMetadataKey, "");
+	private static IntegerDataField townMultiplier = new IntegerDataField("towny_resources_town_multiplier", 100);
 
     public static String getDiscovered(Government government) {
         return MetaDataUtil.getString(government, discoveredSDF).replaceAll(" ","");
@@ -189,4 +191,20 @@ public class TownyResourcesGovernmentMetaDataController {
         StringDataField meta = metadataKey.equals(availableForCollectionMetadataKey) ? availableForCollectionSDF : dailyProductionSDF;
         MetaDataUtil.setString(government, meta, resourceQuantitiesAsStringBuilder.toString(), false);
     }
+
+	public static void setTownMulitplier(Town town, int multiplier) {
+		if (multiplier == 100) {
+			town.removeMetaData(townMultiplier);
+			return;
+		}
+		MetaDataUtil.setInt(town, townMultiplier, multiplier, true);
+	}
+
+	public static double getTownMultiplier(Town town) {
+		return hasMultiplier(town) ? (double) MetaDataUtil.getInt(town, townMultiplier) : 100.0;
+	}
+
+	public static boolean hasMultiplier(Town town) {
+		return MetaDataUtil.hasMeta(town, townMultiplier);
+	}
 }

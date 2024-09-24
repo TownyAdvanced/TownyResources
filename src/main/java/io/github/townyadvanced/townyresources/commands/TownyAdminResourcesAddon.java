@@ -12,12 +12,14 @@ import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.Translator;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
+import com.palmergames.util.MathUtil;
 import com.palmergames.util.StringMgmt;
 
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.TownResourceDiscoveryController;
 import io.github.townyadvanced.townyresources.enums.TownyResourcesPermissionNodes;
 import io.github.townyadvanced.townyresources.metadata.BypassEntries;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,17 +40,23 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 		TownyCommandAddonAPI.addSubCommand(townyAdminResourcesCommand);
 	}
 
-	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources", "bypass");
+	private static final List<String> tabCompletes = Arrays.asList("reload", "reroll_all_resources", "bypass", "town");
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		if (args.length == 1)
 			return NameUtil.filterByStart(tabCompletes, args[0]);
 		else if(args.length == 2) {
 			switch (args[0].toLowerCase(Locale.ROOT)) {
-			case "reroll_all_resources":
+			case "reroll_all_resources", "town":
 				return getTownyStartingWith(args[1], "t");
 			}
-		} 
+		}
+		else if (args.length == 3 && args[0].toLowerCase(Locale.ROOT).equals("town")) {
+			return Arrays.asList("setmultiplier");
+		}
+		else if (args.length == 4 && args[0].toLowerCase(Locale.ROOT).equals("town")) {
+			return Arrays.asList("90","100","120","150","...");
+		}
 		return Collections.emptyList();
 	}
 
@@ -73,6 +81,7 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 				case "reload" -> parseReloadCommand(sender);
 				case "reroll_all_resources" -> parseReRollCommand(sender, StringMgmt.remFirstArg(args));
 				case "bypass" -> bypassExtractionLimitCommand(sender);
+				case "town" -> setTownMultiplier(sender, StringMgmt.remFirstArg(args));
 				/*
 				 * Show help if no command found.
 				 */
@@ -82,7 +91,7 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 			TownyResourcesMessagingUtil.sendErrorMsg(sender, e.getMessage(sender));
 		}
 	}
-	
+
 	private void showHelp(CommandSender sender) {
 		Translator translator = Translator.locale(sender);
 		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/townyadmin resources"));
@@ -90,6 +99,8 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources", translator.of("townyresources.admin_help_reroll")));
 		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "reroll_all_resources [townname]", translator.of("townyresources.admin_help_reroll_one_town")));
 		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "bypass", translator.of("townyresources.admin_help_bypass")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "town [townname] setmultiplier [percent]", translator.of("townyresources.tra_town_setmultiplierhelp")));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta resources", "town [townname] setmultiplier [100]", translator.of("townyresources.tra_town_setmultiplierhelp2")));
 	}
 
 	private void parseReloadCommand(CommandSender sender) {
@@ -131,6 +142,19 @@ public class TownyAdminResourcesAddon extends BaseCommand implements CommandExec
 			BypassEntries.bypassData.add(playerUUID);
 			TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.bypass_on"));
 		}
+	}
+
+	private void setTownMultiplier(CommandSender sender, String[] args) throws TownyException {
+
+		if (args.length < 3) {
+			showHelp(sender);
+			return;
+		}
+		
+		Town town = getTownOrThrow(args[0]);
+		int multiplier = MathUtil.getPositiveIntOrThrow(args[2]);
+		TownyResourcesGovernmentMetaDataController.setTownMulitplier(town, multiplier);
+		TownyResourcesMessagingUtil.sendMsg(sender, Translatable.of("townyresources.tra_town_multiplier_set", town.getName(), multiplier));
 	}
 }
 

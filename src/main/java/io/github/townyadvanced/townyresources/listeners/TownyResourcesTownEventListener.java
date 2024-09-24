@@ -52,6 +52,11 @@ public class TownyResourcesTownEventListener implements Listener {
 			// > TownLevel Modifier: +10%.
 			if (TownySettings.getTownLevel(town).resourceProductionModifier() != 1.0)
 				component = component.append(getTownModifierComponent(town, translator)).appendNewline();
+
+			// > Multiplier: 100%
+			if (TownyResourcesGovernmentMetaDataController.hasMultiplier(town))
+				component = component.append(getMultiplierComponent(town, translator)).appendNewline();
+
 			event.getStatusScreen().addComponentOf("TownyResources", component);
 		}
 	}
@@ -64,5 +69,9 @@ public class TownyResourcesTownEventListener implements Listener {
 		if (townModifier < 1.0)
 			modifierSlug = String.valueOf(BigDecimal.valueOf((townModifier * 100) - 100).setScale(2, RoundingMode.HALF_UP).doubleValue()); 
 		return Component.text(translator.of("townyresources.town.screen.town.level.modifier", modifierSlug)).append(Component.text("%"));
+	}
+
+	private Component getMultiplierComponent(Town town, Translator translator) {
+		return Component.text(translator.of("townyresources.town.screen.multiplier", TownyResourcesGovernmentMetaDataController.getTownMultiplier(town))).append(Component.text("%"));
 	}
 }

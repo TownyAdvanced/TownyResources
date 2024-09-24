@@ -25,6 +25,8 @@ import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;
 
 import io.github.townyadvanced.townyresources.TownyResources;
+import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
+
 import org.bukkit.inventory.ItemStack;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -238,14 +240,18 @@ public class TownyResourcesMessagingUtil {
         String[] amountAndMaterialName;
         String amount;
         String materialName;
+        double townLevelmultiplier;
         double multiplier;
         for(String resourceAsString: resourcesAsArray) {
             if (resourceAsString.isEmpty())
                 continue;
             amountAndMaterialName = resourceAsString.split("-");
             materialName = amountAndMaterialName[1];
-            multiplier = TownyResourcesSettings.isNonDynamicAmountMaterial(materialName) ? 1.0 : TownySettings.getTownLevel(town).resourceProductionModifier(); 
-            amount = String.valueOf((int) (Integer.valueOf(amountAndMaterialName[0]) * multiplier));
+            townLevelmultiplier = TownyResourcesSettings.isNonDynamicAmountMaterial(materialName) ? 1.0 : TownySettings.getTownLevel(town).resourceProductionModifier();
+            multiplier = !TownyResourcesGovernmentMetaDataController.hasMultiplier(town) || TownyResourcesSettings.isNonDynamicAmountMaterial(materialName)
+                    ? 1.0 : (TownyResourcesGovernmentMetaDataController.getTownMultiplier(town) / 100.0);
+
+            amount = String.valueOf((int) (Integer.valueOf(amountAndMaterialName[0]) * townLevelmultiplier * multiplier));
             resourcesAsFormattedList.add(amount + "-" + materialName);
         }
         return StringMgmt.join(resourcesAsFormattedList,",");

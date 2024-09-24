@@ -226,3 +226,8 @@ townyresources.notification.unsurveyed: " (Unsurveyed)"
 townyresources.notification.surveyed_resource: " [%s]"
 
 townyresources.dominantbiome: "A SurveySite plot with the dominant biome of %s has been made."
+
+townyresources.tra_town_setmultiplierhelp: "Sets the multiplier of the town's resources."
+townyresources.tra_town_setmultiplierhelp2: "Resets the multiplier of the town's resources."
+townyresources.tra_town_multiplier_set: "The town of %s has had their multiplier set to %s."
+townyresources.town.screen.multiplier: '&2 > Multiplier: &f %s'

@@ -1,5 +1,6 @@
 package io.github.townyadvanced.townyresources;
 
+import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
@@ -10,8 +11,6 @@ import com.palmergames.bukkit.towny.scheduling.TaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.BukkitTaskScheduler;
 import com.palmergames.bukkit.towny.scheduling.impl.FoliaTaskScheduler;
 import com.palmergames.bukkit.util.Colors;
-import com.palmergames.bukkit.util.Version;
-
 import io.github.townyadvanced.townyresources.commands.NationCollectAddon;
 import io.github.townyadvanced.townyresources.commands.TownResourcesAddon;
 import io.github.townyadvanced.townyresources.commands.TownyAdminResourcesAddon;
@@ -39,7 +38,7 @@ public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
 	private final TaskScheduler scheduler;
-	private static Version requiredTownyVersion = Version.fromString("0.99.0.6");
+	private static String requiredTownyVersion = "0.100.4.0";
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled;
 	private static boolean mapTownyInstalled;
@@ -274,13 +273,12 @@ public class TownyResources extends JavaPlugin {
 		return mmmoItemsInstalled;
 	}
 
-	private String getTownyVersion() {
-        return Bukkit.getPluginManager().getPlugin("Towny").getDescription().getVersion();
-    }
-    
 	private void townyVersionCheck() throws TownyException{
-		if (!(Version.fromString(getTownyVersion()).compareTo(requiredTownyVersion) >= 0))
-			throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
+		try {
+			if (Towny.isTownyVersionSupported(requiredTownyVersion))
+				return;
+		} catch (NoSuchMethodError ignored) {}
+		throw new TownyException("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
     }
     
     private void setupIntegrationsWithOtherPlugins() {

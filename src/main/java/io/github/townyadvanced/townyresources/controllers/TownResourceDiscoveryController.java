@@ -112,12 +112,15 @@ public class TownResourceDiscoveryController {
  		 */
  		List<ResourceOfferCategory> candidateCategories = new ArrayList<>();
         CATEGORY_LOOP:
- 		for(ResourceOfferCategory category: TownResourceOffersController.getResourceOfferCategoryList()) { 		    
- 		    //Skip category if we have already discovered something in it
- 		    for(String material: alreadyDiscoveredMaterials) {
- 		        if(category.getMaterialsInCategory().contains(material))
-    		        continue CATEGORY_LOOP;
-            }
+ 		for(ResourceOfferCategory category: TownResourceOffersController.getResourceOfferCategoryList()) {
+			//Skip category if we have already discovered something in it
+			if (TownyResources.isAllowDuplicateResources()) {
+				for (String material : alreadyDiscoveredMaterials) {
+					if (category.getMaterialsInCategory().contains(material))
+						continue CATEGORY_LOOP;
+				}
+			}
+
 			// Skip category because it isn't available from this biome.
 			if (biome != null && !category.isAllowedInBiome(biome)) {
 				continue CATEGORY_LOOP;

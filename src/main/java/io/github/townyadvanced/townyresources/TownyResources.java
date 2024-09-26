@@ -50,6 +50,8 @@ public class TownyResources extends JavaPlugin {
 	private static boolean itemsAdderInstalled;
 	private static boolean oraxenInstalled;
 
+	private static boolean allowDuplicateResources = false;
+
 	public TownyResources() {
 		plugin = this;
 		this.scheduler = isFoliaClassPresent() ? new FoliaTaskScheduler(this) : new BukkitTaskScheduler(this);
@@ -88,6 +90,10 @@ public class TownyResources extends JavaPlugin {
 		try {
 			printSickASCIIArt();
 			townyVersionCheck();
+			saveDefaultConfig();
+
+			allowDuplicateResources = getConfig().getBoolean("allow-duplicate-resources", false);
+
 			//Setup integrations with other plugins
 			setupIntegrationsWithOtherPlugins();
 			//Load settings and languages
@@ -245,6 +251,10 @@ public class TownyResources extends JavaPlugin {
 	*/
 	public boolean isSiegeWarInstalled() {
 		return siegeWarInstalled;
+	}
+
+	public static boolean isAllowDuplicateResources() {
+		return allowDuplicateResources;
 	}
 
 	public boolean isLanguageUtilsInstalled() {

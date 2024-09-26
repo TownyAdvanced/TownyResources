@@ -244,6 +244,11 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"",
 			""),
+	TOWN_RESOURCES_ALLOW_DUPLICATE_OFFERS(
+			"town_resources.offers.allow_duplicate_offers",
+			"false",
+			"# If set to true you can get multiple resource outposts of the same type"
+	),
 	TOWN_RESOURCES_OFFERS_CATEGORIES(
 			"town_resources.offers.categories",
 			"" +

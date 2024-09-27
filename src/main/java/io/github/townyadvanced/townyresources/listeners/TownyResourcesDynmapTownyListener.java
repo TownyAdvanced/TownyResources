@@ -18,7 +18,7 @@ public class TownyResourcesDynmapTownyListener implements Listener {
     public void on(BuildTownMarkerDescriptionEvent event) {
         if (TownyResourcesSettings.isEnabled()) {
             if (event.getDescription().contains("%town_resources%")) {
-                event.setDescription(event.getDescription().replace("%town_resource%", TownyResources.getPlugin().getResourcesString(event.getTown())));
+                event.setDescription(event.getDescription().replace("%town_resources%", TownyResources.getPlugin().getResourcesString(event.getTown())));
             }
         }
     }

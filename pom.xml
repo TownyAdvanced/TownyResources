@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.10.0</version>
+  <version>0.10.1</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -173,7 +173,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version>
         <configuration>
-          <release>8</release>
+          <release>17</release>
           <source>${java.version}</source>
           <target>${java.version}</target>
           <compilerArgs>

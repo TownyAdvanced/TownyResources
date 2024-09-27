@@ -55,7 +55,7 @@
 	<dependency>
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
-      <version>0.100.4.0</version>
+      <version>${towny.version}</version>
       <scope>provided</scope>
 	</dependency>
     <dependency>
@@ -98,12 +98,6 @@
       <groupId>com.github.LoneDev6</groupId>
       <artifactId>api-itemsadder</artifactId>
       <version>3.6.1</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.bsideup.jabel</groupId>
-      <artifactId>jabel-javac-plugin</artifactId>
-      <version>1.0.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -171,14 +165,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>3.13.0</version>
         <configuration>
-          <release>17</release>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <compilerArgs>
-            <arg>-Xplugin:jabel</arg>
-          </compilerArgs>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
     </plugins>

@@ -88,7 +88,6 @@ public class TownyResources extends JavaPlugin {
 		try {
 			printSickASCIIArt();
 			townyVersionCheck();
-			saveDefaultConfig();
 
 			//Setup integrations with other plugins
 			setupIntegrationsWithOtherPlugins();

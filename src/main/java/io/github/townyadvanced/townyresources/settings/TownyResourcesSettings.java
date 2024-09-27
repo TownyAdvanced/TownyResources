@@ -410,6 +410,10 @@ public class TownyResourcesSettings {
 		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_SURVEYS_ENABLED);
 	}
 
+	public static boolean areDuplicateOffersAllowed() {
+		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_ALLOW_DUPLICATE_OFFERS);
+	}
+
 	public static int getStorageLimitModifier() {
 		return getInt(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_STORAGE_LIMIT_MODIFIER);
 	}

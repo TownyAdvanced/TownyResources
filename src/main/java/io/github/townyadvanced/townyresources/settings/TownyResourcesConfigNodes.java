@@ -244,6 +244,11 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"",
 			""),
+	TOWN_RESOURCES_ALLOW_DUPLICATE_OFFERS(
+			"town_resources.offers.allow_duplicate_offers",
+			"false",
+			"# When set to true a town can survey and receive a resource that they have already gained prior. This will mean they get more of the resource, but will have less diversity overall."
+	),
 	TOWN_RESOURCES_OFFERS_CATEGORIES(
 			"town_resources.offers.categories",
 			"" +

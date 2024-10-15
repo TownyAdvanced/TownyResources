@@ -65,6 +65,10 @@ public class TownyResourcesSettings {
 		return getDouble(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_OCCUPYING_NATION_TAX_PERCENTAGE) / 100;
 	}
 
+	public static boolean isMaxStackSizeLockedTo64() {
+		return getBoolean(TownyResourcesConfigNodes.TOWN_RESOURCES_PRODUCTION_COLLECTION_FORCES_STACKSIZE_OF_64);
+	}
+
 	public static int getSumOfAllOfferDiscoveryProbabilityWeights() {
 		return sumOfAllOfferDiscoveryProbabilityWeights;
 	}

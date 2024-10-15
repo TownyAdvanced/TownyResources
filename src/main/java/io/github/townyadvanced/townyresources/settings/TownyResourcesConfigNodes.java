@@ -239,6 +239,12 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# If a town is occupied, the occupying nation gets this percentage of town production.",
 			"# The town gets the rest."),
+	TOWN_RESOURCES_PRODUCTION_COLLECTION_FORCES_STACKSIZE_OF_64(
+			"town_resources.production.collection_forces_max_stacksize_of_64",
+			"true",
+			"",
+			"# Forces TownyResources to give resources out with a max stack size of 64.",
+			"# This is usually the case but you might have other plugins which will set a player's max stack size higher."),
 	TOWN_RESOURCES_OFFERS(
 			"town_resources.offers",
 			"",

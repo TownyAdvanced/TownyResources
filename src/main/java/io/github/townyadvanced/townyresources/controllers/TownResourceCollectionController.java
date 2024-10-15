@@ -7,6 +7,7 @@ import com.palmergames.bukkit.towny.object.Translatable;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
+import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.ItemsAdderUtil;
 import io.github.townyadvanced.townyresources.util.MMOItemsUtil;
 import io.github.townyadvanced.townyresources.util.MythicMobsUtil;
@@ -64,6 +65,12 @@ public class TownResourceCollectionController {
             return false;
         }
 
+        // Some plugin might be altering the max stack size of the player, and the server  
+        // admin doesn't want TR resources given out in stacks greater than 64.
+        int invSize = inv.getMaxStackSize();
+        if (TownyResourcesSettings.isMaxStackSizeLockedTo64() && invSize != 64)
+            inv.setMaxStackSize(64);
+
         final Map<Integer, ItemStack> itemsThatDontFit = inv.addItem(itemStackList.toArray(new ItemStack[0]));
         /* If map is not empty, some items were not added.... */
         if (!itemsThatDontFit.isEmpty()) {
@@ -84,6 +91,11 @@ public class TownResourceCollectionController {
 
         //Save government
         government.save();
+
+        // Reset the player's wonky max stack size.
+        if (TownyResourcesSettings.isMaxStackSizeLockedTo64() && invSize != 64)
+            inv.setMaxStackSize(invSize);
+
         return true;
     }
 

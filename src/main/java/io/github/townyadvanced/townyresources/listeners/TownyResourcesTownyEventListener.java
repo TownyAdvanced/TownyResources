@@ -2,13 +2,22 @@ package io.github.townyadvanced.townyresources.listeners;
 
 import com.palmergames.bukkit.towny.event.PreNewDayEvent;
 import com.palmergames.bukkit.towny.event.TownyLoadedDatabaseEvent;
+import com.palmergames.bukkit.towny.event.TranslationLoadEvent;
 import com.palmergames.bukkit.towny.event.time.NewShortTimeEvent;
+import com.palmergames.bukkit.towny.object.TranslationLoader;
+
 import io.github.townyadvanced.townyresources.TownyResources;
 import io.github.townyadvanced.townyresources.controllers.PlayerExtractionLimitsController;
 import io.github.townyadvanced.townyresources.controllers.TownResourceProductionController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 
 /**
  * 
@@ -59,4 +68,20 @@ public class TownyResourcesTownyEventListener implements Listener {
             }
         }
     }
+
+	/*
+	 * When Towny is reloading the languages, make sure we're re-injecting our language strings. 
+	 */
+	@EventHandler(ignoreCancelled = true)
+	public void onTownyLoadLanguages(TranslationLoadEvent event) {
+		Plugin plugin = TownyResources.getPlugin();
+		Path langFolderPath = Paths.get(plugin.getDataFolder().getPath()).resolve("lang");
+		TranslationLoader loader = new TranslationLoader(langFolderPath, plugin, TownyResources.class);
+		loader.load();
+		Map<String, Map<String, String>> translations = loader.getTranslations();
+
+		for (String language : translations.keySet())
+			for (Map.Entry<String, String> map : translations.get(language).entrySet())
+				event.addTranslation(language, map.getKey(), map.getValue());
+	}
 }

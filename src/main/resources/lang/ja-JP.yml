@@ -1,0 +1,192 @@
+name: TownyResources
+version: 0.10
+language: japanese
+author: humisan
+website: 'https://github.com/TownyAdvanced/TownyResources'
+description: 
+    Language file for all game messages for this Locale.
+
+# A note on editing this file.
+# ----------------------------
+#
+# Do not alter this file if it is in the reference folder.
+# Before you edit this file, read about how Towny handles 
+# language files:
+# https://github.com/TownyAdvanced/Towny/wiki/How-Towny-Works#multi-language.
+#
+#
+# A note on text formatting (how Towny inserts words.)
+# ----------------------------------------------------
+#
+# You MUST retain spacing in the texts.
+# If a text begins or ends with a space, it must remain that
+# way.
+#
+#      %s = data to be supplied by the plugin.
+#
+# If you find that a line has multiple %s variables which would
+# be in a different order in your language, you can change them
+# to %1$s, %2$s, %4$s, %3$s to change their order. ie: %4$s
+# will always use the 4th variable, no matter where it is
+# placed on the line.
+#
+#
+# A note on text colouring and formatting.
+# ----------------------------------------
+#
+# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
+# DarkPurple = &9, LightGreen = &a, LightBlue = &b
+# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+#
+# This language file also supports using MiniMessage for colours
+# and formatting. Learn about MiniMessage formatting here:
+# https://docs.adventure.kyori.net/minimessage/format.html
+#
+#
+
+townyresources.plugin_prefix: '&f[&6Towny Resources&f] '
+
+### Reloading
+townyresources.townyresources_reloaded_successfully: "TownyResources のリロードに成功しました。"
+townyresources.townyresources_failed_to_reload: "TownyResources のリロードに失敗しました。"
+townyresources.admin_help_reload: 'TownyResources をリロードします。'
+
+### Town Screen
+townyresources.town.screen.header: "&2Resources:"
+townyresources.town.screen.daily.production: '&2 > 1日の産出量 &a[%s]&2: &f'
+townyresources.town.screen.available.for.collection: '&2 > 収集可能 &a[%s]&2: &f'
+townyresources.town.screen.town.level.modifier: '&2 > Townレベル補正: &f %s'
+
+### Nation Screen
+townyresources.nation.screen.header: "&2Resources:"
+townyresources.nation.screen.daily.production: '&2 > 1日の産出量 &a[%s]&2: &f'
+townyresources.nation.screen.available.for.collection: '&2 > 収集可能 &a[%s]&2: &f'
+
+### Surveys 
+townyresources.not_your_town: 'あなたはこのTownのメンバーではありません。'
+townyresources.help_survey: '現在位置のTownを調査して、新しい資源を発見します。'
+townyresources.discovery.success: "&b%s が %s を %s で発見しました！1日の産出量: %d %s。"
+
+townyresources.msg_err_survey_no_town: "&cこの場所には調査可能なTownが存在しません。"
+townyresources.msg_err_survey_all_resources_already_discovered: "&cこのTownの資源はすべてすでに発見されています。"
+townyresources.msg_err_survey_not_enough_townblocks: "&cこのTownには調査に必要なTownBlockが足りません。必要: %d、現在: %d"
+townyresources.msg_err_survey_too_expensive: "&cこの調査を行うには資金が不足しています。必要: %s、所持金: %s"
+townyresources.msg_err_not_enough_offers_left: "&c設定されたオファーリストに残りがないため、調査はできません。"
+
+### Production
+townyresources.production.message: "&b%sのTownが資源を産出しました。"
+
+### Collection
+townyresources.help_towncollect: 'Townで収集可能な資源をすべて集めます。'
+townyresources.help_nationcollect: 'Nationで収集可能な資源をすべて集めます。'
+
+townyresources.resource.towncollect.success: "&2Townの資源をすべて正常に収集しました。"
+townyresources.resource.nationcollect.success: "&2Nationの資源をすべて正常に収集しました。"
+
+townyresources.msg_err_cannot_towncollect_not_a_town_member: "&cTown資源を収集するには、そのTownのメンバーである必要があります。"
+townyresources.msg_err_cannot_towncollect_not_in_own_town: "&cTown資源を収集するには、自分のTownにいる必要があります。"
+townyresources.msg_err_cannot_towncollect_no_resources_available: '&c収集できるTown資源はありません。'
+
+townyresources.msg_err_cannot_nationcollect_not_a_town_member: "&cNation資源を収集するには、いずれかのTownに所属している必要があります。"
+townyresources.msg_err_cannot_nationcollect_not_a_nation_member: "&cNation資源を収集するには、Nationに所属している必要があります。"
+townyresources.msg_err_cannot_nationcollect_not_in_capital: "&cNation資源を収集するには、首都にいる必要があります。"
+townyresources.msg_err_cannot_nationcollect_no_resources_available: '&c収集できるNation資源はありません。'
+
+townyresources.msg_err_cannot_collect_uknown_material: "&c未知の資源: %s。収集できません。"
+
+# Player Extraction Limits
+townyresources.msg_error_daily_extraction_limit_reached: "&c%s の1日あたりの採取上限 (%d) に達しました。"
+townyresources.daily_extraction_limits_reset: "&bすべての1日採取上限がリセットされました。"
+
+# Resource Categories
+resource_category_common_dirt: '普通の土, 普通の土'
+resource_category_uncommon_dirt: '珍しい土, 珍しい土'
+resource_category_rare_dirt: '希少な土, 希少な土'
+resource_category_gravel: '砂利, 砂利'
+resource_category_sand: '砂, 砂'
+resource_category_wood: '木材, 木材'
+resource_category_common_rocks: '普通の岩, 普通の岩'
+resource_category_uncommon_rocks: '珍しい岩, 珍しい岩'
+resource_category_terracotta: 'テラコッタ, テラコッタ'
+resource_category_quartz: 'クォーツ, クォーツ'
+resource_category_prismarine: 'プリズマリン, プリズマリン'
+resource_category_obsidian: '黒曜石, 黒曜石'
+resource_category_clay: '粘土, 粘土'
+resource_category_ice: '氷, 氷'
+resource_category_snow: '雪, 雪'
+resource_category_coal: '石炭, 石炭'
+resource_category_iron: '鉄, 鉄'
+resource_category_gold: '金, 金'
+resource_category_gold_nugget: '金塊, 金'
+resource_category_copper: '銅, 銅'
+resource_category_emeralds: 'エメラルド, エメラルド'
+resource_category_lapis_lazuli: 'ラピスラズリ, ラピスラズリ'
+resource_category_diamonds: 'ダイヤモンド, ダイヤモンド'
+resource_category_netherrack: 'ネザーラック, ネザーラック'
+resource_category_nether_quartz: 'ネザークォーツ, ネザークォーツ'
+resource_category_glowstone: 'グロウストーン, グロウストーン'
+resource_category_end_stone: 'エンドストーン, エンドストーン'
+resource_category_ancient_debris: '古代の残骸, 古代の残骸'
+resource_category_wool: '羊毛, 羊の群れ'
+resource_category_coral: 'サンゴ, サンゴ'
+resource_category_wheat: '小麦, 肥沃な土'
+resource_category_carrots: 'ニンジン, 肥沃な土'
+resource_category_potatoes: 'ジャガイモ, 肥沃な土'
+resource_category_beetroot: 'ビートルート, 肥沃な土'
+resource_category_pumpkin_seeds: 'カボチャの種, 肥沃な土'
+resource_category_melon_slice: 'スイカのスライス, 肥沃な土'
+resource_category_cocoa_beans: 'カカオ豆, 肥沃な土'
+resource_category_pumpkin_blocks: 'カボチャ, 肥沃な土'
+resource_category_melon_blocks: 'スイカ, 肥沃な土'
+resource_category_cocoa_pods: 'カカオのさや, 肥沃な土'
+resource_category_kelp: '昆布, 昆布'
+resource_category_bamboo: '竹, 肥沃な土'
+resource_category_cactus: 'サボテン, 肥沃な土'
+resource_category_mushrooms: 'キノコ, キノコ'
+resource_category_apples: 'リンゴ, 果樹園'
+resource_category_vines: 'ツタ, ツタ'
+resource_category_nether_wart: 'ネザーウォート, ネザーウォート'
+resource_category_chorus_fruit: 'コーラスフルーツ, コーラスフルーツ'
+resource_category_fish: '魚, 魚の群れ'
+resource_category_gunpowder: '火薬, 火薬'
+resource_category_string: '糸, クモの巣'
+resource_category_spider_eyes: 'クモの目, クモの巣'
+resource_category_feathers: '羽, ニワトリの群れ'
+resource_category_leather: '革, ウシの群れ'
+resource_category_rabbit_hides: 'ウサギの皮, ウサギの群れ'
+resource_category_rotten_flesh: '腐った肉, ゾンビの群れ'
+resource_category_bones: '骨, スケルトンの群れ'
+resource_category_pork: '豚肉, ブタの群れ'
+resource_category_mutton: '羊肉, ヒツジの群れ'
+resource_category_beef: '牛肉, ウシの群れ'
+resource_category_chickens: '鶏肉, ニワトリの群れ'
+resource_category_eggs: '卵, メンドリの群れ'
+resource_category_ender_pearls: 'エンダーパール, エンダーマンの群れ'
+
+#Added in 0.03
+resource_category_slime: 'スライム（スライムの巣）'
+
+#Added in 0.04
+townyresources.msg_confirm_survey: "%s の Town のレベル %d 資源を調査しようとしています。費用は %s です。続行しますか？"
+townyresources.msg_err_level_x_resource_already_discovered: "レベル %d の資源はすでに発見されています。"
+townyresources.msg_err_cannot_collect_unknown_material: "次の未知の素材は収集できません: %s"
+
+#Added in 0.05
+townyresources.msg_confirm_survey_town_level_warning: "&c警告: 資源は発見可能ですが、この Town は人口が不足しているため生産できません。必要なTownレベル: %d、現在のTownレベル: %d"
+
+#Added in 0.06
+townyresources.admin_help_reroll: "すでに発見されているすべての資源を再抽選します。"
+townyresources.msg_confirm_reroll: "&c警告: すでに発見されたすべての Town 資源を再抽選しようとしています。すでに資源を発見しているすべての Town に影響します。"
+townyresources.all_resources_rerolled: "すべての Town の発見済み資源が再抽選されました。"
+
+townyresources.admin_help_bypass: "採取制限を無視します。"
+townyresources.bypass_on: "採取制限を無視するようになりました。"
+townyresources.bypass_off: "採取制限を無視しなくなりました。"
+
+#Added in 0.08
+townyresources.resource.you_have_no_room_in_your_inventory: 'インベントリに空きスロットがありません。収集する前に空きを作ってください。'
+
+#Added in 0.09
+townyresources.msg_confirm_reroll_town: "この Town の資源を本当に再抽選しますか？"
+townyresources.admin_help_reroll_one_town: "指定された Town の発見済み資源をすべて再抽選します。"

@@ -38,7 +38,7 @@ public class TownyResources extends JavaPlugin {
 	
 	private static TownyResources plugin;
 	private final TaskScheduler scheduler;
-	private static String requiredTownyVersion = "0.100.4.0";
+	private static String requiredTownyVersion = "0.101.2.5";
 	private static boolean siegeWarInstalled;
 	private static boolean dynmapTownyInstalled;
 	private static boolean mapTownyInstalled;
@@ -68,7 +68,7 @@ public class TownyResources extends JavaPlugin {
     }
 
 	public String getVersion() {
-		return this.getDescription().getVersion();
+		return this.getPluginMeta().getVersion();
 	}
 
 	public static TownyResources getPlugin() {

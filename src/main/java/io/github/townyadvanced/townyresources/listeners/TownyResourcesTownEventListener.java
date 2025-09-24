@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.palmergames.adventure.text.Component;
 import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
@@ -9,6 +8,7 @@ import com.palmergames.bukkit.towny.utils.TownyComponents;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+import net.kyori.adventure.text.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

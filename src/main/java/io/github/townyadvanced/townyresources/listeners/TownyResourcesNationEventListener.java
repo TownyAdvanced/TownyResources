@@ -1,6 +1,5 @@
 package io.github.townyadvanced.townyresources.listeners;
 
-import com.palmergames.adventure.text.Component;
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Translator;
@@ -8,6 +7,8 @@ import com.palmergames.bukkit.towny.utils.TownyComponents;
 import io.github.townyadvanced.townyresources.metadata.TownyResourcesGovernmentMetaDataController;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
 import io.github.townyadvanced.townyresources.util.TownyResourcesMessagingUtil;
+import net.kyori.adventure.text.Component;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

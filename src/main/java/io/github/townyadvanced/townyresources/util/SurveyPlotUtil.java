@@ -7,7 +7,6 @@ import java.util.Map;
 import org.bukkit.block.Biome;
 import org.jetbrains.annotations.Nullable;
 
-import com.palmergames.adventure.text.Component;
 import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -27,6 +26,7 @@ import io.github.townyadvanced.townyresources.controllers.TownResourceOffersCont
 import io.github.townyadvanced.townyresources.metadata.SurveyPlotMetaDataController;
 import io.github.townyadvanced.townyresources.objects.ResourceOfferCategory;
 import io.github.townyadvanced.townyresources.settings.TownyResourcesSettings;
+import net.kyori.adventure.text.Component;
 
 public class SurveyPlotUtil {
 	

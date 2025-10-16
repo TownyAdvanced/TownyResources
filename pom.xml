@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.townyadvanced</groupId>
   <artifactId>TownyResources</artifactId>
-  <version>0.14.0</version>
+  <version>0.13.0</version>
   <name>townyresources</name> <!-- Leave lower-cased -->
 
   <properties>
@@ -52,16 +52,11 @@
       <version>1.21.8-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
-<!--    <dependency>
+    <dependency>
       <groupId>com.palmergames.bukkit.towny</groupId>
       <artifactId>towny</artifactId>
       <version>${towny.version}</version>
       <scope>provided</scope>
-    </dependency>-->
-    <dependency>
-      <groupId>com.github.TownyAdvanced.Towny</groupId>
-      <artifactId>towny</artifactId>
-      <version>master-4907b3123a-1</version>
 	</dependency>
     <dependency>
 	  <groupId>com.github.TownyAdvanced</groupId>

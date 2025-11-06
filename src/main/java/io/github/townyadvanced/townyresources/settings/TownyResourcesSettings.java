@@ -460,7 +460,7 @@ public class TownyResourcesSettings {
 	}
 
 	public static boolean isNonDynamicAmountMaterial(String material) {
-		return getStrArr(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMMOUNTS).contains(material);
+		return getStrArr(TownyResourcesConfigNodes.TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMOUNTS).contains(material);
 	}
 	
 	public static String getMaterialsDisplayLanguage() {

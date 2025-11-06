@@ -208,7 +208,6 @@ public enum TownyResourcesConfigNodes {
 			"",
 			"# When above 0, a town can pay to reroll their resources.",
 			"# This is disabled by default to prevent rich towns being able to spam rerolls. Use cautiously."),
-	
 	TOWN_RESOURCES_PRODUCTION_TOWN_LEVEL_REQUIREMENT_PER_RESOURCE_LEVEL(
 			"town_resources.production.town_level_requirement_per_resource_level",
 			"2, 4, 6, 8",
@@ -403,8 +402,40 @@ public enum TownyResourcesConfigNodes {
 			"# ",
 			"# On top of the available biomes mentioned here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html,",
 			"# you may choose catch-all words like ALL, OVERWORLD, NETHER, END, SNOWY, COLD, TEMPERATE, WARM, OCEANBIOMES, AQUATIC"),
-	
-	TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMMOUNTS(
+
+    RESOURCE_REGIONS("town_resources.offers.resource_regions",
+            "",
+            "",
+            "# +------------------------------------------------------+ #",
+            "# |                    Resource Regions                  | #",
+            "# +------------------------------------------------------+ #",
+            ""),
+    RESOURCE_REGIONS_ENABLED(
+            "town_resources.offers.resource_regions.enabled",
+            "false",
+            "",
+            "# If this value is true, then Resource Regions are enabled."),
+    RESOURCE_REGIONS_LIST(
+            "town_resources.offers.resource_regions.list",
+            "{-20000, -20000], [-6667, -6667], wheat, carrots}, " +
+                    "{-6667, -20000], [6667, -6667], wheat, carrots}, " +
+                    "{6667, -20000], [20000, -6667], wheat, coal}, " +
+                    "{-20000, -6667], [-6667, 6667], wheat, coal}, " +
+                    "{-6667, -6667], [6667, 6667], wheat, carrots}, " +
+                    "{6667, -6667], [20000, 6667], wheat, pumpkins}, " +
+                    "{-20000, 6667], [-6667, 20000], wheat, pumpkins}, " +
+                    "{-6667, 6667], [6667, 20000], wheat, coal}, " +
+                    "{6667, 6667], [20000, 20000], wheat, pumpkins}",
+            "",
+            "# This field lists all configured regions and their surveyable resources.",
+            "# ",
+            "# Each entry is in the following form: ",
+            "{[top left x, top left y], [bottom right x, bottom right y], list of resources in the region}",
+            "# ",
+            "# If a survey is done in a configured region, only the listed resources can be discovered.",
+            "# If a survey is done outside of any configured region, no region limitations apply"),
+
+	TOWN_RESOURCES_OFFERS_MATERIALS_WITH_NON_DYNAMIC_AMOUNTS(
 			"town_resources.offers.categories_with_fixed_amounts",
 			"somematerial,someitem",
 			"",

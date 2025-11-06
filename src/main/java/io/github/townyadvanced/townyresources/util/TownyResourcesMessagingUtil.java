@@ -9,7 +9,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -232,7 +232,7 @@ public class TownyResourcesMessagingUtil {
         
         materialName = Colors.strip(materialName);
         //Couldn't find a translation. Return un-translated material name
-        return WordUtils.capitalizeFully(materialName.replaceAll("_", " "));
+        return StringUtils.capitalize((materialName.replaceAll("_", " ")));
     }
 
 	public static String adjustAmountsForTownLevelModifier(Town town, String productionAsString) {

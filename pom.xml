@@ -47,10 +47,6 @@
   
   <dependencies>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-text</artifactId>
-      <version>1.14.0</version>    </dependency>
-    <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>1.21.8-R0.1-SNAPSHOT</version>
@@ -188,6 +184,6 @@
         <filtering>true</filtering>
       </resource>
     </resources>
-</build>
+  </build>
 
 </project>

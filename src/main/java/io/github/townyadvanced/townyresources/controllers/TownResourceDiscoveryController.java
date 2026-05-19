@@ -126,6 +126,14 @@ public class TownResourceDiscoveryController {
 				continue CATEGORY_LOOP;
 			}
 
+			// Skip category because it requires a higher survey level.
+			int requiredResourceLevel = category.getRequiredResourceLevel();
+			if (requiredResourceLevel > -1) {
+				int discoveredResourceNumber = TownyResourcesGovernmentMetaDataController.getDiscoveredAsList(townBlock.getTownOrNull()).size();
+				if (requiredResourceLevel > discoveredResourceNumber)
+					continue CATEGORY_LOOP;
+			}
+
  	        //Add category as a candidate
  	        candidateCategories.add(category);
         }

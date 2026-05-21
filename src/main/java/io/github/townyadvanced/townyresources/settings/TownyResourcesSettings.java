@@ -190,11 +190,10 @@ public class TownyResourcesSettings {
 				categoryBaseAmountItems = (int)((categoryBaseAmountStacks * 64) + 0.5);
 				
 				// Attempt to read the required resource level.
+				requiredResourceLevel = -1;
 				try {
-					requiredResourceLevel = Integer.parseInt(categoryAsArray[3]);
-				} catch (NumberFormatException e) {
-					requiredResourceLevel = -1;
-				}
+					requiredResourceLevel = Integer.parseInt(categoryAsArray[3].trim());
+				} catch (NumberFormatException ignored) {}
 				
 				int entrypoint = requiredResourceLevel == -1 ? 3 : 4;
 				//Read Materials

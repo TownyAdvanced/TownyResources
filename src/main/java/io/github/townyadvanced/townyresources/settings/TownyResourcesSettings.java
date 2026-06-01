@@ -162,6 +162,7 @@ public class TownyResourcesSettings {
 			int categoryDiscoveryWeight;
 			double categoryBaseAmountStacks;
 			int categoryBaseAmountItems;
+			int requiredResourceLevel;
 			List<String> materialsInCategory;
 			List<String> allowedBiomesInCategory = Arrays.asList("ALL");
 			String materialName;
@@ -188,9 +189,16 @@ public class TownyResourcesSettings {
 				categoryBaseAmountStacks = Double.parseDouble(categoryAsArray[2].trim());
 				categoryBaseAmountItems = (int)((categoryBaseAmountStacks * 64) + 0.5);
 				
+				// Attempt to read the required resource level.
+				requiredResourceLevel = -1;
+				try {
+					requiredResourceLevel = Integer.parseInt(categoryAsArray[3].trim());
+				} catch (NumberFormatException ignored) {}
+				
+				int entrypoint = requiredResourceLevel == -1 ? 3 : 4;
 				//Read Materials
 				materialsInCategory = new ArrayList<>();
-				for(int i = 3; i < categoryAsArray.length; i++) {
+				for(int i = entrypoint; i < categoryAsArray.length; i++) {
 					materialName = categoryAsArray[i].trim();
 					if(!isValidMaterial(materialName)) {
 						TownyResources.severe("Unknown material in offer category. Category: " + categoryName + ". Material: " + categoryAsArray[i]);
@@ -204,7 +212,7 @@ public class TownyResourcesSettings {
 				allowedBiomesInCategory = categoryToBiomeMap.getOrDefault(categoryName, Arrays.asList("ALL"));
 
 				//Construct ResourceExtractionCategory object
-				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, materialsInCategory, allowedBiomesInCategory);
+				resourceOfferCategory = new ResourceOfferCategory(categoryName, categoryDiscoveryWeight, categoryBaseAmountItems, requiredResourceLevel, materialsInCategory, allowedBiomesInCategory);
 				
 				//Add to result
 				result.add(resourceOfferCategory);
